@@ -13,6 +13,7 @@
 | 09 | Energy Centered and QoS Aware Services Selection for Internet of Things | 2022 | Genetic Algorithm (Multi-Objective) | Original Research |
 | 10 | Incentive Based Selection and Composition of IoT Energy Services | 2022 | Game Theory + Optimization | Original Research |
 | 11 | Machine Learning in Real-Time Internet of Things (IoT) Systems: A Survey | 2022 | Multiple (SL, UL, RL, DL, FL) | Survey |
+| 12 | Composing Energy Services in a Crowdsourced IoT Environment | 2022 | Crowdsourcing + Optimization | Original Research |
 
 ---
 
@@ -20,9 +21,9 @@
 
 | Metric | Value |
 |--------|-------|
-| **Total Papers** | 11 |
+| **Total Papers** | 12 |
 | **Systematic Reviews/Surveys** | 3 |
-| **Original Research** | 8 |
+| **Original Research** | 9 |
 | **Year Range** | 2020-2022 |
 | **Papers using Genetic Algorithm** | 5 |
 | **Papers using Machine Learning/RL** | 5 |
@@ -73,6 +74,7 @@
 | 09 | Synthetic IoT Services | Simulated IoT service datasets |
 | 10 | Market Simulation | Simulated market with provider and user agents |
 | 11 | 300+ Primary Studies | Survey - papers from IEEE, ACM, Springer, Elsevier |
+| 12 | Crowdsourced Simulation | Simulated environment with user providers |
 
 ---
 
@@ -90,4 +92,4 @@ When adding a new reference paper:
 ---
 
 *Last Updated: April 2026*
-*Total Papers: 11*
+*Total Papers: 12*
