@@ -11,7 +11,7 @@
 | 07 | DDAPSO: Hybrid Discrete Dragonfly Algorithm and Particle Swarm Algorithm to Service Selection and Composition for the Internet of Things Applications | 2022 | Discrete Dragonfly Algorithm + PSO + Levy Flight (Hybrid) | Original Research |
 | 08 | Reinforcement Learning for Interactive QoS-Aware Services Composition | 2022 | Q-Learning (Reinforcement Learning) | Original Research |
 | 09 | Energy Centered and QoS Aware Services Selection for Internet of Things | 2022 | Genetic Algorithm (Multi-Objective) | Original Research |
-| 10 | | | | |
+| 10 | Incentive Based Selection and Composition of IoT Energy Services | 2022 | Game Theory + Optimization | Original Research |
 
 ---
 
@@ -19,9 +19,9 @@
 
 | Metric | Value |
 |--------|-------|
-| **Total Papers** | 9 |
+| **Total Papers** | 10 |
 | **Systematic Reviews** | 2 |
-| **Original Research** | 7 |
+| **Original Research** | 8 |
 | **Year Range** | 2020-2022 |
 | **Papers using Genetic Algorithm** | 5 |
 | **Papers using Machine Learning/RL** | 4 |
@@ -50,6 +50,7 @@
 | Levy Flight | 07 |
 | Opposition-Based Learning | 07 |
 | Multi-Objective Optimization | 09 |
+| Game Theory | 10 |
 
 ---
 
@@ -57,7 +58,7 @@
 
 When adding a new reference paper:
 
-1. Place the PDF in a new folder (e.g., `reference-paper/10/`)
+1. Place the PDF in a new folder (e.g., `reference-paper/11/`)
 2. Ask me to analyze the paper using the peer review process
 3. I will update this table with the new paper details
 
@@ -67,4 +68,4 @@ When adding a new reference paper:
 ---
 
 *Last Updated: April 2026*
-*Total Papers: 9*
+*Total Papers: 10*
