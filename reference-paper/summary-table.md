@@ -10,7 +10,7 @@
 | 06 | A deep reinforcement learning based multiple meta-heuristic methods approach for resource constrained multi-project scheduling problem | 2021 | Deep Reinforcement Learning (DQN) + GA + PSO + SA + ABC (Hybrid) | Original Research |
 | 07 | DDAPSO: Hybrid Discrete Dragonfly Algorithm and Particle Swarm Algorithm to Service Selection and Composition for the Internet of Things Applications | 2022 | Discrete Dragonfly Algorithm + PSO + Levy Flight (Hybrid) | Original Research |
 | 08 | Reinforcement Learning for Interactive QoS-Aware Services Composition | 2022 | Q-Learning (Reinforcement Learning) | Original Research |
-| 09 | | | | |
+| 09 | Energy Centered and QoS Aware Services Selection for Internet of Things | 2022 | Genetic Algorithm (Multi-Objective) | Original Research |
 | 10 | | | | |
 
 ---
@@ -19,14 +19,15 @@
 
 | Metric | Value |
 |--------|-------|
-| **Total Papers** | 8 |
+| **Total Papers** | 9 |
 | **Systematic Reviews** | 2 |
-| **Original Research** | 6 |
+| **Original Research** | 7 |
 | **Year Range** | 2020-2022 |
-| **Papers using Genetic Algorithm** | 4 |
+| **Papers using Genetic Algorithm** | 5 |
 | **Papers using Machine Learning/RL** | 4 |
 | **Papers using Hybrid Approaches** | 5 |
 | **Papers using Swarm Intelligence** | 3 |
+| **Papers on Energy Efficiency** | 2 |
 
 ---
 
@@ -34,7 +35,7 @@
 
 | Algorithm | Papers Using |
 |-----------|--------------|
-| Genetic Algorithm (GA) | 01, 02, 03, 04 |
+| Genetic Algorithm (GA) | 01, 02, 03, 04, 09 |
 | Neural Networks (NN) | 02, 04 |
 | Particle Swarm Optimization (PSO) | 01, 05, 06, 07 |
 | Ant Colony Optimization (ACO) | 01, 05 |
@@ -48,6 +49,7 @@
 | Artificial Bee Colony (ABC) | 06 |
 | Levy Flight | 07 |
 | Opposition-Based Learning | 07 |
+| Multi-Objective Optimization | 09 |
 
 ---
 
@@ -55,7 +57,7 @@
 
 When adding a new reference paper:
 
-1. Place the PDF in a new folder (e.g., `reference-paper/09/`)
+1. Place the PDF in a new folder (e.g., `reference-paper/10/`)
 2. Ask me to analyze the paper using the peer review process
 3. I will update this table with the new paper details
 
@@ -65,4 +67,4 @@ When adding a new reference paper:
 ---
 
 *Last Updated: April 2026*
-*Total Papers: 8*
+*Total Papers: 9*
