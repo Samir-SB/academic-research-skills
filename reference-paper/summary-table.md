@@ -54,6 +54,23 @@
 
 ---
 
+## Datasets Used
+
+| Paper | Dataset | Description |
+|-------|---------|-------------|
+| 01 | 147 Primary Studies | Systematic review - published papers from IEEE Xplore, ACM DL, Scopus, Web of Science |
+| 02 | Synthetic IoT Services | Generated IoT service registry with QoS attributes |
+| 03 | Synthetic IoT Services | Simulated service datasets with injected QoS fluctuations |
+| 04 | Synthetic IoT Services | Synthetic datasets with spatial distributions |
+| 05 | 114 Primary Studies | Systematic review - papers from IEEE, ACM, Scopus, WoS |
+| 06 | RC-MPSP Benchmarks | Standard resource-constrained multi-project scheduling benchmarks |
+| 07 | Synthetic IoT Scenarios | Generated service composition scenarios |
+| 08 | Synthetic IoT Services | Simulated service scenarios with user preferences |
+| 09 | Synthetic IoT Services | Simulated IoT service datasets |
+| 10 | Market Simulation | Simulated market with provider and user agents |
+
+---
+
 ## Instructions for Adding New Papers
 
 When adding a new reference paper:
