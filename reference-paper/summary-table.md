@@ -14,6 +14,7 @@
 | 10 | Incentive Based Selection and Composition of IoT Energy Services | 2022 | Game Theory + Optimization | Original Research |
 | 11 | Machine Learning in Real-Time Internet of Things (IoT) Systems: A Survey | 2022 | Multiple (SL, UL, RL, DL, FL) | Survey |
 | 12 | Composing Energy Services in a Crowdsourced IoT Environment | 2022 | Crowdsourcing + Optimization | Original Research |
+| 13 | Crowdsourcing Energy as a Service | 2022 | CEaaS Framework + Market Mechanism | Original Research |
 
 ---
 
@@ -21,7 +22,7 @@
 
 | Metric | Value |
 |--------|-------|
-| **Total Papers** | 12 |
+| **Total Papers** | 13 |
 | **Systematic Reviews/Surveys** | 3 |
 | **Original Research** | 9 |
 | **Year Range** | 2020-2022 |
@@ -75,6 +76,7 @@
 | 10 | Market Simulation | Simulated market with provider and user agents |
 | 11 | 300+ Primary Studies | Survey - papers from IEEE, ACM, Springer, Elsevier |
 | 12 | Crowdsourced Simulation | Simulated environment with user providers |
+| 13 | CEaaS Simulation | Simulated energy marketplace |
 
 ---
 
@@ -92,4 +94,4 @@ When adding a new reference paper:
 ---
 
 *Last Updated: April 2026*
-*Total Papers: 12*
+*Total Papers: 13*
