@@ -350,9 +350,58 @@ $$trigger = \begin{cases} 1 & \text{if } |Capacity(t) - Capacity(t-1)| > \tau \\
 
 ---
 
-### Paper 17: Double DQN for Moving Services
+### Paper 17: Double DQN for Moving Services (with SNR/Shannon-Hartley)
 
-#### 2.12 Double DQN Loss
+#### 2.12 Shannon-Hartley Theorem for Service Selection
+
+The paper uses Signal-to-Noise Ratio (SNR) based on the Shannon-Hartley theorem as a key selection function for evaluating wireless communication capacity:
+
+$$C = B \cdot \log_2(1 + SNR)$$
+
+Where:
+- $C$ is channel capacity (bits/s)
+- $B$ is bandwidth (Hz)
+- $SNR = \frac{P_{signal}}{P_{noise}}$ is the signal-to-noise ratio
+
+#### 2.13 SNR-Based QoS Estimation
+
+For moving IoT services, SNR is computed as:
+
+$$SNR_{ij} = \frac{P_{tx} \cdot G_{tx} \cdot G_{rx} \cdot d_{ij}^{-\alpha}}{N_0 \cdot B}$$
+
+Where:
+- $P_{tx}$ is transmission power
+- $G_{tx}, G_{rx}$ are antenna gains
+- $d_{ij}$ is distance between service $i$ and user $j$
+- $\alpha$ is path loss exponent (typically 2-4)
+- $N_0$ is noise power spectral density
+
+#### 2.14 Capacity-Based Service Selection
+
+Service selection based on communication capacity:
+
+$$QoS_{comm}(i, j) = B \cdot \log_2\left(1 + \frac{P_{tx} \cdot G_{tx} \cdot G_{rx} \cdot d_{ij}^{-\alpha}}{N_0 \cdot B}\right)$$
+
+Selection prioritizes services with:
+$$i^* = \text{argmax}_{i \in S} QoS_{comm}(i, j) \cdot QoS_{other}(i)$$
+
+#### 2.15 Dynamic SNR with Mobility
+
+As services move, SNR changes dynamically:
+
+$$SNR_{ij}(t) = \frac{P_{tx} \cdot G_{tx} \cdot G_{rx} \cdot d_{ij}(t)^{-\alpha}}{N_0 \cdot B}$$
+
+Where $d_{ij}(t)$ changes with mobility. The trajectory prediction helps anticipate SNR degradation.
+
+#### 2.16 Combined Selection Function
+
+The final selection uses a combined function:
+
+$$f_{select}(i, j) = \lambda_1 \cdot QoS_{comm}(i, j) + \lambda_2 \cdot QoS_{functional}(i) + \lambda_3 \cdot Reliability(i)$$
+
+Subject to: $QoS_{comm}(i, j) > C_{min}$ (minimum capacity requirement)
+
+#### 2.17 Double DQN Loss
 
 $$L(\theta) = \mathbb{E}[(Y - Q(s, a; \theta))^2]$$
 
@@ -460,7 +509,7 @@ Where: $g$ = generations, $pop$ = population size, $n$ = number of services, $|S
 | 14 | $C_{new} = C + \alpha \Delta E \cdot \mathbb{I}(\Delta E > \delta)$ | Fluid adaptation | Dynamic update |
 | 15 | $\hat{p}(t+\tau) = p + v\tau + \frac{1}{2}a\tau^2$ | Proactive planning | Trajectory prediction |
 | 16 | $Capacity(t) = \sum capacity \cdot elasticity$ | Elastic pool | GA + adaptation |
-| 17 | $L = (r + \gamma Q(s', \max Q') - Q)^2$ | Trajectory-aware MDP | Double DQN |
+| 17 | $C = B \cdot \log_2(1 + SNR)$ with trajectory-aware MDP | Double DQN + Shannon-Hartley |
 
 ---
 
