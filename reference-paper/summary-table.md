@@ -16,6 +16,7 @@
 | 12 | Composing Energy Services in a Crowdsourced IoT Environment | 2022 | Crowdsourcing + Optimization | Original Research |
 | 13 | Crowdsourcing Energy as a Service | 2022 | CEaaS Framework + Market Mechanism | Original Research |
 | 14 | Fluid Composition of Intermittent IoT Energy Services | 2022 | Fluid Composition + Adaptation Algorithm | Original Research |
+| 15 | Proactive Composition of Mobile IoT Energy Services | 2022 | Trajectory Prediction + Proactive Planning | Original Research |
 
 ---
 
@@ -23,7 +24,7 @@
 
 | Metric | Value |
 |--------|-------|
-| **Total Papers** | 14 |
+| **Total Papers** | 15 |
 | **Systematic Reviews/Surveys** | 3 |
 | **Original Research** | 9 |
 | **Year Range** | 2020-2022 |
@@ -79,6 +80,7 @@
 | 12 | Crowdsourced Simulation | Simulated environment with user providers |
 | 13 | CEaaS Simulation | Simulated energy marketplace |
 | 14 | Variable Renewable Simulation | Simulated intermittent energy patterns |
+| 15 | Mobile IoT Simulation | Simulated mobile device trajectories |
 
 ---
 
@@ -96,4 +98,4 @@ When adding a new reference paper:
 ---
 
 *Last Updated: April 2026*
-*Total Papers: 14*
+*Total Papers: 15*
