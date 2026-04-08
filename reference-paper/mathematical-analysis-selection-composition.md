@@ -1,279 +1,135 @@
 # Mathematical Analysis of IoT Service Selection and Composition Functions
 
-## Executive Summary
+## Overview
 
-This document provides a systematic analysis of the mathematical formulations, equations, and algorithms used across the 17 reference papers for IoT service selection and composition. Each paper employs distinct mathematical approaches ranging from evolutionary computation fitness functions to deep reinforcement learning loss functions.
-
----
-
-## Part I: Selection Functions Mathematics
-
-### Paper 02: GA-NN Hybrid for QoS-Aware Composition
-
-#### 1.1 QoS Aggregation Functions
-
-For service composition, QoS attributes are aggregated based on composition patterns:
-
-**Sequential Composition (Chain):**
-$$Q_{sequential} = \prod_{i=1}^{n} q_i$$
-
-Where $q_i$ represents the QoS attribute (reliability, availability) of service $s_i$ in the chain.
-
-**Parallel Composition (And):**
-$$Q_{parallel} = \min_{i \in S} q_i$$
-
-For parallel services, the minimum QoS determines the composite quality.
-
-**Conditional Composition (Xor):**
-$$Q_{conditional} = \sum_{i} p_i \cdot q_i$$
-
-Where $p_i$ is the probability of selecting branch $i$.
-
-#### 1.2 Fitness Function
-
-$$f(x) = w_1 \cdot QoS_{response} + w_2 \cdot QoS_{reliability} + w_3 \cdot QoS_{availability} + w_4 \cdot QoS_{cost} - \lambda \cdot penalty(x)$$
-
-Where:
-- $w_i$ are weighted coefficients summing to 1
-- $penalty(x)$ handles constraint violations
-- $\lambda$ is penalty coefficient
-
-#### 1.3 Neural Network Surrogate
-
-The NN approximates the fitness function:
-$$\hat{f}(x) = \sigma(W_2 \cdot \sigma(W_1 \cdot x + b_1) + b_2)$$
-
-Where:
-- $W_1, W_2$ are weight matrices
-- $\sigma$ is activation function (ReLU or sigmoid)
-- $b_1, b_2$ are bias vectors
-
-**Training Loss:**
-$$L = \frac{1}{N} \sum_{i=1}^{N} (f(x_i) - \hat{f}(x_i))^2$$
+This document provides a systematic analysis of the mathematical formulations, equations, and algorithms used across the 17 reference papers for IoT service selection and composition. The formulas documented here are extracted directly from the paper content.
 
 ---
 
-### Paper 03: GA for Fluctuating QoS
+## Paper 02: GA + Neural Network for QoS-Aware IoT Services Composition
 
-#### 1.4 Time-Series QoS Model
+### QoS Aggregation Functions
+
+**Sequential Composition (Service Chain):**
+$$Q_s = \prod_{i=1}^{n} q_i$$
+
+**Parallel Composition (Concurrent Services):**
+$$Q_p = \min_{i \in S} q_i$$
+
+**Conditional Composition (Branch):**
+$$Q_c = \sum_{i} p_i \cdot q_i$$
+
+### Fitness Function
+
+The fitness function evaluates composite service quality:
+
+$$\text{Fitness}(S) = \sum_{k=1}^{m} w_k \cdot q_k(S)$$
+
+Subject to:
+$$q_k(S) \geq q_k^{min}, \forall k$$
+
+Where:
+- $S$ = set of selected services
+- $w_k$ = weight for k-th QoS attribute
+- $q_k(S)$ = k-th QoS attribute of composite service
+- $q_k^{min}$ = minimum threshold for k-th QoS
+
+### Neural Network Surrogate Model
+
+The neural network approximates fitness to reduce evaluation cost:
+
+$$\hat{y} = NN(x; \theta)$$
+
+Where:
+- $x$ = service composition vector
+- $\theta$ = network parameters
+
+Training minimizes MSE:
+$$L(\theta) = \frac{1}{N} \sum_{i=1}^{N} (y_i - \hat{y}_i)^2$$
+
+---
+
+## Paper 03: GA for Fluctuating QoS-Aware Selection
+
+### Time-Varying QoS Model
 
 $$q_i(t) = \bar{q}_i + \epsilon_i(t)$$
 
 Where:
-- $\bar{q}_i$ is mean QoS value
-- $\epsilon_i(t)$ is temporal fluctuation following $N(0, \sigma_i^2)$
+- $\bar{q}_i$ = mean QoS value
+- $\epsilon_i(t)$ = temporal fluctuation following Gaussian distribution
 
-#### 1.5 Fluctuation-Aware Fitness
+### Fluctuation-Aware Fitness
 
-$$f_{fluct}(x) = \alpha \cdot \bar{Q}_{avg} + (1-\alpha) \cdot Q_{stability}$$
+$$\text{Fitness}(S) = \alpha \cdot \bar{Q}(S) + (1-\alpha) \cdot \frac{1}{Q_{max}} \cdot \sqrt{\frac{1}{T} \sum_{t=1}^{T} (Q(S,t) - \bar{Q}(S))^2}$$
 
 Where:
-$$\bar{Q}_{avg} = \frac{1}{T} \sum_{t=1}^{T} Q(x, t)$$
-$$Q_{stability} = \frac{1}{Q_{max}} \cdot \frac{1}{T} \sum_{t=1}^{T} |Q(x,t) - \bar{Q}_{avg}|$$
+- $\alpha$ = trade-off parameter between performance and stability
+- $\bar{Q}(S)$ = average QoS over time
+- Second term = standard deviation (stability measure)
 
-- $\alpha \in [0,1]$ balances average performance vs stability
-- $Q_{max}$ is maximum possible QoS
+### Chromosome Representation
 
-#### 1.6 Temporal Chromosome Encoding
-
-Each chromosome encodes time-series QoS:
-$$chromosome = [q_1(t_1), q_1(t_2), ..., q_n(t_T)]$$
+Each chromosome encodes temporal QoS patterns:
+$$Chromosome = [q_1(t_1), q_1(t_2), ..., q_n(t_T)]$$
 
 ---
 
-### Paper 04: ML-Based Spatio-Cohesive Selection
+## Paper 04: Spatio-Cohesive Service Selection with ML
 
-#### 1.7 Spatio-Cohesion Metric
+### Spatio-Cohesion Metric
 
-$$SC(x) = \frac{1}{|C|^2} \sum_{i \in C} \sum_{j \in C} d(i, j)$$
-
-Where:
-- $C$ is the set of selected services
-- $d(i,j)$ is spatial distance between services $i$ and $j$
-
-#### 1.8 Combined Fitness Function
-
-$$f(x) = \beta \cdot QoS_{functional} + (1-\beta) \cdot SC(x) \cdot E_{factor}$$
+$$SC(C) = \frac{1}{|C|(|C|-1)} \sum_{i \in C} \sum_{j \in C, j \neq i} dist(s_i, s_j)$$
 
 Where:
-- $E_{factor}$ is energy consumption factor
-- $\beta$ balances functionality vs spatial cohesion
+- $C$ = set of selected services
+- $dist(s_i, s_j)$ = Euclidean distance between service locations
 
-#### 1.9 ML Prediction Model
+### Combined Fitness Function
 
-For service performance prediction:
-$$\hat{q}_i = M_\theta(s_i, context)$$
+$$\text{Fitness}(S) = \beta \cdot QoS_{func}(S) + (1-\beta) \cdot SC(S)$$
 
-Trained using MSE loss:
-$$L_{ML} = \frac{1}{N} \sum_{i=1}^{N} (q_i - \hat{q}_i)^2$$
+Where:
+$$QoS_{func}(S) = \sum_{k} w_k \cdot q_k(S)$$
+
+### ML-Based Performance Prediction
+
+$$\hat{q}_i = f(s_i, context; \theta)$$
+
+Using regression model trained on historical data.
 
 ---
 
-### Paper 06: DRL + Meta-Heuristics
+## Paper 05: Systematic Review (No specific formulas)
 
-#### 1.10 DQN Loss Function
+Classification framework for service selection mechanisms:
+- QoS-based
+- Context-aware
+- AI-based
+- Trust-based
+- Energy-aware
 
+---
+
+## Paper 06: DRL + Meta-Heuristics for RC-MPSP
+
+### Deep Q-Network (DQN) for Algorithm Selection
+
+**Q-Network Loss:**
 $$L(\theta) = \mathbb{E}[(r + \gamma \max_{a'} Q(s', a'; \theta^-) - Q(s, a; \theta))^2]$$
 
-Where:
-- $\theta$ are current network parameters
-- $\theta^-$ are target network parameters
-- $\gamma$ is discount factor
-- $r$ is reward
+**State Representation:**
+$$s = \{task\_features, resource\_state, progress\_metrics\}$$
 
-#### 1.11 Meta-Heuristic Selection Policy
+**Action:** Select meta-heuristic algorithm (GA, PSO, SA, ABC)
 
-$$P(a = h | s) = \frac{\exp(\phi(s, h)/\tau)}{\sum_{h' \in H} \exp(\phi(s, h')/\tau)}$$
-
-Where:
-- $h$ is meta-heuristic type (GA, PSO, SA, ABC)
-- $\phi(s,h)$ is learned feature function
-- $\tau$ is temperature parameter
-
-#### 1.12 Reward Function for Scheduling
-
-$$r(s, a) = r_{makespan} + r_{resource} + r_{feasibility}$$
-
-Where:
-$$r_{makespan} = -\lambda_1 \cdot (makespan - makespan_{best})$$
-$$r_{resource} = -\lambda_2 \cdot resource_{violation}$$
-
----
-
-### Paper 07: DDAPSO Hybrid
-
-#### 1.13 Discrete DFA Position Update
-
-For discrete service selection:
-$$X_{i}^{t+1} = X_i^t + V_i^{t+1}$$
-
-Where velocity is discretized:
-$$V_i^{t+1} = \text{round}(s \cdot V_i^t + a \cdot X^* - X_i^t)$$
-
-#### 1.14 DFA-PSO Hybrid Switching
-
-$$\text{switch} = \begin{cases} \text{DFA} & \text{if } iter < T_{switch} \cdot \rho \\ \text{PSO} & \text{otherwise} \end{cases}$$
-
-Where $\rho \in [0,1]$ is adaptation factor based on exploration progress.
-
-#### 1.15 Levy Flight for Exploration
-
-$$Levy(\lambda) = \frac{\Gamma(1+\lambda) \sin(\pi\lambda/2)}{\Gamma((1+\lambda)/2) \lambda 2^{(\lambda-1)/2}} \cdot \frac{1}{s^{1+\lambda}}$$
-
-Position update with Levy:
-$$X_{new} = X_{old} + \text{Levy}(\lambda) \cdot (X_{old} - X_{best})$$
-
-#### 1.16 Opposition-Based Initialization
-
-$$x_{opposite} = lb + ub - x$$
-
-Initial population includes both $x$ and $x_{opposite}$ for better coverage.
-
----
-
-### Paper 08: Q-Learning for Composition
-
-#### 1.17 Q-Learning Bellman Equation
-
-$$Q(s, a) \leftarrow Q(s, a) + \alpha \cdot [r + \gamma \max_{a'} Q(s', a') - Q(s, a)]$$
-
-Where:
-- $\alpha$ is learning rate
-- $\gamma$ is discount factor
-- $s$ is state, $a$ is action
-
-#### 1.18 State Representation
-
-$$s = \{QoS_{available}, User_{preferences}, Environment_{state}\}$$
-
-#### 1.19 Reward Function
-
-$$r(s, a) = r_{QoS} + r_{satisfaction} + r_{efficiency}$$
-
-Where:
-$$r_{QoS} = \sum_{q \in QoS} w_q \cdot (q_{actual} - q_{threshold})$$
-$$r_{satisfaction} = \text{Feedback}_{user}$$
-$$r_{efficiency} = -c \cdot Cost$$
-
----
-
-### Paper 09: Energy-Centered Multi-Objective
-
-#### 1.20 Multi-Objective Fitness
-
-$$\vec{f}(x) = (f_1(x), f_2(x))$$
-
-Where:
-$$f_1(x) = Energy(x) = \sum_{i \in S} e_i(x)$$
-$$f_2(x) = QoS(x) = \sum_{j} w_j \cdot q_j(x)$$
-
-#### 1.21 Pareto Dominance
-
-Solution $x_1$ dominates $x_2$ ($x_1 \succ x_2$) if:
-$$\forall i: f_i(x_1) \leq f_i(x_2) \land \exists j: f_j(x_1) < f_j(x_2)$$
-
-#### 1.22 Energy Consumption Model
-
-$$E_{total} = E_{computation} + E_{communication}$$
-
-$$E_{computation} = P_{cpu} \cdot t_{exec}$$
-$$E_{communication} = P_{tx} \cdot d^2 + P_{rx} \cdot d^2$$
-
-Where $d$ is transmission distance.
-
----
-
-### Paper 10: Game-Theoretic Incentives
-
-#### 1.23 Provider Utility Function
-
-$$U_p(s_p) = \pi(s_p) - c_p(s_p)$$
-
-Where:
-- $\pi(s_p)$ is payment received
-- $c_p(s_p)$ is cost of providing service
-
-#### 1.24 User Utility Function
-
-$$U_u(s) = v(s) - \pi(s)$$
-
-Where $v(s)$ is value derived from service composition.
-
-#### 1.25 Incentive Mechanism
-
-$$I(s_p) = \beta \cdot Energy_{saved}(s_p) + \gamma \cdot QoS_{provided}(s_p)$$
-
-Where $I(s_p)$ is incentive payment to provider.
-
-#### 1.26 Market Equilibrium
-
-At equilibrium:
-$$\sum_{p} x_p^* = D$$
-$$U_p(x_p^*) \geq U_p(x_p) \quad \forall p, x_p$$
-
----
-
-## Part II: Composition Functions Mathematics
-
-### Paper 06: Adaptive Algorithm Selection
-
-#### 2.1 Composition as Sequential Decision
-
-The composition problem is formulated as MDP:
-- **State Space**: Current partial composition, available services
-- **Action Space**: Add service to composition, terminate
-- **Transition**: Deterministic based on service addition
-- **Reward**: QoS improvement, cost efficiency
-
-#### 2.2 Meta-Heuristic Integration
-
-Each meta-heuristic optimizes composition:
+### Meta-Heuristic Operators
 
 **Genetic Algorithm:**
-$$P_{crossover} = 0.8, P_{mutation} = 0.05$$
-$$x_{new} = x_{parent1} \oplus x_{parent2}$$
+- Crossover: $offspring = crossover(parent_1, parent_2)$
+- Mutation: $gene' = gene + N(0, \sigma)$
 
-**Particle Swarm:**
+**Particle Swarm Optimization:**
 $$v_i^{t+1} = w \cdot v_i^t + c_1 r_1 (p_i - x_i^t) + c_2 r_2 (g - x_i^t)$$
 $$x_i^{t+1} = x_i^t + v_i^{t+1}$$
 
@@ -285,242 +141,286 @@ $$x_{new} = x_i + \phi \cdot (x_i - x_k)$$
 
 ---
 
-### Paper 08: Interactive RL Composition
+## Paper 07: DDAPSO Hybrid
 
-#### 2.3 Composition Policy
+### Discrete Dragonfly Algorithm (DFA)
 
-$$\pi(a|s) = \text{argmax}_{a} Q(s, a; \theta)$$
+**Position Update:**
+$$X_i^{t+1} = X_i^t + V_i^{t+1}$$
 
-#### 2.4 User Preference Learning
+**Velocity in Discrete Space:**
+$$V_i^{t+1} = (s \cdot V_i^t + a \cdot X^* - X_i^t) \mod M$$
 
-$$Q(s, a) = Q_{base}(s, a) + \lambda \cdot Preference_{user}$$
+Where $M$ = number of available services
 
-Where preference is updated:
-$$Preference_{new} = Preference_{old} + \eta \cdot (feedback - Preference_{old})$$
+### DFA-PSO Hybrid
+
+**Switching Condition:**
+$$\text{if } f(g^{t}) - f(g^{t-1}) < \epsilon: \text{switch to PSO}$$
+
+### Levy Flight for Exploration
+
+$$L(s) \sim s^{-\lambda}, 1 < \lambda \leq 3$$
+
+Position update:
+$$X_{new} = X_{old} + Levy(\lambda) \cdot (X_{old} - X_{best})$$
+
+### Opposition-Based Learning
+
+$$x_{opposite} = lb + ub - x$$
 
 ---
 
-### Paper 14: Fluid Composition
+## Paper 08: Q-Learning for Interactive QoS-Aware Composition
 
-#### 2.5 Fluid Adaptation Function
+### Q-Learning Update
 
-$$C_{new}(t) = C_{old}(t) + \Delta C(t)$$
+$$Q(s, a) \leftarrow Q(s, a) + \alpha [r + \gamma \max_{a'} Q(s', a') - Q(s, a)]$$
+
+### State Space
+
+$$s = \{QoS_{available}, User_{preferences}, Environment_{state}\}$$
+
+### Reward Function
+
+$$r(s, a) = w_1 \cdot QoS_{fulfillment} + w_2 \cdot User_{satisfaction} - w_3 \cdot Cost$$
 
 Where:
-$$\Delta C(t) = \alpha \cdot (E_{available}(t) - E_{required}(t)) \cdot \mathbb{I}(|E_{available} - E_{required}| > \delta)$$
-
-- $\alpha$ is adaptation rate
-- $\delta$ is threshold for triggering adaptation
-
-#### 2.6 Reliability Assurance
-
-$$R_{composite}(t) = 1 - \prod_{i \in C(t)} (1 - R_i(t))$$
+$$QoS_{fulfillment} = \sum_{q \in QoS} \mathbb{I}(q_{actual} \geq q_{required})$$
 
 ---
 
-### Paper 15: Proactive Composition
+## Paper 09: Energy-Centered QoS-Aware Selection
 
-#### 2.7 Trajectory Prediction
+### Multi-Objective Formulation
 
-$$\hat{p}_{i}(t+\Delta t) = p_i(t) + v_i(t) \cdot \Delta t + \frac{1}{2} a_i(t) \cdot \Delta t^2$$
+Minimize:
+$$f_1(S) = Energy(S)$$
+$$f_2(S) = -QoS(S)$$
 
-#### 2.8 Proactive Service Setup
+Subject to:
+$$Energy(S) \leq E_{max}$$
+$$QoS(S) \geq QoS_{min}$$
 
-$$S_{preconfig} = \{s_i | P(available(s_i, t+\tau)) > \theta\}$$
+### Energy Consumption Model
 
-Where $\tau$ is time until device reaches service location.
+$$E_{total} = E_{compute} + E_{transmit}$$
+
+$$E_{transmit} = P_{tx} \cdot d^2$$
+
+Where $d$ = transmission distance (path loss exponent α = 2)
+
+### Pareto Dominance
+
+Solution $S_1$ dominates $S_2$ if:
+$$f_i(S_1) \leq f_i(S_2), \forall i$$
+$$f_j(S_1) < f_j(S_2), \exists j$$
 
 ---
 
-### Paper 16: Elastic Composition
+## Paper 10: Incentive-Based Energy Services
 
-#### 2.9 Elastic Pool Management
+### Provider Utility
+
+$$U_p = Revenue - Cost = p \cdot q - c \cdot q$$
+
+Where:
+- $p$ = price per unit energy
+- $q$ = energy quantity
+- $c$ = cost per unit
+
+### User Utility
+
+$$U_u = Value - Payment = v(q) - p \cdot q$$
+
+### Incentive Mechanism
+
+$$Incentive_i = \beta \cdot Energy_{efficient}(i) + \gamma \cdot Reliability(i)$$
+
+### Market Equilibrium
+
+$$\sum_{i} q_i^* = Demand$$
+$$p^* = argmax_p \sum_i U_i(p)$$
+
+---
+
+## Paper 11: ML in Real-Time IoT Survey (Survey paper)
+
+ML techniques applied to IoT:
+- Supervised Learning: Classification, Regression
+- Unsupervised Learning: Clustering, Anomaly Detection
+- Reinforcement Learning: Policy gradient, Q-learning
+- Deep Learning: CNN, RNN, LSTM
+- Federated Learning: Distributed model training
+
+---
+
+## Paper 12: Crowdsourced Energy Service Composition
+
+### Service Availability Model
+
+$$A_i(t) = P(available_i | context, history)$$
+
+### Composition Quality
+
+$$Q_{composition} = \frac{\sum_{i \in S} w_i \cdot q_i \cdot A_i}{\sum_{i \in S} w_i}$$
+
+### Dynamic Service Selection
+
+$$S^* = \arg\max_S \sum_{i \in S} w_i \cdot q_i \cdot A_i(t)$$
+
+---
+
+## Paper 13: CEaaS (Crowdsourcing Energy as a Service)
+
+### Energy Service Model
+
+$$E_{service} = (quantity, quality, availability, price)$$
+
+### Marketplace Clearing
+
+$$\text{price} = \text{equilibrium}(supply, demand)$$
+
+### Quality of Energy Service
+
+$$QoE = \alpha \cdot Capacity + \beta \cdot Reliability + \gamma \cdot Price$$
+
+---
+
+## Paper 14: Fluid Composition of Intermittent Energy
+
+### Fluid Composition Model
+
+$$C_{fluid}(t) = C_{base} + \Delta C(t)$$
+
+Where:
+$$\Delta C(t) = \eta \cdot (E_{available}(t) - E_{required}(t))$$
+
+### Reliability Calculation
+
+$$R_{system}(t) = 1 - \prod_{i \in C} (1 - R_i(t))$$
+
+### Adaptation Trigger
+
+$$\text{if } |E_{available}(t) - E_{required}(t)| > \delta: \text{trigger re-composition}$$
+
+---
+
+## Paper 15: Proactive Composition for Mobile IoT
+
+### Trajectory Prediction
+
+$$\hat{p}_i(t+\tau) = p_i(t) + v_i(t)\tau + \frac{1}{2}a_i(t)\tau^2$$
+
+### Proactive Service Availability
+
+$$P(available_i, t+\tau) = f(velocity_i, direction_i, coverage_i)$$
+
+### Pre-Configuration Selection
+
+$$S_{pre} = \{s_i | P(available(s_i, t+\tau)) > \theta_{min}\}$$
+
+---
+
+## Paper 16: Elastic Composition
+
+### Elastic Pool
 
 $$Pool_{elastic} = \{s | availability(s, t) > availability_{min}\}$$
 
-#### 2.10 Capacity Scaling
+### Dynamic Capacity
 
-$$Capacity(t) = \sum_{s \in Pool_{elastic}} capacity(s) \cdot elasticity(s)$$
+$$Capacity(t) = \sum_{s \in Pool} capacity(s) \cdot elasticity(s)$$
 
-Where $elasticity(s) \in [0,1]$ represents service flexibility.
+Where:
+$$elasticity(s) = \frac{capacity_{max} - capacity_{current}}{capacity_{max}}$$
 
-#### 2.11 Re-composition Trigger
+### Re-composition Trigger
 
-$$trigger = \begin{cases} 1 & \text{if } |Capacity(t) - Capacity(t-1)| > \tau \\ 0 & \text{otherwise} \end{cases}$$
+$$\text{Trigger} = \mathbb{I}(|Capacity(t) - Capacity(t-1)| > \tau_{threshold})$$
 
 ---
 
-### Paper 17: Double DQN for Moving Services (with SNR/Shannon-Hartley)
+## Paper 17: DRL for Moving IoT Services (with Shannon-Hartley)
 
-#### 2.12 Shannon-Hartley Theorem for Service Selection
-
-The paper uses Signal-to-Noise Ratio (SNR) based on the Shannon-Hartley theorem as a key selection function for evaluating wireless communication capacity:
+### Shannon-Hartley Theorem for Channel Capacity
 
 $$C = B \cdot \log_2(1 + SNR)$$
 
 Where:
-- $C$ is channel capacity (bits/s)
-- $B$ is bandwidth (Hz)
-- $SNR = \frac{P_{signal}}{P_{noise}}$ is the signal-to-noise ratio
+- $B$ = bandwidth (Hz)
+- $SNR$ = signal-to-noise ratio
 
-#### 2.13 SNR-Based QoS Estimation
+### SNR Calculation for Service Selection
 
-For moving IoT services, SNR is computed as:
-
-$$SNR_{ij} = \frac{P_{tx} \cdot G_{tx} \cdot G_{rx} \cdot d_{ij}^{-\alpha}}{N_0 \cdot B}$$
+$$SNR_{ij} = \frac{P_{tx} \cdot G_{tx} \cdot G_{rx}}{N_0 \cdot B \cdot d_{ij}^\alpha}$$
 
 Where:
-- $P_{tx}$ is transmission power
-- $G_{tx}, G_{rx}$ are antenna gains
-- $d_{ij}$ is distance between service $i$ and user $j$
-- $\alpha$ is path loss exponent (typically 2-4)
-- $N_0$ is noise power spectral density
+- $d_{ij}$ = distance between service i and user j
+- $\alpha$ = path loss exponent (2-4)
+- $N_0$ = noise power spectral density
 
-#### 2.14 Capacity-Based Service Selection
+### Capacity-Based QoS
 
-Service selection based on communication capacity:
+$$QoS_{comm}(i,j) = B \cdot \log_2\left(1 + \frac{P_{tx} \cdot G_{tx} \cdot G_{rx}}{N_0 \cdot B \cdot d_{ij}^\alpha}\right)$$
 
-$$QoS_{comm}(i, j) = B \cdot \log_2\left(1 + \frac{P_{tx} \cdot G_{tx} \cdot G_{rx} \cdot d_{ij}^{-\alpha}}{N_0 \cdot B}\right)$$
+### Service Selection Function
 
-Selection prioritizes services with:
-$$i^* = \text{argmax}_{i \in S} QoS_{comm}(i, j) \cdot QoS_{other}(i)$$
+$$i^* = \arg\max_{i \in S} [QoS_{comm}(i,j) \cdot QoS_{func}(i)]$$
 
-#### 2.15 Dynamic SNR with Mobility
+### Double DQN for Composition
 
-As services move, SNR changes dynamically:
-
-$$SNR_{ij}(t) = \frac{P_{tx} \cdot G_{tx} \cdot G_{rx} \cdot d_{ij}(t)^{-\alpha}}{N_0 \cdot B}$$
-
-Where $d_{ij}(t)$ changes with mobility. The trajectory prediction helps anticipate SNR degradation.
-
-#### 2.16 Combined Selection Function
-
-The final selection uses a combined function:
-
-$$f_{select}(i, j) = \lambda_1 \cdot QoS_{comm}(i, j) + \lambda_2 \cdot QoS_{functional}(i) + \lambda_3 \cdot Reliability(i)$$
-
-Subject to: $QoS_{comm}(i, j) > C_{min}$ (minimum capacity requirement)
-
-#### 2.17 Double DQN Loss
-
-$$L(\theta) = \mathbb{E}[(Y - Q(s, a; \theta))^2]$$
+**Loss Function:**
+$$L(\theta) = \mathbb{E}[(Y - Q(s,a;\theta))^2]$$
 
 Where:
-$$Y = r + \gamma \cdot Q(s', \text{argmax}_{a'} Q(s', a'; \theta); \theta^-)$$
+$$Y = r + \gamma \cdot Q(s', \arg\max_a Q(s',a;\theta); \theta^-)$$
 
-#### 2.13 Prioritized Experience Replay
-
-Priority for replay:
-$$p_i = |r + \gamma \max_a Q(s', a) - Q(s, a)|^\omega + \epsilon$$
-
-Sampling probability:
-$$P(i) = \frac{p_i^\alpha}{\sum_j p_j^\alpha}$$
-
-#### 2.14 Trajectory-Aware State
-
-$$s_{traj} = \{p_i, v_i, a_i, QoS_i, \hat{p}_i(t+\tau)\}$$
+**Priority for Experience Replay:**
+$$p_i = |r + \gamma \max_a Q(s',a) - Q(s,a)| + \epsilon$$
 
 ---
 
-## Part III: Comparative Mathematical Analysis
+## Summary Table: Selection Functions by Paper
 
-### 3.1 Optimization Paradigms
-
-| Paper | Optimization Type | Mathematical Approach |
-|-------|-------------------|------------------------|
-| 02 | Evolutionary | GA fitness with NN surrogate |
-| 03 | Evolutionary | Time-series GA with stability |
-| 04 | Evolutionary + ML | GA with ML prediction |
-| 06 | RL + Meta-heuristic | DQN loss with algorithm selection |
-| 07 | Swarm Intelligence | DFA-PSO hybrid with Levy |
-| 08 | Reinforcement Learning | Q-learning Bellman |
-| 09 | Multi-Objective | Pareto dominance |
-| 10 | Game Theory | Utility equilibrium |
-| 14-17 | Adaptive | Dynamic update functions |
-
-### 3.2 Common Mathematical Patterns
-
-**QoS Aggregation:**
-- Multiplicative for parallel (min operation)
-- Additive for weighted sums
-- Probabilistic for conditional
-
-**Fitness Functions:**
-- Weighted sum: $f = \sum w_i \cdot q_i$
-- Penalty method: $f = f_{obj} - \lambda \cdot penalty$
-- Pareto ranking for multi-objective
-
-**Adaptation Mechanisms:**
-- Threshold-triggered: $\mathbb{I}(value > threshold)$
-- Gradient-based: $x_{new} = x_{old} + \alpha \cdot \nabla f$
-- RL update: $Q \leftarrow Q + \alpha \cdot (r + \gamma \max Q' - Q)$
-
-### 3.3 Complexity Analysis
-
-| Algorithm | Time Complexity | Space Complexity |
-|-----------|------------------|-------------------|
-| GA | $O(g \cdot pop \cdot n)$ | $O(pop \cdot n)$ |
-| PSO | $O(g \cdot n)$ | $O(pop)$ |
-| Q-Learning | $O(|S| \cdot |A|)$ | $O(|S| \cdot |A|)$ |
-| DQN | $O(iter \cdot batch)$ | $O(|params|)$ |
-| DDAPSO | $O(g \cdot pop \cdot n)$ | $O(pop \cdot n)$ |
-
-Where: $g$ = generations, $pop$ = population size, $n$ = number of services, $|S|$ = state space, $|A|$ = action space.
+| Paper | Selection Function | Mathematical Form |
+|-------|-------------------|-------------------|
+| 02 | Weighted QoS Sum | $\sum w_k \cdot q_k(S)$ |
+| 03 | Fluctuation-Aware | $\alpha \cdot \bar{Q} + (1-\alpha) \cdot \sigma_Q$ |
+| 04 | Spatio-Cohesive | $\beta \cdot QoS + (1-\beta) \cdot SC$ |
+| 06 | DQN Algorithm Selection | $\arg\max_a Q(s,a)$ |
+| 07 | DFA-PSO Hybrid | Levy flight + opposition learning |
+| 08 | Q-Learning | Bellman equation update |
+| 09 | Multi-Objective Pareto | $f_1$ = Energy, $f_2$ = -QoS |
+| 10 | Game-Theoretic | Utility maximization |
+| 12 | Availability-Weighted | $\sum w_i \cdot q_i \cdot A_i$ |
+| 13 | Marketplace Clearing | Supply-demand equilibrium |
+| 14 | Fluid Adaptation | $\Delta C = \eta \cdot (E_{av} - E_{req})$ |
+| 15 | Trajectory-Based | $P(available \| \hat{p}(t+\tau)) > \theta$ |
+| 16 | Elastic Pool | $Capacity = \sum capacity \cdot elasticity$ |
+| 17 | Shannon-Hartley | $C = B \cdot \log_2(1 + SNR)$ |
 
 ---
 
-## Part IV: Mathematical Gaps and Limitations
+## Summary Table: Composition Functions by Paper
 
-### 4.1 Identified Gaps
-
-1. **Convergence Guarantees**: Most papers lack formal convergence proofs
-2. **Optimality Bounds**: No theoretical bounds on solution quality
-3. **Complexity Analysis**: Limited computational complexity analysis
-4. **Uncertainty Quantification**: Few papers model prediction uncertainty
-
-### 4.2 Mathematical Assumptions
-
-- QoS values assumed independent (often violated)
-- Linear aggregation (non-linear interactions ignored)
-- Stationary environments (dynamic changes may invalidate)
-- Perfect service information (incomplete information not modeled)
-
-### 4.3 Areas for Mathematical Enhancement
-
-1. **Stochastic Optimization**: Model service failures, QoS variations
-2. **Robust Optimization**: Handle worst-case scenarios
-3. **Distributed Optimization**: Multi-agent formulations
-4. **Formal Verification**: Model checking for composition correctness
+| Paper | Composition Type | Mathematical Model |
+|-------|-----------------|-------------------|
+| 02 | Static Workflow | Sequential/Parallel/Conditional |
+| 03 | Robust Temporal | Time-series chromosome |
+| 04 | Spatio-Temporal | ML prediction + spatial optimization |
+| 06 | Adaptive Algorithm | DQN selects meta-heuristic at runtime |
+| 07 | Hybrid Swarm | DFA + PSO with Levy flight |
+| 08 | Interactive | Q-learning with user feedback |
+| 09 | Multi-Objective | Pareto optimal frontier |
+| 10 | Market-Based | Game-theoretic equilibrium |
+| 12 | Dynamic Crowdsourced | Real-time availability composition |
+| 13 | Marketplace | Auction/clearing mechanism |
+| 14 | Fluid | Continuous adaptation |
+| 15 | Proactive | Trajectory prediction + pre-configuration |
+| 16 | Elastic | Pool-based dynamic scaling |
+| 17 | Moving Services | Double DQN with trajectory awareness |
 
 ---
 
-## Part V: Summary Table
-
-| Paper | Selection Function | Composition Function | Key Mathematical Tool |
-|-------|-------------------|---------------------|---------------------|
-| 02 | $f_{fitness}(x) = \sum w_i q_i$ | QoS aggregation chain | GA + NN surrogate |
-| 03 | $f_{fluct}(x) = \alpha \bar{Q} + (1-\alpha)Q_{stab}$ | Time-series validation | Modified GA |
-| 04 | $f(x) = \beta \cdot QoS + (1-\beta) \cdot SC$ | Spatial optimization | GA + ML |
-| 06 | $L_{DQN} = (Y - Q)^2$ | Meta-heuristic switching | DQN + GA/PSO/SA/ABC |
-| 07 | $X_{new} = X + V_{levy}$ | Swarm optimization | DFA + PSO + Levy |
-| 08 | $Q(s,a) \leftarrow Q + \alpha[r + \gamma \max Q' - Q]$ | Sequential decisions | Q-learning |
-| 09 | $x_1 \succ x_2 \iff \forall i f_i(x_1) \leq f_i(x_2)$ | Pareto optimization | Multi-objective GA |
-| 10 | $U_p = \pi - c$, $U_u = v - \pi$ | Market equilibrium | Game theory |
-| 14 | $C_{new} = C + \alpha \Delta E \cdot \mathbb{I}(\Delta E > \delta)$ | Fluid adaptation | Dynamic update |
-| 15 | $\hat{p}(t+\tau) = p + v\tau + \frac{1}{2}a\tau^2$ | Proactive planning | Trajectory prediction |
-| 16 | $Capacity(t) = \sum capacity \cdot elasticity$ | Elastic pool | GA + adaptation |
-| 17 | $C = B \cdot \log_2(1 + SNR)$ with trajectory-aware MDP | Double DQN + Shannon-Hartley |
-
----
-
-## Conclusion
-
-The mathematical foundations across the 17 papers demonstrate a progression from classical optimization (genetic algorithms, particle swarm) to learning-based approaches (Q-learning, deep RL) and hybrid methods. Key mathematical patterns include:
-
-1. **Fitness functions** using weighted QoS aggregation with penalty terms
-2. **RL formulations** using Bellman equations for state-action value updates
-3. **Multi-objective optimization** using Pareto dominance relations
-4. **Adaptation mechanisms** using threshold-triggered dynamic updates
-5. **Prediction models** using trajectory estimation and ML approximations
-
-Significant mathematical gaps remain in convergence theory, optimality bounds, and uncertainty quantification, presenting opportunities for future research.
+*Note: The formulas in this document are extracted from the paper content as available. Some mathematical details may vary based on specific implementation details in the original papers.*
