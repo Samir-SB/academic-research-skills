@@ -20,18 +20,20 @@
 
 | 16 | Elastic Composition of Crowdsourced IoT Energy Services | 2022 | Genetic Algorithm + Elastic Adaptation | Original Research |
 
+| 17 | A Deep Reinforcement Learning Approach for Composing Moving IoT Services | 2022 | Double DQN (Deep Reinforcement Learning) | Original Research |
+
 ---
 
 ## Summary Statistics
 
 | Metric | Value |
 |--------|-------|
-| **Total Papers** | 16 |
+| **Total Papers** | 17 |
 | **Systematic Reviews/Surveys** | 3 |
 | **Original Research** | 10 |
 | **Year Range** | 2020-2022 |
 | **Papers using Genetic Algorithm** | 6 |
-| **Papers using Machine Learning/RL** | 5 |
+| **Papers using Machine Learning/RL** | 6 |
 | **Papers using Hybrid Approaches** | 6 |
 | **Papers using Swarm Intelligence** | 3 |
 | **Papers on Energy Efficiency** | 2 |
@@ -48,9 +50,10 @@
 | Ant Colony Optimization (ACO) | 01, 05 |
 | Dragonfly Algorithm (DFA) | 07 |
 | Machine Learning (General) | 04, 05 |
-| Reinforcement Learning (RL) | 08 |
+| Reinforcement Learning (RL) | 08, 17 |
 | Q-Learning | 08 |
-| Deep Reinforcement Learning (DQN) | 06 |
+| Deep Reinforcement Learning (DQN) | 06, 17 |
+| Double DQN | 17 |
 | Multi-Criteria Decision Making (MCDM) | 05 |
 | Simulated Annealing (SA) | 06 |
 | Artificial Bee Colony (ABC) | 06 |
@@ -85,8 +88,9 @@
 | 14 | Variable Renewable Simulation | Simulated intermittent energy patterns |
 | 15 | Mobile IoT Simulation | Simulated mobile device trajectories |
 | 16 | Synthetic IoT Prosumer Simulation | Simulated crowdsourced energy pool scenarios |
+| 17 | Synthetic Moving IoT Services | Simulated mobility patterns (random waypoint, vehicle, drone) |
 
 ---
 
 *Last Updated: April 2026*
-*Total Papers: 16*
+*Total Papers: 17*
