@@ -15,6 +15,7 @@
 | 11 | Machine Learning in Real-Time Internet of Things (IoT) Systems: A Survey | 2022 | Multiple (SL, UL, RL, DL, FL) | Survey |
 | 12 | Composing Energy Services in a Crowdsourced IoT Environment | 2022 | Crowdsourcing + Optimization | Original Research |
 | 13 | Crowdsourcing Energy as a Service | 2022 | CEaaS Framework + Market Mechanism | Original Research |
+| 14 | Fluid Composition of Intermittent IoT Energy Services | 2022 | Fluid Composition + Adaptation Algorithm | Original Research |
 
 ---
 
@@ -22,7 +23,7 @@
 
 | Metric | Value |
 |--------|-------|
-| **Total Papers** | 13 |
+| **Total Papers** | 14 |
 | **Systematic Reviews/Surveys** | 3 |
 | **Original Research** | 9 |
 | **Year Range** | 2020-2022 |
@@ -77,6 +78,7 @@
 | 11 | 300+ Primary Studies | Survey - papers from IEEE, ACM, Springer, Elsevier |
 | 12 | Crowdsourced Simulation | Simulated environment with user providers |
 | 13 | CEaaS Simulation | Simulated energy marketplace |
+| 14 | Variable Renewable Simulation | Simulated intermittent energy patterns |
 
 ---
 
@@ -94,4 +96,4 @@ When adding a new reference paper:
 ---
 
 *Last Updated: April 2026*
-*Total Papers: 13*
+*Total Papers: 14*
