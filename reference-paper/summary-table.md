@@ -18,19 +18,21 @@
 | 14 | Fluid Composition of Intermittent IoT Energy Services | 2022 | Fluid Composition + Adaptation Algorithm | Original Research |
 | 15 | Proactive Composition of Mobile IoT Energy Services | 2022 | Trajectory Prediction + Proactive Planning | Original Research |
 
+| 16 | Elastic Composition of Crowdsourced IoT Energy Services | 2022 | Genetic Algorithm + Elastic Adaptation | Original Research |
+
 ---
 
 ## Summary Statistics
 
 | Metric | Value |
 |--------|-------|
-| **Total Papers** | 15 |
+| **Total Papers** | 16 |
 | **Systematic Reviews/Surveys** | 3 |
-| **Original Research** | 9 |
+| **Original Research** | 10 |
 | **Year Range** | 2020-2022 |
-| **Papers using Genetic Algorithm** | 5 |
+| **Papers using Genetic Algorithm** | 6 |
 | **Papers using Machine Learning/RL** | 5 |
-| **Papers using Hybrid Approaches** | 5 |
+| **Papers using Hybrid Approaches** | 6 |
 | **Papers using Swarm Intelligence** | 3 |
 | **Papers on Energy Efficiency** | 2 |
 
@@ -40,7 +42,7 @@
 
 | Algorithm | Papers Using |
 |-----------|--------------|
-| Genetic Algorithm (GA) | 01, 02, 03, 04, 09 |
+| Genetic Algorithm (GA) | 02, 03, 04, 09, 16 |
 | Neural Networks (NN) | 02, 04 |
 | Particle Swarm Optimization (PSO) | 01, 05, 06, 07 |
 | Ant Colony Optimization (ACO) | 01, 05 |
@@ -59,6 +61,7 @@
 | Supervised Learning (SL) | 11 |
 | Unsupervised Learning (UL) | 11 |
 | Federated Learning (FL) | 11 |
+| Elastic Adaptation | 16 |
 
 ---
 
@@ -81,21 +84,9 @@
 | 13 | CEaaS Simulation | Simulated energy marketplace |
 | 14 | Variable Renewable Simulation | Simulated intermittent energy patterns |
 | 15 | Mobile IoT Simulation | Simulated mobile device trajectories |
-
----
-
-## Instructions for Adding New Papers
-
-When adding a new reference paper:
-
-1. Place the PDF in a new folder (e.g., `reference-paper/11/`)
-2. Ask me to analyze the paper using the peer review process
-3. I will update this table with the new paper details
-
-**To add a new reference paper, simply ask:**
-"Please analyze the new reference paper and update table with the new entry"
+| 16 | Synthetic IoT Prosumer Simulation | Simulated crowdsourced energy pool scenarios |
 
 ---
 
 *Last Updated: April 2026*
-*Total Papers: 15*
+*Total Papers: 16*
