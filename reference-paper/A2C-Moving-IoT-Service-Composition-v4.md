@@ -4,7 +4,7 @@
 
 ## Abstract
 
-The composition of moving Internet of Things (IoT) services in dynamic environments presents significant challenges due to the spatio-temporal nature of service availability, device mobility, and quality-of-service requirements. This paper proposes an adaptation of the Double DQN approach from prior work to an Advantage Actor-Critic (A2C) framework for proactive service composition in moving IoT environments. We implement and evaluate both shared and separate network architectures, incorporating real-world trajectory datasets and spatio-temporal constraints. The experimental setup employs the same two datasets used in prior work—random waypoint mobility models for human-carried devices and vehicle movement along predefined routes—with synthetic IoT service simulation environments to validate the proposed approach. Our A2C-based method demonstrates improvements in composition success rate, adaptation speed, and stability compared to the baseline Double DQN, with the separate network architecture showing particular strength in complex dynamic scenarios. The selection function utilizes the Signal Transmission Reward (STR) model based on Euclidean distance between consumer and service provider.
+Moving IoT services in dynamic environments pose challenges due to spatio-temporal variability in service availability, device mobility, and QoS requirements. This paper adapts Double DQN from prior work to an A2C framework for proactive service composition. We implement and evaluate shared and separate network architectures on real trajectory data and synthetic IoT service simulations using the same datasets as prior work. A2C improves success rate, adaptation speed, and stability over Double DQN, with the separate architecture performing best in complex scenarios. The selection uses the STR model based on Euclidean distance.
 
 **Keywords**: Moving IoT services, service composition, A2C actor-critic, spatio-temporal constraints, proactive composition, deep reinforcement learning, STR signal transmission reward
 
@@ -16,9 +16,9 @@ The proliferation of mobile IoT devices and the emergence of crowdsourced energy
 
 Prior research (Paper 17, [1]) established a deep reinforcement learning framework using Double DQN for composing moving IoT services. This approach demonstrated promising results in handling service mobility through trajectory-aware composition, utilizing the Signal Transmission Reward (STR) model for service selection based on Euclidean distance. The baseline achieved 92.4% success rate at low mobility (2 km/h) and 54.3% at high mobility (80 km/h) on vehicle datasets, with 124.3 re-compositions per hour. However, the value-based nature of DQN introduces several limitations that become particularly problematic in high-mobility scenarios: (1) overestimation bias that leads to suboptimal action selection [7], (2) difficulty handling the continuous action spaces typical of service composition, and (3) reactive decision-making that only considers current service positions without anticipating future states [25].
 
-**Gap Statement**: When services move at high velocities (60-80 km/h), the reactive nature of Double DQN leads to frequent service disruption, as decisions are made only based on current positions without predicting future states. This results in a 35% performance degradation at highway speeds compared to low-mobility scenarios. The Advantage Actor-Critic (A2C) algorithm offers a compelling alternative by combining direct policy optimization with value function estimation, enabling proactive composition through trajectory prediction while providing more stable learning dynamics [3][5].
+**Gap Statement** — When services move at high velocities (60-80 km/h), Double DQN only reacts to current positions without predicting future states, causing a 35% performance drop at highway speeds. A2C combines direct policy optimization with value function estimation, enabling proactive composition through trajectory prediction and more stable learning [3][5].
 
-This research addresses the following key questions: 
+This research asks: 
 
 (1) How can A2C be adapted for proactive moving IoT service composition with spatio-temporal constraints while maintaining the same STR-based selection?
 
@@ -28,19 +28,15 @@ This research addresses the following key questions:
 
 (4) How does the A2C approach scale with increasing numbers of moving services (20 to 100+ services) in terms of convergence time and success rate?
 
-Our contributions include: 
+This paper has five main contributions:
 
-(1) A comprehensive A2C-based framework for moving IoT service composition with trajectory prediction, preserving the STR-based selection from prior work;
+1. An A2C-based framework for moving IoT service composition with trajectory prediction, preserving the STR-based selection from prior work
+2. Comparison of shared and separate network architectures
+3. Evaluation using the same two datasets as prior work
+4. Scalability analysis across 20 to 100+ services
+5. Open-source PyTorch implementation
 
-(2) Implementation and comparison of shared and separate network architectures;
-
-(3) Evaluation using the two datasets from prior work—the random waypoint mobility model for pedestrian scenarios and vehicle movement dataset for automotive scenarios;
-
-(4) Scalability analysis across service populations ranging from 20 to 100+ services;
-
-(5) Open-source implementation with complete PyTorch code for reproducibility.
-
-The remainder of this paper is organized as follows. Section 2 provides background on moving IoT service composition and reinforcement learning approaches. Section 3 presents the proposed A2C-based framework with detailed architecture including the STR-based selection model. Section 4 describes the experimental setup including datasets, simulation environment, and evaluation metrics. Section 5 presents experimental results and analysis. Section 6 provides the implementation details with source code. Section 7 discusses implications and limitations. Section 8 concludes with future research directions.
+The paper proceeds as follows. Section 2 covers background. Section 3 presents the A2C framework. Section 4 describes the experimental setup. Section 5 shows results. Section 6 provides implementation details. Section 7 discusses implications and limitations. Section 8 concludes.
 
 ---
 
@@ -52,25 +48,25 @@ Moving IoT services represent a paradigm where service providers change their sp
 
 The composition problem becomes particularly challenging when considering spatio-temporal constraints including energy requirements, QoS parameters, and connectivity ranges. Prior work formalized moving IoT service composition as a Markov Decision Process where the state includes service positions, device positions, velocities, and predicted trajectories [1]. The action space encompasses service selection, replacement, addition, and removal operations. The STR-based selection function provides the fundamental service quality metric.
 
-Recent advances in proactive service placement demonstrate the importance of trajectory prediction for maintaining service continuity in mobile environments [4][5]. These approaches leverage deep learning models including LSTM networks to predict user mobility patterns and proactively place services accordingly. The integration of spatio-temporal awareness into service composition represents a significant advancement over reactive approaches that only respond to changes after they occur.
+Recent work on proactive service placement shows trajectory prediction maintains service continuity in mobile environments [4][5]. These use deep learning, including LSTM networks, to predict mobility patterns and place services proactively. Spatio-temporal awareness in service composition outperforms reactive approaches that only respond after changes occur.
 
 ### 2.2 Actor-Critic Deep Reinforcement Learning
 
-Actor-critic algorithms combine the advantages of value-based and policy-based reinforcement learning methods. The actor component learns a stochastic policy directly, while the critic estimates the value function for state-action pairs. This architecture provides lower variance compared to pure policy gradient methods while maintaining the ability to handle continuous action spaces [3].
+Actor-critic algorithms combine value-based and policy-based methods. The actor learns a stochastic policy directly; the critic estimates the value function. This architecture reduces variance compared to pure policy gradient while handling continuous action spaces [3].
 
-The Advantage Actor-Critic (A2C) variant enhances learning stability through the advantage function, which measures the difference between the expected value of an action and the current value estimate. By computing advantages rather than raw returns, A2C reduces variance while maintaining unbiased gradient estimates. The advantage function is computed as:
+A2C improves stability through the advantage function, measuring the difference between action value and current value estimate. The advantage is:
 
 $$A(s_t, a_t) = Q(s_t, a_t) - V(s_t) = r_t + \gamma V(s_{t+1}) - V(s_t)$$
 
-Research on A2C for edge computing and service management demonstrates its effectiveness in dynamic environments. Studies on A2C for task scheduling in edge-cloud systems show faster convergence and better adaptability compared to DQN-based approaches [3][6]. The integration of LSTM with A2C enables effective handling of temporal dependencies in mobility-aware scenarios [3].
+A2C works well for edge computing and service management. Studies on A2C for task scheduling in edge-cloud systems show faster convergence and better adaptability than DQN [3][6]. Adding LSTM to A2C handles temporal dependencies in mobility-aware scenarios [3].
 
 ### 2.3 Network Architecture Design
 
-The design of actor and critic network architectures significantly impacts learning performance and convergence. Two primary architectural paradigms have been explored in the literature: shared networks where actor and critic share feature extraction layers but have separate output heads, and separate networks where each component maintains independent parameter sets [2].
+Actor and critic network design affects learning performance. Two main approaches exist: shared networks where both share feature extraction layers but have separate output heads, and separate networks with independent parameters [2].
 
-The shared architecture offers advantages including reduced parameter count, faster training due to fewer gradient computations, and potential regularization through shared representation learning. However, this approach risks interference between actor and critic updates, where gradient updates from one component may adversely affect the other. Research on stochastic integrated actor-critic demonstrates that careful learning rate management can mitigate this interference while maintaining sample efficiency [2].
+Shared networks reduce parameters, train faster with fewer gradient computations, and may regularize through shared representation. The risk is interference between actor and critic updates—gradients from one can affect the other. Careful learning rate management can mitigate this while maintaining sample efficiency [2].
 
-Separate networks provide greater flexibility for complex state representations where actor and critic may require fundamentally different feature processing. This architecture enables specialized architectures such as LSTM-based trajectory encoding for the actor while using different temporal processing for the critic [3][9]. The trade-off involves increased computational requirements and potential training instability from independent updates.
+Separate networks offer more flexibility for complex states where actor and critic need different processing. This enables specialized architectures like LSTM for trajectory encoding in the actor [3][9]. The trade-off is more computation and potential training instability from independent updates.
 
 ### 2.4 Signal Transmission Reward (STR) Based Selection Function
 
@@ -110,29 +106,29 @@ This hierarchical model ensures that proximity (lower distance leads to higher S
 
 ### 2.5 Recent Advances in DRL for Service Composition
 
-Recent research has explored diverse approaches for applying deep reinforcement learning to service composition challenges. Multi-user edge service orchestration using DRL has demonstrated effective QoS optimization through parametric combinatorial action modeling [11]. Graph reinforcement learning approaches enable dependency-aware microservice deployment in edge computing environments, leveraging graph convolutional networks to extract structural features for complex call graphs [12].
+Research applies DRL to service composition in various ways. Multi-user edge service orchestration uses DRL for QoS optimization through parametric combinatorial action modeling [11]. Graph RL enables dependency-aware microservice deployment in edge environments, using graph convolutional networks for complex call graphs [12].
 
-The integration of multi-agent systems with DRL has emerged as a promising direction for scalable IoT service composition. The DRL-MAS framework combines decentralized multi-agent decision-making with deep reinforcement learning to ensure scalability, energy efficiency, and responsiveness in distributed IoT systems [13]. Similarly, graph convolutional network-based multi-agent deep reinforcement learning enables dynamic service function chain deployment with multi-objective optimization across delay and resource utilization [14].
+Multi-agent systems with DRL scale IoT service composition. The DRL-MAS framework combines decentralized multi-agent decision-making for scalability, energy efficiency, and responsiveness [13]. Graph convolutional multi-agent DRL enables dynamic service function chain deployment with multi-objective optimization across delay and resource utilization [15].
 
-Recent work on aerial-terrestrial network integration demonstrates DRL-based service composition for aerial base stations with trajectory prediction [15]. The collective deep reinforcement learning approach enables intelligent sharing across edge nodes using soft actor-critic learning [16]. These advances collectively push the boundaries of what's possible in dynamic service composition environments.
+Aerial-terrestrial network integration uses DRL for service composition with trajectory prediction [15]. Collective DRL enables intelligent sharing across edge nodes using soft actor-critic [16].
 
 ### 2.6 Surveys on IoT Service Composition
 
-Two comprehensive surveys provide valuable taxonomy and analysis of IoT service composition approaches. Asghari et al. [26] conducted a systematic literature review (SLR) analyzing service composition approaches in IoT published between 2012 and 2017, categorizing methods based on functional and non-functional aspects. Hamzei et al. [27] provided a more recent survey categorizing approaches into four distinct categories: framework, service-oriented architecture and RESTful, heuristic, and model-based methods. These surveys identify key challenges including scalability (improved in 45.4% of reviewed articles), execution time (36.3%), cost (27.2%), and reliability (22.7%). Arellanes et al. [28] specifically evaluated scalability of IoT service composition mechanisms, finding that dataflow, orchestration, and choreography approaches do not fully satisfy scalability desiderata, while DX-MAN shows promise for large-scale systems.
+Two surveys analyze IoT service composition. Asghari et al. [26] reviewed literature from 2012-2017, categorizing methods by functional and non-functional aspects. Hamzei et al. [27] surveyed approaches as framework, service-oriented architecture/RESTful, heuristic, and model-based. Key challenges identified: scalability (45.4% of articles), execution time (36.3%), cost (27.2%), and reliability (22.7%). Arellanes et al. [28] evaluated scalability—dataflow, orchestration, and choreography don't fully satisfy scalability; DX-MAN shows promise.
 
-### 2.7 Theoretical Foundations of Actor-Critic Methods
+### 2.7 Theoretical Foundations
 
-The convergence properties of actor-critic algorithms have been extensively studied in recent literature. The finite-time convergence analysis for single-timescale actor-critic demonstrates that with linear function approximation and single Markovian sample per update, the algorithm finds an $\epsilon$-approximate stationary point with $\mathcal{O}(\tilde{\epsilon}^{-2})$ sample complexity [22]. This theoretical foundation supports the applicability of A2C to our moving service composition problem where state updates follow Markovian dynamics.
+Actor-critic convergence has been studied extensively. Finite-time analysis shows single-timescale actor-critic with linear function approximation finds an $\epsilon$-approximate stationary point with $\mathcal{O}(\tilde{\epsilon}^{-2})$ sample complexity [22]. This supports applying A2C to moving service composition where state updates follow Markovian dynamics.
 
-The Multi-level Monte Carlo-based Natural Actor-Critic (MLMC-NAC) algorithm achieves global convergence rate of $\tilde{\mathcal{O}}(1/\sqrt{T})$ for average-reward MDPs without requiring knowledge of mixing and hitting times [21]. This represents the first theoretical guarantee for average-reward settings in continuous state spaces, relevant to our scenario where service positions and device states form continuous state variables.
+MLMC-NAC achieves $\tilde{\mathcal{O}}(1/\sqrt{T})$ convergence for average-reward MDPs without requiring mixing and hitting times [21]—first theoretical guarantee for average-reward settings in continuous state spaces.
 
-For multi-objective reinforcement learning settings, the MOAC algorithm provides finite-time convergence and sample complexity guarantees independent of the number of objectives [22]. Given our multi-component reward function balancing success, QoS, efficiency, and stability, these theoretical results provide assurance of convergence even with the complex objective structure.
+For multi-objective RL, MOAC provides finite-time convergence and sample complexity independent of objective count [22]. With our multi-component reward (success, QoS, efficiency, stability), this assures convergence despite complex objectives.
 
-The non-asymptotic analysis for single-loop actor-critic with compatible function approximation establishes the tightest convergence bounds, eliminating critic approximation error terms while achieving optimal sample complexity [24]. This work specifically addresses the single Markovian sample trajectory setting relevant to our online service composition scenario.
+Single-loop actor-critic with compatible function approximation achieves optimal sample complexity by eliminating critic approximation error [24]. This fits our online service composition with single Markovian sample trajectories.
 
 ### 2.8 Proactive Composition in Dynamic Environments
 
-Proactive service composition represents a significant advancement over reactive approaches by anticipating future states rather than merely responding to current conditions. Research on latency-aware and proactive service placement demonstrates effective use of exponential smoothing for QoS prediction in mobile edge environments [17]. The spatial-temporal neural network approach for connected vehicles achieves 6% higher prediction accuracy and 10% lower service dropping rate through gated recurrent units and graph convolutional layers [4]. Edge service pre-deployment based on location prediction (ESPD-LP) demonstrates 41% increase in data transmission rates through bidirectional matching algorithms across MEC servers [19]. These proactive approaches form the foundation for our trajectory-aware composition framework.
+Proactive composition anticipates future states rather than just reacting. Latency-aware and proactive service placement uses exponential smoothing for QoS prediction in mobile edge [17]. Spatial-temporal neural networks for connected vehicles achieve 6% higher prediction accuracy and 10% lower service dropping through gated recurrent units and graph convolutional layers [4]. ESPD-LP improves data transmission by 41% through bidirectional matching across MEC servers [19]. These approaches inform our trajectory-aware framework.
 
 ---
 
@@ -725,88 +721,61 @@ The training loop implements proactive composition through trajectory prediction
 - `evaluate_agent()`: Performance evaluation
 - `plot_training_curves()`: Visualization utilities
 
-**SeparateA2CNetwork**: Independent networks with LSTM for actor:
-- Actor: LSTM(128) → FC(64) → Softmax
-- Critic: FC(256) → FC(64) → FC(1)
-
-**A2CAgent**: Advantage Actor-Critic agent with:
-- Advantage function: $A(s_t, a_t) = r_t + \gamma V(s_{t+1}) - V(s_t)$
-- Policy gradient updates
-- Entropy regularization for exploration
-
-For complete implementation, see **Annex B**.
-
-### 6.3 Training Loop (Annex C)
-
-The training loop implements proactive composition through trajectory prediction:
-
-**Key Functions**:
-- `predict_service_trajectories()`: Linear trajectory prediction based on velocity
-- `extend_state_with_trajectories()`: State augmentation with predicted positions
-- `state_to_vector()`: Convert state to neural network input
-- `train_a2c()`: Main training loop with advantage updates
-- `evaluate_agent()`: Performance evaluation
-- `plot_training_curves()`: Visualization utilities
-
-For complete implementation, see **Annex C**.
-
 ---
 
 ## 7. Discussion
 
 ### 7.1 Interpretation of Results
 
-The experimental results demonstrate clear advantages for A2C-based service composition in moving IoT environments while preserving the STR-based selection from prior work. The performance improvements stem from several interrelated factors:
+A2C outperforms Double DQN on moving IoT service composition while preserving STR-based selection. Three factors drive improvements.
 
-First, the actor-critic architecture provides more stable learning through the combination of value function estimation and direct policy optimization. The advantage function reduces variance in gradient estimates while maintaining unbiased updates, enabling effective learning from fewer samples.
+First, actor-critic gives stable learning by combining value estimation with direct policy optimization. The advantage function reduces variance while keeping updates unbiased, so the agent learns effectively from fewer samples.
 
-Second, the proactive composition through trajectory prediction enables anticipatory service selection rather than reactive adjustment. By incorporating predicted service positions into the decision-making process, the A2C agent selects services that will maintain adequate capacity (based on Euclidean distance → STR → capacity) throughout the composition horizon rather than only currently available services.
+Second, proactive composition via trajectory prediction anticipates service positions instead of just reacting. The A2C agent picks services that maintain capacity (distance → STR → capacity) across the composition horizon, not just currently available ones.
 
-Third, the separate network architecture with LSTM-based trajectory encoding provides specialized processing for spatio-temporal state representation. While requiring more parameters and training time, this architecture achieves superior performance in complex dynamic scenarios where movement pattern understanding is crucial.
+Third, separate networks with LSTM trajectory encoding specialize processing for spatio-temporal states. More parameters and training time, but better performance when movement patterns matter.
 
-The preservation of the STR-based selection ensures that the fundamental service quality metric from prior work—derived from Euclidean distance through STR to capacity—continues to drive composition decisions. The A2C agent learns to optimize compositions that maximize expected capacity while maintaining stability.
+The STR-based selection continues driving decisions—the agent learns to maximize expected capacity while maintaining stability.
 
 ### 7.2 Comparison with Prior Work
 
-When comparing our A2C results with the original Double DQN from Paper 17, we observe consistent improvements across both datasets:
+A2C improves over Double DQN on both datasets.
 
-**Random Waypoint Dataset**: A2C Separate achieves 95.2% success rate versus 92.4% for Double DQN at low mobility, representing a 3% absolute improvement. At high mobility (10 km/h), the improvement increases to 13.9% (85.7% vs 71.8%).
+Random Waypoint: A2C Separate achieves 95.2% versus 92.4% at low mobility (3% improvement). At high mobility (10 km/h), the gap grows to 13.9% (85.7% vs 71.8%).
 
-**Vehicle Routes Dataset**: At highway speeds (80 km/h), A2C Separate achieves 73.5% versus 54.3% for Double DQN, a 19.2% absolute improvement. The vehicle dataset with its more structured movement patterns benefits particularly from the trajectory prediction component.
+Vehicle Routes: At 80 km/h, A2C Separate reaches 73.5% versus 54.3% for Double DQN—a 19.2% absolute improvement. Structured movement patterns help trajectory prediction.
 
-The capacity satisfaction rate improvements demonstrate that A2C better leverages the STR model by anticipating future capacity degradation and selecting services with better margin.
+Capacity satisfaction improves because A2C anticipates degradation and picks services with better margin.
 
 ### 7.3 Practical Implications
 
-The findings have several practical implications for moving IoT service composition deployment:
+**Edge Deployment**: A2C with shared networks balances performance and computation for edge deployment. Inference cost allows real-time decisions on edge devices.
 
-**Edge Deployment Suitability**: The A2C approach with shared networks provides a good balance of performance and computational requirements for edge deployment. The inference-time computational cost enables real-time composition decisions on edge devices.
+**Stability**: A2C re-composes 69.2/hr versus 124.3/hr for Double DQN on waypoint data. Less disruption, lower overhead for production systems.
 
-**Stability for Production Systems**: The low re-composition frequency achieved by A2C (69.2/hr versus 124.3/hr for Double DQN on waypoint dataset) translates to reduced service disruption and overhead for production systems requiring stable composition.
-
-**STR-Based Quality Assurance**: The explicit use of STR-derived capacity in the selection function provides a well-founded metric for service quality that directly relates to observable spatial proximity performance.
+**STR Quality**: STR-derived capacity provides a grounded service quality metric tied to spatial proximity.
 
 ### 7.4 Limitations
 
-This research has several limitations that suggest directions for future work:
+Three limitations point to future work:
 
-**Single STR Model**: The STR calculation uses simplified distance-based models. More complex propagation models including multipath fading, shadowing, and interference warrant investigation.
+**STR Model**: Uses simplified distance-based models. More complex propagation—multipath fading, shadowing, interference—needs investigation.
 
-**Single-Agent Formulation**: The current formulation assumes centralized composition decision-making. Distributed multi-agent approaches may provide better scalability for large-scale IoT systems.
+**Centralized**: Assumes centralized composition. Distributed multi-agent approaches could scale better for large IoT systems.
 
-**Real-World Validation**: While we validated on real GPS trajectory data from the Illinois campus, the access point (service) locations are based on simulation assumptions. Future work should integrate real IoT service availability data.
+**Validation**: We tested on real GPS from Illinois, but AP locations are simulated. Future work should use real IoT service availability data.
 
 ---
 
 ## 8. Conclusion
 
-This paper presented an A2C-based framework for proactive moving IoT service composition with spatio-temporal constraints, preserving the STR-based selection from prior work. We implemented and compared shared and separate network architectures, evaluating performance using the same two datasets as prior work—the random waypoint mobility model and vehicle movement dataset. The experimental results demonstrate that A2C methods outperform the Double DQN baseline across multiple metrics including success rate, capacity satisfaction, adaptation speed, re-composition frequency, and capacity satisfaction.
+This paper presented A2C for proactive moving IoT service composition with spatio-temporal constraints, preserving STR-based selection from prior work. We compared shared and separate network architectures on the same datasets (random waypoint and vehicle movement). A2C outperforms Double DQN on success rate, capacity satisfaction, adaptation speed, and re-composition frequency.
 
-The separate network architecture with LSTM-based trajectory encoding achieves the best overall performance, particularly in challenging high-mobility scenarios. At 80 km/h highway mobility with the vehicle dataset, A2C Separate achieves 73.5% success rate compared to 54.3% for Double DQN. The shared architecture provides a computationally efficient alternative with strong performance.
+Separate networks with LSTM trajectory encoding perform best in high-mobility scenarios. At 80 km/h on vehicle data, A2C Separate reaches 73.5% versus 54.3% for Double DQN. Shared networks offer a faster, computationally efficient alternative.
 
-The integration of trajectory prediction enables proactive composition that anticipates future service positions and capacities (via distance → STR → capacity) rather than merely reacting to current states. This proactive capability proves particularly valuable in dynamic environments where services and devices move continuously, and the STR-based selection ensures that service quality is quantified using Euclidean distance-based reward with Shannon-Hartley capacity derivation.
+Trajectory prediction enables proactive composition—anticipating future positions and capacities (distance → STR → capacity) rather than just reacting. STR-based selection ties service quality to Euclidean distance with Shannon-Hartley capacity.
 
-Future work will explore distributed multi-agent extensions for large-scale IoT environments, integration with real-world IoT testbeds, and investigation of other actor-critic variants including PPO and SAC for this application domain.
+Future work will explore distributed multi-agent extensions, integration with real IoT testbeds, and other actor-critic variants like PPO and SAC.
 
 ---
 
