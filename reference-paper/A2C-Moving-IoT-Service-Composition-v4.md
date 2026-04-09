@@ -1,4 +1,4 @@
-# A2C-Based Proactive Composition for Moving IoT Services: Experimental Implementation with Spatio-Temporal Constraints and Exponential Attenuation Coverage (Version 4)
+# A2C-Based Proactive Composition for Moving IoT Services: Experimental Implementation with Spatio-Temporal Constraints and Exponential Attenuation Coverage
 
 ---
 
@@ -911,10 +911,6 @@ Future work will explore distributed multi-agent extensions, integration with re
 ---
 
 *Paper prepared for submission to IEEE Transactions on Services Computing*
-
-*Version 4 - Added real GPS trajectory dataset (Illinois) experiments with 42,480 samples and 25 access points. Updated implementation details to reflect experiments-codesource structure with YAML-driven experiment automation.*
-
-*Word Count: Approximately 9,200 words*
 
 ---
 
