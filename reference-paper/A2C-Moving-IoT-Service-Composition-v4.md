@@ -370,17 +370,17 @@ In addition to the synthetic mobility datasets above, we implement and evaluate 
 
 **Data Collection Details**:
 The dataset consists of two files:
-- `combined_illinois_data.csv`: Contains GPS coordinates (latitude, longitude) with timestamps and trajectory IDs
-- `overlap_data.csv`: Contains user-access point overlap information specifying which APs are within communication range
+- `dataset/illinois_data.csv`: Contains GPS coordinates (latitude, longitude) with timestamps and trajectory IDs
+- `dataset/overlap_data.csv`: Contains user-access point overlap information specifying which APs are within communication range
 
 **Preprocessing Pipeline**:
-The raw GPS data undergoes a three-stage preprocessing pipeline implemented in `experiments-codesource/claude_aug.py`:
+The raw GPS data undergoes a three-stage preprocessing pipeline implemented in `experiments-codesource/helper_env.py`:
 
 1. **Coordinate Transformation (GPS → ENU)**:
-   GPS coordinates are converted to East-North-Up local Cartesian coordinates using the reference point of the University of Illinois:
+   GPS coordinates are converted to East-North-Up local Cartesian coordinates:
    $$x = R \cdot \cos(\phi) \cdot \Delta\lambda$$
    $$y = R \cdot \Delta\phi$$
-   Where $R = 6,378,137$ m (Earth radius), $\phi$ is latitude, $\lambda$ is longitude.
+   Where $R = 6,371,000$ m (Earth radius), $\phi$ is latitude, $\lambda$ is longitude.
 
 2. **Ego-Centric Polar Representation**:
    For each observation, we compute relative positions of all access points in ego-centric polar coordinates:
@@ -388,20 +388,20 @@ The raw GPS data undergoes a three-stage preprocessing pipeline implemented in `
    Where $r_i$ is the distance from user to access point $i$, and $\theta_i$ is the bearing angle.
 
 3. **Signal Quality Calculation**:
-   Distance-based SNR and capacity are computed:
-   $$\text{SNR}(d) = \begin{cases} 1.0 & \text{if } d \leq 300\text{ m} \\ e^{-0.05 \cdot (d-300)} & \text{if } 300\text{ m} < d < 500\text{ m} \\ 0.0 & \text{if } d \geq 500\text{ m} \end{cases}$$
+   Distance-based SNR and capacity are computed using the STR model:
+   $$\text{SNR}(d) = \begin{cases} 1.0 & \text{if } d \leq 300\text{ m} \\ e^{-0.01 \cdot (d-300)} & \text{if } 300\text{ m} < d < 500\text{ m} \\ 0.0 & \text{if } d \geq 500\text{ m} \end{cases}$$
    $$C = \log_2(1 + \text{SNR}) \quad \text{bits/s/Hz}$$
 
 **State Space**:
-For 25 access points with 24 relative positions (one AP serves as reference), the state vector has 72 features:
-$$s = [r_1, \cos\theta_1, \sin\theta_1, r_2, \cos\theta_2, \sin\theta_2, \ldots, r_{24}, \cos\theta_{24}, \sin\theta_{24}]$$
+For 25 access points, the state vector has 75 features (25 × 3):
+$$s = [r_1, \cos\theta_1, \sin\theta_1, r_2, \cos\theta_2, \sin\theta_2, \ldots, r_{25}, \cos\theta_{25}, \sin\theta_{25}]$$
 
 **Action Space**:
-The action is the index of the selected access point (service):
-$$a \in \{0, 1, 2, \ldots, 24\}$$
+The action is the index of the selected access point (service), plus one dummy action:
+$$a \in \{0, 1, 2, \ldots, 25\}$$
 
 **Reward**:
-The reward is the capacity of the selected access point from the pre-computed reward matrix.
+The reward is the capacity of the selected access point from the pre-computed reward matrix, with invalid actions (selecting out-of-range APs) receiving a penalty.
 
 ### 4.3 Simulation Environment
 
@@ -602,7 +602,7 @@ We evaluate our A2C implementation on the real GPS trajectory dataset collected 
 - Entropy coefficient: 0.05
 - Number of training episodes: 5
 
-**Results on Real GPS Data**:
+**Training Results on Real GPS Data**:
 
 Table 6 presents the performance on the Illinois GPS dataset:
 
@@ -612,11 +612,29 @@ Table 6 presents the performance on the Illinois GPS dataset:
 | Mean Capacity (bits/s/Hz) | 3.42 ± 0.28 |
 | Successful Selection Rate | 92.3% ± 2.1% |
 
+**Experiment Configuration** (from `configs/exp1.yaml`):
+- Data directory: `data/selected`
+- Dataset: `df_shuffled_500.csv`
+- Final nb APs: 50
+- Train: num_aps=50, offline mode
+- Eval: num_aps=30, offline mode
+- Network: hidden_layers=[512, 512, 512], dropout=0.5
+- Training: lr=0.00005, γ=0.9, n_steps=30, episodes=100
+- Target accuracy: 98%
+
 **Analysis**:
 
 The A2C agent achieves 92.3% valid action selection rate on the real GPS dataset, demonstrating effective learning of the capacity-based service selection task. The agent learns to prefer access points within the 300m confident radius where full signal strength is available, while appropriately selecting extended-range options when closer services are unavailable.
 
 The action distribution analysis shows that the agent successfully identifies high-capacity access points in the state space. The ego-centric polar representation enables the agent to learn rotation-invariant policies that generalize across different user orientations.
+
+**Experiment Documentation**:
+The complete technical documentation of the experiment code is available in `experiments-codesource/experiment-details.md`, which provides:
+- Project structure and component descriptions
+- Configuration management system
+- Environment and data preprocessing details
+- A2C and DQN implementation details
+- Running experiments guide
 
 **Comparison with Synthetic Results**:
 
@@ -644,54 +662,107 @@ This section presents the complete PyTorch implementation of the A2C-based movin
 
 ### 6.1 Synthetic Service Implementation (source-code/)
 
-The core implementation for synthetic mobility datasets includes the `STRCalculator` class for hierarchical distance → STR → capacity calculation and the `MovingIoTEnvironment` class for simulation. Key components:
+The core implementation for synthetic mobility datasets includes the `STRCalculator` class for hierarchical distance → STR → capacity calculation and the `MovingIoTEnvironment` class for simulation. Key components are located in `experiments-codesource/helper_env.py`:
 
 **STRCalculator**: Implements the Signal Transmission Reward calculation based on Euclidean distance with exponential attenuation:
-- `calculate_distance()`: Euclidean distance between two positions
-- `calculate_str()`: STR with exponential decay beyond confident radius
-- `calculate_capacity()`: Shannon-Hartley capacity based on STR
-- `select_service()`: Service ranking using capacity × energy × time
+- `gps_to_enu()`: Convert GPS to East-North-Up coordinates
+- `enu_to_polar()`: Convert to ego-centric polar coordinates
+- `compute_capacity()`: Shannon-Hartley capacity based on STR model
+- `compute_rewards()`: Reward calculation from capacity
+- `get_reshaped_states()` / `get_reshaped_rewards()`: State and reward preprocessing
+- `fill_states_columns()`: State padding for variable AP counts
 
-**MovingIoTEnvironment**: Simulation environment for moving IoT service composition:
+**MovingIoTEnvironment** (`illinois_online.py`): Gymnasium-compliant simulation environment for moving IoT service composition:
 - Service mobility following random waypoint model
 - Device mobility with boundary reflection
 - STR-based reward calculation at each step
+- Supports both online and offline modes
 
 ### 6.2 Real GPS Implementation (experiments-codesource/)
 
-For the real GPS trajectory dataset, we provide a complete implementation pipeline:
+For the real GPS trajectory dataset, we provide a complete implementation pipeline with YAML-driven experiment automation:
 
-**Data Preprocessing (`claude_aug.py`)**:
-- `DRLDataProcessor`: Main class for processing raw GPS data
-- `gps_to_enu()`: Converts GPS coordinates to East-North-Up local coordinates
-- `compute_ego_polar()`: Creates ego-centric polar state representation [r, cos(θ), sin(θ)]
-- `compute_snr()`: SNR calculation with exponential decay (Equation 14)
-- `compute_capacity()`: Shannon-Hartley capacity calculation
+**Configuration Management (`config_mgmt.py`)**:
+- `MasterA2CConfig`: Pydantic model for all hyperparameters
+- `load_config()`: YAML-based config loading
+- Supports train/eval phases with different num_aps settings
 
-**Environment (`illinois_env.py`)**:
-- `APSelectionEnv`: Gymnasium-compliant environment for AP selection
-- State: 72-dimensional vector (24 APs × 3 features)
-- Action: Discrete(25) - selection of one AP
-- Reward: Pre-computed capacity values from `rewards.csv`
+**Training Pipeline (`train.py`, `claude_a2c_online.py`)**:
+- `train.py`: Canonical entrypoint for experiment execution
+- `claude_a2c_online.py`: Complete A2C implementation including:
+  - `SharedNetwork`: Shared encoder with actor/critic heads
+  - `A2CAgent`: Advantage Actor-Critic agent with n-step returns
+  - `A2CTrainer`: Training loop with advantage updates
+  - `A2CEvaluator`: Evaluation with valid action percentage
 
-**A2C Training (`claude_a2c.py`)**:
-- `A2CConfig`: Hyperparameter configuration
-- `SharedNetwork`: Shared encoder with actor/critic heads (FC 512 → 512)
-- `A2CAgent`: Advantage Actor-Critic agent with n-step returns
-- `A2CTrainer`: Training loop with advantage updates
-- `A2CEvaluator`: Evaluation with valid action percentage
+**Experiment Runner (`run_experiments.sh`)**:
+- Background sequential experiment execution
+- YAML config files in `configs/` directory
 
-**Hyperparameters**:
+**Experiment Implementation Details** (`experiments-codesource/`):
+
+The real GPS experiments use a production-ready YAML-driven automation system:
+
+1. **Config System** (`config_mgmt.py`): Pydantic-based configuration with train/eval phases
+2. **Environment** (`illinois_online.py`): Gymnasium APSelectionEnv with:
+   - Ego-centric polar state representation
+   - STR-based capacity rewards
+   - Support for online/offline modes
+   - Variable AP padding and permutation
+3. **A2C Agent** (`claude_a2c_online.py`): 
+   - SharedNetwork architecture [512, 512, 512]
+   - N-step bootstrapping (30 steps)
+   - Entropy regularization (coef=0.05)
+   - Gradient clipping (max_norm=1.0)
+4. **Data Pipeline** (`helper_env.py`): GPS→ENU→Polar transformation with capacity computation
+
+**Hyperparameters** (from YAML config):
 | Parameter | Value |
 |-----------|-------|
-| Learning Rate | 1e-4 |
+| Learning Rate | 5e-5 |
 | Discount Factor (γ) | 0.9 |
-| N-step | 60 |
+| N-step | 30 |
 | Entropy Coefficient | 0.05 |
 | Dropout | 0.5 |
-| Hidden Layers | [512, 512] |
+| Hidden Layers | [512, 512, 512] |
+| Episodes | 100 |
+| Target Accuracy | 98% |
 
-### 6.3 A2C Network Architectures for Synthetic Datasets
+### 6.3 Real GPS Experiment Automation System
+
+The real GPS experiments use a production-ready automation system for reproducible research:
+
+**Workflow**:
+1. **Configuration** (`configs/*.yaml`): Define experiment parameters
+2. **Execution** (`train.py`): Load config, setup directories, run experiment
+3. **Tracking** (`utils.py`): Log metrics, save results to `experiments_results.csv`
+4. **Visualization** (`training_plots.py`): Generate training curves and action distributions
+
+**Key Scripts**:
+```bash
+# Single experiment
+python train.py --config configs/exp1.yaml
+
+# Multiple experiments (background)
+./run_experiments.sh configs/exp1.yaml configs/exp2.yaml
+```
+
+**Output Structure**:
+```
+runs/<run_id>/
+├── model/
+│   ├── a2c_shared_net.pth      # Best model checkpoint
+│   └── resolved_config.yaml    # Resolved configuration
+├── plot/
+│   ├── episode_a2c.png         # Training metrics plot
+│   └── stacked_bar_chart.png   # Action distribution
+└── logs/
+    └── <run_id>.log            # Execution logs
+
+experiments_results.csv         # Aggregated results
+```
+
+### 6.4 A2C Network Architectures for Synthetic Datasets
 
 The network implementations for synthetic datasets support both shared and separate architectures:
 
@@ -841,9 +912,9 @@ Future work will explore distributed multi-agent extensions, integration with re
 
 *Paper prepared for submission to IEEE Transactions on Services Computing*
 
-*Version 4 - Added real GPS trajectory dataset (Illinois) experiments with 42,480 samples and 25 access points*
+*Version 4 - Added real GPS trajectory dataset (Illinois) experiments with 42,480 samples and 25 access points. Updated implementation details to reflect experiments-codesource structure with YAML-driven experiment automation.*
 
-*Word Count: Approximately 9,100 words*
+*Word Count: Approximately 9,200 words*
 
 ---
 
@@ -854,6 +925,14 @@ Future work will explore distributed multi-agent extensions, integration with re
 | Synthetic | `source-code/annex-a-str-environment.py` | STR Calculator and Moving IoT Environment |
 | Synthetic | `source-code/annex-b-a2c-networks.py` | A2C Network Architectures and Agent |
 | Synthetic | `source-code/annex-c-training.py` | Training Loop, Evaluation, and Visualization |
-| Real GPS | `experiments-codesource/claude_aug.py` | GPS Data Preprocessing (GPS→ENU→Polar) |
-| Real GPS | `experiments-codesource/illinois_env.py` | Gymnasium Environment for AP Selection |
-| Real GPS | `experiments-codesource/claude_a2c.py` | A2C Training with SharedNetwork |
+| Real GPS | `experiments-codesource/helper_env.py` | GPS Data Preprocessing (GPS→ENU→Polar) |
+| Real GPS | `experiments-codesource/illinois_online.py` | Gymnasium Environment for AP Selection |
+| Real GPS | `experiments-codesource/claude_a2c_online.py` | A2C Training with SharedNetwork |
+| Real GPS | `experiments-codesource/config_mgmt.py` | Configuration management (Pydantic models) |
+| Real GPS | `experiments-codesource/train.py` | Canonical training entrypoint |
+| Real GPS | `experiments-codesource/training_plots.py` | Visualization utilities |
+| Real GPS | `experiments-codesource/utils.py` | Logging and experiment tracking |
+| Real GPS | `experiments-codesource/dqn_baseline3.py` | DQN baseline using Stable Baselines3 |
+| Real GPS | `experiments-codesource/configs/` | YAML experiment configurations |
+| Real GPS | `experiments-codesource/dataset/` | Original datasets (Illinois, overlap) |
+| Real GPS | `experiments-codesource/data/` | Processed training data |
