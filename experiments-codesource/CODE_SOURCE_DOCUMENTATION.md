@@ -8,8 +8,10 @@ This document explains the implementation in the `experiments-codesource/` folde
 
 The code implements an **Advantage Actor-Critic (A2C)** agent for selecting optimal access points (services) based on location and signal quality. It processes real GPS trajectory data and trains a neural network to make service selection decisions.
 
+The system uses a **YAML-driven experiment automation** workflow with run-based artifact management.
+
 ```
-GPS Trajectories → Data Processing → State/ Reward → A2C Training → Evaluation
+YAML Config → train.py → A2C Training → Evaluation → Runs Artifacts
 ```
 
 ---
@@ -18,76 +20,131 @@ GPS Trajectories → Data Processing → State/ Reward → A2C Training → Eval
 
 ```
 experiments-codesource/
-├── claude_aug.py          # Data preprocessing pipeline
-├── illinois_env.py        # Gymnasium environment
-├── claude_a2c.py          # A2C training framework
-├── training_plots.py     # Training visualization
-├── helper_plot.py        # Action distribution plots
-├── data/                 # Dataset folder
-│   ├── combined_illinois_data.csv   # Raw GPS data
-│   ├── overlap_data.csv             # User-AP overlap info
-│   ├── states.csv                   # Processed states
-│   ├── rewards.csv                 # Capacity rewards
-│   └── 25_aug/                      # Processed dataset (25 APs)
+├── train.py                    # Canonical training entrypoint
+├── config.py                   # Config loading interface
+├── config_mgmt.py              # Pydantic configuration models
+├── utils.py                    # Logging, metrics, utilities
+├── claude_a2c_online.py        # A2C implementation (SharedNetwork, Agent, Trainer)
+├── illinois_online.py          # Gymnasium environment (APSelectionEnv)
+├── helper_env.py               # Data preprocessing (GPS→ENU→Polar)
+├── training_plots.py           # Training visualization
+├── dqn_baseline3.py            # DQN baseline implementation
+├── configs/                    # YAML experiment configurations
+│   ├── exp1.yaml
+│   └── exp2.yaml
+├── runs/                       # Run artifacts (created at runtime)
+├── logs/                       # Log files (created at runtime)
+└── data/                       # Dataset directory
+    ├── selected/
+    └── random/
 ```
 
 ---
 
-## 1. Data Preprocessing (claude_aug.py)
+## 1. Configuration System (config_mgmt.py, config.py)
+
+### Purpose
+YAML-driven experiment configuration with Pydantic validation.
+
+### Configuration Models
+
+```python
+# config_mgmt.py - Pydantic Models
+from config_mgmt import MasterA2CConfig, load_config
+
+# Load from YAML
+config = load_config("configs/exp1.yaml", run_id="my_run_001")
+
+# Or use config.py wrapper
+from config import load_experiment_config
+config, run_id = load_experiment_config("configs/exp1.yaml")
+```
+
+### Key Configuration Classes
+
+| Class | Description |
+|-------|-------------|
+| `MasterA2CConfig` | Root config with device, random_seed, directories |
+| `networkConfig` | Neural network architecture (hidden_layers, dropout) |
+| `TrainingConfig` | Training hyperparameters (lr, gamma, n_steps, entropy_coef) |
+| `EnvConfig` | Environment settings (num_aps, on_line mode) |
+| `DatasetConfig` | Dataset filename |
+
+### Example YAML Config (configs/exp1.yaml)
+
+```yaml
+experiment_name: a2c_experiment
+random_seed: 42
+train: true
+
+data_dir: data/selected
+dataset:
+  filename: df_shuffled_200.csv
+
+env:
+  final_nb_aps: 50
+  train:
+    num_aps: 20
+    on_line: true
+  eval:
+    num_aps: 20
+    on_line: true
+
+network:
+  hidden_layers: [512, 512, 512]
+  dropout_prob: 0.5
+
+training:
+  learning_rate: 0.00005
+  gamma: 0.9
+  n_steps: 60
+  episodes: 50
+  entropy_coef: 0.05
+  max_grad_norm: 1.0
+  target_accuracy: 95
+```
+
+---
+
+## 2. Data Preprocessing (helper_env.py)
 
 ### Purpose
 Converts raw GPS trajectory data into DRL-ready state and reward matrices.
 
 ### Key Classes and Functions
 
-#### Configuration (`Config` class)
+#### STRCalculator
 ```python
-EARTH_RADIUS_METERS = 6378137.0
-REFERENCE_DISTANCE = 300.0      # meters - full signal threshold
-DECAY_RATE = 0.05               # SNR exponential decay
-MAX_SIGNAL_RANGE = 500.0        # meters - zero signal threshold
-MAX_RANGE = 500.0               # state representation max
-```
+from helper_env import STRCalculator
 
-#### Coordinate Transformations
-
-| Function | Input | Output | Description |
-|----------|-------|--------|-------------|
-| `gps_to_enu()` | lat, lon (pedestrian + goal) | (x, y) meters | GPS → East-North-Up local coords |
-| `enu_to_polar()` | x, y | (r, θ) | Cartesian → Polar |
-| `compute_ego_polar()` | GPS + heading | (r, cos, sin) | Ego-centric state representation |
-
-#### Signal Quality Functions
-
-| Function | Formula | Description |
-|----------|---------|-------------|
-| `compute_snr()` | SNR = 1.0 if d ≤ 300m<br>SNR = exp(-0.05 × (d-300)) if 300m < d < 500m<br>SNR = 0.0 if d ≥ 500m | Distance → SNR |
-| `compute_capacity()` | C = log₂(1 + SNR) | Shannon-Hartley capacity |
-| `compute_haversine()` | Great-circle distance | GPS → meters |
-
-#### Main Pipeline (`DRLDataProcessor`)
-
-```python
-processor = DRLDataProcessor(
-    input_dir=Path('data'),
-    output_dir=Path('data'),
-    num_samples=200,           # User-AP pairs to sample
-    num_access_points=25,     # APs per observation
-    random_seed=64
+calc = STRCalculator(
+    confident_radius=300,  # meters - full signal threshold
+    decay_factor=0.01,     # SNR exponential decay
+    max_signal_range=500   # meters - zero signal threshold
 )
-processor.run()
 ```
 
-**Pipeline Steps:**
-1. Load and merge trajectory data with overlap info
-2. Sample unique user-AP pairs
-3. Build state representations [r, cos, sin] per AP
-4. Compute capacity rewards
-5. Save to states.csv and rewards.csv
+| Function | Description |
+|----------|-------------|
+| `gps_to_enu()` | Convert GPS (lat, lon) to East-North-Up local coords |
+| `enu_to_polar()` | Convert Cartesian to ego-centric polar (r, θ) |
+| `compute_capacity()` | Shannon-Hartley capacity: C = log₂(1 + SNR) |
+| `compute_rewards()` | Calculate capacity rewards from distance matrix |
+| `get_reshaped_states()` | Group N APs per observation |
+
+### SNR Model
+
+```
+SNR(d) = 1.0                          if d ≤ Rc
+SNR(d) = exp(-k × (d - Rc))           if Rc < d < max_range
+SNR(d) = 0.0                           if d ≥ max_range
+```
+
+Default: Rc = 300m, k = 0.01, max_range = 500m
 
 ---
 
-## 2. Environment (illinois_env.py)
+## 3. Environment (illinois_online.py)
 
 ### Purpose
 Implements the OpenAI Gymnasium interface for service selection.
@@ -95,103 +152,85 @@ Implements the OpenAI Gymnasium interface for service selection.
 ### Class: `APSelectionEnv`
 
 ```python
-env = APSelectionEnv(states_df, rewards_df)
+from illinois_online import APSelectionEnv
+
+env = APSelectionEnv(
+    states_df,      # DataFrame with state vectors
+    rewards_df,     # DataFrame with capacity rewards
+    num_aps=25,     # Number of access points
+    on_line=True    # Online vs offline mode
+)
 ```
 
 #### Key Properties
 
 | Property | Description |
 |----------|-------------|
-| `num_aps` | Number of access points (columns in rewards) |
-| `total_steps` | Number of samples (rows in states) |
-| `action_space` | Discrete(25) - selection of one AP |
-| `observation_space` | Box((num_aps-1)×3) - 72 features |
+| `num_aps` | Number of access points |
+| `total_steps` | Number of samples |
+| `action_space` | Discrete(num_aps + 1) - includes dummy action |
+| `observation_space` | Box(features) - ego-centric polar state |
 
 #### State Format
-```
-[r1, cos1, sin1, r2, cos2, sin2, ..., r24, cos24, sin24]
-```
-- Excludes the 25th AP (reference point)
-- Each AP has 3 features: distance, cos(angle), sin(angle)
-- Distances clipped at 500m max
 
-#### Reward Format
 ```
-capacity[step, action]  # Pre-calculated capacity for that AP at that step
+[r1, cos1, sin1, r2, cos2, sin2, ..., rN, cosN, sinN]
 ```
+
+- Ego-centric polar: distance (r), direction (cos, sin) relative to user
+- For 25 APs: 75 features (25 × 3)
 
 #### Methods
 
 ```python
-# Reset environment
 state, info = env.reset()
-
-# Take action (select AP by index)
 next_state, reward, terminated, truncated, info = env.step(action)
-
-# Render (optional)
-env.render()
 ```
 
 ---
 
-## 3. A2C Training (claude_a2c.py)
+## 4. A2C Training (claude_a2c_online.py)
 
 ### Purpose
 Implements the Advantage Actor-Critic algorithm for training the service selection agent.
 
-### Configuration (`A2CConfig`)
-
-```python
-config = A2CConfig(
-    state_dim=72,              # Observation size
-    action_dim=25,             # Number of APs
-    hidden_layers=[512, 512], # Network architecture
-    learning_rate=1e-4,
-    gamma=0.9,                # Discount factor
-    n_steps=60,                # N-step bootstrapping
-    entropy_coef=0.05,        # Exploration bonus
-    dropout_prob=0.5,
-    num_episodes=5,
-    device='cuda:0' if available else 'cpu'
-)
-```
-
 ### Network Architecture (`SharedNetwork`)
 
 ```
-Input (state_dim: 72)
+Input (state_dim)
     │
     ▼
 Shared Encoder
-├── Linear(72 → 512) → ReLU → Dropout(0.5)
-├── Linear(512 → 512) → ReLU → Dropout(0.5)
+├── Linear(state_dim → hidden[0]) → ReLU → Dropout
+├── Linear(hidden[0] → hidden[1]) → ReLU → Dropout
+...
     │
     ▼
 ┌─────────────┬─────────────┐
 │ Actor Head  │ Critic Head │
-│ Linear(512→25)│ Linear(512→1)│
-│   logits    │    value    │
+│ Linear→logits│ Linear→value │
 └─────────────┴─────────────┘
+   Policy π       Value V(s)
 ```
 
-### Agent (`A2CAgent`)
+### Key Classes
 
-```python
-agent = A2CAgent(config)
-action = agent.act(state)              # Select action
-agent.store_transition(s, a, r, s', done)  # Store experience
-agent.train_step()                     # Update networks
-```
+| Class | Description |
+|-------|-------------|
+| `SharedNetwork` | Shared feature encoder with separate actor/critic heads |
+| `A2CAgent` | Advantage Actor-Critic agent with n-step returns |
+| `A2CTrainer` | Training loop with advantage updates |
+| `A2CEvaluator` | Evaluation with valid action percentage |
 
-**Training Step:**
+### Training Step
+
 ```python
 # 1. Forward pass
 values, logits = model(states)
 dist = Categorical(logits=logits)
 
 # 2. Compute n-step returns
-targets = rewards + gamma * next_values * (1 - dones)
+targets = rewards + gamma ** n_steps * next_values * (1 - dones)
 
 # 3. Compute advantage
 advantages = targets - values
@@ -208,28 +247,63 @@ total_loss = actor_loss + critic_loss
 torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
 ```
 
-### Trainer (`A2CTrainer`)
+---
 
-```python
-trainer = A2CTrainer(agent, env, config)
-trainer.train()  # Runs num_episodes
+## 5. Execution Workflow (train.py)
+
+### Run Single Experiment
+
+```bash
+python train.py --config configs/exp1.yaml
 ```
 
-### Evaluator (`A2CEvaluator`)
+Optional run ID:
+```bash
+python train.py --config configs/exp1.yaml --run-id my_run_001
+```
 
-```python
-evaluator = A2CEvaluator(agent, test_env, num_steps)
-results = evaluator.evaluate(deterministic=True)
-# Returns: valid_percentage, action_distribution
+### Run Multiple Experiments (Background)
+
+```bash
+./run_experiments.sh configs/exp1.yaml configs/exp2.yaml
+```
+
+### Output Structure
+
+```
+runs/<run_id>/
+├── model/
+│   ├── a2c_shared_net.pth       # Best model checkpoint
+│   └── resolved_config.yaml     # Resolved configuration
+├── plot/
+│   ├── episode_a2c.png          # Training metrics plot
+│   └── stacked_bar_chart.png    # Action distribution
+└── logs/
+    └── <run_id>.log             # Execution logs
+
+logs/<run_id>.log                # Run log
+experiments_results.csv          # Aggregated results
 ```
 
 ---
 
-## 4. Visualization (training_plots.py, helper_plot.py)
+## 6. DQN Baseline (dqn_baseline3.py)
 
-### training_plots.py
+Implements DQN baseline using Stable Baselines3 for comparison with A2C.
+
+```bash
+python dqn_baseline3.py --config configs/exp1.yaml
+```
+
+---
+
+## 7. Visualization (training_plots.py)
+
+### Training Metrics Plot
 
 ```python
+from training_plots import plot_training_metrics
+
 plot_training_metrics(
     actor_losses, critic_losses, entropies,
     episode, valid_percentages, best_rewards,
@@ -243,51 +317,12 @@ Generates:
 - Entropy loss curve
 - Critic loss curve
 
-### helper_plot.py
+### Action Distribution Plot
 
 ```python
+from training_plots import plot_stacked_actions
+
 plot_stacked_actions(total_actions, valid_actions)
-```
-
-Generates stacked bar chart showing:
-- Valid actions (green)
-- Invalid actions (red)
-
----
-
-## 5. Main Execution (claude_a2c.py - main())
-
-```python
-def main():
-    # 1. Load data
-    states_df, rewards_df, split_idx = load_data(
-        STATES_PATH, REWARDS_PATH, train_split=0.25
-    )
-    
-    # 2. Create environments
-    train_env = APSelectionEnv(states_df.iloc[:split_idx], rewards_df.iloc[:split_idx])
-    test_env = APSelectionEnv(states_df.iloc[split_idx:], rewards_df.iloc[split_idx:])
-    
-    # 3. Configure A2C
-    config = A2CConfig(
-        state_dim=train_env.observation_space.shape[0],
-        action_dim=train_env.action_space.n,
-        hidden_layers=[512, 512],
-        n_steps=60,
-        learning_rate=1e-4,
-        gamma=0.9,
-        num_episodes=5
-    )
-    
-    # 4. Train
-    agent = A2CAgent(config)
-    trainer = A2CTrainer(agent, train_env, config)
-    trainer.train()
-    
-    # 5. Evaluate
-    agent.load_model('a2c_shared_net.pth')
-    evaluator = A2CEvaluator(agent, test_env, num_test_steps)
-    results = evaluator.evaluate(deterministic=False)
 ```
 
 ---
@@ -296,59 +331,66 @@ def main():
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                        RAW DATA                                 │
+│                     RAW DATA                                     │
 ├─────────────────────────────────────────────────────────────────┤
-│ combined_illinois_data.csv                                      │
-│ [id, timestamp, latitude, longitude]                            │
+│ dataset/illinois_data.csv                                        │
+│ [id, timestamp, latitude, longitude, trajectory_id]             │
 ├─────────────────────────────────────────────────────────────────┤
-│ overlap_data.csv                                                │
+│ dataset/overlap_data.csv                                         │
 │ [id, s_id, nb_overlap, nb_overlap_500]                           │
 └─────────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│                   claude_aug.py                                 │
+│                      helper_env.py                              │
 ├─────────────────────────────────────────────────────────────────┤
-│ 1. filter_by_timestamp() - Merge by timestamp                  │
+│ 1. load_data() - Load CSV files                                 │
 │ 2. gps_to_enu() - GPS to local coordinates                      │
-│ 3. compute_ego_polar() - Ego-centric polar [r, cos, sin]       │
-│ 4. compute_haversine() - Distance in meters                    │
-│ 5. compute_snr() - SNR from distance                           │
-│ 6. compute_capacity() - Shannon capacity                       │
-│ 7. reshape_data() - Group N APs per observation                │
+│ 3. compute_distance_matrix() - Distance between all pairs      │
+│ 4. STRCalculator.compute_rewards() - STR → Capacity              │
+│ 5. get_reshaped_states() - Group N APs per observation          │
 └─────────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│                    PROCESSED DATA                               │
+│                   PROCESSED DATA                                 │
 ├─────────────────────────────────────────────────────────────────┤
-│ states.csv (42,480 × 75)     │ rewards.csv (42,480 × 25)       │
-│ [r1,cos1,sin1,...,r24,...]  │ [capacity_AP0, ..., capacity_AP24]│
+│ data/selected/df_shuffled_*.csv                                  │
+│ [r1,cos1,sin1,...,rN,cosN,sinN, capacity_AP0,...,capacity_APN] │
 └─────────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│                illinois_env.py                                  │
+│                 illinois_online.py                               │
 ├─────────────────────────────────────────────────────────────────┤
-│ APSelectionEnv(states_df, rewards_df)                           │
-│ • step(action) → reward from rewards_df                         │
-│ • _get_obs() → state from states_df                             │
+│ APSelectionEnv(states_df, rewards_df, num_aps)                  │
+│ • step(action) → reward from capacity                           │
+│ • reset() → state from preprocessed data                        │
 └─────────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│                   claude_a2c.py                                 │
+│              claude_a2c_online.py                                │
 ├─────────────────────────────────────────────────────────────────┤
-│ SharedNetwork → A2CAgent → A2CTrainer → A2CEvaluator           │
+│ SharedNetwork → A2CAgent → A2CTrainer → A2CEvaluator             │
 │                                                                  │
 │ Training Loop:                                                   │
 │ for episode in episodes:                                        │
 │   for step in episode:                                          │
 │     action = agent.act(state)                                   │
-│     next_state, reward = env.step(action)                       │
+│     next_state, reward = env.step(action)                      │
 │     agent.store_transition(s,a,r,s',done)                       │
 │     if len(transitions) == n_steps:                             │
 │       agent.train_step()                                        │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                    OUTPUT ARTIFACTS                             │
+├─────────────────────────────────────────────────────────────────┤
+│ runs/<run_id>/model/a2c_shared_net.pth                          │
+│ runs/<run_id>/plot/*.png                                        │
+│ experiments_results.csv                                         │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -356,25 +398,26 @@ def main():
 
 ## Hyperparameters Summary
 
-| Parameter | Value | Description |
-|-----------|-------|-------------|
-| learning_rate | 1e-4 | Adam optimizer learning rate |
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| learning_rate | 5e-5 | Adam optimizer learning rate |
 | gamma | 0.9 | Discount factor for future rewards |
 | n_steps | 60 | N-step bootstrapping window |
 | entropy_coef | 0.05 | Entropy regularization weight |
 | max_grad_norm | 1.0 | Gradient clipping threshold |
 | dropout_prob | 0.5 | Dropout rate in shared layers |
-| num_episodes | 5 | Training episodes |
+| episodes | 50 | Training episodes |
+| target_accuracy | 95 | Early stopping threshold (%) |
 
 ---
 
 ## Key Formulas
 
-### SNR (Signal-to-Noise Ratio)
+### SNR (Signal-to-Noise Ratio) - STR Model
 ```
-SNR(d) = 1.0                          if d ≤ 300m
-SNR(d) = exp(-0.05 × (d - 300))      if 300m < d < 500m
-SNR(d) = 0.0                          if d ≥ 500m
+SNR(d) = 1.0                          if d ≤ Rc (300m)
+SNR(d) = exp(-k × (d - Rc))           if Rc < d < max_range
+SNR(d) = 0.0                          if d ≥ max_range (500m)
 ```
 
 ### Channel Capacity (Shannon-Hartley)
@@ -384,7 +427,7 @@ C = log₂(1 + SNR)  [bits/second/Hz]
 
 ### A2C Advantage
 ```
-A(s,a) = Q(s,a) - V(s) = r + γV(s') - V(s)
+A(s,a) = Q(s,a) - V(s) = r + γⁿV(s') - V(s)
 ```
 
 ### Actor Loss
@@ -400,13 +443,17 @@ L_critic = E[A(s,a)²]
 
 ---
 
-## Output Files
+## Legacy Scripts
 
-After training:
-- `model/a2c_shared_net.pth` - Trained model weights
-- `plot/episode_a2c.png` - Training metrics visualization
-- `stacked_bar_chart.png` - Action distribution
+The following legacy scripts are deprecated but still present:
+
+| File | Status | Description |
+|------|--------|-------------|
+| `claude_a2c.py` | Deprecated | Old A2C implementation - use `train.py` |
+| `illinois_env.py` | Deprecated | Old environment - use `illinois_online.py` |
+| `helper_plot.py` | Deprecated | Old plotting - use `training_plots.py` |
 
 ---
 
 *Document generated: April 2026*
+*Updated to reflect YAML-driven experiment automation system*
