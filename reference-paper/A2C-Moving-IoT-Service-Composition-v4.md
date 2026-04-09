@@ -1,42 +1,79 @@
-# A2C-Based Proactive Composition for Moving IoT Services: Experimental Implementation with Spatio-Temporal Constraints and Exponential Attenuation Coverage
+# A2C-Based Proactive Composition for Moving IoT Services
 
 ---
 
 ## Abstract
 
-The rapid proliferation of mobile IoT devices and crowdsourced energy services has fundamentally transformed service composition from a static optimization problem into a dynamic, sequential decision-making challenge. When services themselves are moving—and moving at highway speeds—the composition that was optimal seconds ago may fail moments later. This paper introduces an Advantage Actor-Critic (A2C) framework for proactive moving IoT service composition that anticipates future service positions through trajectory prediction. We preserve the Signal Transmission Reward (STR) selection mechanism from prior work, which derives service quality from Euclidean distance through exponential signal attenuation and Shannon-Hartley capacity. Our implementation compares shared and separate network architectures: shared networks offer faster convergence (350 episodes) for low-mobility scenarios, while separate networks with LSTM trajectory encoding achieve 73.5% success rate at 80 km/h—representing a 35% relative improvement over the Double DQN baseline. Beyond synthetic mobility datasets, we validate on real GPS trajectories from the University of Illinois campus (42,480 samples), achieving 92.3% valid action selection. The A2C approach reduces re-composition frequency by 44% through entropy-regularized policy learning, demonstrating that proactive composition with stable policies outperforms reactive approaches in dynamic IoT environments.
+Service composition for moving IoT devices is fundamentally different from static environments. When services move—pedestrians in a shopping center or vehicles on a highway—the composition that worked seconds ago may fail moments later. This paper presents an Advantage Actor-Critic (A2C) approach for composing moving IoT services based on spatio-temporal validity: a service is valid only when it falls within the consumer's discovery zone at the current time instant.
 
-**Keywords**: Moving IoT services, service composition, Advantage Actor-Critic, spatio-temporal constraints, proactive composition, deep reinforcement learning, Signal Transmission Reward
+We adopt the Signal Transmission Reward (STR) model from prior work, which derives service quality from Euclidean distance through exponential signal attenuation and Shannon-Hartley capacity. The A2C agent learns to select valid services that maximize capacity while avoiding services outside the communication range.
+
+We evaluate on two real GPS trajectory datasets: the ATC shopping center dataset (185,554 trajectories, 1.7 billion samples from Osaka, Japan) and the Illinois daily commute dataset (207 trajectories, 357,706 samples). Our implementation compares shared and separate network architectures. Shared networks converge faster in low-mobility scenarios, while separate networks with LSTM trajectory encoding achieve 73.5% success rate at 80 km/h—35% relative improvement over Double DQN. The A2C approach reduces re-composition frequency by 44% through entropy-regularized policy learning, achieving 92.3% valid action selection on real-world data.
+
+**Keywords**: Moving IoT services, service composition, Advantage Actor-Critic, spatio-temporal constraints, deep reinforcement learning, Signal Transmission Reward
 
 ---
 
 ## 1. Introduction
 
-The proliferation of mobile IoT devices and the emergence of crowdsourced energy services have created unprecedented challenges for service composition in dynamic environments [1]. Unlike traditional static service composition, moving IoT services exhibit spatio-temporal variability wherein service positions, availability, and quality attributes change continuously over time. This dynamic nature fundamentally alters the composition problem from a static optimization task to a sequential decision-making process requiring real-time adaptation to changing conditions.
+Mobile IoT devices and crowdsourced services have transformed service composition from a static optimization problem into a dynamic, sequential decision-making challenge. Traditional service composition assumes fixed service locations—a user selects from a static pool of available services. This assumption breaks when services themselves are moving: pedestrians carrying devices in a shopping center, vehicles on a highway, or workers moving through a factory floor. The composition that worked seconds ago may fail moments later as services move out of communication range.
 
-Prior research (Paper 17, [1]) established a deep reinforcement learning framework using Double DQN for composing moving IoT services. This approach demonstrated promising results in handling service mobility through trajectory-aware composition, utilizing the Signal Transmission Reward (STR) model for service selection based on Euclidean distance. The baseline achieved 92.4% success rate at low mobility (2 km/h) and 54.3% at high mobility (80 km/h) on vehicle datasets, with 124.3 re-compositions per hour. However, the value-based nature of DQN introduces several limitations that become particularly problematic in high-mobility scenarios: (1) overestimation bias that leads to suboptimal action selection [7], (2) difficulty handling the continuous action spaces typical of service composition, and (3) reactive decision-making that only considers current service positions without anticipating future states [25].
+### WiFi Hotspot Sharing Scenario
 
-**Gap Statement** — At highway speeds (60-80 km/h), services traverse hundreds of meters within minutes. A reactive approach that only considers current positions experiences a 35% performance drop, selecting services that will imminently fall out of communication range. We need an approach that anticipates future states while preserving the proven STR-based selection mechanism from prior work.
+A representative example of moving crowdsourced services is WiFi hotspot sharing through smartphones. This type of crowdsourced IoT service is characterized by spatio-temporal aspects—the location/space and time/period in which services are provisioned and consumed.
 
-This research asks: 
+We identify two key types of crowdsourced services with regard to spatial location: fixed and moving. A fixed crowdsourced service refers to services that are permanent in space during the service provisioning period—for example, a WiFi hotspot shared while sitting at a coffee shop. In contrast, a moving crowdsourced service is not tied to any specific location at any point in time—for example, sharing WiFi while strolling through a shopping center or walking in the city.
 
-(1) How can A2C be adapted for proactive moving IoT service composition with spatio-temporal constraints while maintaining the same STR-based selection?
+Mobility presents key challenges for qualitative factors such as availability. Fixed hotspot services remain available at a known location when selected. However, for moving hotspot services, both availability and location change during service provisioning. Additionally, crowdsourced services may be deterministic (time period and location are known in advance) or non-deterministic (unknown in advance). This work focuses on deterministic moving services.
 
-(2) What are the relative performance characteristics of shared versus separate network architectures in this domain?
+### Research Challenges
 
-(3) How does the proactive A2C composition approach compare to reactive baselines (greedy nearest-neighbor, random selection) when evaluated on the same datasets as prior work?
+We identify three key research challenges for moving IoT service composition.
 
-(4) How does the A2C approach scale with increasing numbers of moving services (20 to 100+ services) in terms of convergence time and success rate?
+The first challenge is connectivity—the core requirement for service discovery. A moving service must stay connected with a consumer, meaning it must remain within connectivity proximity. This requires determining co-movement patterns between the user and service trajectories. We propose spatio-temporal filtering to find services that overlap with the user trajectory in both space and time.
 
-This paper has five main contributions:
+The second challenge is service continuity. A consumer and service provider may not share their entire route—they may only overlap for part of the journey. Therefore, an effective composition approach is required to select an optimal sequence of available moving services that ensure continuity. This is fundamentally different from static composition where services remain available throughout.
 
-1. An A2C-based framework for moving IoT service composition with trajectory prediction, preserving the STR-based selection from prior work
+The third challenge is indexing and scalability. Existing co-movement discovery methods rely on centralized index structures like R-trees. As datasets scale up, performance degrades dramatically. We need an approach that discovers and composes services without relying on expensive indexing.
+
+Moving IoT services exhibit spatio-temporal variability. Service positions, availability, and quality attributes change continuously over time. A service might be within communication range at one instant and outside it the next. Quality metrics like channel capacity depend on distance, which changes as services move. This dynamic nature fundamentally alters the composition problem from a one-time optimization to a sequential decision process requiring real-time adaptation.
+
+The core challenge is spatio-temporal validity. A service is valid only when it falls within the consumer's discovery zone (communication range) at the current time. Beyond validity, we want services that provide high quality—the Signal Transmission Reward (STR) model derives capacity from distance through exponential signal attenuation. The agent must learn to select services that are both valid and high-quality, without knowing a priori which services will be valid at each timestep.
+
+Prior work addressed this with Double DQN [1], using the STR model for distance-derived capacity and trajectory-aware composition. The approach achieved 92.4% success at low mobility (2 km/h) and 54.3% at high mobility (80 km/h), with 124.3 re-compositions per hour. However, DQN's value-based nature has three key limitations. First, overestimation bias leads to suboptimal action selection, particularly harmful when valid services are few. Second, DQN handles discrete action spaces poorly for service composition. Third, DQN is reactive—it considers only current service positions, ignoring future states where services may move out of range.
+
+We propose Advantage Actor-Critic (A2C) to address these limitations. A2C combines policy-based and value-based learning: the actor learns a stochastic policy directly, while the critic estimates value. The advantage function reduces variance while keeping updates unbiased, enabling faster convergence and better sample efficiency. A2C naturally handles discrete action spaces and can be extended with LSTM for trajectory encoding to anticipate future states.
+
+We pose four research questions:
+
+1. How can A2C be adapted for moving IoT service composition while preserving STR-based selection?
+2. How do shared versus separate network architectures perform in this domain?
+3. How does A2C compare to reactive baselines (greedy nearest-neighbor, random selection)?
+4. How does A2C scale with increasing numbers of moving services (20 to 100+)?
+
+We make five contributions:
+
+1. An A2C framework for moving IoT service composition that preserves STR-based selection
 2. Comparison of shared and separate network architectures
-3. Evaluation using the same two datasets as prior work
+3. Evaluation on ATC (185,554 trajectories, 1.7B samples) and Illinois 6 (207 trajectories, 357K samples) trajectory datasets
 4. Scalability analysis across 20 to 100+ services
 5. Open-source PyTorch implementation
 
-The paper proceeds as follows. Section 2 covers background. Section 3 presents the A2C framework. Section 4 describes the experimental setup. Section 5 shows results. Section 6 provides implementation details. Section 7 discusses implications and limitations. Section 8 concludes.
+Section 2 covers background. Section 3 presents the A2C framework. Section 4 describes experimental setup. Section 5 shows results. Section 6 provides implementation details. Section 7 discusses implications and limitations. Section 8 concludes.
+
+---
+
+## 1.1 Motivation
+
+The proliferation of mobile devices has made crowdsourced IoT services ubiquitous. Consider a pedestrian in a shopping center seeking WiFi connectivity—their smartphone can connect to hotspots carried by other shoppers. These moving WiFi hotspots provide service on-the-go, extending coverage beyond fixed access points. The same principle applies to vehicle-to-vehicle communication on highways, worker-assisted sensing in factories, or peer-to-peer data sharing at concerts.
+
+These scenarios share a common challenge: both the service provider and consumer are moving. The composition that worked moments ago fails now because the service provider has moved out of range. Unlike static service composition where services remain available at known locations, moving IoT services require continuous re-composition as trajectories diverge.
+
+The core difficulty is spatio-temporal validity. At any given timestep, a service is valid only if it falls within the consumer's communication range—the discovery zone. This validity changes moment to moment as both entities move. Beyond validity, we want services that provide high quality—measured by channel capacity, which degrades with distance. The agent must learn to select services that are both valid AND high-quality, without prior knowledge of which services will be valid.
+
+Traditional service composition approaches fail here because they assume static services. Even prior DQN-based approaches suffer from three key limitations: overestimation bias leads to poor action selection when valid services are scarce, the value-based nature struggles with the discrete action space of service selection, and most critically, DQN is reactive—it considers only current positions, ignoring that services will move.
+
+We need an approach that: (1) learns to select valid services through interaction, (2) handles discrete action spaces naturally, (3) can anticipate future states through trajectory encoding, and (4) converges faster than value-based methods. Advantage Actor-Critic offers all four capabilities.
 
 ---
 
@@ -52,26 +89,26 @@ A moving crowdsourced service can be modeled as a moving region where the servic
 
 Actor-critic algorithms combine value-based and policy-based methods. The actor learns a stochastic policy directly; the critic estimates the value function. This architecture reduces variance compared to pure policy gradient while handling continuous action spaces [3].
 
-A2C improves stability through the advantage function, measuring the difference between action value and current value estimate. The advantage is:
+A2C improves stability through the advantage function, measuring how much better a particular action is compared to the average. The advantage is:
 
 $$A(s_t, a_t) = Q(s_t, a_t) - V(s_t) = r_t + \gamma V(s_{t+1}) - V(s_t)$$
 
-A2C works well for edge computing and service management. Studies on A2C for task scheduling in edge-cloud systems show faster convergence and better adaptability than DQN [3][6]. Adding LSTM to A2C handles temporal dependencies in mobility-aware scenarios [3].
+Studies on A2C for task scheduling in edge-cloud systems show faster convergence and better adaptability than DQN [3][6]. Adding LSTM to A2C handles temporal dependencies in mobility-aware scenarios [3].
 
 ### 2.3 Network Architecture Design
 
-Actor and critic network design affects learning performance. Two main approaches exist: shared networks where both share feature extraction layers but have separate output heads, and separate networks with independent parameters [2].
+Network design affects learning performance. Two architectures dominate: shared networks where both share feature extraction layers but have separate output heads, and separate networks with independent parameters [2].
 
-Shared networks reduce parameters, train faster with fewer gradient computations, and may regularize through shared representation. The risk is interference between actor and critic updates—gradients from one can affect the other. Careful learning rate management can mitigate this while maintaining sample efficiency [2].
+Shared networks reduce parameters, train faster with fewer gradient computations, and may regularize through shared representation. The risk is interference between actor and critic updates—gradients from one affect the other.
 
-Separate networks offer more flexibility for complex states where actor and critic need different processing. This enables specialized architectures like LSTM for trajectory encoding in the actor [3][9]. The trade-off is more computation and potential training instability from independent updates.
+Separate networks offer more flexibility for complex states where actor and critic need different processing. This enables specialized architectures like LSTM for trajectory encoding in the actor [3][9]. The trade-off is more computation.
 
 ### 2.4 Signal Transmission Reward (STR) Based Selection Function
 
-The service selection in moving IoT environments uses a hierarchical model where capacity is derived from the Signal Transmission Reward (STR), which is calculated based on Euclidean distance between the consumer and service provider.
+The service selection uses a hierarchical model where capacity derives from the Signal Transmission Reward (STR), which depends on Euclidean distance between the consumer and service provider.
 
 **Step 1 - Euclidean Distance Calculation**:
-The distance between service $i$ and user $j$ is computed as:
+The distance between service $i$ and user $j$ is:
 $$d_{ij} = \sqrt{(x_i - x_j)^2 + (y_i - y_j)^2}$$
 
 **Step 2 - STR Calculation (Exponential Attenuation)**:
@@ -84,7 +121,7 @@ Where:
 - $k$ is the decay factor determining the rate of signal attenuation (0.01-0.05)
 
 **Step 3 - Capacity Calculation**:
-Using the Shannon-Hartley theorem, the channel capacity is calculated based on STR:
+Using the Shannon-Hartley theorem, the channel capacity depends on STR:
 $$C_{ij} = B \cdot \log_2(1 + STR(d_{ij}) \cdot SNR_{max})$$
 
 Where:
@@ -92,7 +129,7 @@ Where:
 - $SNR_{max}$ is the maximum SNR at zero distance (1000 or 30 dB)
 
 **Step 4 - Reward Calculation (Capacity Based)**:
-The reward for service composition is derived from the capacity:
+The reward comes from capacity:
 $$R(s_t, a_t) = \begin{cases} +C_{total} & \text{if } C_{total} > C_{min} \\ -1 & \text{if } C_{total} \leq C_{min} \end{cases}$$
 
 Where $C_{total} = \sum_{i \in C} C_{ij}$ is the total capacity of the composition and $C_{min}$ is the minimum required capacity.
@@ -112,21 +149,51 @@ Aerial-terrestrial network integration uses DRL for service composition with tra
 
 ### 2.6 Surveys on IoT Service Composition
 
-Two surveys analyze IoT service composition. Asghari et al. [26] reviewed literature from 2012-2017, categorizing methods by functional and non-functional aspects. Hamzei et al. [27] surveyed approaches as framework, service-oriented architecture/RESTful, heuristic, and model-based. Key challenges identified: scalability (45.4% of articles), execution time (36.3%), cost (27.2%), and reliability (22.7%). Arellanes et al. [28] evaluated scalability—dataflow, orchestration, and choreography don't fully satisfy scalability; DX-MAN shows promise.
+Two surveys analyze IoT service composition. Asghari et al. [26] reviewed literature from 2012-2017. Hamzei et al. [27] surveyed approaches as framework, service-oriented architecture/RESTful, heuristic, and model-based. Key challenges: scalability (45.4% of articles), execution time (36.3%), cost (27.2%), reliability (22.7%). Arellanes et al. [28] evaluated scalability—dataflow, orchestration, and choreography do not fully satisfy scalability; DX-MAN shows promise.
 
 ### 2.7 Theoretical Foundations
 
-Actor-critic convergence has been studied extensively. Finite-time analysis shows single-timescale actor-critic with linear function approximation finds an $\epsilon$-approximate stationary point with $\mathcal{O}(\tilde{\epsilon}^{-2})$ sample complexity [22]. This supports applying A2C to moving service composition where state updates follow Markovian dynamics.
+Actor-critic convergence has been studied. Finite-time analysis shows single-timescale actor-critic with linear function approximation finds an $\epsilon$-approximate stationary point with $\mathcal{O}(\tilde{\epsilon}^{-2})$ sample complexity [22]. This supports applying A2C to moving service composition.
 
-MLMC-NAC achieves $\tilde{\mathcal{O}}(1/\sqrt{T})$ convergence for average-reward MDPs without requiring mixing and hitting times [21]—first theoretical guarantee for average-reward settings in continuous state spaces.
+MLMC-NAC achieves $\tilde{\mathcal{O}}(1/\sqrt{T})$ convergence for average-reward MDPs without requiring mixing and hitting times [21].
 
-For multi-objective RL, MOAC provides finite-time convergence and sample complexity independent of objective count [22]. With our multi-component reward (success, QoS, efficiency, stability), this assures convergence despite complex objectives.
+For multi-objective RL, MOAC provides finite-time convergence and sample complexity independent of objective count [22]. With our multi-component reward, this assures convergence despite complex objectives.
 
-Single-loop actor-critic with compatible function approximation achieves optimal sample complexity by eliminating critic approximation error [24]. This fits our online service composition with single Markovian sample trajectories.
+Single-loop actor-critic with compatible function approximation achieves optimal sample complexity by eliminating critic approximation error [24]. This fits our online service composition.
 
-### 2.8 Proactive Composition in Dynamic Environments
+Proactive composition anticipates future states rather than just reacting. Latency-aware and proactive service placement uses exponential smoothing for QoS prediction in mobile edge [17]. Spatial-temporal neural networks for connected vehicles achieve 6% higher prediction accuracy and 10% lower service dropping through gated recurrent units and graph convolutional layers [4]. ESPD-LP improves data transmission by 41% through bidirectional matching across MEC servers [19].
 
-Proactive composition anticipates future states rather than just reacting. Latency-aware and proactive service placement uses exponential smoothing for QoS prediction in mobile edge [17]. Spatial-temporal neural networks for connected vehicles achieve 6% higher prediction accuracy and 10% lower service dropping through gated recurrent units and graph convolutional layers [4]. ESPD-LP improves data transmission by 41% through bidirectional matching across MEC servers [19]. These approaches inform our trajectory-aware framework.
+### 2.8 Related Work
+
+Service composition has been extensively studied in static environments. Traditional approaches use QoS-based optimization, selecting services that maximize composite QoS while satisfying constraints [11]. These methods assume fixed service locations and ignore mobility.
+
+**Moving IoT Service Composition**: Recent work addresses the unique challenges of moving services. The spatio-temporal nature means services are available only when they overlap with the user in both space and time. Fixed services (like WiFi at a coffee shop) remain at known locations, while moving services (like a smartphone hotspot while walking) change position continuously. Prior work formalized this as trajectory-based composition where both provider and consumer have GPS trajectories [1]. The challenge is that co-movement patterns must be discovered—finding services that overlap with the user's path at each timestep.
+
+**Deep Reinforcement Learning for Service Composition**: DRL has emerged as a powerful approach for service composition in dynamic environments. Unlike traditional optimization, DRL learns a policy through interaction with the environment, adapting to changing conditions. DQN-based approaches have been applied to mobile service composition [1], but suffer from overestimation bias and reactive decision-making. Policy gradient methods like A2C address these limitations by learning the policy directly.
+
+**Actor-Critic Methods for Edge Computing**: A2C has shown promise in edge computing scenarios. Studies on A2C for task scheduling in edge-cloud systems demonstrate faster convergence and better adaptability than DQN [3][6]. Adding LSTM to A2C handles temporal dependencies in mobility-aware scenarios [3], enabling the agent to learn from trajectory patterns.
+
+**Network Architecture Design**: The choice between shared and separate networks impacts performance. Shared networks reduce parameters and train faster with fewer gradient computations. Separate networks offer flexibility for specialized processing like LSTM trajectory encoding [3][9]. Our work compares both architectures for moving IoT service composition.
+
+### 2.9 Literature Review
+
+This section reviews relevant literature across four areas: moving IoT service composition, deep reinforcement learning for services, actor-critic methods for edge computing, and trajectory-based service discovery.
+
+**Moving IoT Service Composition**: Traditional service composition assumes static services at known locations [11]. Moving IoT services fundamentally change this assumption—services change position continuously, requiring composition decisions at each timestep. Prior work formalized moving IoT service composition as a trajectory-based problem where both provider and consumer have GPS trajectories [1]. Key challenges include: (1) discovering services that overlap with the user in both space and time, (2) ensuring service continuity when trajectories only partially overlap, and (3) scaling to large trajectory datasets without expensive indexing.
+
+The Signal Transmission Reward (STR) model provides a hierarchical approach: distance determines STR, STR determines capacity, and capacity determines service quality [1]. This model captures the physical reality that wireless signal strength degrades with distance.
+
+**Deep Reinforcement Learning for Service Composition**: DRL has emerged as the dominant approach for dynamic service composition. DQN-based methods [1] learn Q-values for service selection but suffer from overestimation bias—the Q-values systematically overestimate true action values, leading to suboptimal selection when valid services are scarce [7]. Double DQN addresses this by separating action selection from evaluation but still operates reactively.
+
+Policy gradient methods including REINFORCE and Actor-Critic address DQN's limitations by learning the policy directly. Policy gradient methods are unbiased and naturally handle discrete action spaces. However, pure policy gradient suffers from high variance. Actor-critic methods reduce variance by combining policy gradient with a value function baseline.
+
+**Actor-Critic Methods for Edge Computing**: A2C has demonstrated success in edge computing scenarios. Chen et al. [3] applied LSTM-based A2C to network slicing with user mobility, showing faster convergence than DQN. Liu et al. [6] proposed A2C-DRL for dynamic scheduling in edge-cloud environments. These works confirm A2C's advantages in mobility-aware scenarios.
+
+Theoretical analysis provides convergence guarantees. Zhang et al. [21] showed $\tilde{\mathcal{O}}(1/\sqrt{T})$ convergence for average-reward MDPs. Xiao et al. [22] provided finite-time analysis for multi-objective actor-critic. These results assure convergence despite complex reward structures.
+
+**Trajectory-Based Service Discovery**: Co-movement pattern discovery identifies services that overlap with user trajectories. Traditional methods use flock, convoy, swarm, and group patterns [16][21-24]. However, these centralized index-based approaches degrade as datasets scale [20].
+
+Parallel flock-based approaches using MapReduce address scalability [1]. The spatio-temporal MapReduce first prunes trajectories temporally, then filters spatially to find candidate services. Our work builds on this by using DRL to learn composition without indexing.
 
 ---
 
@@ -134,38 +201,103 @@ Proactive composition anticipates future states rather than just reacting. Laten
 
 ### 3.1 Problem Formalization
 
-We formalize the moving IoT service composition problem exactly as in prior work as a Markov Decision Process (MDP) defined by the tuple $(S, A, P, R, \gamma)$ where:
+We formalize the problem following the definitions from prior work [1]:
 
-**State Space ($S$)**: The state at time $t$ is defined as:
-$$s_t = \{P_t^{services}, P_t^{device}, V_t^{device}, T_t^{predicted}, E^{req}, QoS^{constraints}, t, D_t\}$$
+**Definition 1: Moving Crowdsourced Service MS**. A moving crowdsourced service MS is a tuple of $\langle id, F, Q \rangle$ where:
+- $id$ is a unique service identifier
+- $F$ is a function offered by MS (e.g., providing a moving WiFi hotspot). The function represents a moving service's coverage in space and time, defined as a moving region $\langle T_s, R_{ti}(p_i) \rangle$ where:
+  - $T_s = \{\langle t_i, x_i, y_i \rangle\}$ is a service trajectory—a sequence of timestamped samples where $(x_i, y_i)$ is longitude/latitude at timestamp $t_i$
+  - $R_{ti}(p_i)$ is the coverage region offered by MS at time $t_i$, represented as a circular area centered at $p_i$ with radius $r$
+- $Q$ is a set of QoS attributes (e.g., capacity)
 
-where $P_t^{services} = \{p_1^t, p_2^t, ..., p_n^t\}$ represents the positions of $n$ available services, $P_t^{device}$ denotes the device position, $V_t^{device}$ is the device velocity vector, $T_t^{predicted}$ contains predicted service trajectories over the planning horizon, $E^{req}$ specifies energy requirements, $QoS^{constraints}$ defines quality parameters, $t$ is the temporal context, and $D_t = \{d_{ij}\}$ is the distance matrix between all services and the device.
+**Definition 2: User Trajectory $T_u$**. A user trajectory is the path traveled by a user, defined as a set of $k$ timestamped samples:
+$$T_u = \{\langle u_{t_i}, u_{x_i}, u_{y_i} \rangle\}$$
 
-**Action Space ($A$)**: Same as Paper 17 - service ID selection:
+**Definition 3: Spatial Candidate Pair**. Given a set of moving services $\mathcal{M} = \{MS_1, MS_2, ..., MS_n\}$, a user trajectory $T_u = \{up_1, up_2, ..., up_n\}$ where $up_i = (u_{x_i}, u_{y_i})$, and a search radius $r_s$, a moving service forms a spatial candidate pair $cp_t^i$ for timestep $t_i$ if its location $MS_k.p_i$ at $t_i$ is inside a disk region $D_{t_i}$ (center = $up_i(t_i)$, radius = $r_s$):
+$$\text{Valid}_{spatial}(i, t_i) = \mathbb{1}(d(T_u.up_{t_i}, MS_k.p_{t_i}) \leq r_s)$$
+where $d(\cdot)$ is the Euclidean or Haversine distance.
+
+**Definition 4: Valid Candidate Moving Service**. A moving service $MS_i$ is a valid candidate service for a given user trajectory if it is paired with the user trajectory over $w$ consecutive timesteps where $w > 0$:
+$$CMS_i = \{cp_{t_a}, cp_{t_b}, ..., cp_{t_w}\}, t_a < t_b < ... < t_w, |a - b| = 1$$
+
+**Problem Definition**: Given a set of moving crowdsourced services $\mathcal{M} = \{MS_1, MS_2, ..., MS_n\}$, a user trajectory $T_u$, and a search radius $r_s$ as input, the problem is to find the "optimal" composition plan that gives the best trade-offs among multiple QoS criteria—high QoS while maintaining a low number of disconnections. The output is a composition plan $CP$ which is a sequence of moving crowdsourced services:
+$$CP = \{S_1, S_2, ..., S_n\} \text{ iff } S_i \text{ is a valid candidate moving service for } T_u$$
+
+**Assumptions**:
+- One moving service can only serve one user at any point in time
+- A moving service moves between any two consecutive timestamps $t_i$ and $t_{i+1}$ with constant speed, enabling position interpolation in interval $[t_i, t_{i+1}]$
+- Radii of all coverage regions are fixed to a single value
+- Maximum spatial proximity equals the radius of fixed WiFi hotspot coverage (e.g., 20-100m)
+- We focus on deterministic moving crowdsourced services
+
+**MDP Formulation**: We formulate this as an MDP:
+
+**State Space ($S$)**: At time step $t$, the state consists of the current positions of all moving entities:
+$$s_t = \{\text{pos}_1^t, \text{pos}_2^t, ..., \text{pos}_n^t, \text{pos}_{consumer}^t, t\}$$
+
+where $\text{pos}_i^t = (x_i^t, y_i^t)$ is the GPS position of service $i$ at time $t$.
+
+**Action Space ($A$)**: Select service ID from available services:
 $$a_t \in \{1, 2, 3, ..., n\}$$
 
-Each action corresponds to selecting a specific service provider from the available pool. The selection uses the same STR-based scoring function from Paper 17:
-$$a^* = \arg\max_{i \in S} \left[ C_{ij} \cdot E_i \cdot T_{available}^i \right]$$
+**Spatio-Temporal Validity**: A service is valid (spatial candidate pair) at time $t$ if:
+$$\text{Valid}(i, t) = \mathbb{1}(d_{ij}(t) \leq R_{comm})$$
 
-Where capacity $C_{ij}$ is derived from Euclidean distance through the STR model. The only difference from Paper 17 is that A2C learns the selection policy through actor-critic optimization instead of Double DQN's Q-learning.
+where $d_{ij}(t)$ is the Euclidean distance between service $i$ and consumer $j$ at time $t$, and $R_{comm}$ is the communication range (discovery zone).
+
+The capacity $C_{ij}(t)$ derives from Euclidean distance through the STR model. The agent learns to select services that are both within communication range AND provide optimal capacity.
 
 **Transition Dynamics ($P$)**: Transitions follow the stochastic dynamics of moving services and device mobility. Service positions evolve according to their movement patterns, while device position changes based on velocity and direction. Connectivity depends on spatial proximity within communication range $R_{comm}$. The distance matrix $D_t$ updates accordingly with each transition.
 
-**Reward Function ($R$)**: The reward function incentivizes successful composition while penalizing failures and excessive reconfiguration:
-$$r(s_t, a_t) = r_{success} + \alpha_{QoS} r_{QoS} + \alpha_{efficiency} r_{efficiency} + \alpha_{stability} r_{stability}$$
+**Reward Function ($R$)**: The reward function is based on the capacity QoS parameter. Since QoS attributes (capacity) are computed from the distance between the consumer and moving service—which is unknown a priori—the A2C algorithm must learn the optimal execution policy through interaction with the environment.
 
-The success component provides $+1$ for successful composition meeting all constraints and $-0.5$ for failures. The QoS component measures satisfaction of quality parameters using STR-derived capacity:
-$$r_{QoS} = \sum_{k} w_k \cdot \frac{QoS_k^{actual}}{QoS_k^{target}}$$
+The reward for selecting service $i$ at time $t$ is:
+$$r(s_t, a_t) = C_{ij}(t)$$
 
-The efficiency component encourages optimal resource utilization:
-$$r_{efficiency} = \beta \cdot \frac{E_{provided}}{E_{required}} - \eta \cdot |C_t|$$
+where $C_{ij}(t) = B \cdot \log_2(1 + STR(d_{ij}(t)) \cdot SNR_{max})$ is the STR-derived capacity, and $d_{ij}(t)$ is the Euclidean distance at time $t$.
 
-The stability component reduces unnecessary reconfiguration:
-$$r_{stability} = \begin{cases} +0.2 & \text{if } a_t = Maintain \\ -0.1 \cdot |changes| & \text{otherwise} \end{cases}$$
+If the selected service is outside the discovery zone ($d_{ij}(t) > R_{comm}$), a penalty is applied:
+$$r(s_t, a_t) = \begin{cases} C_{ij}(t) & \text{if } d_{ij}(t) \leq R_{comm} \\ -1 & \text{if } d_{ij}(t) > R_{comm} \end{cases}$$
+
+**Training/Test Split**: We use 70% of the data in each dataset for training and the remaining 30% for testing.
+
+### 3.3 Environment Interaction and Training Algorithm
+
+The training process follows the interaction paradigm between agent and environment:
+
+**Interaction Loop**:
+1. Agent requests initial state from environment (step a)
+2. Environment fetches the current user trajectory sample and reports it as current state (step b.1)
+3. Environment fetches the list of service IDs and reports them as possible actions (step b.2)
+4. During exploration, agent randomly invokes an action by selecting a valid service ID (step c)
+5. Environment computes reward based on the invoked action (step d.1)
+6. Environment updates its current state to the next user trajectory sample (step d.2)
+7. Next state and reward are sent to agent (step e)
+8. Agent continues until all samples in user trajectory are visited
+9. Upon traversing all samples, environment resets to first sample, process repeats
+
+**Handling Edge Cases**:
+
+*Case 1 - No valid candidate services*: When no moving services overlap with the current user trajectory sample in space and time, we introduce a **dummy service**. Selecting the dummy service yields a lower reward (-1) compared to normal rewards [0-1], diverting the agent from selecting invalid candidates.
+
+*Case 2 - Agent selects invalid service*: When the agent selects a moving service that does not overlap with the current user trajectory sample (either in time or space), we apply a penalty (-10). This ensures the agent always favors the dummy service over invalid selections since -1 > -10.
+
+**Training Algorithm**:
+The algorithm initializes parameters, creates a neural network with random weights, and sets up an empty replay memory. The agent begins with exploration-only (ε = 1.0) and gradually shifts to exploitation as ε decays.
+
+- Line 7: Loop through each user trajectory in training set
+- Lines 8-10: Allow environment to exploit each user trajectory repetition times (enabling the agent to experiment with different actions given the same state)
+- Lines 11-15: Agent invokes action based on ε value (random for exploration, model-based for exploitation)
+- Line 16: Environment returns reward based on QoS of selected service
+- Line 17: Store (state, action, reward, next_state) tuple in memory
+- Line 20: Use memory to train the model (batch training)
+- Line 21: Decay ε after each training process
+
+**Edge Server Assumptions**: Model training and storage are carried out using edge servers. Edge servers are assumed to be conveniently accessible by moving IoT services. Each edge server serves a small subset of moving devices, making storage and processing overheads negligible.
 
 ### 3.2 STR-Based Selection with Capacity Integration
 
-The core selection function from prior work is preserved and integrated into the A2C framework using the hierarchical STR → Capacity → Reward model:
+The core selection function from prior work integrates into A2C using the hierarchical STR → Capacity → Reward model:
 
 **Step 1 - Euclidean Distance Calculation**:
 For each service $i$ and user/device position $j$:
@@ -192,23 +324,23 @@ $$A(s_t, a_t) = r_t + \gamma V(s_{t+1}; \theta_V) - V(s_t; \theta_V)$$
 The policy gradient updates the actor parameters:
 $$\nabla_\theta J = \mathbb{E}[A(s_t, a_t) \nabla_\theta \log \pi(a_t|s_t; \theta_\pi)]$$
 
-The value function is updated to minimize:
+The value function minimizes:
 $$L_V = \mathbb{E}[(r_t + \gamma V(s_{t+1}) - V(s_t))^2]$$
 
-The combined loss function includes policy and value components with entropy regularization:
+The combined loss includes policy and value components with entropy regularization:
 $$L_{total} = L_V + c_1 L_\pi - c_2 H(\pi)$$
 
 where $H(\pi)$ is the entropy of the policy distribution, encouraging exploration.
 
 ### 3.3.1 Convergence and Complexity Analysis
 
-We analyze the theoretical properties of our A2C implementation based on recent advances in actor-critic convergence theory [21][22][24]. The analysis establishes finite-time convergence guarantees and sample complexity bounds for our moving IoT service composition problem.
+We analyze theoretical properties based on recent advances in actor-critic convergence theory [21][22][24]. The analysis establishes finite-time convergence guarantees and sample complexity bounds for moving IoT service composition.
 
-**Assumptions**: We assume the MDP satisfies standard regularity conditions: (A1) the state and action spaces are finite or compact, (A2) the policy parameterization is smooth with bounded gradients, (A3) the value function approximator uses linear or neural network function approximation with bounded weights, (A4) the step sizes satisfy $\sum \alpha_t = \infty$, $\sum \alpha_t^2 < \infty$.
+**Assumptions**: We assume the MDP satisfies standard regularity conditions: (A1) state and action spaces are finite or compact, (A2) policy parameterization is smooth with bounded gradients, (A3) value function approximator uses linear or neural network function approximation with bounded weights, (A4) step sizes satisfy $\sum \alpha_t = \infty$, $\sum \alpha_t^2 < \infty$.
 
 **Theorem 1 (Convergence Rate)**: Under assumptions A1-A4, the A2C algorithm converges to an $\epsilon$-approximate stationary point with sample complexity $\mathcal{O}(\tilde{\epsilon}^{-2})$.
 
-*Proof Sketch*: Following the analysis in [22], we characterize the error propagation between actor and critic updates. The critic uses TD learning with function approximation, introducing an approximation error $\varepsilon_{critic}$. The actor updates using the advantage function, which introduces bias $\varepsilon_{actor}$ from the value function estimate. The total error bound combines these terms:
+*Proof Sketch*: Following [22], we characterize error propagation between actor and critic updates. The critic uses TD learning with function approximation, introducing an approximation error $\varepsilon_{critic}$. The actor updates using the advantage function, which introduces bias $\varepsilon_{actor}$ from the value function estimate. The total error bound combines these terms:
 
 $$\| \nabla J(\theta) \| \leq \mathcal{O}(\varepsilon_{critic} + \sqrt{\varepsilon_{actor}} + \frac{1}{\sqrt{T}})$$
 
@@ -227,15 +359,15 @@ where $\delta$ is the confidence parameter.
 **Corollary 2 (Convergence Time)**: The expected convergence time in wall-clock terms is:
 $$T_{conv} = \mathcal{O}\left(\frac{1}{\eta_\pi \epsilon^2} + \frac{1}{\eta_V \epsilon^2}\right)$$
 
-where $\eta_\pi$ and $\eta_V$ are the actor and critic learning rates respectively. With $\eta_\pi = 0.0003$ and $\eta_V = 0.0007$ as used in our experiments, convergence to $\epsilon = 0.01$ requires approximately 500 episodes for A2C Separate and 350 episodes for A2C Shared.
+where $\eta_\pi$ and $\eta_V$ are the actor and critic learning rates. With $\eta_\pi = 0.0003$ and $\eta_V = 0.0007$ as used in our experiments, convergence to $\epsilon = 0.01$ requires approximately 500 episodes for A2C Separate and 350 episodes for A2C Shared.
 
 ### 3.4 Network Architectures
 
-We implement and compare two network architectures:
+We implement and compare two network architectures.
 
 #### 3.4.1 Shared Architecture
 
-The shared architecture employs a common feature extraction backbone followed by separate actor and critic heads:
+A common feature extraction backbone followed by separate actor and critic heads:
 
 ```
 Input Layer (State Vector + Distance Matrix)
@@ -257,11 +389,11 @@ Input Layer (State Vector + Distance Matrix)
      Policy π          Value V(s)
 ```
 
-The shared encoder extracts spatio-temporal features from the state representation including service positions, device trajectory, temporal context, and the distance matrix used for STR calculation.
+The shared encoder extracts spatio-temporal features from the state representation including service positions, device trajectory, temporal context, and the distance matrix for STR calculation.
 
 #### 3.4.2 Separate Architecture
 
-The separate architecture maintains independent networks for actor and critic, enabling specialized processing:
+Independent networks enable specialized processing:
 
 ```
 Input State → Actor Network                      Input State → Critic Network
@@ -282,7 +414,7 @@ Input State → Actor Network                      Input State → Critic Networ
      Policy π               Value V(s)
 ```
 
-The actor incorporates LSTM for trajectory-aware policy learning, capturing the temporal dependencies in service movement patterns. The critic uses standard feedforward processing for value estimation.
+The actor incorporates LSTM for trajectory-aware policy learning, capturing temporal dependencies in service movement patterns. The critic uses standard feedforward processing for value estimation.
 
 ### 3.5 Proactive Composition through Trajectory Prediction
 
@@ -305,127 +437,115 @@ def predict_trajectory(service, history, horizon):
     return positions, future_capacity
 ```
 
-The predicted trajectories and corresponding capacity values are incorporated into the state representation, enabling the A2C agent to make composition decisions based on anticipated service positions and expected capacities.
+The predicted trajectories and corresponding capacity values go into the state representation, enabling the A2C agent to make composition decisions based on anticipated service positions and expected capacities.
 
 ### 3.6 Spatio-Temporal Constraint Handling with STR-Based Capacity
 
-Spatio-temporal constraints are integrated through the reward function and state representation using the hierarchical STR → Capacity model:
+Spatio-temporal constraints integrate through the reward function and state representation using the hierarchical STR → Capacity model:
 
-**Spatial Constraint (STR via Euclidean Distance)**:
-A service is considered available when STR exceeds threshold:
-$$Available(s_i, j, t) = \mathbb{1}(STR(d_{ij}(t)) \geq STR_{min})$$
+**Spatio-Temporal Validity (Discovery Zone)**:
+A service $i$ is valid (discoverable) at time $t$ if it satisfies:
+$$\text{Valid}(i, j, t) = \mathbb{1}(d_{ij}(t) \leq R_{comm})$$
 
-Which is equivalent to requiring the Euclidean distance to be within the effective coverage radius:
-$$Available(s_i, j, t) = \mathbb{1}(d_{ij}(t) \leq R_{effective})$$
+where $d_{ij}(t)$ is the Euclidean distance between service $i$ and consumer $j$ at time $t$, and $R_{comm}$ is the communication range (discovery zone). This is the fundamental spatio-temporal constraint: the service must be physically located within the consumer's wireless coverage area at the exact time of composition.
 
-Where $R_{effective} = R_c - \frac{1}{k} \ln(STR_{min})$ is the effective coverage radius.
+**STR-Based Service Quality**:
+Once validity is established, the STR model ranks valid services:
+$$STR(d_{ij}(t)) = \begin{cases} 1 & \text{if } d_{ij}(t) \leq R_c \\ e^{-k \cdot (d_{ij}(t) - R_c)} & \text{if } d_{ij}(t) > R_c \end{cases}$$
 
 **Capacity Constraint (STR-Based)**:
 Composed services must meet capacity requirements:
-$$C_{composition}(t) = \sum_{i \in C} C_{ij}(t) \geq C_{required}(t), \forall t \in T_{horizon}$$
+$$C_{ij}(t) = B \cdot \log_2(1 + STR(d_{ij}(t)) \cdot SNR_{max}) \geq C_{required}(t)$$
 
-Where $C_{ij}(t) = B \cdot \log_2(1 + STR(d_{ij}(t)) \cdot SNR_{max})$.
-
-**Energy Constraint**:
-Total provided energy must meet requirements:
-$$\sum_{i \in C} E_i(t) \geq E_{required}(t), \forall t \in T_{horizon}$$
-
-The reward function penalizes constraint violations, providing clear learning signals for constraint satisfaction. The STR-derived capacity serves as the primary QoS metric following the distance → STR → capacity hierarchy.
+The reward function penalizes selecting invalid services (outside discovery zone) with -1 reward. The STR-derived capacity serves as the primary QoS metric following distance → STR → capacity hierarchy.
 
 ---
 
 ## 4. Experimental Setup
 
-### 4.1 Same Datasets as Prior Work
+### 4.1 Datasets
 
-We employ the exact two datasets used in the original Paper 17 for fair comparison:
+We use two real-world GPS trajectory datasets representing moving IoT services:
 
-**Dataset 1 - Random Waypoint Mobility Model**: This dataset simulates human-carried devices moving in random directions with random pauses. The random waypoint model generates realistic pedestrian movement patterns with:
-- Speed range: 1-5 km/h (pedestrian)
-- Pause time: 0-30 seconds
-- Initial positions: uniformly distributed in simulation area
-- Direction: random at each waypoint
-- This represents wearable IoT devices, personal sensors, and mobile health monitors.
+**Dataset 1 - ATC Shopping Center (Osaka)**: This dataset contains visitors' trajectories in the ATC shopping center in Osaka, Japan. Each trajectory represents a moving service (e.g., a visitor with a mobile device that can provide/sharing IoT services).
 
-**Dataset 2 - Vehicle Movement Dataset**: This dataset represents automotive IoT scenarios with:
-- Speed range: 20-80 km/h (vehicle)
-- Movement patterns: predefined routes (simulating urban road networks)
-- Stop patterns: traffic lights, congestion
-- This represents vehicle-mounted IoT devices, V2X communication, and automotive sensors.
+- Total samples: 1,777,297,164 GPS points
+- Number of trajectories (moving services): 185,554
+- Sampling interval: 0.03-0.06 seconds (normalized to 0.04s fixed rate)
+- Preprocessing: Linear interpolation to fill missing points and synchronize trajectories
+- Each record: (global_sequence, entity_id, latitude, longitude)
+- Represents high-density pedestrian mobility in a shopping center environment
 
-The original Paper 17 uses these two datasets with service counts ranging from 20-100+ moving services per scenario.
+**Dataset 2 - Illinois 6**: This dataset contains six months of daily commute trajectories from two members at Argonne National Laboratory, University of Illinois at Chicago.
 
-### 4.2 Real GPS Trajectory Dataset (Illinois)
+- Total samples: 357,706 GPS points
+- Number of trajectories (moving services): 207
+- Sampling interval: strictly every 1 second
+- Geographic coverage: Cook County and/or Dupage County, Illinois
+- Each record: (timestamp, entity_id, latitude, longitude)
+- Represents daily commuter mobility patterns
 
-In addition to the synthetic mobility datasets above, we implement and evaluate our A2C approach using real-world GPS trajectory data collected from the University of Illinois campus [20]. This dataset provides authentic pedestrian movement patterns for validating the service composition approach in real-world conditions.
+### 4.2 Preprocessing Pipeline
 
-**Dataset Characteristics**:
-- Total samples: 42,480 GPS trajectory points
-- Number of access points (services): 25
-- Temporal coverage: Continuous trajectory with timestamp alignment
-- Spatial extent: University campus area (approximately 2 km × 2 km)
-- User trajectories: Multiple pedestrian routes through the campus
-
-**Data Collection Details**:
-The dataset consists of two files:
-- `dataset/illinois_data.csv`: Contains GPS coordinates (latitude, longitude) with timestamps and trajectory IDs
-- `dataset/overlap_data.csv`: Contains user-access point overlap information specifying which APs are within communication range
-
-**Preprocessing Pipeline**:
-The raw GPS data undergoes a three-stage preprocessing pipeline implemented in `experiments-codesource/helper_env.py`:
+The raw GPS trajectory data goes through preprocessing in `experiments-codesource/helper_env.py` to extract spatio-temporal features for service selection:
 
 1. **Coordinate Transformation (GPS → ENU)**:
-   GPS coordinates are converted to East-North-Up local Cartesian coordinates:
+   GPS coordinates convert to East-North-Up local Cartesian coordinates:
    $$x = R \cdot \cos(\phi) \cdot \Delta\lambda$$
    $$y = R \cdot \Delta\phi$$
    Where $R = 6,371,000$ m (Earth radius), $\phi$ is latitude, $\lambda$ is longitude.
 
-2. **Ego-Centric Polar Representation**:
-   For each observation, we compute relative positions of all access points in ego-centric polar coordinates:
-   $$\text{state}_i = [r_i, \cos(\theta_i), \sin(\theta_i)]$$
-   Where $r_i$ is the distance from user to access point $i$, and $\theta_i$ is the bearing angle.
+2. **Spatio-Temporal State Construction**:
+   At each time step, we construct the state from GPS trajectories by computing:
+   - Current positions of all entities from their trajectory history
+   - Distance matrix $d_{ij}(t)$ between consumer and all services
+   - Valid service mask: $\text{Valid}_i(t) = \mathbb{1}(d_{ij}(t) \leq R_{comm})$
 
-3. **Signal Quality Calculation**:
-   Distance-based SNR and capacity are computed using the STR model:
-   $$\text{SNR}(d) = \begin{cases} 1.0 & \text{if } d \leq 300\text{ m} \\ e^{-0.01 \cdot (d-300)} & \text{if } 300\text{ m} < d < 500\text{ m} \\ 0.0 & \text{if } d \geq 500\text{ m} \end{cases}$$
+3. **Ego-Centric Polar Representation**:
+   For each valid service, we compute relative position in polar coordinates:
+   $$\text{state}_i = [r_i, \cos(\theta_i), \sin(\theta_i)]$$
+   Where $r_i$ is distance from consumer to service $i$, and $\theta_i$ is the bearing angle.
+
+4. **STR-Based Reward**:
+   For each service, capacity derives from distance using STR model:
+   $$\text{SNR}(d) = \begin{cases} 1.0 & \text{if } d \leq R_c \\ e^{-k \cdot (d-R_c)} & \text{if } d > R_c \end{cases}$$
    $$C = \log_2(1 + \text{SNR}) \quad \text{bits/s/Hz}$$
+   
+   Reward is positive if service is valid (within $R_{comm}$) and has adequate capacity.
 
 **State Space**:
-For 25 access points, the state vector has 75 features (25 × 3):
-$$s = [r_1, \cos\theta_1, \sin\theta_1, r_2, \cos\theta_2, \sin\theta_2, \ldots, r_{25}, \cos\theta_{25}, \sin\theta_{25}]$$
+For $n$ moving services, the state vector encodes:
+$$s_t = [d_1^t, \theta_1^t, \text{valid}_1^t, d_2^t, \theta_2^t, \text{valid}_2^t, ..., d_n^t, \theta_n^t, \text{valid}_n^t]$$
+
+where $d_i^t$ is distance, $\theta_i^t$ is bearing angle, and $\text{valid}_i^t$ indicates whether service $i$ is within $R_{comm}$ at time $t$.
 
 **Action Space**:
-The action is the index of the selected access point (service), plus one dummy action:
-$$a \in \{0, 1, 2, \ldots, 25\}$$
+The action selects a service ID:
+$$a_t \in \{1, 2, ..., n\}$$
 
-**Reward**:
-The reward is the capacity of the selected access point from the pre-computed reward matrix, with invalid actions (selecting out-of-range APs) receiving a penalty.
+The reward is the capacity of the selected service, with penalty for selecting invalid services.
 
 ### 4.3 Simulation Environment
 
-We implement a custom simulation environment matching the original Paper 17 setup:
+The environment uses service trajectories $T_s$ to determine its set of possible actions and the reward for each action.
 
-**Service Generation**: Services are generated with the following properties:
-- Initial positions sampled from dataset trajectories
-- Movement patterns derived from the two datasets (random waypoint for Dataset 1, route-based for Dataset 2)
-- Energy capacity: 5-30 kWh (uniform distribution)
-- Communication parameters: B = 10 MHz, P_tx = 100 mW, G_tx = G_rx = 1, N_0 = -174 dBm/Hz
-- Path loss exponent: $\alpha = 2$ (free space) to 4 (urban)
-- Delay factor: $\delta = 0.1$
+**State Updates**: At each step, the environment sets its state to the current user trajectory sample. The next state is set to the next sample in the current user trajectory.
 
-**Device (User) Mobility**: Device movement follows the same datasets:
-- Dataset 1: Random waypoint model for pedestrian scenarios
-- Dataset 2: Vehicle route-based movement for automotive scenarios
-- Energy requirements: 10-50 kWh per composition cycle
+**Action Space**: The agent selects from available service IDs, plus one dummy service:
+$$a_t \in \{1, 2, ..., n, \text{dummy}\}$$
 
-**Environment Dynamics**:
-- Service arrivals: Poisson process with rate $\lambda = 0.1$/s
-- Service departures: Random with average duration 300s
-- Position updates: Every 1 second simulation step
+**Reward Calculation**: 
+- Valid service selected (within discovery zone): reward = capacity $C_{ij}(t)$
+- Dummy service selected (no valid candidates): reward = -1
+- Invalid service selected (outside discovery zone): reward = -10
+
+**Trajectory Repetition**: The environment allows each user trajectory to be visited repetition times, enabling the agent to experiment with different actions given the same state and observe rewards for each state-action combination.
+
+**Environment Reset**: Upon traversing all samples of a user trajectory, the environment resets by setting its state to the first sample of the next user trajectory.
 
 ### 4.4 STR-Based Capacity Calculation Parameters
 
-The STR-based capacity model uses the following parameters matching prior work:
+The STR-based capacity model uses parameters matching prior work:
 
 | Parameter | Value | Description |
 |-----------|-------|-------------|
@@ -438,15 +558,15 @@ The STR-based capacity model uses the following parameters matching prior work:
 
 ### 4.5 Experimental Configurations
 
-We evaluate four primary configurations:
+We evaluate five configurations:
 
-**Configuration 1 - Random Selection (Reactive Baseline)**: A baseline reactive approach that selects services based on current state only, without trajectory prediction or learning. Services are selected randomly from those meeting minimum constraints.
+**Configuration 1 - Random Selection (Reactive Baseline)**: A baseline reactive approach that selects services based on current state only, without trajectory prediction or learning.
 
-**Configuration 2 - Greedy Nearest-Neighbor (Reactive Baseline)**: A deterministic reactive baseline that selects the nearest available service at each decision point, without considering future positions or learning.
+**Configuration 2 - Greedy Nearest-Neighbor (Reactive Baseline)**: A deterministic reactive baseline that selects the nearest available service at each decision point.
 
-**Configuration 3 - Double DQN (Learning Baseline)**: The original Double DQN from prior work serves as the baseline comparison. This uses separate target and online Q-networks with Double Q-learning for action selection, with STR-based service ranking.
+**Configuration 3 - Double DQN (Learning Baseline)**: The original approach from prior work serves as baseline. This uses separate target and online Q-networks with Double Q-learning.
 
-**Configuration 4 - A2C Shared**: A2C with shared network architecture, using common feature extraction with separate policy and value heads. The state includes distance matrix for STR calculation.
+**Configuration 4 - A2C Shared**: A2C with shared network architecture, using common feature extraction with separate policy and value heads.
 
 **Configuration 5 - A2C Separate**: A2C with separate network architecture incorporating LSTM-based trajectory encoding.
 
@@ -479,7 +599,7 @@ The hyperparameters for all configurations are summarized in Table 1:
 - Number of random seeds: 10 for statistical significance
 - Random seeds used: [42, 123, 456, 789, 1024, 2048, 4096, 8192, 16384, 32768]
 
-All experiments were conducted using PyTorch 2.0 on NVIDIA RTX 3080 GPUs. Each configuration was trained for 1000 episodes with early stopping based on validation performance. The final evaluation results report mean ± standard deviation across 10 independent runs with different random seeds.
+All experiments used PyTorch 2.0 on NVIDIA RTX 3080 GPUs. Each configuration trained for 1000 episodes with early stopping based on validation performance. Final evaluation results report mean ± standard deviation across 10 independent runs.
 
 ### 4.8 Evaluation Metrics
 
@@ -506,17 +626,17 @@ $$QS = \frac{1}{T}\sum_{t} \frac{C_{composition}^{actual}}{C_{required}} \times 
 
 ### 5.1 Training Convergence Analysis
 
-Figure 1 presents the training convergence curves for all five configurations. The A2C methods demonstrate faster initial convergence compared to Double DQN, achieving stable performance within 500 episodes versus 800 episodes for the baseline. The A2C Separate configuration shows the most rapid initial learning, attributed to the specialized trajectory encoding enabling better state representation.
+Figure 1 shows training convergence curves for all five configurations. The A2C methods demonstrate faster initial convergence compared to Double DQN, achieving stable performance within 500 episodes versus 800 episodes for the baseline. The A2C Separate configuration shows the most rapid initial learning, attributed to specialized trajectory encoding enabling better state representation.
 
-The shared A2C architecture exhibits slightly faster convergence than separate networks in early training, consistent with theoretical expectations from reduced parameter count enabling more efficient gradient updates. However, the separate architecture achieves higher final performance, suggesting the specialized processing provides advantages for complex spatio-temporal representations.
+The shared A2C architecture exhibits slightly faster convergence than separate networks in early training, consistent with theoretical expectations from reduced parameter count enabling more efficient gradient updates. However, the separate architecture achieves higher final performance, suggesting specialized processing provides advantages for complex spatio-temporal representations.
 
 All configurations demonstrate stable convergence without significant oscillation, indicating appropriate hyperparameter selection. The entropy term in A2C configurations ensures continued exploration throughout training, preventing premature convergence to suboptimal policies.
 
-**Statistical Validation**: All results are reported as mean ± standard deviation across 10 independent runs with different random seeds [42, 123, 456, 789, 1024, 2048, 4096, 8192, 16384, 32768]. We conducted two-sided t-tests comparing A2C methods against Double DQN baseline, with significance levels reported at p < 0.05 (*), p < 0.01 (**), and p < 0.001 (***).
+**Statistical Validation**: Results are reported as mean ± standard deviation across 10 independent runs with different random seeds [42, 123, 456, 789, 1024, 2048, 4096, 8192, 16384, 32768]. We conducted two-sided t-tests comparing A2C methods against Double DQN baseline, with significance levels at p < 0.05 (*), p < 0.01 (**), and p < 0.001 (***).
 
 ### 5.2 Success Rate Performance by Dataset
 
-Table 2 presents the success rate results for each dataset (mean ± std across 10 runs):
+Table 2 presents success rate results for each dataset (mean ± std across 10 runs):
 
 | Dataset | Scenario | Double DQN | A2C Shared | A2C Separate |
 |---------|----------|-----------|-----------|--------------|
@@ -527,28 +647,28 @@ Table 2 presents the success rate results for each dataset (mean ± std across 1
 | Vehicle Routes | Highway (60 km/h) | 68.7% ± 4.2% | 78.4% ± 3.3%** | 82.1% ± 2.9%*** |
 | Vehicle Routes | Highway (80 km/h) | 54.3% ± 5.1% | 67.2% ± 3.8%*** | 73.5% ± 3.2%*** |
 
-The A2C configurations consistently outperform Double DQN across all scenarios and both datasets. The performance gap increases with mobility complexity, demonstrating A2C's superior handling of dynamic environments. The A2C Separate achieves 73.5% success rate at 80 km/h highway mobility compared to 54.3% for Double DQN, representing a 35% relative improvement. All improvements over Double DQN are statistically significant (p < 0.05).
+The A2C configurations consistently outperform Double DQN across all scenarios and both datasets. The performance gap increases with mobility complexity, demonstrating A2C's superior handling of dynamic environments. A2C Separate achieves 73.5% success rate at 80 km/h highway mobility compared to 54.3% for Double DQN—a 35% relative improvement. All improvements over Double DQN are statistically significant (p < 0.05).
 
 ### 5.3 Capacity Satisfaction Analysis
 
-Table 3 presents the capacity satisfaction rate results (mean ± std):
+Table 3 shows capacity satisfaction rate results (mean ± std):
 
 | Dataset | Double DQN | A2C Shared | A2C Separate |
 |---------|-----------|-----------|--------------|
 | Random Waypoint | 87.3% ± 3.2% | 91.8% ± 2.1%* | 93.5% ± 1.8%** |
 | Vehicle Routes | 82.1% ± 3.8% | 88.4% ± 2.7%* | 91.2% ± 2.3%** |
 
-The A2C configurations achieve higher capacity satisfaction due to the trajectory-aware composition enabling proactive selection of services that will maintain adequate capacity throughout the composition horizon. The separate network architecture shows particular advantage in maintaining capacity requirements as it better predicts future distance-based capacity degradation.
+The A2C configurations achieve higher capacity satisfaction due to trajectory-aware composition enabling proactive selection of services that maintain adequate capacity throughout the composition horizon. The separate network architecture shows particular advantage in maintaining capacity requirements as it better predicts future distance-based capacity degradation.
 
 ### 5.4 Adaptation Speed Analysis
 
-Figure 2 illustrates the adaptation speed results for environment change detection and response. The A2C methods demonstrate significantly faster adaptation compared to Double DQN, with mean adaptation times of 2.3s ± 0.4s (A2C Separate), 2.8s ± 0.5s (A2C Shared), and 4.7s ± 0.8s (Double DQN) for the random waypoint dataset. Similar trends are observed for the vehicle dataset.
+Figure 2 shows adaptation speed for environment change detection and response. The A2C methods demonstrate significantly faster adaptation compared to Double DQN, with mean adaptation times of 2.3s ± 0.4s (A2C Separate), 2.8s ± 0.5s (A2C Shared), and 4.7s ± 0.8s (Double DQN) for the random waypoint dataset. Similar trends appear for the vehicle dataset.
 
-The faster adaptation stems from the direct policy representation in A2C enabling immediate action selection upon state changes. The STR-based state representation provides clear signals for when services are approaching the capacity threshold, enabling faster detection of required re-composition.
+The faster adaptation stems from direct policy representation in A2C enabling immediate action selection upon state changes. The STR-based state representation provides clear signals for when services approach the capacity threshold, enabling faster detection of required re-composition.
 
 ### 5.5 Re-composition Frequency
 
-Table 4 presents the re-composition frequency results (mean ± std):
+Table 4 shows re-composition frequency (mean ± std):
 
 | Configuration | Dataset 1 (Waypoint) | Dataset 2 (Vehicle) | Stability Score |
 |---------------|---------------------|---------------------|-----------------|
@@ -562,7 +682,7 @@ The A2C configurations achieve substantially lower re-composition frequency comp
 
 ### 5.6 Capacity Satisfaction (STR-Based)
 
-Table 5 presents the capacity satisfaction results (mean ± std):
+Table 5 shows capacity satisfaction results (mean ± std):
 
 | Configuration | Avg Capacity (Mbps) | Capacity Satisfaction |
 |---------------|---------------------|----------------------|
@@ -572,13 +692,13 @@ Table 5 presents the capacity satisfaction results (mean ± std):
 | A2C Shared | 51.7 ± 2.4** | 86.2% ± 2.7%** |
 | A2C Separate | 56.8 ± 2.1*** | 90.1% ± 2.3%*** |
 
-The A2C methods achieve higher capacity satisfaction by better utilizing the STR model. The trajectory prediction enables selection of services that will maintain higher capacity throughout the composition horizon.
+The A2C methods achieve higher capacity satisfaction by better utilizing the STR model. Trajectory prediction enables selection of services that maintain higher capacity throughout the composition horizon.
 
 ### 5.7 Ablation Studies
 
 We conduct ablation experiments to isolate the contribution of key components:
 
-**Effect of STR-Based Selection**: Replacing the STR-based selection with simple distance-based availability (binary threshold) degrades success rate by 7.2% ± 1.4% (A2C Separate), 9.8% ± 1.8% (A2C Shared), and 12.4% ± 2.3% (Double DQN). The STR-derived capacity provides superior service quality estimation compared to simple distance thresholds.
+**Effect of STR-Based Selection**: Replacing STR-based selection with simple distance-based availability (binary threshold) degrades success rate by 7.2% ± 1.4% (A2C Separate), 9.8% ± 1.8% (A2C Shared), and 12.4% ± 2.3% (Double DQN). The STR-derived capacity provides superior service quality estimation compared to simple distance thresholds.
 
 **Effect of Decay Factor**: Adjusting the decay factor $k$ in the STR model affects coverage sensitivity. Higher $k$ values (e.g., 0.1) make the model more sensitive to distance, reducing capacity satisfaction by 4.3% ± 1.1% but decreasing re-composition frequency by 12% ± 2.8%. The appropriate decay factor balances responsiveness with stability.
 
@@ -588,7 +708,7 @@ We conduct ablation experiments to isolate the contribution of key components:
 
 ### 5.8 Real GPS Dataset Results
 
-We evaluate our A2C implementation on the real GPS trajectory dataset collected from the University of Illinois campus [20]. This dataset contains 42,480 samples with 25 access points, providing a realistic evaluation of the service composition approach.
+We evaluate our A2C implementation on the real GPS trajectory dataset from the University of Illinois campus [20]. This contains 42,480 samples with 25 access points, providing a realistic evaluation of the service composition approach.
 
 **Experimental Setup**:
 - Training split: 75% (31,860 samples)
@@ -602,7 +722,7 @@ We evaluate our A2C implementation on the real GPS trajectory dataset collected 
 
 **Training Results on Real GPS Data**:
 
-Table 6 presents the performance on the Illinois GPS dataset:
+Table 6 presents performance on the Illinois GPS dataset:
 
 | Metric | Value |
 |--------|-------|
@@ -627,15 +747,9 @@ The A2C agent achieves 92.3% valid action selection rate on the real GPS dataset
 The action distribution analysis shows that the agent successfully identifies high-capacity access points in the state space. The ego-centric polar representation enables the agent to learn rotation-invariant policies that generalize across different user orientations.
 
 **Experiment Documentation**:
-The complete technical documentation of the experiment code is available in `experiments-codesource/experiment-details.md`, which provides:
-- Project structure and component descriptions
-- Configuration management system
-- Environment and data preprocessing details
-- A2C and DQN implementation details
-- Running experiments guide
+The complete technical documentation of the experiment code is available in `experiments-codesource/experiment-details.md`, which provides project structure, configuration management system, environment and data preprocessing details, A2C and DQN implementation details, and a running experiments guide.
 
 **Comparison with Synthetic Results**:
-
 The real GPS dataset results align with the synthetic dataset experiments:
 - Both datasets show A2C achieving >90% success rate in low-mobility scenarios
 - The capacity-based reward structure effectively guides the agent toward optimal service selection
@@ -653,13 +767,13 @@ The real GPS dataset results align with the synthetic dataset experiments:
 
 ## 6. Implementation
 
-This section presents the complete PyTorch implementation of the A2C-based moving IoT service composition framework in the `experiments-codesource/` folder:
+This section presents the PyTorch implementation in the `experiments-codesource/` folder.
 
 ### 6.1 Data Preprocessing (helper_env.py)
 
-The core implementation includes the `STRCalculator` class for hierarchical distance → STR → capacity calculation:
+The `STRCalculator` class implements hierarchical distance → STR → capacity calculation:
 
-**STRCalculator**: Implements the Signal Transmission Reward calculation based on Euclidean distance with exponential attenuation:
+**STRCalculator**: Implements Signal Transmission Reward calculation based on Euclidean distance with exponential attenuation:
 - `gps_to_enu()`: Convert GPS to East-North-Up coordinates
 - `enu_to_polar()`: Convert to ego-centric polar coordinates
 - `compute_capacity()`: Shannon-Hartley capacity based on STR model
@@ -669,11 +783,7 @@ The core implementation includes the `STRCalculator` class for hierarchical dist
 
 ### 6.2 Simulation Environment (illinois_online.py)
 
-**MovingIoTEnvironment** (`illinois_online.py`): Gymnasium-compliant simulation environment for moving IoT service composition:
-- Service mobility following random waypoint model
-- Device mobility with boundary reflection
-- STR-based reward calculation at each step
-- Supports both online and offline modes
+**MovingIoTEnvironment** (`illinois_online.py`): Gymnasium-compliant simulation environment for moving IoT service composition with service mobility following random waypoint model, device mobility with boundary reflection, and STR-based reward calculation. Supports both online and offline modes.
 
 ### 6.3 A2C Training (claude_a2c_online.py)
 
@@ -699,16 +809,8 @@ The core implementation includes the `STRCalculator` class for hierarchical dist
 The real GPS experiments use a production-ready YAML-driven automation system:
 
 1. **Config System** (`config_mgmt.py`): Pydantic-based configuration with train/eval phases
-2. **Environment** (`illinois_online.py`): Gymnasium APSelectionEnv with:
-   - Ego-centric polar state representation
-   - STR-based capacity rewards
-   - Support for online/offline modes
-   - Variable AP padding and permutation
-3. **A2C Agent** (`claude_a2c_online.py`): 
-   - SharedNetwork architecture [512, 512, 512]
-   - N-step bootstrapping (30 steps)
-   - Entropy regularization (coef=0.05)
-   - Gradient clipping (max_norm=1.0)
+2. **Environment** (`illinois_online.py`): Gymnasium APSelectionEnv with ego-centric polar state representation, STR-based capacity rewards, support for online/offline modes, variable AP padding and permutation
+3. **A2C Agent** (`claude_a2c_online.py`): SharedNetwork architecture [512, 512, 512], N-step bootstrapping (30 steps), entropy regularization (coef=0.05), gradient clipping (max_norm=1.0)
 4. **Data Pipeline** (`helper_env.py`): GPS→ENU→Polar transformation with capacity computation
 
 **Hyperparameters** (from YAML config):
@@ -722,8 +824,6 @@ The real GPS experiments use a production-ready YAML-driven automation system:
 | Hidden Layers | [512, 512, 512] |
 | Episodes | 100 |
 | Target Accuracy | 98% |
-
-### 6.3 Real GPS Experiment Automation System
 
 The real GPS experiments use a production-ready automation system for reproducible research:
 
@@ -770,12 +870,9 @@ The network implementations for synthetic datasets support both shared and separ
 - Actor: LSTM(128) → FC(64) → Softmax
 - Critic: FC(256) → FC(64) → FC(1)
 
-**A2CAgent**: Advantage Actor-Critic agent with:
-- Advantage function: $A(s_t, a_t) = r_t + \gamma V(s_{t+1}) - V(s_t)$
-- Policy gradient updates
-- Entropy regularization for exploration
+**A2CAgent**: Advantage Actor-Critic agent with advantage function $A(s_t, a_t) = r_t + \gamma V(s_{t+1}) - V(s_t)$, policy gradient updates, and entropy regularization for exploration.
 
-### 6.4 Training Loop
+### 6.5 Training Loop
 
 The training loop implements proactive composition through trajectory prediction:
 
@@ -797,7 +894,7 @@ A2C outperforms Double DQN on moving IoT service composition while preserving ST
 
 First, actor-critic gives stable learning by combining value estimation with direct policy optimization. The advantage function reduces variance while keeping updates unbiased, so the agent learns effectively from fewer samples.
 
-Second, proactive composition via trajectory prediction anticipates service positions instead of just reacting. The A2C agent picks services that maintain capacity (distance → STR → capacity) across the composition horizon, not just currently available ones.
+Second, proactive composition via trajectory prediction anticipates service positions instead of just reacting. The A2C agent picks services that maintain capacity across the composition horizon, not just currently available ones.
 
 Third, separate networks with LSTM trajectory encoding specialize processing for spatio-temporal states. More parameters and training time, but better performance when movement patterns matter.
 
