@@ -1,0 +1,50 @@
+# Synchrone remote folder with local 
+cd /home/samir/Projects/PHD26/illinois-env
+rsync -av -e 'ssh -p 2222' --exclude='.venv' --exclude='.git' --exclude='__pycache__' . localhost:/home/samir/project/drl-2026/
+
+# Copy file from remote to local folder
+scp -P 2222 localhost:/home/samir/project/drl-2026/stacked_bar_chart.png rl-server/
+scp -P 2222 localhost:/home/samir/project/drl-2026/plot/episode_a2c.png rl-server/
+mv rl-server /home/samir/Documents/expirements/
+-----------------------------------------------
+
+
+# remove remote branch
+git push origin --delete origin/A2C-production-pipeline-chatgpt
+
+# Git rebase
+git rebase (--continue | --abort | --skip)
+
+rm -fr ".git/rebase-merge"
+
+
+# 1. Most Common Command
+# The killall command is the standard way to stop all instances of a program by name.
+# The killall command is the standard way to stop all instances of a program by name. 
+Graceful: killall code # Sends a SIGTERM signal, giving VS Code a chance to save settings and close properly.
+Forceful: killall -9 code # Sends a SIGKILL signal, which terminates the processes immediately if they are unresponsive
+
+# 2. Using pkill (Best for Pattern Matching) 
+# If killall doesn't find the processes, pkill is more flexible as it can match partial names or full command lines. 
+Basic: pkill code # Kills all processes with "code" in the name.
+pkill -f .vscode-server # Useful if you are working remotely and need to kill the VS Code server processes specifically.
+
+Command:
+nohup python -u script.py > output.log 2>&1 &
+Breakdown:
+nohup: Keeps the script running even if you close the terminal or log out.
+python -u: Runs Python in "unbuffered" mode. This ensures logs are written to the file in real-time rather than being stored in memory first.
+> output.log: Redirects standard output to your text file.
+2>&1: Redirects error messages (stderr) to the same log file.
+&: Puts the process in the background immediately
+
+
+# Prepare Environment
+python3 -m venv .venv
+
+pip install stable-baselines3[extra]
+pip install stable-baselines3
+pip install scikit-learn
+
+# Example: Run dqn.py in background
+nohup python3 -u dqn.py > output_dqn.log 2>&1 &

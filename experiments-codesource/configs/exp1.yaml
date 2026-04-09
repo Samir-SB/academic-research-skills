@@ -1,0 +1,32 @@
+experiment_name: 40aps_offline
+random_seed: 64
+resume_training: false
+train: false
+data_dir: data/selected
+dataset:
+  filename: df_shuffled_500.csv
+env:
+  final_nb_aps: 50
+  train:
+    num_aps: 50
+    on_line: false
+  eval:
+    num_aps: 30 
+    on_line: false
+data_test_size: 0.3
+data_shuffle: false
+
+network:
+  hidden_layers: [512, 512, 512]
+  dropout_prob: 0.5
+
+training:
+  learning_rate: 0.00005
+  gamma: 0.9
+  n_steps: 30
+  invalid_action_penalty: -1
+  reload_freq: 10
+  episodes: 100
+  target_accuracy: 98
+  entropy_coef: 0.05
+  max_grad_norm: 1.0
