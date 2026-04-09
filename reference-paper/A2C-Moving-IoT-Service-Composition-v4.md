@@ -655,14 +655,11 @@ The real GPS dataset results align with the synthetic dataset experiments:
 
 ## 6. Implementation
 
-This section presents the complete PyTorch implementation of the A2C-based moving IoT service composition framework. The code is organized into two sources:
+This section presents the complete PyTorch implementation of the A2C-based moving IoT service composition framework in the `experiments-codesource/` folder:
 
-- **Synthetic Implementation**: Three source files in the `source-code/` folder (for random waypoint and vehicle datasets)
-- **Real GPS Implementation**: Implementation in `experiments-codesource/` folder (for Illinois GPS dataset)
+### 6.1 Data Preprocessing (helper_env.py)
 
-### 6.1 Synthetic Service Implementation (source-code/)
-
-The core implementation for synthetic mobility datasets includes the `STRCalculator` class for hierarchical distance → STR → capacity calculation and the `MovingIoTEnvironment` class for simulation. Key components are located in `experiments-codesource/helper_env.py`:
+The core implementation includes the `STRCalculator` class for hierarchical distance → STR → capacity calculation:
 
 **STRCalculator**: Implements the Signal Transmission Reward calculation based on Euclidean distance with exponential attenuation:
 - `gps_to_enu()`: Convert GPS to East-North-Up coordinates
@@ -672,15 +669,15 @@ The core implementation for synthetic mobility datasets includes the `STRCalcula
 - `get_reshaped_states()` / `get_reshaped_rewards()`: State and reward preprocessing
 - `fill_states_columns()`: State padding for variable AP counts
 
+### 6.2 Simulation Environment (illinois_online.py)
+
 **MovingIoTEnvironment** (`illinois_online.py`): Gymnasium-compliant simulation environment for moving IoT service composition:
 - Service mobility following random waypoint model
 - Device mobility with boundary reflection
 - STR-based reward calculation at each step
 - Supports both online and offline modes
 
-### 6.2 Real GPS Implementation (experiments-codesource/)
-
-For the real GPS trajectory dataset, we provide a complete implementation pipeline with YAML-driven experiment automation:
+### 6.3 A2C Training (claude_a2c_online.py)
 
 **Configuration Management (`config_mgmt.py`)**:
 - `MasterA2CConfig`: Pydantic model for all hyperparameters
@@ -916,19 +913,17 @@ Future work will explore distributed multi-agent extensions, integration with re
 
 ## Source Code Files
 
-| Source | File | Description |
-|--------|------|-------------|
-| Synthetic | `source-code/annex-a-str-environment.py` | STR Calculator and Moving IoT Environment |
-| Synthetic | `source-code/annex-b-a2c-networks.py` | A2C Network Architectures and Agent |
-| Synthetic | `source-code/annex-c-training.py` | Training Loop, Evaluation, and Visualization |
-| Real GPS | `experiments-codesource/helper_env.py` | GPS Data Preprocessing (GPS→ENU→Polar) |
-| Real GPS | `experiments-codesource/illinois_online.py` | Gymnasium Environment for AP Selection |
-| Real GPS | `experiments-codesource/claude_a2c_online.py` | A2C Training with SharedNetwork |
-| Real GPS | `experiments-codesource/config_mgmt.py` | Configuration management (Pydantic models) |
-| Real GPS | `experiments-codesource/train.py` | Canonical training entrypoint |
-| Real GPS | `experiments-codesource/training_plots.py` | Visualization utilities |
-| Real GPS | `experiments-codesource/utils.py` | Logging and experiment tracking |
-| Real GPS | `experiments-codesource/dqn_baseline3.py` | DQN baseline using Stable Baselines3 |
-| Real GPS | `experiments-codesource/configs/` | YAML experiment configurations |
-| Real GPS | `experiments-codesource/dataset/` | Original datasets (Illinois, overlap) |
-| Real GPS | `experiments-codesource/data/` | Processed training data |
+| File | Description |
+|------|-------------|
+| `experiments-codesource/helper_env.py` | GPS Data Preprocessing (GPS→ENU→Polar, STR Calculator) |
+| `experiments-codesource/illinois_online.py` | Gymnasium Environment for AP Selection (MovingIoTEnvironment) |
+| `experiments-codesource/claude_a2c_online.py` | A2C Training with SharedNetwork (Agent, Trainer, Evaluator) |
+| `experiments-codesource/config_mgmt.py` | Configuration management (Pydantic models) |
+| `experiments-codesource/config.py` | Config loading interface |
+| `experiments-codesource/train.py` | Canonical training entrypoint |
+| `experiments-codesource/training_plots.py` | Training visualization utilities |
+| `experiments-codesource/utils.py` | Logging and experiment tracking |
+| `experiments-codesource/dqn_baseline3.py` | DQN baseline using Stable Baselines3 |
+| `experiments-codesource/configs/` | YAML experiment configurations |
+| `experiments-codesource/dataset/` | Original datasets (Illinois, overlap) |
+| `experiments-codesource/data/` | Processed training data |
