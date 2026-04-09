@@ -4,9 +4,10 @@ import matplotlib.pyplot as plt
 import os
 import cv2
 import numpy as np
+from collections import Counter
 
 # Create a directory to save the images
-os.makedirs('plot', exist_ok=True)
+# os.makedirs('plot', exist_ok=True)
 
 plt.ion()
 
@@ -36,14 +37,71 @@ def create_video(image_folder, output_video, fps=10):
     print(f"Removed {len(images)} images from {image_folder}")
 
 
-def plot_training_metrics(actor_losses, critic_losses, entropy_losses, episode, valid, best, annotations_title, parameters_dict):
+def plot_bar_from_counter(data):
+    """
+    Plot a bar chart from a dictionary or Counter.
+
+    Parameters:
+    data: Mapping from category to frequency.
+    """
+    sorted_keys = sorted(data.keys())
+    sorted_values = [data[k] for k in sorted_keys]
+
+    plt.figure(figsize=(10, 5))
+    plt.bar(sorted_keys, sorted_values, color='skyblue', edgecolor='black')
+    plt.xlabel('Actions')
+    plt.ylabel('Frequency')
+    plt.title('Frequency Distribution')
+    plt.xticks(sorted_keys)
+    plt.tight_layout()
+    plt.savefig('bar_chart.png')
+    plt.close()
+
+
+def plot_stacked_actions(total_data, valid_data):
+    """
+    Plot a stacked bar chart showing valid and invalid actions.
+
+    Parameters:
+    total_data: Dictionary/Counter of total counts per action.
+    valid_data: Dictionary/Counter of valid counts per action.
+    """
+    total_counter = Counter(total_data)
+    valid_counter = Counter(valid_data)
+    sorted_keys = sorted(total_counter.keys())
+
+    valid_vals = [valid_counter.get(k, 0) for k in sorted_keys]
+    invalid_vals = [total_counter[k] - valid_counter.get(k, 0) for k in sorted_keys]
+
+    plt.figure(figsize=(10, 5))
+    plt.bar(sorted_keys, valid_vals, label='Valid Actions', color='#4CAF50', edgecolor='black')
+    plt.bar(
+        sorted_keys,
+        invalid_vals,
+        bottom=valid_vals,
+        label='Invalid Actions',
+        color='#F44336',
+        edgecolor='black',
+    )
+
+    plt.xlabel('Category')
+    plt.ylabel('Count')
+    plt.title('Total Actions: Valid vs Invalid')
+    plt.xticks(sorted_keys)
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig('plot/stacked_bar_chart.png')
+    plt.close()
+
+
+def plot_training_metrics(actor_losses, critic_losses, entropy_losses, episode, valid, reward, annotations_title, parameters_dict):
     fig, axs = plt.subplots(2, 2, figsize=(12, 8))
     fig.suptitle(f'Training Metrics - Episode {episode}')
     
      # Plot Reward
     # axs[0, 0].plot(rewards, label='Reward', color='yellow')
-    axs[0, 0].plot(valid, label='Valid', color='green')
-    axs[0, 0].plot(best, label='Best', color='red')
+    axs[0, 0].plot(valid, label='Valid actions', color='green')
+    axs[0, 0].plot(reward, label='Reward Percentages', color='red')
     axs[0, 0].set_title('Reward')
     axs[0, 0].set_xlabel('Episode')
     axs[0, 0].set_ylabel('Reward')
@@ -86,38 +144,11 @@ def plot_training_metrics(actor_losses, critic_losses, entropy_losses, episode, 
 def set_annotations_text(title, parameters_dict):
     text_str = f'{title}\n'
     for key, value in parameters_dict.items():
+        if key in ['device', 'random_seed', 'model_dir', 'num_episodes']:
+            continue
         text_str += f'{key}: {value}\n'
         
     return text_str
-
-def create_bar_chart(actions_chosen, N, episode=1):    
-    # Count the occurrences of each action
-    action_counts = np.bincount(actions_chosen, minlength=N)
-
-    # Calculate the percentage of each action
-    action_percentages = (action_counts / len(actions_chosen)) * 100    
-    
-    # Create a bar chart
-    actions = range(N)
-    bars = plt.bar(actions, action_percentages, tick_label=[f'Action {i}' for i in actions])
-
-    # Add percentage labels on top of each bar
-    for bar in bars:
-        height = bar.get_height()
-        plt.text(
-            bar.get_x() + bar.get_width() / 2,  # x-position of the label
-            height,                             # y-position of the label
-            f'{height:.1f}%',                   # label text
-            ha='center',                        # horizontal alignment
-            va='bottom'                         # vertical alignment
-        )
-
-    plt.xlabel('Actions')
-    plt.ylabel('Percentage')
-    plt.title(f'Percentage of Selection for Each Action - {episode}')
-    plt.savefig('actions.png')
-    # plt.show()
-    plt.close()
 
 def plot_metrics(rewards, accuracies, losses, title="DQN Training Metrics"):
     """
