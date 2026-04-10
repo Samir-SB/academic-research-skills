@@ -259,6 +259,8 @@ where $C_{ij}(t) = B \cdot \log_2(1 + STR(d_{ij}(t)) \cdot SNR_{max})$ is the ST
 If the selected service is outside the discovery zone ($d_{ij}(t) > R_{comm}$), a penalty is applied:
 $$r(s_t, a_t) = \begin{cases} C_{ij}(t) & \text{if } d_{ij}(t) \leq R_{comm} \\ -1 & \text{if } d_{ij}(t) > R_{comm} \end{cases}$$
 
+**Training Mode**: The experiments use **offline training** mode where the agent learns from pre-collected trajectory data without active environment interaction. In offline mode, the environment provides fixed state-action-reward tuples from the dataset, enabling sample-efficient learning from historical trajectories.
+
 **Training/Test Split**: We use 70% of the data in each dataset for training and the remaining 30% for testing.
 
 ### 3.3 Environment Interaction and Training Algorithm
@@ -527,7 +529,13 @@ The reward is the capacity of the selected service, with penalty for selecting i
 
 ### 4.3 Simulation Environment
 
-The environment uses service trajectories $T_s$ to determine its set of possible actions and the reward for each action.
+The environment uses service trajectories $T_s$ to determine its set of possible actions and the reward for each action. The system supports both **offline** and **online** training modes:
+
+- **Offline Mode**: The agent trains on pre-collected trajectory data from the dataset. This is sample-efficient and suitable when active environment interaction is expensive or risky. The experiments reported in this paper use offline mode.
+
+- **Online Mode**: The agent interacts with a simulated environment in real-time, enabling continuous learning from environmental feedback.
+
+In offline mode, each trajectory sample provides a (state, action, reward, next_state) tuple that the agent learns from without requiring live environment interaction.
 
 **State Updates**: At each step, the environment sets its state to the current user trajectory sample. The next state is set to the next sample in the current user trajectory.
 
