@@ -209,18 +209,18 @@ factor (γ): 0.9 - N-step bootstrapping: 60 steps - Entropy coefficient:
 Table 6 presents performance on the Illinois GPS dataset:
 
 \begin{table}[htbp]
-	\centering
-	\caption{Performance on Illinois GPS Dataset}
-	\label{illinois-gps-table}
-	\begin{tabular}{|l|c|}
-		\toprule
-		\textbf{Metric}             & \textbf{Value}     \\
-		\midrule
-		Valid Action Selection Rate & 92.3\% $\pm$ 2.1\% \\
-		Mean Capacity (bits/s/Hz)   & 3.42 $\pm$ 0.28    \\
-		Successful Selection Rate   & 92.3\% $\pm$ 2.1\% \\
-		\bottomrule
-	\end{tabular}
+\centering
+\caption{Performance on Illinois GPS Dataset}
+\label{illinois-gps-table}
+\begin{tabular}{|l|c|}
+\toprule
+\textbf{Metric} & \textbf{Value} \\
+\midrule
+Valid Action Selection Rate & 92.3\% $\pm$ 2.1\% \\
+Mean Capacity (bits/s/Hz) & 3.42 $\pm$ 0.28 \\
+Successful Selection Rate & 92.3\% $\pm$ 2.1\% \\
+\bottomrule
+\end{tabular}
 \end{table}
 
 \textbf{Experiment Configuration} (from \texttt{configs/exp1.yaml}): -

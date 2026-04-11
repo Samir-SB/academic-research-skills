@@ -14,7 +14,7 @@
 \fi
 \usepackage{lmodern}
 \usepackage{parskip}
-\usepackage[svgnames]{xcolor}
+\usepackage{xcolor}
 \usepackage[paper=a4paper,margin=0.8in]{geometry}
 \usepackage{hyperref}
 \usepackage{longtable,booktabs,array}
@@ -23,9 +23,9 @@
 
 \hypersetup{
   colorlinks=true,
-  linkcolor=Maroon,
-  citecolor=Blue,
-  urlcolor=Blue,
+  linkcolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
   pdfcreator={LaTeX via pandoc}}
 
 \author{}

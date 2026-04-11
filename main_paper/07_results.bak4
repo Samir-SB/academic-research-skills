@@ -38,21 +38,21 @@ with significance levels at p \textless{} 0.05 (\emph{), p \textless{}
 Table 2 presents success rate results for each dataset (mean $\pm$ std across 10 runs):
 
 \begin{table}[htbp]
-	\centering
-	\caption{Success Rate Performance by Dataset}
-	\label{success-rate-table}
-	\begin{tabular}{|l|c|c|c|c|}
-		\toprule
-		\textbf{Dataset}   & \textbf{Mobility Scenario} & \textbf{Double DQN} & \textbf{A2C Shared} & \textbf{A2C Separate} \\
-		\midrule
-		ATC (Indoor)       & Low Mobility (2 km/h)      & 92.4\% $\pm$ 2.1\%  & 94.1\% $\pm$ 1.8\%  & 95.2\% $\pm$ 1.5\%    \\
-		ATC (Indoor)       & Medium Mobility (5 km/h)   & 85.3\% $\pm$ 3.2\%  & 90.1\% $\pm$ 2.4\%  & 92.4\% $\pm$ 2.0\%    \\
-		ATC (Indoor)       & High Mobility (10 km/h)    & 71.8\% $\pm$ 4.5\%  & 82.3\% $\pm$ 3.1\%  & 85.7\% $\pm$ 2.8\%    \\
-		Illinois (Outdoor) & Low Mobility (2 km/h)      & 89.2\% $\pm$ 2.8\%  & 92.5\% $\pm$ 2.1\%  & 94.8\% $\pm$ 1.7\%    \\
-		Illinois (Outdoor) & Medium Mobility (5 km/h)   & 78.4\% $\pm$ 3.5\%  & 85.7\% $\pm$ 2.6\%  & 88.9\% $\pm$ 2.2\%    \\
-		Illinois (Outdoor) & High Mobility (10 km/h)    & 64.2\% $\pm$ 4.8\%  & 76.8\% $\pm$ 3.4\%  & 80.3\% $\pm$ 2.9\%    \\
-		\bottomrule
-	\end{tabular}
+\centering
+\caption{Success Rate Performance by Dataset}
+\label{success-rate-table}
+\begin{tabular}{|l|c|c|c|c|}
+\toprule
+\textbf{Dataset} & \textbf{Mobility Scenario} & \textbf{Double DQN} & \textbf{A2C Shared} & \textbf{A2C Separate} \\
+\midrule
+ATC (Indoor) & Low Mobility (2 km/h) & 92.4\% $\pm$ 2.1\% & 94.1\% $\pm$ 1.8\% & 95.2\% $\pm$ 1.5\% \\
+ATC (Indoor) & Medium Mobility (5 km/h) & 85.3\% $\pm$ 3.2\% & 90.1\% $\pm$ 2.4\% & 92.4\% $\pm$ 2.0\% \\
+ATC (Indoor) & High Mobility (10 km/h) & 71.8\% $\pm$ 4.5\% & 82.3\% $\pm$ 3.1\% & 85.7\% $\pm$ 2.8\% \\
+Illinois (Outdoor) & Low Mobility (2 km/h) & 89.2\% $\pm$ 2.8\% & 92.5\% $\pm$ 2.1\% & 94.8\% $\pm$ 1.7\% \\
+Illinois (Outdoor) & Medium Mobility (5 km/h) & 78.4\% $\pm$ 3.5\% & 85.7\% $\pm$ 2.6\% & 88.9\% $\pm$ 2.2\% \\
+Illinois (Outdoor) & High Mobility (10 km/h) & 64.2\% $\pm$ 4.8\% & 76.8\% $\pm$ 3.4\% & 80.3\% $\pm$ 2.9\% \\
+\bottomrule
+\end{tabular}
 \end{table}
 
 The A2C configurations consistently outperform Double DQN across all
@@ -67,21 +67,18 @@ significant (p \textless{} 0.05).
 	\subsubsection{5.3 Capacity Satisfaction
 		Analysis}\label{capacity-satisfaction-analysis}}
 
-Table 3 shows capacity satisfaction rate results (mean $\pm$ std):
+Table 3 shows capacity satisfaction rate results (mean ± std):
 
-\begin{table}[htbp]
-	\centering
-	\caption{Capacity Satisfaction Rate Results}
-	\label{capacity-satisfaction-table}
-	\begin{tabular}{|l|c|c|c|}
-		\toprule
-		\textbf{Dataset} & \textbf{Double DQN} & \textbf{A2C Shared} & \textbf{A2C Separate} \\
-		\midrule
-		Random Waypoint  & 87.3\% $\pm$ 3.2\%  & 91.8\% $\pm$ 2.1\%  & 93.5\% $\pm$ 1.8\%    \\
-		Illinois         & 84.2\% $\pm$ 3.5\%  & 89.7\% $\pm$ 2.4\%  & 92.1\% $\pm$ 2.0\%    \\
-		\bottomrule
-	\end{tabular}
-\end{table}
+\begin{longtable}[]{@{}llll@{}}
+	\toprule\noalign{}
+	Dataset         & Double DQN     & A2C Shared      & A2C Separate     \\
+	\midrule\noalign{}
+	\endhead
+	\bottomrule\noalign{}
+	\endlastfoot
+	Random Waypoint & 87.3\% ± 3.2\% & 91.8\% ± 2.1\%* & 93.5\% ± 1.8\%** \\
+	Illinois        & 84.2\% ± 3.5\% & 89.7\% ± 2.4\%* & 92.1\% ± 2.0\%** \\
+\end{longtable}
 
 The A2C configurations achieve higher capacity satisfaction due to
 the policy-based approach enabling better selection of services that
@@ -110,24 +107,33 @@ re-composition.
 	\subsubsection{5.5 Re-composition
 		Frequency}\label{re-composition-frequency}}
 
-Table 4 shows re-composition frequency (mean $\pm$ std):
+Table 4 shows re-composition frequency (mean ± std):
 
-\begin{table}[htbp]
-	\centering
-	\caption{Re-composition Frequency Results}
-	\label{recomp-frequency-table}
-	\begin{tabular}{|l|c|c|c|}
-		\toprule
-		\textbf{Configuration} & \textbf{Dataset 1 (Waypoint)} & \textbf{Dataset 2 (Vehicle)} & \textbf{Stability Score} \\
-		\midrule
-		Random                 & 156.2/hr $\pm$ 12.3           & 162.8/hr $\pm$ 14.1          & 0.45 $\pm$ 0.05          \\
-		Greedy                 & 142.7/hr $\pm$ 10.8           & 148.3/hr $\pm$ 11.2          & 0.52 $\pm$ 0.06          \\
-		Double DQN             & 124.3/hr $\pm$ 8.2            & 131.8/hr $\pm$ 9.1           & 0.72 $\pm$ 0.04          \\
-		A2C Shared             & 86.7/hr $\pm$ 5.6             & 92.4/hr $\pm$ 6.2            & 0.81 $\pm$ 0.03          \\
-		A2C Separate           & 69.2/hr $\pm$ 4.3             & 74.8/hr $\pm$ 5.1            & 0.87 $\pm$ 0.02          \\
-		\bottomrule
-	\end{tabular}
-\end{table}
+\begin{longtable}[]{@{}
+	>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2027}}
+	>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2838}}
+	>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2838}}
+	>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2297}}@{}}
+	\toprule\noalign{}
+	\begin{minipage}[b]{\linewidth}\raggedright
+		Configuration
+	\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+		                 Dataset 1 (Waypoint)
+	                 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+		                                  Dataset 2 (Vehicle)
+	                                  \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+		                                                   Stability Score
+	                                                   \end{minipage}                                                            \\
+	\midrule\noalign{}
+	\endhead
+	\bottomrule\noalign{}
+	\endlastfoot
+	Random                                      & 156.2/hr ± 12.3                             & 162.8/hr ± 14.1                             & 0.45 ± 0.05    \\
+	Greedy                                      & 142.7/hr ± 10.8                             & 148.3/hr ± 11.2                             & 0.52 ± 0.06    \\
+	Double DQN                                  & 124.3/hr ± 8.2                              & 131.8/hr ± 9.1                              & 0.72 ± 0.04    \\
+	A2C Shared                                  & 86.7/hr ± 5.6**                             & 92.4/hr ± 6.2**                             & 0.81 ± 0.03*   \\
+	A2C Separate                                & 69.2/hr ± 4.3***                            & 74.8/hr ± 5.1***                            & 0.87 ± 0.02*** \\
+\end{longtable}
 
 The A2C configurations achieve substantially lower re-composition
 frequency compared to Double DQN. The stability reward component in the
@@ -139,24 +145,21 @@ maintaining constraint satisfaction.
 	\subsubsection{5.6 Capacity Satisfaction
 		(STR-Based)}\label{capacity-satisfaction-str-based}}
 
-Table 5 shows capacity satisfaction results (mean $\pm$ std):
+Table 5 shows capacity satisfaction results (mean ± std):
 
-\begin{table}[htbp]
-	\centering
-	\caption{Capacity Satisfaction Results (STR-Based)}
-	\label{capacity-str-table}
-	\begin{tabular}{|l|c|c|}
-		\toprule
-		\textbf{Configuration} & \textbf{Avg Capacity (Mbps)} & \textbf{Capacity Satisfaction} \\
-		\midrule
-		Random                 & 28.4 $\pm$ 4.2               & 62.3\% $\pm$ 5.1\%             \\
-		Greedy                 & 35.2 $\pm$ 3.8               & 71.2\% $\pm$ 4.2\%             \\
-		Double DQN             & 42.3 $\pm$ 3.1               & 78.4\% $\pm$ 3.8\%             \\
-		A2C Shared             & 51.7 $\pm$ 2.4               & 86.2\% $\pm$ 2.7\%             \\
-		A2C Separate           & 56.8 $\pm$ 2.1               & 90.1\% $\pm$ 2.3\%             \\
-		\bottomrule
-	\end{tabular}
-\end{table}
+\begin{longtable}[]{@{}lll@{}}
+	\toprule\noalign{}
+	Configuration & Avg Capacity (Mbps) & Capacity Satisfaction \\
+	\midrule\noalign{}
+	\endhead
+	\bottomrule\noalign{}
+	\endlastfoot
+	Random        & 28.4 ± 4.2          & 62.3\% ± 5.1\%        \\
+	Greedy        & 35.2 ± 3.8          & 71.2\% ± 4.2\%        \\
+	Double DQN    & 42.3 ± 3.1          & 78.4\% ± 3.8\%        \\
+	A2C Shared    & 51.7 ± 2.4**        & 86.2\% ± 2.7\%**      \\
+	A2C Separate  & 56.8 ± 2.1***       & 90.1\% ± 2.3\%***     \\
+\end{longtable}
 
 The A2C methods achieve higher capacity satisfaction by better utilizing
 the STR model. Trajectory prediction enables selection of services that
@@ -208,20 +211,17 @@ factor (γ): 0.9 - N-step bootstrapping: 60 steps - Entropy coefficient:
 
 Table 6 presents performance on the Illinois GPS dataset:
 
-\begin{table}[htbp]
-	\centering
-	\caption{Performance on Illinois GPS Dataset}
-	\label{illinois-gps-table}
-	\begin{tabular}{|l|c|}
-		\toprule
-		\textbf{Metric}             & \textbf{Value}     \\
-		\midrule
-		Valid Action Selection Rate & 92.3\% $\pm$ 2.1\% \\
-		Mean Capacity (bits/s/Hz)   & 3.42 $\pm$ 0.28    \\
-		Successful Selection Rate   & 92.3\% $\pm$ 2.1\% \\
-		\bottomrule
-	\end{tabular}
-\end{table}
+\begin{longtable}[]{@{}ll@{}}
+	\toprule\noalign{}
+	Metric                      & Value          \\
+	\midrule\noalign{}
+	\endhead
+	\bottomrule\noalign{}
+	\endlastfoot
+	Valid Action Selection Rate & 92.3\% ± 2.1\% \\
+	Mean Capacity (bits/s/Hz)   & 3.42 ± 0.28    \\
+	Successful Selection Rate   & 92.3\% ± 2.1\% \\
+\end{longtable}
 
 \textbf{Experiment Configuration} (from \texttt{configs/exp1.yaml}): -
 Data directory: \texttt{data/selected} - Dataset:

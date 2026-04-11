@@ -142,20 +142,20 @@ maintaining constraint satisfaction.
 Table 5 shows capacity satisfaction results (mean $\pm$ std):
 
 \begin{table}[htbp]
-	\centering
-	\caption{Capacity Satisfaction Results (STR-Based)}
-	\label{capacity-str-table}
-	\begin{tabular}{|l|c|c|}
-		\toprule
-		\textbf{Configuration} & \textbf{Avg Capacity (Mbps)} & \textbf{Capacity Satisfaction} \\
-		\midrule
-		Random                 & 28.4 $\pm$ 4.2               & 62.3\% $\pm$ 5.1\%             \\
-		Greedy                 & 35.2 $\pm$ 3.8               & 71.2\% $\pm$ 4.2\%             \\
-		Double DQN             & 42.3 $\pm$ 3.1               & 78.4\% $\pm$ 3.8\%             \\
-		A2C Shared             & 51.7 $\pm$ 2.4               & 86.2\% $\pm$ 2.7\%             \\
-		A2C Separate           & 56.8 $\pm$ 2.1               & 90.1\% $\pm$ 2.3\%             \\
-		\bottomrule
-	\end{tabular}
+\centering
+\caption{Capacity Satisfaction Results (STR-Based)}
+\label{capacity-str-table}
+\begin{tabular}{|l|c|c|}
+\toprule
+\textbf{Configuration} & \textbf{Avg Capacity (Mbps)} & \textbf{Capacity Satisfaction} \\
+\midrule
+Random & 28.4 $\pm$ 4.2 & 62.3\% $\pm$ 5.1\% \\
+Greedy & 35.2 $\pm$ 3.8 & 71.2\% $\pm$ 4.2\% \\
+Double DQN & 42.3 $\pm$ 3.1 & 78.4\% $\pm$ 3.8\% \\
+A2C Shared & 51.7 $\pm$ 2.4 & 86.2\% $\pm$ 2.7\% \\
+A2C Separate & 56.8 $\pm$ 2.1 & 90.1\% $\pm$ 2.3\% \\
+\bottomrule
+\end{tabular}
 \end{table}
 
 The A2C methods achieve higher capacity satisfaction by better utilizing
@@ -208,20 +208,17 @@ factor (γ): 0.9 - N-step bootstrapping: 60 steps - Entropy coefficient:
 
 Table 6 presents performance on the Illinois GPS dataset:
 
-\begin{table}[htbp]
-	\centering
-	\caption{Performance on Illinois GPS Dataset}
-	\label{illinois-gps-table}
-	\begin{tabular}{|l|c|}
-		\toprule
-		\textbf{Metric}             & \textbf{Value}     \\
-		\midrule
-		Valid Action Selection Rate & 92.3\% $\pm$ 2.1\% \\
-		Mean Capacity (bits/s/Hz)   & 3.42 $\pm$ 0.28    \\
-		Successful Selection Rate   & 92.3\% $\pm$ 2.1\% \\
-		\bottomrule
-	\end{tabular}
-\end{table}
+\begin{longtable}[]{@{}ll@{}}
+	\toprule\noalign{}
+	Metric                      & Value          \\
+	\midrule\noalign{}
+	\endhead
+	\bottomrule\noalign{}
+	\endlastfoot
+	Valid Action Selection Rate & 92.3\% ± 2.1\% \\
+	Mean Capacity (bits/s/Hz)   & 3.42 ± 0.28    \\
+	Successful Selection Rate   & 92.3\% ± 2.1\% \\
+\end{longtable}
 
 \textbf{Experiment Configuration} (from \texttt{configs/exp1.yaml}): -
 Data directory: \texttt{data/selected} - Dataset:

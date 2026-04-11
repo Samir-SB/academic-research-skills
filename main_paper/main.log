@@ -1,0 +1,1928 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.3.10)  11 APR 2026 22:42
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**main.tex
+(./main.tex
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-22>
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2023/05/17 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count187
+\c@section=\count188
+\c@subsection=\count189
+\c@subsubsection=\count190
+\c@paragraph=\count191
+\c@subparagraph=\count192
+\c@figure=\count193
+\c@table=\count194
+\abovecaptionskip=\skip48
+\belowcaptionskip=\skip49
+\bibindent=\dimen140
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2023/05/13 v2.17o AMS math features
+\@mathmargin=\skip50
+
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2021/08/26 v2.01 AMS text
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks17
+\ex@=\dimen141
+))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen142
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2022/04/08 v2.04 operator names
+)
+\inf@bad=\count195
+LaTeX Info: Redefining \frac on input line 234.
+\uproot@=\count196
+\leftroot@=\count197
+LaTeX Info: Redefining \overline on input line 399.
+LaTeX Info: Redefining \colon on input line 410.
+\classnum@=\count198
+\DOTSCASE@=\count199
+LaTeX Info: Redefining \ldots on input line 496.
+LaTeX Info: Redefining \dots on input line 499.
+LaTeX Info: Redefining \cdots on input line 620.
+\Mathstrutbox@=\box51
+\strutbox@=\box52
+LaTeX Info: Redefining \big on input line 722.
+LaTeX Info: Redefining \Big on input line 723.
+LaTeX Info: Redefining \bigg on input line 724.
+LaTeX Info: Redefining \Bigg on input line 725.
+\big@size=\dimen143
+LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
+\macc@depth=\count266
+LaTeX Info: Redefining \bmod on input line 905.
+LaTeX Info: Redefining \pmod on input line 910.
+LaTeX Info: Redefining \smash on input line 940.
+LaTeX Info: Redefining \relbar on input line 970.
+LaTeX Info: Redefining \Relbar on input line 971.
+\c@MaxMatrixCols=\count267
+\dotsspace@=\muskip16
+\c@parentequation=\count268
+\dspbrk@lvl=\count269
+\tag@help=\toks18
+\row@=\count270
+\column@=\count271
+\maxfields@=\count272
+\andhelp@=\toks19
+\eqnshift@=\dimen144
+\alignsep@=\dimen145
+\tagshift@=\dimen146
+\tagwidth@=\dimen147
+\totwidth@=\dimen148
+\lineht@=\dimen149
+\@envbody=\toks20
+\multlinegap=\skip51
+\multlinetaggap=\skip52
+\mathdisplay@stack=\toks21
+LaTeX Info: Redefining \[ on input line 2953.
+LaTeX Info: Redefining \] on input line 2954.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
+(/usr/share/texlive/texmf-dist/tex/latex/setspace/setspace.sty
+Package: setspace 2022/12/04 v6.7b set line spacing
+)
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2022/02/03 v1.0f TeX engine tests
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2021/02/14 v1.3d Input encoding file
+\inpenc@prehook=\toks22
+\inpenc@posthook=\toks23
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/textcomp.sty
+Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
+)
+(/usr/share/texmf/tex/latex/lm/lmodern.sty
+Package: lmodern 2015/05/01 v1.6.1 Latin Modern Fonts
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/lmr/m/n on input line 22.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> OML/lmm/m/it on input line 23.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> OMS/lmsy/m/n on input line 24.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 25.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 26.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/cmm/b/it --> OML/lmm/b/it on input line 27.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/cmsy/b/n --> OMS/lmsy/b/n on input line 28.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 29.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 31.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> OT1/lmss/m/n on input line 32.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> OT1/lmr/m/it on input line 33.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 34.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 35.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> OT1/lmss/bx/n on input line 36.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> OT1/lmr/bx/it on input line 37.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 38.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/parskip/parskip.sty
+Package: parskip 2021-03-14 v2.0h non-zero parskip adjustments
+
+(/usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks24
+)
+(/usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
+Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
+))
+(/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count273
+))
+(/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2023/11/15 v3.01 LaTeX color extensions (UK)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 274.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2022/09/22 v1.2b Graphics/color driver for pdftex
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1350.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1354.
+Package xcolor Info: Model `RGB' extended on input line 1366.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1368.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1370.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1371.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1372.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1373.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/xcolor/svgnam.def
+File: svgnam.def 2023/11/15 v3.01 Predefined colors according to SVG 1.1 (UK)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
+
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/ifvtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+)
+\Gm@cnth=\count274
+\Gm@cntv=\count275
+\c@Gm@tempcnt=\count276
+\Gm@bindingoffset=\dimen150
+\Gm@wd@mp=\dimen151
+\Gm@odd@mp=\dimen152
+\Gm@even@mp=\dimen153
+\Gm@layoutwidth=\dimen154
+\Gm@layoutheight=\dimen155
+\Gm@layouthoffset=\dimen156
+\Gm@layoutvoffset=\dimen157
+\Gm@dimlist=\toks25
+)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2024-01-20 v7.01h Hypertext links for LaTeX
+
+(/usr/share/texlive/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(/usr/share/texlive/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+))
+(/usr/share/texlive/texmf-dist/tex/latex/hycolor/hycolor.sty
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/auxhook/auxhook.sty
+Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2023-11-26 v2.56 Cross-referencing by name of section
+
+(/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+)
+\c@section@level=\count277
+)
+\@linkdim=\dimen158
+\Hy@linkcounter=\count278
+\Hy@pagecounter=\count279
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2024-01-20 v7.01h Hyperref: PDFDocEncoding definition (HO)
+Now handling font encoding PD1 ...
+... no UTF-8 mapping file for font encoding PD1
+)
+(/usr/share/texlive/texmf-dist/tex/generic/intcalc/intcalc.sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+)
+\Hy@SavedSpaceFactor=\count280
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/puenc.def
+File: puenc.def 2024-01-20 v7.01h Hyperref: PDF Unicode definition (HO)
+Now handling font encoding PU ...
+... no UTF-8 mapping file for font encoding PU
+)
+Package hyperref Info: Hyper figures OFF on input line 4179.
+Package hyperref Info: Link nesting OFF on input line 4184.
+Package hyperref Info: Hyper index ON on input line 4187.
+Package hyperref Info: Plain pages OFF on input line 4194.
+Package hyperref Info: Backreferencing OFF on input line 4199.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4446.
+\c@Hy@tempcnt=\count281
+
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip17
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 4784.
+\XeTeXLinkMargin=\dimen159
+
+(/usr/share/texlive/texmf-dist/tex/generic/bitset/bitset.sty
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
+)
+))
+\Fld@menulength=\count282
+\Field@Width=\dimen160
+\Fld@charsize=\dimen161
+Package hyperref Info: Hyper figures OFF on input line 6063.
+Package hyperref Info: Link nesting OFF on input line 6068.
+Package hyperref Info: Hyper index ON on input line 6071.
+Package hyperref Info: backreferencing OFF on input line 6078.
+Package hyperref Info: Link coloring OFF on input line 6083.
+Package hyperref Info: Link coloring with OCG OFF on input line 6088.
+Package hyperref Info: PDF/A mode OFF on input line 6093.
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/atbegshi-ltx.sty
+Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
+package with kernel methods
+)
+\Hy@abspage=\count283
+\c@Item=\count284
+\c@Hfootnote=\count285
+)
+Package hyperref Info: Driver (autodetected): hpdftex.
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2024-01-20 v7.01h Hyperref driver for pdfTeX
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/atveryend-ltx.sty
+Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend pac
+kage
+with kernel methods
+)
+\Fld@listcount=\count286
+\c@bookmark@seq@number=\count287
+
+(/usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+Package: rerunfilecheck 2022-07-10 v1.10 Rerun checks for auxiliary files (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
+Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
+)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+85.
+)
+\Hy@SectionHShift=\skip53
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/longtable.sty
+Package: longtable 2023-11-01 v4.19 Multi-page Table package (DPC)
+\LTleft=\skip54
+\LTright=\skip55
+\LTpre=\skip56
+\LTpost=\skip57
+\LTchunksize=\count288
+\LTcapwidth=\dimen162
+\LT@head=\box53
+\LT@firsthead=\box54
+\LT@foot=\box55
+\LT@lastfoot=\box56
+\LT@gbox=\box57
+\LT@cols=\count289
+\LT@rows=\count290
+\c@LT@tables=\count291
+\c@LT@chunks=\count292
+\LT@p@ftn=\toks26
+)
+(/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen163
+\lightrulewidth=\dimen164
+\cmidrulewidth=\dimen165
+\belowrulesep=\dimen166
+\belowbottomsep=\dimen167
+\aboverulesep=\dimen168
+\abovetopsep=\dimen169
+\cmidrulesep=\dimen170
+\cmidrulekern=\dimen171
+\defaultaddspace=\dimen172
+\@cmidla=\count293
+\@cmidlb=\count294
+\@aboverulesep=\dimen173
+\@belowrulesep=\dimen174
+\@thisruleclass=\count295
+\@lastruleclass=\count296
+\@thisrulewidth=\dimen175
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
+Package: array 2023/10/16 v2.5g Tabular extension package (FMi)
+\col@sep=\dimen176
+\ar@mcellbox=\box58
+\extrarowheight=\dimen177
+\NC@list=\toks27
+\extratabsurround=\skip58
+\backup@length=\skip59
+\ar@cellbox=\box59
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2022/03/10 v1.4e Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 107.
+)
+\Gin@req@height=\dimen178
+\Gin@req@width=\dimen179
+)
+Package hyperref Info: Option `colorlinks' set `true' on input line 29.
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 34
+.
+
+(/usr/share/texmf/tex/latex/lm/t1lmr.fd
+File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count297
+\l__pdf_internal_box=\box60
+)
+(./main.aux
+
+LaTeX Warning: Label `discussion' multiply defined.
+
+
+LaTeX Warning: Label `interpretation-of-results' multiply defined.
+
+
+LaTeX Warning: Label `comparison-with-prior-work' multiply defined.
+
+
+LaTeX Warning: Label `practical-implications' multiply defined.
+
+
+LaTeX Warning: Label `limitations' multiply defined.
+
+)
+\openout1 = `main.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+ (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count298
+\scratchdimen=\dimen180
+\scratchbox=\box61
+\nofMPsegments=\count299
+\nofMParguments=\count300
+\everyMPshowfont=\toks28
+\MPscratchCnt=\count301
+\MPscratchDim=\dimen181
+\MPnumerator=\count302
+\makeMPintoPDFobject=\count303
+\everyMPtoPDFconversion=\toks29
+) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(57.81621pt, 481.87546pt, 57.81621pt)
+* v-part:(T,H,B)=(57.81621pt, 729.41443pt, 57.81621pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=481.87546pt
+* \textheight=729.41443pt
+* \oddsidemargin=-14.45378pt
+* \evensidemargin=-14.45378pt
+* \topmargin=-51.45378pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=4.0pt
+* \marginparsep=10.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumntrue
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+Package hyperref Info: Link coloring ON on input line 34.
+(./main.out) (./main.out)
+\@outlinefile=\write3
+\openout3 = `main.out'.
+
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 3
+9.
+ (/usr/share/texmf/tex/latex/lm/ot1lmr.fd
+File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 3
+9.
+
+(/usr/share/texmf/tex/latex/lm/omllmm.fd
+File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
+39.
+
+(/usr/share/texmf/tex/latex/lm/omslmsy.fd
+File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
+39.
+
+(/usr/share/texmf/tex/latex/lm/omxlmex.fd
+File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <12> on input line 39.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <8> on input line 39.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <6> on input line 39.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 39.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 39.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) (./01_abstract.tex)
+(./02_introduction.tex
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 15.
+
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf/fonts/en
+c/dvips/lm/lm-ec.enc}
+
+
+]) (./03_motivation.tex) (./04_background.tex
+Underfull \hbox (badness 2486) in paragraph at lines 7--12
+\T1/lmr/m/n/10 Moving IoT ser-vices rep-re-sent a paradigm shift
+ []
+
+
+Underfull \hbox (badness 1024) in paragraph at lines 7--12
+\T1/lmr/m/n/10 change their spa-tial po-si-tions over time, cre-at-ing
+ []
+
+
+Underfull \vbox (badness 4254) has occurred while \output is active []
+
+ [2]
+Underfull \hbox (badness 1533) in paragraph at lines 26--26
+[]\T1/lmr/bx/n/10 2.2 Actor-Critic Deep Re-in-force-ment
+ []
+
+
+Underfull \hbox (badness 4699) in paragraph at lines 28--32
+\T1/lmr/m/n/10 Actor-critic al-go-rithms com-bine value-based and
+ []
+
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 37.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 37.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 37.
+
+Underfull \hbox (badness 1622) in paragraph at lines 53--57
+\T1/lmr/m/n/10 fewer gra-di-ent com-pu-ta-tions, and may reg-u-lar-ize
+ []
+
+[3{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/en
+c/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/s
+hare/texmf/fonts/enc/dvips/lm/lm-mathex.enc}]
+Underfull \hbox (badness 5050) in paragraph at lines 151--153
+[]\T1/lmr/m/n/10 MLMC-NAC achieves $[]\OT1/lmr/m/n/10 (1\OML/lmm/m/it/10 =[]\OT
+1/lmr/m/n/10 )$ \T1/lmr/m/n/10 con-ver-gence for
+ []
+
+
+Underfull \hbox (badness 1127) in paragraph at lines 200--206
+[]\T1/lmr/bx/n/10 Actor-Critic Meth-ods for Edge Com-put-ing\T1/lmr/m/n/10 :
+ []
+
+
+Underfull \hbox (badness 1019) in paragraph at lines 222--232
+\T1/lmr/m/n/10 tin-u-ously, re-quir-ing com-po-si-tion de-ci-sions at each
+ []
+
+[4]
+Underfull \hbox (badness 1127) in paragraph at lines 254--260
+[]\T1/lmr/bx/n/10 Actor-Critic Meth-ods for Edge Com-put-ing\T1/lmr/m/n/10 :
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 267--272
+[]\T1/lmr/bx/n/10 Trajectory-Based Ser-vice Dis-cov-ery\T1/lmr/m/n/10 : Co-
+ []
+
+)
+Runaway argument?
+{
+! File ended while scanning use of \hypertarget.
+<inserted text> 
+                \par 
+l.43 \input{04_background}
+                          
+I suspect you have forgotten a `}', causing me
+to read past where you wanted me to stop.
+I'll try to recover; but if the error is serious,
+you'd better type `E' or `X' now and fix your file.
+
+(./05_framework.tex
+! Too many }'s.
+l.2 ...ework}\label{proposed-a2c-based-framework}}
+                                                  
+You've closed more groups than you opened.
+Such booboos are generally harmless, so keep going.
+
+
+Overfull \hbox (14.16216pt too wide) detected at line 41
+\OML/lmm/m/it/10 CMS[] \OT1/lmr/m/n/10 = \OMS/lmsy/m/n/10 f\OML/lmm/m/it/10 cp[
+]; cp[]; :::; cp[]\OMS/lmsy/m/n/10 g\OML/lmm/m/it/10 ; t[] < t[] < ::: < t[]; \
+OMS/lmsy/m/n/10 j\OML/lmm/m/it/10 a \OMS/lmsy/m/n/10 ^^@ \OML/lmm/m/it/10 b\OMS
+/lmsy/m/n/10 j \OT1/lmr/m/n/10 = 1
+ []
+
+
+Overfull \hbox (67.689pt too wide) detected at line 50
+\OML/lmm/m/it/10 CP \OT1/lmr/m/n/10 = \OMS/lmsy/m/n/10 f\OML/lmm/m/it/10 S[]; S
+[]; :::; S[]\OMS/lmsy/m/n/10 g[]\OML/lmm/m/it/10 S[][]T[]
+ []
+
+[5]
+Underfull \hbox (badness 1442) in paragraph at lines 155--159
+\T1/lmr/m/n/10 ram-e-ters, cre-ates a neu-ral net-work with ran-dom
+ []
+
+! Undefined control sequence.
+l.161 	\tightlist
+                 
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1
+63.
+(/usr/share/texmf/tex/latex/lm/ts1lmr.fd
+File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+) [6{/usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc}]
+Underfull \hbox (badness 10000) in paragraph at lines 234--234
+[]\T1/lmr/bx/n/10 3.3.1 Con-ver-gence and Com-plex-ity
+ []
+
+[7]
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 3
+08.
+ (/usr/share/texmf/tex/latex/lm/t1lmtt.fd
+File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+Overfull \hbox (42.31146pt too wide) in paragraph at lines 326--326
+[]    \T1/lmtt/m/n/10 +-----------------------+-----------------------+[] 
+ []
+
+
+Underfull \hbox (badness 1221) in paragraph at lines 335--336
+ []\T1/lmr/bx/n/10 3.4.2 Sep-a-rate Ar-chi-tec-ture[] \T1/lmr/m/n/10 In-de-pen-
+dent net-
+ []
+
+
+Overfull \hbox (178.81107pt too wide) in paragraph at lines 354--354
+[]\T1/lmtt/m/n/10 Input State -> Actor Network                      Input State
+ -> Critic Network[] 
+ []
+
+
+Overfull \hbox (73.81137pt too wide) in paragraph at lines 354--354
+[]     \T1/lmtt/m/n/10 |                                                    |[]
+ 
+ []
+
+
+Overfull \hbox (73.81137pt too wide) in paragraph at lines 354--354
+[]     \T1/lmtt/m/n/10 v                                                    v[]
+ 
+ []
+
+
+Overfull \hbox (131.5612pt too wide) in paragraph at lines 354--354
+[]\T1/lmtt/m/n/10 +----------------------+                      +--------------
+--------+[] 
+ []
+
+
+Overfull \hbox (131.5612pt too wide) in paragraph at lines 354--354
+[]\T1/lmtt/m/n/10 | Trajectory Encoder   |                      | State Encoder
+        |[] 
+ []
+
+
+Overfull \hbox (136.81119pt too wide) in paragraph at lines 354--354
+[]\T1/lmtt/m/n/10 | LSTM(128)            |                      | FC(256) -> Re
+LU       |[] 
+ []
+
+
+Overfull \hbox (131.5612pt too wide) in paragraph at lines 354--354
+[]\T1/lmtt/m/n/10 +----------------------+                      +--------------
+--------+[] 
+ []
+
+
+Overfull \hbox (73.81137pt too wide) in paragraph at lines 354--354
+[]     \T1/lmtt/m/n/10 |                                                    |[]
+ 
+ []
+
+
+Overfull \hbox (73.81137pt too wide) in paragraph at lines 354--354
+[]     \T1/lmtt/m/n/10 v                                                    v[]
+ 
+ []
+
+
+Overfull \hbox (131.5612pt too wide) in paragraph at lines 354--354
+[]\T1/lmtt/m/n/10 +----------------------+                      +--------------
+--------+[] 
+ []
+
+
+Overfull \hbox (131.5612pt too wide) in paragraph at lines 354--354
+[]\T1/lmtt/m/n/10 | Policy Head          |                      | Value Head   
+        |[] 
+ []
+
+
+Overfull \hbox (131.5612pt too wide) in paragraph at lines 354--354
+[]\T1/lmtt/m/n/10 | FC(64) -> ReLU       |                      | FC(64) -> ReL
+U       |[] 
+ []
+
+
+Overfull \hbox (126.31122pt too wide) in paragraph at lines 354--354
+[]\T1/lmtt/m/n/10 | FC(action_dim)      |                      | FC(1)         
+       |[] 
+ []
+
+
+Overfull \hbox (131.5612pt too wide) in paragraph at lines 354--354
+[]\T1/lmtt/m/n/10 | -> Softmax           |                      +--------------
+--------+[] 
+ []
+
+
+Overfull \hbox (26.63974pt too wide) detected at line 375
+\OML/lmm/m/it/10 r[] \OT1/lmr/m/n/10 = []\OML/lmm/m/it/10 ;  ^^R[] \OT1/lmr/m/n
+/10 = [] 2(\OML/lmm/m/it/10 y[] \OMS/lmsy/m/n/10 ^^@ \OML/lmm/m/it/10 y[]; x[] 
+\OMS/lmsy/m/n/10 ^^@ \OML/lmm/m/it/10 x[]\OT1/lmr/m/n/10 )
+ []
+
+
+Underfull \hbox (badness 1097) in paragraph at lines 387--387
+[]\T1/lmr/bx/n/10 3.6 Spatio-Temporal Con-straint Han-
+ []
+
+[8]
+Overfull \hbox (10.93625pt too wide) detected at line 408
+\OML/lmm/m/it/10 C[]\OT1/lmr/m/n/10 (\OML/lmm/m/it/10 t\OT1/lmr/m/n/10 ) = \OML
+/lmm/m/it/10 B \OMS/lmsy/m/n/10 ^^A [][]\OT1/lmr/m/n/10 (1 + \OML/lmm/m/it/10 S
+TR\OT1/lmr/m/n/10 (\OML/lmm/m/it/10 d[]\OT1/lmr/m/n/10 (\OML/lmm/m/it/10 t\OT1/
+lmr/m/n/10 )) \OMS/lmsy/m/n/10 ^^A \OML/lmm/m/it/10 SNR[]\OT1/lmr/m/n/10 ) \OMS
+/lmsy/m/n/10 ^^U \OML/lmm/m/it/10 C[]\OT1/lmr/m/n/10 (\OML/lmm/m/it/10 t\OT1/lm
+r/m/n/10 )
+ []
+
+)
+Runaway argument?
+{
+! File ended while scanning use of \hypertarget.
+<inserted text> 
+                \par 
+l.44 \input{05_framework}
+                         
+I suspect you have forgotten a `}', causing me
+to read past where you wanted me to stop.
+I'll try to recover; but if the error is serious,
+you'd better type `E' or `X' now and fix your file.
+
+(./06_experimental_setup.tex
+! Too many }'s.
+l.1 ...erimental Setup}\label{experimental-setup}}
+                                                  
+You've closed more groups than you opened.
+Such booboos are generally harmless, so keep going.
+
+! Undefined control sequence.
+l.15 	\tightlist
+                
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.37 	\tightlist
+                
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.73 		      \tightlist
+                       
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+[9]
+Underfull \hbox (badness 2772) in paragraph at lines 161--162
+\T1/lmr/m/n/10 The STR-based ca-pac-ity model uses pa-ram-e-ters
+ []
+
+
+Overfull \hbox (64.0088pt too wide) in paragraph at lines 167--179
+ [][] 
+ []
+
+
+Overfull \hbox (274.38826pt too wide) in paragraph at lines 215--231
+ [][] 
+ []
+
+[10])
+Runaway argument?
+{
+! File ended while scanning use of \hypertarget.
+<inserted text> 
+                \par 
+l.45 \input{06_experimental_setup}
+                                  
+I suspect you have forgotten a `}', causing me
+to read past where you wanted me to stop.
+I'll try to recover; but if the error is serious,
+you'd better type `E' or `X' now and fix your file.
+
+(./07_results.tex
+! Too many }'s.
+l.1 ...ental Results}\label{experimental-results}}
+                                                  
+You've closed more groups than you opened.
+Such booboos are generally harmless, so keep going.
+
+
+Underfull \hbox (badness 1596) in paragraph at lines 21--26
+[]\T1/lmr/m/n/10 All con-fig-u-ra-tions demon-strate sta-ble con-ver-gence
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 36--36
+[]\T1/lmr/bx/n/10 5.2 Suc-cess Rate Per-for-mance by
+ []
+
+
+Overfull \hbox (221.55179pt too wide) in paragraph at lines 44--56
+ [][] 
+ []
+
+
+Underfull \hbox (badness 1466) in paragraph at lines 58--65
+\T1/lmr/m/n/10 ble DQN across all mo-bil-ity sce-nar-ios and both
+ []
+
+
+Overfull \hbox (94.48422pt too wide) in paragraph at lines 76--84
+ [][] 
+ []
+
+Runaway argument?
+{adaptation-speed-analysis{\subsubsection {5.4 Adaptation Speed Analy\ETC.
+! Paragraph ended before \hypertarget was complete.
+<to be read again> 
+                   \par 
+l.96 
+     
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+[11]
+Overfull \hbox (163.79445pt too wide) in paragraph at lines 119--130
+ [][] 
+ []
+
+
+Overfull \hbox (85.7621pt too wide) in paragraph at lines 148--159
+ [][] 
+ []
+
+
+! LaTeX Error: Unicode character γ (U+03B3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.204 factor (γ
+                ): 0.9 - N-step bootstrapping: 60 steps - Entropy coefficient:
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character γ (U+03B3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.231 γ
+        =0.9, n\_steps=30, episodes=100 - Target accuracy: 98\%
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 226--232
+[]\T1/lmr/bx/n/10 Experiment Con-fig-u-ra-tion \T1/lmr/m/n/10 (from
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 226--232
+\T1/lmtt/m/n/10 configs/exp1.yaml\T1/lmr/m/n/10 ): - Data di-rec-tory:
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 248--254
+[]\T1/lmr/bx/n/10 Experiment Doc-u-men-ta-tion\T1/lmr/m/n/10 : The
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 248--254
+\T1/lmr/m/n/10 com-plete tech-ni-cal doc-u-men-ta-tion of
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 248--254
+\T1/lmr/m/n/10 the ex-per-i-ment code is avail-able in
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 248--254
+\T1/lmtt/m/n/10 experiments-codesource/experiment-details.md\T1/lmr/m/n/10 ,
+ []
+
+[12]
+Underfull \hbox (badness 4132) in paragraph at lines 267--272
+\T1/lmr/m/n/10 or-di-nate rep-re-sen-ta-tion (dis-tance, cos(angle),
+ []
+
+
+Underfull \hbox (badness 1303) in paragraph at lines 267--272
+\T1/lmr/m/n/10 sin(angle)) pro-vides rotation-invariant fea-tures
+ []
+
+)
+Runaway argument?
+{
+! File ended while scanning use of \hypertarget.
+<inserted text> 
+                \par 
+l.46 \input{07_results}
+                       
+I suspect you have forgotten a `}', causing me
+to read past where you wanted me to stop.
+I'll try to recover; but if the error is serious,
+you'd better type `E' or `X' now and fix your file.
+
+(./08_implementation.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--5
+\T1/lmr/m/n/10 This sec-tion presents the im-ple-men-ta-tion us-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3--5
+\T1/lmr/m/n/10 ing the Sta-ble Base-lines3 frame-work in the
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--7
+[]\T1/lmr/bx/n/12 6.1 Data Pre-pro-cess-ing
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 12--21
+\T1/lmr/m/n/10 Con-vert to ego-centric po-lar co-or-di-nates -
+ []
+
+
+Underfull \hbox (badness 7238) in paragraph at lines 12--21
+\T1/lmtt/m/n/10 compute_capacity()\T1/lmr/m/n/10 : Shannon-Hartley ca-pac-ity
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 24--24
+[]\T1/lmr/bx/n/10 6.2 Sim-u-la-tion En-vi-ron-ment (illi-
+ []
+
+
+Underfull \hbox (badness 6001) in paragraph at lines 26--31
+\T1/lmr/bx/n/10 MovingIoTEnvironment \T1/lmr/m/n/10 (\T1/lmtt/m/n/10 illinois_o
+nline.py\T1/lmr/m/n/10 ):
+ []
+
+
+Underfull \hbox (badness 2932) in paragraph at lines 26--31
+\T1/lmr/m/n/10 Gymnasium-compliant sim-u-la-tion en-vi-ron-ment for
+ []
+
+! You can't use `macro parameter character #' in vertical mode.
+<argument> ##
+             ###### 6.3 Stable Baselines3 Framework for A2C and DQN Training 
+l.34 }
+      \label{stable-baselines3-framework-for-a2c-and-dqn-training}
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! You can't use `macro parameter character #' in vertical mode.
+<argument> ####
+               #### 6.3 Stable Baselines3 Framework for A2C and DQN Training 
+l.34 }
+      \label{stable-baselines3-framework-for-a2c-and-dqn-training}
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! You can't use `macro parameter character #' in vertical mode.
+<argument> ######
+                 ## 6.3 Stable Baselines3 Framework for A2C and DQN Training 
+l.34 }
+      \label{stable-baselines3-framework-for-a2c-and-dqn-training}
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! You can't use `macro parameter character #' in vertical mode.
+<argument> ########
+                    6.3 Stable Baselines3 Framework for A2C and DQN Training 
+l.34 }
+      \label{stable-baselines3-framework-for-a2c-and-dqn-training}
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 36--40
+\T1/lmr/m/n/10 ([][]$\T1/lmtt/m/n/10 https : / / stable-[]baselines3 . readthed
+ocs . io/$[][]\T1/lmr/m/n/10 )
+ []
+
+LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 47.
+
+Underfull \hbox (badness 7099) in paragraph at lines 47--49
+[]\T1/lmr/bx/n/10 A2C Im-ple-men-ta-tion (\T1/lmtt/b/n/10 train.py\T1/lmr/bx/n/
+10 )\T1/lmr/m/n/10 : We use
+ []
+
+
+Overfull \hbox (37.06148pt too wide) in paragraph at lines 70--70
+[]\T1/lmtt/m/n/10 env = APSelectionEnv(num_services=20, max_steps=100)[] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 72--73
+[]\T1/lmr/bx/n/10 DQN Im-ple-men-ta-tion\T1/lmr/m/n/10 : We use
+ []
+
+[13]
+Underfull \hbox (badness 1308) in paragraph at lines 93--97
+[]\T1/lmr/bx/n/10 Configuration Man-age-ment (\T1/lmtt/b/n/10 config_mgmt.py\T1
+/lmr/bx/n/10 )\T1/lmr/m/n/10 :
+ []
+
+
+Underfull \hbox (badness 1642) in paragraph at lines 93--97
+\T1/lmr/m/n/10 - \T1/lmtt/m/n/10 MasterConfig\T1/lmr/m/n/10 : Py-dan-tic model 
+for all hy-per-
+ []
+
+
+! LaTeX Error: Unicode character γ (U+03B3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.106 	Discount Factor (γ
+                          )    & 0.9            \\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+Underfull \hbox (badness 5832) in paragraph at lines 127--132
+\T1/lmr/m/n/10 De-fine ex-per-i-ment pa-ram-e-ters 2. \T1/lmr/bx/n/10 Ex-e-cu-t
+ion
+ []
+
+
+Overfull \hbox (58.06142pt too wide) in paragraph at lines 141--141
+[]\T1/lmtt/m/n/10 ./run_experiments.sh configs/exp1.yaml configs/exp2.yaml[] 
+ []
+
+
+! LaTeX Error: Unicode character ├ (U+251C)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.157 \end{verbatim}
+                    
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ─ (U+2500)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.157 \end{verbatim}
+                    
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ─ (U+2500)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.157 \end{verbatim}
+                    
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character │ (U+2502)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.157 \end{verbatim}
+                    
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ├ (U+251C)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.157 \end{verbatim}
+                    
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ─ (U+2500)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.157 \end{verbatim}
+                    
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ─ (U+2500)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.157 \end{verbatim}
+                    
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+Overfull \hbox (42.31146pt too wide) in paragraph at lines 157--157
+[]    \T1/lmtt/m/n/10 a2c_model.zip          # SB3 A2C model checkpoint[] 
+ []
+
+
+! LaTeX Error: Unicode character │ (U+2502)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.157 \end{verbatim}
+                    
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character └ (U+2514)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.157 \end{verbatim}
+                    
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ─ (U+2500)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.157 \end{verbatim}
+                    
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ─ (U+2500)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.157 \end{verbatim}
+                    
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+Overfull \hbox (31.8115pt too wide) in paragraph at lines 157--157
+[]    \T1/lmtt/m/n/10 resolved_config.yaml   # Resolved configuration[] 
+ []
+
+
+! LaTeX Error: Unicode character ├ (U+251C)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.157 \end{verbatim}
+                    
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ─ (U+2500)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.157 \end{verbatim}
+                    
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ─ (U+2500)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.157 \end{verbatim}
+                    
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character │ (U+2502)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.157 \end{verbatim}
+                    
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ├ (U+251C)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.157 \end{verbatim}
+                    
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ─ (U+2500)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.157 \end{verbatim}
+                    
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ─ (U+2500)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.157 \end{verbatim}
+                    
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+Overfull \hbox (26.56151pt too wide) in paragraph at lines 157--157
+[]    \T1/lmtt/m/n/10 episode_rewards.png    # Training metrics plot[] 
+ []
+
+
+! LaTeX Error: Unicode character │ (U+2502)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.157 \end{verbatim}
+                    
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character └ (U+2514)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.157 \end{verbatim}
+                    
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ─ (U+2500)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.157 \end{verbatim}
+                    
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ─ (U+2500)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.157 \end{verbatim}
+                    
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+Overfull \hbox (21.31152pt too wide) in paragraph at lines 157--157
+[]    \T1/lmtt/m/n/10 action_distribution.png # Action distribution[] 
+ []
+
+
+! LaTeX Error: Unicode character └ (U+2514)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.157 \end{verbatim}
+                    
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ─ (U+2500)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.157 \end{verbatim}
+                    
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ─ (U+2500)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.157 \end{verbatim}
+                    
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character └ (U+2514)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.157 \end{verbatim}
+                    
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ─ (U+2500)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.157 \end{verbatim}
+                    
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character ─ (U+2500)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.157 \end{verbatim}
+                    
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+Overfull \hbox (31.8115pt too wide) in paragraph at lines 157--157
+[]\T1/lmtt/m/n/10 experiments_results.csv        # Aggregated results[] 
+ []
+
+(./09_discussion.tex
+! Too many }'s.
+l.1 \subsection{7. Discussion}\label{discussion}}
+                                                 
+You've closed more groups than you opened.
+Such booboos are generally harmless, so keep going.
+
+
+Underfull \hbox (badness 1270) in paragraph at lines 36--40
+[]\T1/lmr/m/n/10 Illinois (Out-door): At high mo-bil-ity (10 km/h),
+ []
+
+! You can't use `macro parameter character #' in vertical mode.
+<argument> ##
+             ###### 7.3 Practical Implications
+l.45 	#### 7.3 Practical Implications}
+                                      \label{practical-implications}}
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! You can't use `macro parameter character #' in vertical mode.
+<argument> ####
+               #### 7.3 Practical Implications
+l.45 	#### 7.3 Practical Implications}
+                                      \label{practical-implications}}
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! You can't use `macro parameter character #' in vertical mode.
+<argument> ######
+                 ## 7.3 Practical Implications
+l.45 	#### 7.3 Practical Implications}
+                                      \label{practical-implications}}
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! You can't use `macro parameter character #' in vertical mode.
+<argument> ########
+                    7.3 Practical Implications
+l.45 	#### 7.3 Practical Implications}
+                                      \label{practical-implications}}
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! Too many }'s.
+l.45 ...plications}\label{practical-implications}}
+                                                  
+You've closed more groups than you opened.
+Such booboos are generally harmless, so keep going.
+
+
+Underfull \hbox (badness 1009) in paragraph at lines 54--56
+[]\T1/lmr/bx/n/10 STR Qual-ity\T1/lmr/m/n/10 : STR-derived ca-pac-ity pro-vides
+ a
+ []
+
+! You can't use `macro parameter character #' in vertical mode.
+<argument> ##
+             
+l.58 #
+      ### 7.4 Limitations}\label{limitations}
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! You can't use `macro parameter character #' in vertical mode.
+l.58 ##
+       ## 7.4 Limitations}\label{limitations}
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! You can't use `macro parameter character #' in vertical mode.
+l.58 ###
+        # 7.4 Limitations}\label{limitations}
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! You can't use `macro parameter character #' in vertical mode.
+l.58 ####
+          7.4 Limitations}\label{limitations}
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! Too many }'s.
+l.58 #### 7.4 Limitations}
+                          \label{limitations}
+You've closed more groups than you opened.
+Such booboos are generally harmless, so keep going.
+
+[14])
+Runaway argument?
+{
+! File ended while scanning use of \hypertarget.
+<inserted text> 
+                \par 
+l.159 \input{09_discussion}
+                           
+I suspect you have forgotten a `}', causing me
+to read past where you wanted me to stop.
+I'll try to recover; but if the error is serious,
+you'd better type `E' or `X' now and fix your file.
+
+) (./09_discussion.tex
+! Too many }'s.
+l.1 \subsection{7. Discussion}\label{discussion}}
+                                                 
+You've closed more groups than you opened.
+Such booboos are generally harmless, so keep going.
+
+
+pdfTeX warning (ext4): destination with the same identifier (name{interpretatio
+n-of-results}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.5 		Results}\label{interpretation-of-results}}
+                                                
+pdfTeX warning (ext4): destination with the same identifier (name{comparison-wi
+th-prior-work}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.28 		Work}\label{comparison-with-prior-work}}
+                                               
+Underfull \hbox (badness 1270) in paragraph at lines 36--40
+[]\T1/lmr/m/n/10 Illinois (Out-door): At high mo-bil-ity (10 km/h),
+ []
+
+
+pdfTeX warning (ext4): destination with the same identifier (name{practical-imp
+lications}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.45 	#### 7.3 Practical Implications}
+                                      \label{practical-implications}}
+! You can't use `macro parameter character #' in vertical mode.
+<argument> ##
+             ###### 7.3 Practical Implications
+l.45 	#### 7.3 Practical Implications}
+                                      \label{practical-implications}}
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! You can't use `macro parameter character #' in vertical mode.
+<argument> ####
+               #### 7.3 Practical Implications
+l.45 	#### 7.3 Practical Implications}
+                                      \label{practical-implications}}
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! You can't use `macro parameter character #' in vertical mode.
+<argument> ######
+                 ## 7.3 Practical Implications
+l.45 	#### 7.3 Practical Implications}
+                                      \label{practical-implications}}
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! You can't use `macro parameter character #' in vertical mode.
+<argument> ########
+                    7.3 Practical Implications
+l.45 	#### 7.3 Practical Implications}
+                                      \label{practical-implications}}
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! Too many }'s.
+l.45 ...plications}\label{practical-implications}}
+                                                  
+You've closed more groups than you opened.
+Such booboos are generally harmless, so keep going.
+
+
+Underfull \hbox (badness 1009) in paragraph at lines 54--56
+[]\T1/lmr/bx/n/10 STR Qual-ity\T1/lmr/m/n/10 : STR-derived ca-pac-ity pro-vides
+ a
+ []
+
+
+pdfTeX warning (ext4): destination with the same identifier (name{limitations})
+ has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.58 #
+      ### 7.4 Limitations}\label{limitations}
+! You can't use `macro parameter character #' in vertical mode.
+<argument> ##
+             
+l.58 #
+      ### 7.4 Limitations}\label{limitations}
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! You can't use `macro parameter character #' in vertical mode.
+l.58 ##
+       ## 7.4 Limitations}\label{limitations}
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! You can't use `macro parameter character #' in vertical mode.
+l.58 ###
+        # 7.4 Limitations}\label{limitations}
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! You can't use `macro parameter character #' in vertical mode.
+l.58 ####
+          7.4 Limitations}\label{limitations}
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! Too many }'s.
+l.58 #### 7.4 Limitations}
+                          \label{limitations}
+You've closed more groups than you opened.
+Such booboos are generally harmless, so keep going.
+
+)
+Runaway argument?
+{
+! File ended while scanning use of \hypertarget.
+<inserted text> 
+                \par 
+l.48 \input{09_discussion}
+                          
+I suspect you have forgotten a `}', causing me
+to read past where you wanted me to stop.
+I'll try to recover; but if the error is serious,
+you'd better type `E' or `X' now and fix your file.
+
+(./10_conclusion.tex
+
+! LaTeX Error: Unicode character θ (U+03B8)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.15 ... coordinate state representation (r, cosθ
+                                                  , sinθ) effectively captures
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Unicode character θ (U+03B8)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.15 ...nate state representation (r, cosθ, sinθ
+                                                  ) effectively captures
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+)
+Runaway argument?
+{
+! File ended while scanning use of \hypertarget.
+<inserted text> 
+                \par 
+l.49 \input{10_conclusion}
+                          
+I suspect you have forgotten a `}', causing me
+to read past where you wanted me to stop.
+I'll try to recover; but if the error is serious,
+you'd better type `E' or `X' now and fix your file.
+
+(./11_references.tex
+! Too many }'s.
+l.1 \subsection{References}\label{references}}
+                                              
+You've closed more groups than you opened.
+Such booboos are generally harmless, so keep going.
+
+[15]
+Underfull \hbox (badness 4229) in paragraph at lines 53--57
+[]\T1/lmr/m/n/10 [12] Y. Sun, J. Liu, and X. Chen, ``Graph-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 53--57
+\T1/lmr/m/n/10 Reinforcement-Learning-Based Dependency-Aware
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 53--57
+\T1/lmr/m/n/10 Mi-croser-vice De-ploy-ment in Edge Com-put-ing,''
+ []
+
+
+Underfull \hbox (badness 8056) in paragraph at lines 96--99
+\T1/lmr/m/n/10 Multi-Objective Re-in-force-ment Learn-ing,'' \T1/lmr/m/it/10 ar
+Xiv
+ []
+
+[16])
+Runaway argument?
+{
+! File ended while scanning use of \hypertarget.
+<inserted text> 
+                \par 
+l.50 \input{11_references}
+                          
+I suspect you have forgotten a `}', causing me
+to read past where you wanted me to stop.
+I'll try to recover; but if the error is serious,
+you'd better type `E' or `X' now and fix your file.
+
+[17
+
+] (./main.aux)
+ ***********
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-22>
+ ***********
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: 0B264359F6059A89907895B05C95A6AF;11499.
+ ) 
+Here is how much of TeX's memory you used:
+ 11829 strings out of 474222
+ 181303 string characters out of 5748733
+ 1957975 words of memory out of 5000000
+ 33709 multiletter control sequences out of 15000+600000
+ 620000 words of font info for 83 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 69i,10n,79p,526b,583s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/ty
+pe1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmbxi10.pfb></
+usr/share/texmf/fonts/type1/public/lm/lmex10.pfb></usr/share/texmf/fonts/type1/
+public/lm/lmmi10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi5.pfb></usr/sh
+are/texmf/fonts/type1/public/lm/lmmi7.pfb></usr/share/texmf/fonts/type1/public/
+lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr17.pfb></usr/share/texm
+f/fonts/type1/public/lm/lmr7.pfb></usr/share/texmf/fonts/type1/public/lm/lmri10
+.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts
+/type1/public/lm/lmsy7.pfb></usr/share/texmf/fonts/type1/public/lm/lmtk10.pfb><
+/usr/share/texmf/fonts/type1/public/lm/lmtt10.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (17 pages, 384644 bytes).
+PDF statistics:
+ 488 PDF objects out of 1000 (max. 8388607)
+ 429 compressed objects within 5 object streams
+ 141 named destinations out of 1000 (max. 500000)
+ 417 words of extra memory for PDF output out of 10000 (max. 10000000)
+

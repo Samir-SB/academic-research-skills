@@ -161,21 +161,21 @@ sample of the next user trajectory.
 The STR-based capacity model uses parameters matching prior work:
 
 \begin{table}[htbp]
-	\centering
-	\caption{STR-Based Capacity Calculation Parameters}
-	\label{str-params-table}
-	\begin{tabular}{|l|c|l|}
-		\toprule
-		\textbf{Parameter} & \textbf{Value} & \textbf{Description}                \\
-		\midrule
-		$R_c$              & 200-300 m      & Confident radius (full coverage)    \\
-		$k$                & 0.01-0.05      & Decay factor for signal attenuation \\
-		$STR_{min}$        & 0.3            & Minimum STR threshold               \\
-		$B$                & 10 MHz         & Bandwidth                           \\
-		$SNR_{max}$        & 1000 (30 dB)   & Maximum SNR at zero distance        \\
-		$C_{min}$          & 1 Mbps         & Minimum required capacity           \\
-		\bottomrule
-	\end{tabular}
+\centering
+\caption{STR-Based Capacity Calculation Parameters}
+\label{str-params-table}
+\begin{tabular}{|l|c|l|}
+\toprule
+\textbf{Parameter} & \textbf{Value} & \textbf{Description} \\
+\midrule
+$R_c$ & 200-300 m & Confident radius (full coverage) \\
+$k$ & 0.01-0.05 & Decay factor for signal attenuation \\
+$STR_{min}$ & 0.3 & Minimum STR threshold \\
+$B$ & 10 MHz & Bandwidth \\
+$SNR_{max}$ & 1000 (30 dB) & Maximum SNR at zero distance \\
+$C_{min}$ & 1 Mbps & Minimum required capacity \\
+\bottomrule
+\end{tabular}
 \end{table}
 
 \hypertarget{experimental-configurations}{%
