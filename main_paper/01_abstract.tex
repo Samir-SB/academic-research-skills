@@ -1,0 +1,29 @@
+\section*{Abstract}\label{abstract}
+
+Service composition for moving IoT devices is fundamentally different
+from static environments. When services move---pedestrians in a shopping
+center or walking through a campus---the composition that worked seconds
+ago may fail moments later. This paper presents an Advantage
+Actor-Critic (A2C) approach for composing moving IoT services based on
+spatio-temporal validity: a service is valid only when it falls within
+the consumer's discovery zone at the current time instant.
+
+We build upon the Signal Transmission Reward (STR) model from prior work [1], which derives service quality from Euclidean distance through exponential signal attenuation and Shannon-Hartley capacity. The A2C
+agent learns to select valid services that maximize capacity while
+avoiding services outside the communication range.
+
+We evaluate on two real GPS trajectory datasets: the ATC shopping center
+dataset (185,554 trajectories, 1.7 billion samples from Osaka, Japan)
+and the Illinois daily commute dataset (207 trajectories, 357,706
+samples). Our implementation compares shared and separate network
+architectures. Shared networks converge faster in low-mobility
+scenarios (2-5 km/h pedestrian speed), while separate networks achieve
+up to 92.3\% valid action selection on real-world pedestrian data.
+The A2C approach reduces re-composition frequency by 44\% through
+entropy-regularized policy learning.
+
+\textbf{Keywords}: Moving IoT services, service composition, Advantage
+Actor-Critic, spatio-temporal constraints, deep reinforcement learning,
+Signal Transmission Reward
+
+\section{Introduction}

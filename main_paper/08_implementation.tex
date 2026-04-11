@@ -1,0 +1,159 @@
+\subsection{6. Implementation}\label{implementation}
+
+This section presents the implementation using the Stable Baselines3
+framework in the \texttt{experiments-codesource/} folder.
+
+\hypertarget{data-preprocessing-helper_env.py}{%
+	\subsection{6.1 Data Preprocessing (helper\_env.py)}\label{data-preprocessing-helper_env.py}}
+
+The \texttt{STRCalculator} class implements hierarchical distance → STR
+→ capacity calculation:
+
+\textbf{STRCalculator}: Implements Signal Transmission Reward
+calculation based on Euclidean distance with exponential attenuation: -
+\texttt{gps\_to\_enu()}: Convert GPS to East-North-Up coordinates -
+\texttt{enu\_to\_polar()}: Convert to ego-centric polar coordinates -
+\texttt{compute\_capacity()}: Shannon-Hartley capacity based on STR
+model - \texttt{compute\_rewards()}: Reward calculation from capacity -
+\texttt{get\_reshaped\_states()} / \texttt{get\_reshaped\_rewards()}:
+State and reward preprocessing - \texttt{fill\_states\_columns()}: State
+padding for variable AP counts
+
+\hypertarget{simulation-environment-illinois_online.py}{%
+	\subsubsection{6.2 Simulation Environment
+		(illinois\_online.py)}\label{simulation-environment-illinois_online.py}}
+
+\textbf{MovingIoTEnvironment} (\texttt{illinois\_online.py}):
+Gymnasium-compliant simulation environment for moving IoT service
+composition with service mobility following random waypoint model,
+device mobility with boundary reflection, and STR-based reward
+calculation. Supports both online and offline modes.
+
+\hypertarget{stable-baselines3-framework-for-a2c-and-dqn-training}{%
+	#### 6.3 Stable Baselines3 Framework for A2C and DQN Training
+}\label{stable-baselines3-framework-for-a2c-and-dqn-training}
+
+We utilize the Stable Baselines3 (SB3) framework
+(\url{https://stable-baselines3.readthedocs.io/}) for both A2C and DQN
+implementations, replacing custom PyTorch implementations with
+well-tested, production-ready algorithms.
+
+\textbf{Installation}:
+
+\begin{verbatim}
+pip install stable-baselines3
+\end{verbatim}
+
+\textbf{A2C Implementation (\texttt{train.py})}: We use
+\texttt{stable\_baselines3.A2C} with the custom Gymnasium environment:
+
+\begin{verbatim}
+from stable_baselines3 import A2C
+from illinois_online import APSelectionEnv
+
+env = APSelectionEnv(num_services=20, max_steps=100)
+
+model = A2C(
+    policy="MlpPolicy",
+    env=env,
+    learning_rate=5e-5,
+    n_steps=30,
+    gamma=0.9,
+    ent_coef=0.05,
+    vf_coef=0.5,
+    max_grad_norm=1.0,
+    verbose=1
+)
+
+model.learn(total_timesteps=100000)
+model.save("a2c_moving_iot")
+\end{verbatim}
+
+\textbf{DQN Implementation}: We use \texttt{stable\_baselines3.DQN}:
+
+\begin{verbatim}
+from stable_baselines3 import DQN
+
+model = DQN(
+    policy="MlpPolicy",
+    env=env,
+    learning_rate=5e-5,
+    buffer_size=100000,
+    learning_starts=1000,
+    gamma=0.9,
+    target_update_interval=500,
+    exploration_fraction=0.1,
+    verbose=1
+)
+
+model.learn(total_timesteps=100000)
+model.save("dqn_moving_iot")
+\end{verbatim}
+
+\textbf{Configuration Management (\texttt{config\_mgmt.py})}: -
+\texttt{MasterConfig}: Pydantic model for all hyperparameters -
+\texttt{load\_config()}: YAML-based config loading - Supports train/eval
+phases with different num\_services settings
+
+\textbf{Hyperparameters} (from YAML config):
+
+\begin{tabular}{|l|l|}
+	\hline
+	\textbf{Parameter}     & \textbf{Value} \\
+	\hline
+	Learning Rate          & 5e-5           \\
+	\hline
+	Discount Factor (γ)    & 0.9            \\
+	\hline
+	N-step (A2C)           & 30             \\
+	\hline
+	Entropy Coefficient    & 0.05           \\
+	\hline
+	Buffer Size (DQN)      & 100000         \\
+	\hline
+	Target Update Interval & 500            \\
+	\hline
+	Max Grad Norm          & 1.0            \\
+	\hline
+	Episodes               & 100            \\
+	\hline
+	Target Accuracy        & 98\%           \\
+	\hline
+\end{tabular}
+
+The real GPS experiments use a production-ready automation system for
+reproducible research:
+
+\textbf{Workflow}:
+1. \textbf{Configuration} (\texttt{configs/*.yaml}): Define experiment parameters
+2. \textbf{Execution} (\texttt{train.py}): Load config, setup directories, run experiment
+3. \textbf{Tracking} (\texttt{utils.py}): Log metrics, save results to \texttt{experiments\_results.csv}
+4. \textbf{Visualization} (\texttt{training\_plots.py}): Generate training curves and action distributions
+
+\textbf{Key Scripts}:
+
+\begin{verbatim}
+# Single experiment
+python train.py --config configs/exp1.yaml
+
+# Multiple experiments (background)
+./run_experiments.sh configs/exp1.yaml configs/exp2.yaml
+\end{verbatim}
+
+\textbf{Output Structure}:
+
+\begin{verbatim}
+runs/<run_id>/
+├── model/
+│   ├── a2c_model.zip          # SB3 A2C model checkpoint
+│   └── resolved_config.yaml   # Resolved configuration
+├── plot/
+│   ├── episode_rewards.png    # Training metrics plot
+│   └── action_distribution.png # Action distribution
+└── logs/
+    └── <run_id>.log           # Execution logs
+
+experiments_results.csv        # Aggregated results
+\end{verbatim}
+
+\input{09_discussion}
