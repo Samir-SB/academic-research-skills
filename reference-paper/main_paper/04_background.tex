@@ -1,0 +1,281 @@
+	\subsection{2. Background and Related
+		Work}\label{background-and-related-work}}
+
+\hypertarget{moving-iot-service-composition}{%
+	\subsubsection{2.1 Moving IoT Service
+		Composition}\label{moving-iot-service-composition}}
+
+Moving IoT services represent a paradigm shift from traditional static
+composition: service providers change their spatial positions over time,
+creating unique challenges for composition algorithms. The temporal
+dimension of service availability requires anticipating future service
+positions when making composition decisions {[}1{]}.
+
+A moving crowdsourced service can be modeled as a moving region where
+the service provider moves in close proximity to users over time. The
+composition problem becomes particularly challenging when considering
+spatio-temporal constraints including energy requirements, QoS
+parameters, and connectivity ranges. Prior work formalized moving IoT
+service composition as a Markov Decision Process where the state
+includes service positions, device positions, velocities, and predicted
+trajectories {[}1{]}. The action space encompasses service selection,
+replacement, addition, and removal operations. The STR-based selection
+function provides the fundamental service quality metric.
+
+\hypertarget{actor-critic-deep-reinforcement-learning}{%
+	\subsubsection{2.2 Actor-Critic Deep Reinforcement
+		Learning}\label{actor-critic-deep-reinforcement-learning}}
+
+Actor-critic algorithms combine value-based and policy-based methods.
+The actor learns a stochastic policy directly; the critic estimates the
+value function. This architecture reduces variance compared to pure
+policy gradient while handling continuous action spaces {[}3{]}.
+
+A2C improves stability through the advantage function, measuring how
+much better a particular action is compared to the average. The
+advantage is:
+
+\[A(s_t, a_t) = Q(s_t, a_t) - V(s_t) = r_t + \gamma V(s_{t+1}) - V(s_t)\]
+
+Studies on A2C for task scheduling in edge-cloud systems show faster
+convergence and better adaptability than DQN {[}3{]}{[}6{]}. Adding LSTM
+to A2C handles temporal dependencies in mobility-aware scenarios
+{[}3{]}.
+
+\hypertarget{network-architecture-design}{%
+	\subsubsection{2.3 Network Architecture
+		Design}\label{network-architecture-design}}
+
+Network design affects learning performance. Two architectures dominate:
+shared networks where both share feature extraction layers but have
+separate output heads, and separate networks with independent parameters
+{[}2{]}.
+
+Shared networks reduce parameters, train faster with fewer gradient
+computations, and may regularize through shared representation. The risk
+is interference between actor and critic updates---gradients from one
+affect the other.
+
+Separate networks offer more flexibility for complex states where actor
+and critic need different processing. This enables specialized
+architectures like LSTM for trajectory encoding in the actor
+{[}3{]}{[}9{]}. The trade-off is more computation.
+
+\hypertarget{signal-transmission-reward-str-based-selection-function}{%
+	\subsubsection{2.4 Signal Transmission Reward (STR) Based Selection
+		Function}\label{signal-transmission-reward-str-based-selection-function}}
+
+The service selection uses a hierarchical model where capacity derives
+from the Signal Transmission Reward (STR), which depends on Euclidean
+distance between the consumer and service provider.
+
+\textbf{Step 1 - Euclidean Distance Calculation}: The distance between
+service \(i\) and user \(j\) is:
+\[d_{ij} = \sqrt{(x_i - x_j)^2 + (y_i - y_j)^2}\]
+
+\textbf{Step 2 - STR Calculation (Exponential Attenuation)}: The STR
+models signal transmission probability with distance-based exponential
+attenuation:
+\[STR(d_{ij}) = \begin{cases} 1 & \text{if } d_{ij} \leq R_c \\ e^{-k \cdot (d_{ij} - R_c)} & \text{if } d_{ij} > R_c \end{cases}\]
+
+Where: - \(d_{ij}\) is the Euclidean distance between service \(i\) and
+user \(j\) - \(R_c\) is the confident radius defining the region where
+full transmission is guaranteed (200-300 m) - \(k\) is the decay factor
+determining the rate of signal attenuation (0.01-0.05)
+
+\textbf{Step 3 - Capacity Calculation}: Using the Shannon-Hartley
+theorem, the channel capacity depends on STR:
+\[C_{ij} = B \cdot \log_2(1 + STR(d_{ij}) \cdot SNR_{max})\]
+
+Where: - \(B\) is the bandwidth in Hz (10 MHz) - \(SNR_{max}\) is the
+maximum SNR at zero distance (1000 or 30 dB)
+
+\textbf{Step 4 - Reward Calculation (Capacity Based)}: The reward comes
+from capacity:
+\[R(s_t, a_t) = \begin{cases} +C_{total} & \text{if } C_{total} > C_{min} \\ -1 & \text{if } C_{total} \leq C_{min} \end{cases}\]
+
+Where \(C_{total} = \sum_{i \in C} C_{ij}\) is the total capacity of the
+composition and \(C_{min}\) is the minimum required capacity.
+
+The overall service selection function combines STR-derived capacity
+with service attributes:
+\[i^* = \arg\max_{i \in S} \left[ C_{ij} \cdot E_i \cdot T_{available}^i \right]\]
+
+This hierarchical model ensures that proximity (lower distance leads to
+higher STR, which translates to higher capacity) drives the composition
+decision while also considering energy and temporal factors.
+
+\hypertarget{recent-advances-in-drl-for-service-composition}{%
+	\subsubsection{2.5 Recent Advances in DRL for Service
+		Composition}\label{recent-advances-in-drl-for-service-composition}}
+
+Research applies DRL to service composition in various ways. Multi-user
+edge service orchestration uses DRL for QoS optimization through
+parametric combinatorial action modeling {[}11{]}. Graph RL enables
+dependency-aware microservice deployment in edge environments, using
+graph convolutional networks for complex call graphs {[}12{]}.
+
+Multi-agent systems with DRL scale IoT service composition. The DRL-MAS
+framework combines decentralized multi-agent decision-making for
+scalability, energy efficiency, and responsiveness {[}13{]}. Graph
+convolutional multi-agent DRL enables dynamic service function chain
+deployment with multi-objective optimization across delay and resource
+utilization {[}15{]}.
+
+Aerial-terrestrial network integration uses DRL for service composition
+with trajectory prediction {[}15{]}. Collective DRL enables intelligent
+sharing across edge nodes using soft actor-critic {[}16{]}.
+
+\hypertarget{surveys-on-iot-service-composition}{%
+	\subsubsection{2.6 Surveys on IoT Service
+		Composition}\label{surveys-on-iot-service-composition}}
+
+Two surveys analyze IoT service composition. Asghari et al.~{[}26{]}
+reviewed literature from 2012-2017. Hamzei et al.~{[}27{]} surveyed
+approaches as framework, service-oriented architecture/RESTful,
+heuristic, and model-based. Key challenges: scalability (45.4\% of
+articles), execution time (36.3\%), cost (27.2\%), reliability (22.7\%).
+Arellanes et al.~{[}28{]} evaluated scalability---dataflow,
+orchestration, and choreography do not fully satisfy scalability; DX-MAN
+shows promise.
+
+\hypertarget{theoretical-foundations}{%
+	\subsubsection{2.7 Theoretical
+		Foundations}\label{theoretical-foundations}}
+
+Actor-critic convergence has been studied. Finite-time analysis shows
+single-timescale actor-critic with linear function approximation finds
+an \(\epsilon\)-approximate stationary point with
+\(\mathcal{O}(\tilde{\epsilon}^{-2})\) sample complexity {[}22{]}. This
+supports applying A2C to moving service composition.
+
+MLMC-NAC achieves \(\tilde{\mathcal{O}}(1/\sqrt{T})\) convergence for
+average-reward MDPs without requiring mixing and hitting times {[}21{]}.
+
+For multi-objective RL, MOAC provides finite-time convergence and sample
+complexity independent of objective count {[}22{]}. With our
+multi-component reward, this assures convergence despite complex
+objectives.
+
+Single-loop actor-critic with compatible function approximation achieves
+optimal sample complexity by eliminating critic approximation error
+{[}24{]}. This fits our online service composition.
+
+Proactive composition anticipates future states rather than just
+reacting. Latency-aware and proactive service placement uses exponential
+smoothing for QoS prediction in mobile edge {[}17{]}. Spatial-temporal
+neural networks for connected vehicles achieve 6\% higher prediction
+accuracy and 10\% lower service dropping through gated recurrent units
+and graph convolutional layers {[}4{]}. ESPD-LP improves data
+transmission by 41\% through bidirectional matching across MEC servers
+{[}19{]}.
+
+\hypertarget{related-work}{%
+	\subsubsection{2.8 Related Work}\label{related-work}}
+
+Service composition has been extensively studied in static environments.
+Traditional approaches use QoS-based optimization, selecting services
+that maximize composite QoS while satisfying constraints {[}11{]}. These
+methods assume fixed service locations and ignore mobility.
+
+\textbf{Moving IoT Service Composition}: Recent work addresses the
+unique challenges of moving services. The spatio-temporal nature means
+services are available only when they overlap with the user in both
+space and time. Fixed services (like WiFi at a coffee shop) remain at
+known locations, while moving services (like a smartphone hotspot while
+walking) change position continuously. Prior work formalized this as
+trajectory-based composition where both provider and consumer have GPS
+trajectories {[}1{]}. The challenge is that co-movement patterns must be
+discovered---finding services that overlap with the user's path at each
+timestep.
+
+\textbf{Deep Reinforcement Learning for Service Composition}: DRL has
+emerged as a powerful approach for service composition in dynamic
+environments. Unlike traditional optimization, DRL learns a policy
+through interaction with the environment, adapting to changing
+conditions. DQN-based approaches have been applied to mobile service
+composition {[}1{]}, but suffer from overestimation bias and reactive
+decision-making. Policy gradient methods like A2C address these
+limitations by learning the policy directly.
+
+\textbf{Actor-Critic Methods for Edge Computing}: A2C has shown promise
+in edge computing scenarios. Studies on A2C for task scheduling in
+edge-cloud systems demonstrate faster convergence and better
+adaptability than DQN {[}3{]}{[}6{]}. Adding LSTM to A2C handles
+temporal dependencies in mobility-aware scenarios {[}3{]}, enabling the
+agent to learn from trajectory patterns.
+
+\textbf{Network Architecture Design}: The choice between shared and
+separate networks impacts performance. Shared networks reduce parameters
+and train faster with fewer gradient computations. Separate networks
+offer flexibility for specialized processing like LSTM trajectory
+encoding {[}3{]}{[}9{]}. Our work compares both architectures for moving
+IoT service composition.
+
+\hypertarget{literature-review}{%
+	\subsubsection{2.9 Literature Review}\label{literature-review}}
+
+This section reviews relevant literature across four areas: moving IoT
+service composition, deep reinforcement learning for services,
+actor-critic methods for edge computing, and trajectory-based service
+discovery.
+
+\textbf{Moving IoT Service Composition}: Traditional service composition
+assumes static services at known locations {[}11{]}. Moving IoT services
+fundamentally change this assumption---services change position
+continuously, requiring composition decisions at each timestep. Prior
+work formalized moving IoT service composition as a trajectory-based
+problem where both provider and consumer have GPS trajectories {[}1{]}.
+Key challenges include: (1) discovering services that overlap with the
+user in both space and time, (2) ensuring service continuity when
+trajectories only partially overlap, and (3) scaling to large trajectory
+datasets without expensive indexing.
+
+The Signal Transmission Reward (STR) model provides a hierarchical
+approach: distance determines STR, STR determines capacity, and capacity
+determines service quality {[}1{]}. This model captures the physical
+reality that wireless signal strength degrades with distance.
+
+\textbf{Deep Reinforcement Learning for Service Composition}: DRL has
+emerged as the dominant approach for dynamic service composition.
+DQN-based methods {[}1{]} learn Q-values for service selection but
+suffer from overestimation bias---the Q-values systematically
+overestimate true action values, leading to suboptimal selection when
+valid services are scarce {[}7{]}. Double DQN addresses this by
+separating action selection from evaluation but still operates
+reactively.
+
+Policy gradient methods including REINFORCE and Actor-Critic address
+DQN's limitations by learning the policy directly. Policy gradient
+methods are unbiased and naturally handle discrete action spaces.
+However, pure policy gradient suffers from high variance. Actor-critic
+methods reduce variance by combining policy gradient with a value
+function baseline.
+
+\textbf{Actor-Critic Methods for Edge Computing}: A2C has demonstrated
+success in edge computing scenarios. Chen et al.~{[}3{]} applied
+LSTM-based A2C to network slicing with user mobility, showing faster
+convergence than DQN. Liu et al.~{[}6{]} proposed A2C-DRL for dynamic
+scheduling in edge-cloud environments. These works confirm A2C's
+advantages in mobility-aware scenarios.
+
+Theoretical analysis provides convergence guarantees. Zhang et
+al.~{[}21{]} showed \(\tilde{\mathcal{O}}(1/\sqrt{T})\) convergence for
+average-reward MDPs. Xiao et al.~{[}22{]} provided finite-time analysis
+for multi-objective actor-critic. These results assure convergence
+despite complex reward structures.
+
+\textbf{Trajectory-Based Service Discovery}: Co-movement pattern
+discovery identifies services that overlap with user trajectories.
+Traditional methods use flock, convoy, swarm, and group patterns
+{[}16{]}{[}21-24{]}. However, these centralized index-based approaches
+degrade as datasets scale {[}20{]}.
+
+Parallel flock-based approaches using MapReduce address scalability
+{[}1{]}. The spatio-temporal MapReduce first prunes trajectories
+temporally, then filters spatially to find candidate services. Our work
+builds on this by using DRL to learn composition without indexing.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{proposed-a2c-based-framework}{%

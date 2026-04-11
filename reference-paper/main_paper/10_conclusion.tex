@@ -1,0 +1,43 @@
+	\subsection{8. Conclusion}\label{conclusion}}
+
+This paper presented A2C for proactive moving IoT service composition
+with spatio-temporal constraints, preserving STR-based selection from
+prior work. We compared shared and separate network architectures on the
+same datasets (random waypoint and vehicle movement). A2C outperforms
+Double DQN across all evaluated metrics: success rate (+19.2\% at 80
+km/h), capacity satisfaction (+11.7\%), adaptation speed (2.3s vs 4.7s),
+and re-composition frequency (69.2/hr vs 124.3/hr).
+
+\textbf{Key Findings:}
+
+\begin{enumerate}
+	\def\labelenumi{\arabic{enumi}.}
+	\item
+	      \textbf{Proactive composition works}: Trajectory prediction enables
+	      services to be selected that maintain adequate capacity throughout the
+	      composition horizon, not just at the current moment.
+	\item
+	      \textbf{Architecture matters in high mobility}: Separate networks with
+	      LSTM trajectory encoding achieve 73.5\% success rate at 80 km/h versus
+	      54.3\% for Double DQN, a 35\% relative improvement.
+	\item
+	      \textbf{Shared networks offer efficiency}: For lower mobility
+	      scenarios (2-5 km/h), shared networks converge faster (350 vs 500
+	      episodes) while achieving 94-95\% success rate.
+	\item
+	      \textbf{Stability through entropy}: The entropy regularization
+	      component reduces unnecessary re-compositions by 44\%, lowering system
+	      overhead.
+	\item
+	      \textbf{Real data validates}: On the Illinois GPS dataset with 42,480
+	      samples, the A2C agent achieves 92.3\% valid action selection,
+	      demonstrating effective learning of capacity-based service selection.
+\end{enumerate}
+
+Future work will explore distributed multi-agent extensions, integration
+with real IoT testbeds, and other actor-critic variants like PPO and
+SAC.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{references}{%
