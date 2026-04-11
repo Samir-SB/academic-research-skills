@@ -51,13 +51,17 @@ When analyzing papers in `reference-paper/XX/`:
 
 ### 3. Running Experiments
 
-```bash
-# A2C training
-cd experiments-codesource
-python claude_a2c_online.py
+**Using Stable Baselines3** instead of custom implementations:
+- A2C: `sb3.A2C` (`stable_baselines3.A2C`)
+- DQN: `sb3.DQN` (`stable_baselines3.DQN`)
 
-# DQN baseline
-python dqn.py
+```bash
+# Install stable-baselines3
+pip install stable-baselines3
+
+# Training
+cd experiments-codesource
+python train.py
 
 # Run experiments batch
 ./run_experiments.sh
