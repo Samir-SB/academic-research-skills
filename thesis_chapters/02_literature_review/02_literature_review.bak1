@@ -1,0 +1,230 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath,amssymb}
+\usepackage{setspace}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp}
+\else
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\usepackage{parskip}
+\usepackage{xcolor}
+\usepackage[paper=a4paper,margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{longtable,booktabs,array}
+\usepackage{graphicx}
+\usepackage{etoolbox}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX}
+}
+
+\bibliographystyle{plain}
+
+\author{}
+\date{}
+
+\begin{document}
+
+%\title{Chapter 2: Literature Review}
+%\maketitle
+
+\section{Literature Review}
+\label{sec:literature-review}
+
+\subsection{2.1 Introduction}
+\label{sec:2.1-introduction}
+
+The composition of services in the Internet of Things (IoT) has emerged as a critical research area driven by the proliferation of heterogeneous IoT devices and the increasing demand for complex, multi-functional applications. Service composition enables the aggregation of multiple specialized services to fulfill complex user requirements that cannot be satisfied by any single service. In dynamic IoT environments where services may move, become unavailable, or exhibit fluctuating quality of service (QoS) attributes, composition becomes particularly challenging. This chapter presents a comprehensive literature review examining the evolution of IoT service composition approaches, with particular emphasis on machine learning and reinforcement learning-based methods.
+
+The scope of this review encompasses four primary domains: (1) fundamental service composition concepts and problem formulations, (2) traditional heuristic and optimization approaches, (3) mobile and moving IoT service composition, and (4) machine learning and deep reinforcement learning approaches for service composition. Additionally, this chapter presents a novel analysis revealing a consistent publishing pattern in the literature, where researchers address the same underlying NP-hard problem formulation by applying different algorithms across successive publications. Understanding this pattern provides important context for positioning the contributions of this thesis.
+
+The review is organized as follows. Section 2.2 establishes the fundamental concepts of service composition, including problem definitions and complexity analysis. Section 2.3 examines traditional heuristic approaches including genetic algorithms, particle swarm optimization, and ant colony optimization. Section 2.4 explores the evolution from static to mobile and moving IoT services. Section 2.5 reviews machine learning and reinforcement learning approaches. Section 2.6 presents the identified publishing pattern across Energy-as-a-Service, Drone-as-a-Service, and Moving IoT domains. Section 2.7 identifies the research gap addressed by this thesis. Section 2.8 summarizes the key findings.
+
+\subsection{2.2 Fundamentals of Service Composition}
+\label{sec:2.2-fundamentals}
+
+Service composition in IoT environments addresses the challenge of combining multiple services to satisfy complex user requirements. The fundamental problem, as established by Yu and Lin \cite{yu2007efficient}, is formally defined as a multi-objective optimization problem where the goal is to select a set of services that maximize composite QoS while satisfying various constraints. The QoS-aware service composition problem is proven to be NP-hard, specifically equivalent to the Multidimensional Multiple Choice Knapsack Problem (MMKP). This complexity stems from the combinatorial explosion of possible service combinations when considering multiple QoS attributes across numerous service candidates.
+
+The service composition problem can be formalized as follows. Given a set of service requirements $R = \{r_1, r_2, ..., r_n\}$ representing functional tasks, and a set of candidate services $S = \{s_1, s_2, ..., s_m\}$ where each service $s_i$ provides functionality $f(s_i) \in F$, the goal is to find a composition $C \subseteq S$ such that: (1) $f(C) = R$ (all requirements are satisfied), (2) $QoS(C) \geq QoS_{min}$ (QoS constraints are met), and (3) $cost(C)$ is minimized (or alternatively, $utility(C)$ is maximized).
+
+Traditional service composition assumes static services at fixed geographic locations. Services remain available at known coordinates, and composition decisions can be made based on historical QoS data and spatial proximity. However, this assumption becomes invalid in IoT environments where services may be embedded in mobile devices, wearables, or moving vehicles. The spatial-temporal nature of service availability introduces additional complexity, as services are available only when they spatially and temporally overlap with consumers \cite{asghari2020service}.
+
+Surveys of the field reveal significant research activity. Asghari et al. \cite{asghari2020service} conducted a systematic review of 147 primary studies on service composition in dynamic environments, covering the period from 2006 to 2020. Their findings indicate that the majority of research (84.4\%) employs simulation-based evaluation, with only 15.6\% utilizing real-world datasets. Alizadeh et al. \cite{alizadeh2020service} provided another comprehensive survey examining service selection mechanisms in IoT, categorizing approaches into multi-criteria decision-making (MCDM), heuristic methods, and machine learning-based approaches. These surveys identify key research challenges including scalability concerns, execution time optimization, cost minimization, and reliability assurance.
+
+The evolution of service composition research reflects broader trends in service computing. Early work focused on web service composition using standards like SOAP, WSDL, and BPEL. The emergence of RESTful services and microservices architecture shifted focus toward lighter-weight composition mechanisms. In IoT contexts, service composition must address unique challenges including resource constraints, energy limitations, and the dynamic nature of device availability \cite{hussein2022machine}.
+
+\subsection{2.3 Traditional Heuristic Approaches}
+\label{sec:2.3-traditional}
+
+The NP-hard nature of service composition led researchers to adopt heuristic and meta-heuristic approaches that provide tractable solutions with reasonable quality. Genetic algorithms (GA) emerged as a dominant approach, evolving from early work on service selection to sophisticated hybrid implementations. Zhang et al. \cite{zhang2022hybrid} proposed a hybrid approach combining genetic algorithms with neural networks for QoS-aware IoT service composition. Their approach uses neural networks to predict QoS values for unobserved service combinations, while genetic algorithms optimize the selection process. Assaf and信道 \cite{assaf2020genetic} applied genetic algorithms specifically for fluctuating QoS-aware service selection, addressing the challenge of services with variable quality attributes.
+
+Particle swarm optimization (PSO) provides an alternative meta-heuristic inspired by flocking behavior. The algorithm maintains a population of candidate solutions (particles) that move through the solution space based on personal best positions and global best positions. Almashaqbeh and Zhao \cite{almashaqbeh2020spatio} introduced a spatio-cohesive service selection approach using machine learning in dynamic IoT environments, combining genetic algorithms with supervised learning for improved selection accuracy.
+
+Ant colony optimization (ACO) mimics the foraging behavior of ants, where artificial ants construct solutions probabilistically based on pheromone trails. While less common in recent IoT literature, ACO appeared frequently in earlier service composition research. The algorithm excels in dynamic environments where pheromone updates can track changing service conditions.
+
+Swarm intelligence algorithms beyond PSO and ACO have been applied to service composition. Tang and Wu \cite{tang2024shuffled} proposed an improved Shuffled Frog Leaping Algorithm (SFLA) for IoT service composition. Qiu and Cheng \cite{qiu2023nsga} developed an improved NSGA-II algorithm for multi-objective service composition optimization. Khan and Zeadally \cite{khan2022energy} introduced an energy-centered and QoS-aware approach for IoT service selection using multi-objective optimization.
+
+These traditional approaches share common characteristics: (1) they treat service composition as a static optimization problem, (2) they require complete knowledge of candidate services and their QoS attributes, (3) they perform re-optimization when conditions change, and (4) they lack the ability to learn from environmental interactions. The fundamental limitation is that these approaches cannot adapt to the dynamic nature of IoT environments where service availability and quality fluctuate continuously.
+
+Multi-criteria decision-making (MCDM) methods provide an alternative to population-based heuristics. These approaches include techniques like TOPSIS, VIKOR, and fuzzy logic-based selection. However, MCDM methods typically require predefined weights for QoS attributes, which may not be available in dynamic environments.
+
+The survey literature reveals that heuristic approaches dominate the field. Of 147 studies reviewed by Asghari et al. \cite{asghari2020service}, approximately 45\% proposed new algorithms or frameworks, with genetic algorithms being the most prevalent. However, these approaches were designed primarily for static or quasi-static environments and exhibit significant limitations when applied to moving IoT services.
+
+\subsection{2.4 Mobile and Moving IoT Services}
+\label{sec:2.4-mobile-moving}
+
+The paradigm of moving IoT services represents a fundamental shift from traditional static service composition. In moving IoT service composition, service providers themselves are mobile—they change their spatial positions over time, creating unique challenges not addressed by static approaches. This section examines the evolution from mobile services (where consumers move) to moving services (where providers move), with particular attention to the Bouguettaya group's extensive work in this domain.
+
+The Energy-as-a-Service (EaaS) research stream by Lakhdari, Abusafia, Bouguettaya, and colleagues provides a comprehensive progression illustrating the evolution of IoT service composition approaches. Lakhdari et al. \cite{lahkdari2018crowdsourcing} introduced the foundational concept of crowdsourcing energy as a service, where wearable devices can share energy with nearby IoT devices. This work formalized the problem using fractional knapsack optimization for temporal composition of energy services.
+
+The subsequent evolution demonstrates the characteristic pattern of adding one feature per paper. Lakhdari et al. \cite{lahkdari2020composing} extended the approach to full composition of energy services in crowdsourced IoT environments, addressing the complete workflow from service discovery to composition and execution. Building on this foundation, Lakhdari et al. \cite{lahkdari2020fluid} introduced fluid composition of intermittent IoT energy services, adding intermittency modeling to handle the stochastic nature of renewable energy sources. This work utilized integer linear programming (ILP) combined with bin-packing for constraint satisfaction.
+
+The addition of mobility features appeared in Lakhdari and Bouguettaya \cite{lahkdari2021proactive}, where proactive composition of mobile IoT energy services introduced trajectory prediction and handoff management. The key innovation was anticipating future device positions to make composition decisions before services become unavailable. This represents the transition from reactive to proactive composition.
+
+Elastic composition, introduced by Lakhdari et al. \cite{lahkdari2020elastic}, added elastic pool management and dynamic capacity scaling using genetic algorithms with real-time adaptation. Fairness-aware crowdsourcing \cite{lahkdari2021fairness} addressed multi-request scenarios where multiple consumers compete for limited energy services. The incentive-based approach by Abusafia et al. \cite{abusafia2022incentive} added game-theoretic mechanisms for provider incentives. Quality of experience optimization \cite{abusafia2022qoe} introduced a novel QoE metric as the optimization criterion, and service-based wireless energy crowdsourcing \cite{abusafia2022service} provided a comprehensive ecosystem framework.
+
+The Drone-as-a-Service (DaaS) domain exhibits the same publishing pattern. Shahzaad et al. \cite{shahzaad2019composing} introduced composing drone-as-a-service for delivery using 3D R-tree and Dijkstra/Heuristic approaches. Constraint-aware drone-as-a-service composition \cite{shahzaad2019constraint} added recharging constraints using multi-armed bandit and skyline approaches. Swarm-based DaaS \cite{alkouz2020swarm} introduced swarm behavior with modified A* algorithms. Game-theoretic DaaS \cite{shahzaad2020game} added multi-agent negotiation using game theory. Top-k dynamic DaaS \cite{shahzaad2021topk} introduced probabilistic wait and recharge times. DaaS under uncertainty \cite{hamdi2021drone} added uncertainty-aware scheduling using predictive DQN-style approaches. Multi-package delivery \cite{shahzaad2022service} introduced graph-based service-oriented architecture.
+
+Paper 17, by Neiat et al. \cite{neiat2021deep}, represents the application of deep reinforcement learning (Double DQN) to moving IoT service composition. Unlike earlier papers focusing on energy services, this work addresses moving services in general—the providers themselves move during the composition lifecycle. The key contributions include: (1) trajectory-aware composition using predicted service positions, (2) Double DQN with prioritized experience replay for learning policies, (3) adaptive Q-networks handling varying state spaces, and (4) event-triggered re-composition mechanisms.
+
+The state space in Paper 17 includes current positions of moving services, movement trajectories and velocities, QoS attributes, distance matrices, historical composition success rates, and time-to-service availability. The action space encompasses service selection, re-composition triggers, replacement decisions, composition depth adjustment, and wait-or-proceed decisions. The reward function balances composition success, QoS satisfaction, re-composition frequency minimization, latency minimization, and resource utilization efficiency.
+
+The evaluation used synthetic IoT service datasets with random waypoint mobility models (pedestrian), vehicle routes, and drone flight paths. This contrasts with this thesis work, which uses real pedestrian trajectory datasets (ATC indoor and Illinois outdoor).
+
+The evolution from static to mobile to moving services represents a fundamental shift in problem formulation. Static services remain at fixed locations; mobile services have moving consumers; moving services have moving providers. Each transition introduces additional complexity in the composition algorithm.
+
+\subsection{2.5 Machine Learning and Reinforcement Learning Approaches}
+\label{sec:2.5-ml-rl}
+
+The limitations of traditional heuristic approaches—particularly their inability to adapt to dynamic environments—motivated the application of machine learning and reinforcement learning to service composition. This section reviews the progression from basic Q-learning through deep Q-networks to actor-critic methods.
+
+Q-learning, a model-free reinforcement learning algorithm, was applied to service composition by Alizadeh et al. \cite{alizadeh2022reinforcement}. Their work on reinforcement learning for interactive QoS-aware services composition demonstrated the potential of learning policies through environmental interaction. However, tabular Q-learning suffers from the curse of dimensionality when applied to large state spaces typical of IoT environments.
+
+Deep Q-networks (DQN) address the dimensionality problem by using deep neural networks to approximate the Q-function. Liu et al. \cite{liu2021deep} applied DQN combined with meta-heuristics (GA, PSO, SA, ABC) to resource-constrained multi-project scheduling. However, standard DQN suffers from overestimation bias—Q-values systematically overestimate true action values, leading to suboptimal selection when valid services are scarce.
+
+Double DQN, introduced by van Hasselt et al., addresses overestimation by separating action selection from evaluation. Paper 17 \cite{neiat2021deep} utilized Double DQN with prioritized experience replay for moving IoT service composition. The prioritized replay mechanism samples important transitions more frequently during training, accelerating learning in dynamic environments. However, Double DQN still operates reactively—it responds to current state rather than anticipating future states.
+
+The trajectory-aware mechanism in Paper 17 attempts to address reactivity through prediction. By estimating future service positions, the algorithm can include services that will remain available throughout the composition's expected lifetime. However, this requires accurate trajectory prediction, which may fail for unpredictable mobility patterns.
+
+Actor-critic methods combine value-based and policy-based reinforcement learning. The actor learns a stochastic policy directly while the critic estimates the value function. This architecture reduces variance compared to pure policy gradient while handling continuous action spaces. Mnih et al. \cite{mnih2016asynchronous} introduced Asynchronous Advantage Actor-Critic (A2C), which improves stability through the advantage function:
+
+\begin{equation}
+	A(s_t, a_t) = Q(s_t, a_t) - V(s_t) = r_t + \gamma V(s_{t+1}) - V(s_t)
+\end{equation}
+
+The advantage function measures how much better a particular action is compared to the average. Studies on A2C for task scheduling in edge-cloud systems demonstrate faster convergence and better adaptability than DQN \cite{chen2018deep, liu2019deep}. Adding LSTM to A2C handles temporal dependencies in mobility-aware scenarios.
+
+The theoretical foundations supporting actor-critic methods include finite-time convergence analysis. Zhang et al. \cite{zhang2020finite} showed that single-timescale actor-critic with linear function approximation finds an $\epsilon$-approximate stationary point with $\mathcal{O}(\tilde{\epsilon}^{-2})$ sample complexity. Wang et al. \cite{wang2019sample} provided finite-time analysis for multi-objective actor-critic with sample complexity independent of objective count.
+
+A2C offers several advantages for moving IoT service composition: (1) direct policy learning reduces overestimation bias compared to value-based methods, (2) the advantage function enables stable learning in stochastic environments, (3) shared feature extraction reduces computational overhead, and (4) the architecture naturally handles the sequential decision nature of composition. This thesis applies A2C to moving IoT service composition with a novel polar coordinate state representation.
+
+The progression from Q-learning through DQN to Double DQN to A2C reflects broader trends in reinforcement learning research. Each advancement addresses limitations of previous approaches while introducing new capabilities. The move from value-based to policy-based (actor-critic) methods represents a fundamental shift in how composition decisions are learned and executed.
+
+\subsection{2.6 The Publishing Pattern: Algorithm Change in IoT Service Composition}
+\label{sec:2.6-publishing-pattern}
+
+This section presents a novel analysis revealing a consistent publishing pattern in IoT service composition research. Across multiple research domains—including Energy-as-a-Service, Drone-as-a-Service, and Moving IoT Services—researchers address the same underlying NP-hard problem formulation by applying different algorithms in successive publications. Understanding this pattern provides essential context for positioning contributions in this field.
+
+The fundamental observation is that QoS-aware service composition remains NP-hard regardless of the specific application domain. Whether composing energy services, drone delivery services, or general IoT services, the core optimization problem is equivalent—the Multidimensional Multiple Choice Knapsack Problem. Rather than proposing new problem formulations, researchers typically modify one component: the algorithm used to solve the problem.
+
+\textbf{Energy-as-a-Service (EaaS) Domain}. The Bouguettaya group's work on energy service composition demonstrates this pattern clearly. Each paper builds upon prior work while changing exactly one component:
+
+\begin{enumerate}
+	\item \textbf{E1} (2018): Crowdsourcing Energy as a Service---fractional knapsack for temporal composition \cite{lahkdari2018crowdsourcing}
+	\item \textbf{E2} (2020): Composing Energy Services---optimization framework for full composition \cite{lahkdari2020composing}
+	\item \textbf{E3} (2020): Fluid Composition of Intermittent Energy---added intermittency modeling with ILP + bin-packing \cite{lahkdari2020fluid}
+	\item \textbf{E4} (2020): Elastic Composition---added elastic pool + genetic algorithm \cite{lahkdari2020elastic}
+	\item \textbf{E5} (2021): Proactive Composition---added trajectory prediction + mobility \cite{lahkdari2021proactive}
+	\item \textbf{E6} (2021): Fairness-aware Crowdsourcing---added multi-request fairness optimization \cite{lahkdari2021fairness}
+	\item \textbf{E7} (2022): Incentive-based Selection---added game theory + provider incentives \cite{abusafia2022incentive}
+	\item \textbf{E8} (2022): QoE Optimization---added Quality of Experience metric \cite{abusafia2022qoe}
+	\item \textbf{E9} (2022): Service-based Wireless Energy---added ecosystem framework \cite{abusafia2022service}
+\end{enumerate}
+
+Each paper adds exactly one new feature while maintaining the core problem formulation. The pattern is explicit: "we improve upon X using Y" where Y is the new algorithm or feature.
+
+\textbf{Drone-as-a-Service (DaaS) Domain}. The same pattern appears in drone delivery service composition:
+
+\begin{enumerate}
+	\item \textbf{D1} (2019): Composing DaaS for Delivery---3D R-tree + Dijkstra/Heuristic \cite{shahzaad2019composing}
+	\item \textbf{D2} (2019): Constraint-aware DaaS---added recharging constraints + multi-armed bandit + skyline \cite{shahzaad2019constraint}
+	\item \textbf{D3} (2020): Swarm-based DaaS---added swarm behavior + modified A* \cite{alkouz2020swarm}
+	\item \textbf{D4} (2020): Game-theoretic DaaS---added multi-agent negotiation via game theory \cite{shahzaad2020game}
+	\item \textbf{D5} (2021): Top-k Dynamic DaaS---added probabilistic wait/recharge times \cite{shahzaad2021topk}
+	\item \textbf{D6} (2021): DaaS Under Uncertainty---added uncertainty-aware scheduling (predictive DQN-style) \cite{hamdi2021drone}
+	\item \textbf{D7} (2022): Multi-package Delivery---added graph-based SOA \cite{shahzaad2022service}
+\end{enumerate}
+
+\textbf{Moving IoT Services (Paper 17)}. The transition to deep reinforcement learning \cite{neiat2021deep} follows the same pattern—adding trajectory prediction and Double DQN to the moving service composition problem.
+
+The algorithm evolution across the broader literature reflects this pattern:
+
+\begin{center}
+	\begin{tabular}{ll}
+		\textbf{Period} & \textbf{Algorithm Evolution}            \\
+		\hline
+		2015-2017       & GA, PSO, ACO (early optimization)       \\
+		2018-2020       & ABC, WOA, SFLA (swarm intelligence)     \\
+		2020-2022       & DQN, Double DQN (first RL applications) \\
+		2022-2024       & A2C, PPO, TD3 (actor-critic methods)    \\
+		2024-2025       & Hybrid approaches (FPA-TS, DDAPSO)      \\
+	\end{tabular}
+\end{center}
+
+This publishing pattern has important implications. First, it suggests that the fundamental problem formulation—NP-hard multi-objective optimization—remains unsolved, with researchers applying increasingly sophisticated algorithms to the same mathematical structure. Second, it indicates that meaningful contributions often involve adding one feature rather than fundamentally reframing the problem. Third, it highlights the importance of clearly articulating what distinguishes a new approach from prior work.
+
+The pattern also reveals opportunities for differentiation. Rather than simply applying a new algorithm, research that advances the state representation, utilizes different datasets, or addresses previously overlooked constraints represents more substantial contributions. This thesis distinguishes itself through: (1) A2C algorithm (actor-critic) versus Double DQN (value-based), (2) polar coordinate state representation (r, cos$\theta$, sin$\theta$) versus trajectory prediction, and (3) real pedestrian datasets (ATC, Illinois) versus synthetic data.
+
+\subsection{2.7 Research Gap}
+\label{sec:2.7-research-gap}
+
+Despite significant research progress in IoT service composition, several gaps remain unaddressed. This section identifies the specific research gap that this thesis addresses.
+
+First, existing reinforcement learning approaches for moving IoT service composition rely on trajectory prediction to anticipate future service positions. Paper 17 \cite{neiat2021deep} uses predicted trajectories to make proactive composition decisions. However, trajectory prediction introduces additional computational overhead and may fail for unpredictable mobility patterns. This thesis proposes an alternative approach using polar coordinate state representation that encodes spatial relationships without explicit trajectory prediction.
+
+Second, the literature predominantly uses synthetic datasets for evaluation. Paper 17 evaluated using random waypoint models, vehicle routes, and drone flight paths. This thesis uses real pedestrian trajectory datasets—the ATC dataset (indoor) and Illinois dataset (outdoor)—providing more realistic evaluation conditions.
+
+Third, value-based methods like DQN and Double DQN suffer from overestimation bias. Actor-critic methods like A2C address this limitation through direct policy learning. This thesis applies A2C to moving IoT service composition, leveraging its stability advantages for dynamic environments.
+
+Fourth, the publishing pattern analysis reveals that most work builds upon the same problem formulation without fundamentally advancing the representation or learning approach. This thesis contributes a novel state representation (polar coordinates), a different learning paradigm (actor-critic versus value-based), and realistic evaluation (real pedestrian data).
+
+The specific research questions addressed by this thesis are:
+
+\begin{enumerate}
+	\item How can polar coordinate representation enable effective moving IoT service composition without explicit trajectory prediction?
+	\item Does A2C provide advantages over Double DQN for moving service composition in terms of learning stability and composition success rate?
+	\item How do learned policies perform on real pedestrian trajectory datasets compared to synthetic data?
+\end{enumerate}
+
+These questions position this work at the intersection of state representation design, algorithm selection, and evaluation methodology—three orthogonal dimensions that collectively advance the state of the art.
+
+\subsection{2.8 Summary}
+\label{sec:2.8-summary}
+
+This chapter presented a comprehensive literature review of IoT service composition, covering fundamental concepts, traditional approaches, mobile and moving services, machine learning methods, and a novel analysis of publishing patterns.
+
+The fundamental challenge of QoS-aware service composition is NP-hard, requiring heuristic or learning-based approaches for tractable solutions. Traditional heuristic methods (GA, PSO, ACO) treat composition as static optimization and require re-optimization when conditions change.
+
+The evolution from static to mobile to moving IoT services introduces additional complexity. The Bouguettaya group's work demonstrates a consistent pattern where each paper adds one feature to prior work. The Energy-as-a-Service papers (E1-E9), Drone-as-a-Service papers (D1-D7), and Moving IoT work (Paper 17) all follow this pattern.
+
+Reinforcement learning approaches—Q-learning, DQN, Double DQN, and A2C—offer increasingly sophisticated capabilities for dynamic service composition. A2C provides stability advantages through the advantage function and direct policy learning.
+
+The publishing pattern analysis reveals that most research addresses the same NP-hard problem formulation through algorithm changes. This thesis contributes through alternative state representation (polar coordinates), different algorithm (A2C), and realistic evaluation (real pedestrian datasets).
+
+The next chapter presents the proposed A2C-based framework for moving IoT service composition, addressing the research gap identified in this review.
+
+%\bibliography{references}
+\bibliography{references}
+
+\end{document}

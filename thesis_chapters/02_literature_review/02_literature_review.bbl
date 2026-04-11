@@ -1,0 +1,202 @@
+\begin{thebibliography}{10}
+
+\bibitem{abusafia2022incentive}
+Amani Abusafia, Athman Bouguettaya, and Sajib Mistry.
+\newblock Incentive-based selection and composition of {IoT} energy services.
+\newblock In {\em IEEE International Conference on Web Services (ICWS)}, 2022.
+
+\bibitem{abusafia2022qoe}
+Amani Abusafia, Abdallah Lakhdari, and Athman Bouguettaya.
+\newblock Quality of experience optimization in {IoT} energy services.
+\newblock In {\em IEEE International Conference on Web Services (ICWS)}, pages
+  91--96, 2022.
+
+\bibitem{abusafia2022service}
+Amani Abusafia, Abdallah Lakhdari, and Athman Bouguettaya.
+\newblock Service-based wireless energy crowdsourcing.
+\newblock 2022.
+
+\bibitem{alizadeh2022reinforcement}
+Sasan Alizadeh and etc.
+\newblock Reinforcement learning for interactive {QoS-Aware} services
+  composition.
+\newblock {\em IEEE Systems Journal}, 2022.
+
+\bibitem{alizadeh2020service}
+Zohair Alizadeh, Mohammad Barati, and Ali~Daei Gharan.
+\newblock Service selection mechanisms in the {Internet of Things (IoT)}: a
+  systematic and comprehensive study.
+\newblock {\em Journal of Network and Computer Applications}, 172, 2020.
+
+\bibitem{alkouz2020swarm}
+Balsam Alkouz, Athman Bouguettaya, and Sajib Mistry.
+\newblock Swarm-based drone-as-a-service ({SDaaS}) for delivery.
+\newblock {\em arXiv preprint arXiv:2005.06952}, 2020.
+
+\bibitem{almashaqbeh2020spatio}
+Ghadeer Almashaqbeh and Yiming Zhao.
+\newblock Spatio-cohesive service selection using machine learning in dynamic
+  {IoT} environments.
+\newblock {\em IEEE Transactions on Services Computing}, 2020.
+
+\bibitem{asghari2020service}
+Paria Asghari, Amir~Masoud Rahmani, and Hamid Haj Seyyed~Javadi.
+\newblock Service composition in dynamic environments: A systematic review and
+  future directions.
+\newblock {\em Computer Communications}, 160:351--375, 2020.
+
+\bibitem{assaf2020genetic}
+Wen Assaf, Alaa~and信道.
+\newblock A genetic algorithm based approach for fluctuating {QoS} aware
+  selection of {IoT} services.
+\newblock {\em Journal of Network and Computer Applications}, 2020.
+
+\bibitem{chen2018deep}
+Jiaqi Chen and Honggang Li.
+\newblock Deep reinforcement learning for 5g network slicing with dynamic
+  resource allocation.
+\newblock {\em IEEE International Conference on Communications (ICC)}, 2018.
+
+\bibitem{hamdi2021drone}
+Ali Hamdi, Flora~D. Salim, Du~Yong Kim, Azadeh~Ghari Neiat, and Athman
+  Bouguettaya.
+\newblock Drone-as-a-service composition under uncertainty.
+\newblock {\em IEEE Transactions on Services Computing}, 15(6):3202--3215,
+  2021.
+
+\bibitem{hussein2022machine}
+Wafa Hussein, Tarek Amaile, and Mohamed Jdeprecated.
+\newblock Machine learning in real-time internet of things ({IoT}) systems: A
+  survey.
+\newblock {\em Computer Networks}, 2022.
+
+\bibitem{khan2022energy}
+Rafiullah Khan, Sherali Zeadally, and etc.
+\newblock Energy centered and {QoS} aware services selection for internet of
+  things.
+\newblock {\em IEEE Transactions on Services Computing}, 2022.
+
+\bibitem{lahkdari2021fairness}
+Abdallah Lakhdari and Athman Bouguettaya.
+\newblock Fairness-aware crowdsourcing of {IoT} energy services.
+\newblock In {\em International Conference on Service-Oriented Computing
+  (ICSOC)}, pages 351--367, 2021.
+
+\bibitem{lahkdari2021proactive}
+Abdallah Lakhdari and Athman Bouguettaya.
+\newblock Proactive composition of mobile {IoT} energy services.
+\newblock In {\em IEEE International Conference on Web Services (ICWS)}, pages
+  192--197, 2021.
+
+\bibitem{lahkdari2020composing}
+Abdallah Lakhdari, Athman Bouguettaya, Sajib Mistry, and Azadeh~Ghari Neiat.
+\newblock Composing energy services in a crowdsourced {IoT} environment.
+\newblock {\em IEEE Transactions on Services Computing}, 14(4):1154--1167,
+  2020.
+
+\bibitem{lahkdari2020fluid}
+Abdallah Lakhdari, Athman Bouguettaya, Sajib Mistry, and Azadeh~Ghari Neiat.
+\newblock Fluid composition of intermittent {IoT} energy services.
+\newblock In {\em IEEE International Conference on Services Computing (SCC)},
+  pages 329--336, 2020.
+
+\bibitem{lahkdari2020elastic}
+Abdallah Lakhdari, Athman Bouguettaya, Sajib Mistry, Azadeh~Ghari Neiat, and
+  Basem Suleiman.
+\newblock Elastic composition of crowdsourced {IoT} energy services.
+\newblock 2020.
+
+\bibitem{lahkdari2018crowdsourcing}
+Abdallah Lakhdari, Athman Bouguettaya, and Azadeh~Ghari Neiat.
+\newblock Crowdsourcing energy as a service.
+\newblock In {\em International Conference on Service-Oriented Computing
+  (ICSOC)}, pages 342--351, 2018.
+
+\bibitem{liu2021deep}
+Peng Liu and etc.
+\newblock A deep reinforcement learning based multiple meta-heuristic methods
+  approach for resource constrained multi-project scheduling problem.
+\newblock {\em Expert Systems with Applications}, 2021.
+
+\bibitem{liu2019deep}
+Qingyuan Liu and Yuhua Qi.
+\newblock Deep reinforcement learning for dynamic resource allocation in edge
+  computing.
+\newblock {\em IEEE International Conference on Edge Computing (SEC)}, 2019.
+
+\bibitem{mnih2016asynchronous}
+Volodymyr Mnih, Adrià~Puigdomènech Badia, Mehdi Mirza, et~al.
+\newblock Asynchronous methods for deep reinforcement learning.
+\newblock {\em International Conference on Machine Learning (ICML)}, pages
+  1928--1937, 2016.
+
+\bibitem{neiat2021deep}
+Azadeh~Ghari Neiat, Athman Bouguettaya, Sajib Mistry, et~al.
+\newblock A deep reinforcement learning approach for composing moving {IoT}
+  services.
+\newblock {\em IEEE Transactions on Services Computing}, 2021.
+
+\bibitem{qiu2023nsga}
+Huan Qiu and Jiang Cheng.
+\newblock Research on {IoT} service composition optimization based on improved
+  {NSGA-II}.
+\newblock {\em Computers and Security}, 2023.
+
+\bibitem{shahzaad2021topk}
+Babar Shahzaad and Athman Bouguettaya.
+\newblock Top-k dynamic service composition in skyway networks.
+\newblock {\em arXiv preprint arXiv:2111.09153}, 2021.
+
+\bibitem{shahzaad2022service}
+Babar Shahzaad and Athman Bouguettaya.
+\newblock Service-oriented architecture for drone-based multi-package delivery.
+\newblock {\em arXiv preprint arXiv:2206.04544}, 2022.
+
+\bibitem{shahzaad2020game}
+Babar Shahzaad, Athman Bouguettaya, and Sajib Mistry.
+\newblock A game-theoretic drone-as-a-service composition for delivery.
+\newblock In {\em IEEE International Conference on Web Services (ICWS)}, pages
+  449--453, 2020.
+
+\bibitem{shahzaad2019composing}
+Babar Shahzaad, Athman Bouguettaya, Sajib Mistry, and Azadeh~Ghari Neiat.
+\newblock Composing drone-as-a-service ({DaaS}) for delivery.
+\newblock In {\em IEEE International Conference on Web Services (ICWS)}, pages
+  28--32, 2019.
+
+\bibitem{shahzaad2019constraint}
+Babar Shahzaad, Athman Bouguettaya, Sajib Mistry, and Azadeh~Ghari Neiat.
+\newblock Constraint-aware drone-as-a-service composition.
+\newblock In {\em International Conference on Service-Oriented Computing
+  (ICSOC)}, pages 369--382, 2019.
+
+\bibitem{tang2024shuffled}
+Bin Tang and Qi~Wu.
+\newblock Iot service composition based on improved shuffled frog leaping
+  algorithm.
+\newblock {\em Heliyon}, 2024.
+
+\bibitem{wang2019sample}
+Xin Wang and etc.
+\newblock Sample complexity of multi-objective reinforcement learning.
+\newblock {\em arXiv preprint}, 2019.
+
+\bibitem{yu2007efficient}
+Tao Yu and Kejun Lin.
+\newblock Efficient {QoS-aware Service Composition}.
+\newblock {\em IEEE International Conference on Services Computing (SCC)},
+  pages 75--82, 2007.
+
+\bibitem{zhang2022hybrid}
+Xiaohui Zhang, Fang Liu, and Yijia Yang.
+\newblock An approach based on genetic algorithms and neural networks for
+  {QoS-aware IoT} services composition.
+\newblock {\em Computer Communications}, 2022.
+
+\bibitem{zhang2020finite}
+Yusheng Zhang, Meng Liu, and etc.
+\newblock Finite-time analysis of actor-critic with linear function
+  approximation.
+\newblock {\em International Conference on Machine Learning (ICML)}, 2020.
+
+\end{thebibliography}
