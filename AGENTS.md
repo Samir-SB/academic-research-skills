@@ -1,41 +1,78 @@
-# AGENTS.md - Academic Research Skills
+# AGENTS.md - PhD Thesis: A2C-Based Moving IoT Service Composition
 
-## Reference Paper Analysis Workflow
+## Project Context
 
-When analyzing new research papers in `reference-paper/XX/` folders:
+**Main Thesis**: A2C-Based Proactive Composition for Moving IoT Services (IEEE Transactions on Services Computing)
 
-### Critical Steps
+**Research Focus** (from Notion):
+- Selection and deployment of IoT services in dynamic environments
+- Moving IoT services = services from mobile devices (location + availability change over time)
+- Spatio-temporal properties: where + when service is available
+- Core challenge: maintain QoS under device mobility
 
-1. **Confirm paper title before reading** - Use `question` tool to verify the exact title, as filename may differ from actual paper title
+## Directory Structure
 
-2. **Read the PDF first** - Use `read` tool on the PDF file to get full content
+```
+reference-paper/
+├── main_paper/           # Your PhD thesis (A2C-Moving-IoT-Service-Composition-v4.*)
+├── 01-17/                # Reference papers for literature review
+├── analysis/             # Cross-paper analysis
+├── peer_reviews/         # Consolidated peer reviews
+└── surveys_summaries/    # Survey summaries
 
-3. **Create peer review files** - After reading:
-   - `XX/peer-review-analysis.md` - Full peer review with 30 Q&A
-   - `XX/research-summary.md` - Concise summary
+experiments-codesource/   # Experiment code (DQN, A2C, baselines)
+├── claude_a2c_online.py # Main A2C implementation
+├── dqn.py                # DQN baseline
+├── configs/              # Experiment configs
+└── data/                 # Experiment data
+```
 
-4. **Update summary table** - Edit `reference-paper/summary-table.md`:
-   - Add new row with title, year, algorithm, paper type
-   - Update statistics section
+## Critical Workflows
 
-5. **Commit changes** - Use git to track new analysis
+### 1. Reference Paper Analysis
 
-### Summary Table Format
+When analyzing papers in `reference-paper/XX/`:
+1. **Confirm title first** — filename may differ from actual paper title
+2. Read PDF with `read` tool (not OCR - use PDF directly)
+3. Create: `XX/peer-review-analysis.md` (30 Q&A in 5 sections)
+4. Update: `reference-paper/main_paper/summary-table.md` (add row + update stats)
+5. **Commit** with git
 
-| # | Title | Year | Algorithm Used | Paper Type |
-|---|-------|------|----------------|------------|
+**Common pitfalls**:
+- Don't assume filename = title
+- Papers are `01/`, `02/`, not sorted by year
+- Always update summary-table.md when adding new paper
 
-Update these stats after each new paper:
-- Total Papers
-- Systematic Reviews / Original Research counts
-- Algorithm distribution
+### 2. Main Paper Development
 
-### Common Issues to Avoid
+- Main paper: `reference-paper/main_paper/A2C-Moving-IoT-Service-Composition-v4.*`
+- LaTeX source: `reference-paper/main_paper/main.tex` + sections `01_abstract.tex` - `12_source_code.tex`
+- Bibliography: `A2C-Moving-IoT-Service-Composition-v4.bib`
 
-- **Don't assume filename = title** - Always confirm with user before proceeding
-- **Check folder structure** - Papers are in `reference-paper/01/`, `02/`, etc.
-- **Keep table updated** - Always update summary-table.md when adding new paper
+### 3. Running Experiments
+
+```bash
+# A2C training
+cd experiments-codesource
+python claude_a2c_online.py
+
+# DQN baseline
+python dqn.py
+
+# Run experiments batch
+./run_experiments.sh
+```
+
+## Key Research Context
+
+**Moving IoT Services** differ from static services:
+- Location changes over time
+- Availability is time-dependent
+- Require spatio-temporal querying ("available here and now?")
+- QoS degrades under mobility (link quality → latency → reliability)
+
+**Core Problem**: Select, compose, maintain IoT services where services are mobile and spatio-temporal properties evolve, without QoS degradation.
 
 ---
 
-*For full academic pipeline skills, see `.claude/CLAUDE.md`*
+*For academic pipeline skills (deep-research, paper writing), see `.claude/CLAUDE.md`*
