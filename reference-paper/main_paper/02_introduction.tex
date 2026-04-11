@@ -5,8 +5,8 @@ composition from a static optimization problem into a dynamic,
 sequential decision-making challenge. Traditional service composition
 assumes fixed service locations---a user selects from a static pool of
 available services. This assumption breaks when services themselves are
-moving: pedestrians carrying devices in a shopping center, vehicles on a
-highway, or workers moving through a factory floor. The composition that
+moving: pedestrians carrying devices in a shopping center, students
+walking across campus, or workers moving through a factory floor. The composition that
 worked seconds ago may fail moments later as services move out of
 communication range.
 
@@ -79,9 +79,9 @@ learn to select services that are both valid and high-quality, without
 knowing a priori which services will be valid at each timestep.
 
 Prior work addressed this with Double DQN {[}1{]}, using the STR model
-for distance-derived capacity and trajectory-aware composition. The
-approach achieved 92.4\% success at low mobility (2 km/h) and 54.3\% at
-high mobility (80 km/h), with 124.3 re-compositions per hour. However,
+for distance-derived capacity and composition. The approach achieved
+92.4\% success at low pedestrian mobility (2 km/h) and 71.8\% at higher
+mobility (10 km/h), with frequent re-compositions needed. However,
 DQN's value-based nature has three key limitations. First,
 overestimation bias leads to suboptimal action selection, particularly
 harmful when valid services are few. Second, DQN handles discrete action
@@ -101,7 +101,7 @@ We pose four research questions:
 
 \begin{enumerate}
 	\item How can A2C be adapted for moving IoT service composition while
-	      preserving STR-based selection?
+	      building upon the STR-based selection from prior work [1]?
 	\item How do shared versus separate network architectures perform in this
 	      domain?
 	\item How does A2C compare to reactive baselines (greedy nearest-neighbor,
@@ -117,4 +117,4 @@ limitations. Section 8 concludes.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\hypertarget{motivation}{%
+\hypertarget{motivation}{}

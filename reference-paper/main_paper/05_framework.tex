@@ -60,11 +60,16 @@ focus on deterministic moving crowdsourced services
 \textbf{MDP Formulation}: We formulate this as an MDP:
 
 \textbf{State Space (\(S\))}: At time step \(t\), the state consists of
-the current positions of all moving entities:
-\[s_t = \{\text{pos}_1^t, \text{pos}_2^t, ..., \text{pos}_n^t, \text{pos}_{consumer}^t, t\}\]
+the relative polar coordinates of all moving entities with respect to
+the consumer:
+\[s_t = \{r_1^t, \theta_1^t, r_2^t, \theta_2^t, ..., r_n^t, \theta_n^t, t\}\]
 
-where \(\text{pos}_i^t = (x_i^t, y_i^t)\) is the GPS position of service
-\(i\) at time \(t\).
+where \(r_i^t = \sqrt{(x_i^t - x_c^t)^2 + (y_i^t - y_c^t)^2}\) is the
+distance from service \(i\) to consumer \(c\) at time \(t\), and
+\(\theta_i^t = \arctan2(y_i^t - y_c^t, x_i^t - x_c^t)\) is the bearing
+angle. The state is transformed into a feature vector containing
+\([r, \cos\theta, \sin\theta]\) for each service, enabling the agent to
+learn spatial relationships without explicit velocity computation.
 
 \textbf{Action Space (\(A\))}: Select service ID from available
 services: \[a_t \in \{1, 2, 3, ..., n\}\]
@@ -83,10 +88,10 @@ communication range AND provide optimal capacity.
 
 \textbf{Transition Dynamics (\(P\))}: Transitions follow the stochastic
 dynamics of moving services and device mobility. Service positions
-evolve according to their movement patterns, while device position
-changes based on velocity and direction. Connectivity depends on spatial
-proximity within communication range \(R_{comm}\). The distance matrix
-\(D_t\) updates accordingly with each transition.
+evolve according to their movement patterns observed in the trajectory
+data. Connectivity depends on spatial proximity within communication
+range \(R_{comm}\). The distance matrix \(D_t\) updates accordingly
+with each transition.
 
 \textbf{Reward Function (\(R\))}: The reward function is based on the
 capacity QoS parameter. Since QoS attributes (capacity) are computed
@@ -267,14 +272,12 @@ action dimension \(d_a\), the A2C algorithm achieves
 
 where \(\delta\) is the confidence parameter.
 
-\emph{Proof Sketch}: The state space includes service positions
-(\(n \times 2\) for \(n\) services), device position (2), velocity (2),
-predicted trajectories (\(n \times H \times 2\) for horizon \(H\)),
-distance matrix (\(n \times n\)), and temporal features. This yields
-\(d_s = \mathcal{O}(n^2 + nH)\). The action space includes \(n\)
-selection actions, \(n^2\) replacement actions, \(n\) addition actions,
-\(n\) removal actions, and 1 maintain action, giving
-\(d_a = \mathcal{O}(n^2)\).
+\emph{Proof Sketch}: The state space includes relative polar
+coordinates (\(n \times 3\) for \(n\) services: \(r, \cos\theta,
+\sin\theta\)), consumer position (2), distance matrix (\(n \times n\)),
+and temporal features. This yields \(d_s = \mathcal{O}(n^2)\). The
+action space includes \(n\) service selection actions plus a dummy
+action for no valid service, giving \(d_a = \mathcal{O}(n)\).
 
 \textbf{Corollary 1 (Scalability)}: The sample complexity scales
 polynomially with the number of services \(n\), specifically
@@ -354,37 +357,30 @@ The actor incorporates LSTM for trajectory-aware policy learning,
 capturing temporal dependencies in service movement patterns. The critic
 uses standard feedforward processing for value estimation.
 
-\hypertarget{proactive-composition-through-trajectory-prediction}{%
-	\subsubsection{3.5 Proactive Composition through Trajectory
-		Prediction}\label{proactive-composition-through-trajectory-prediction}}
+\hypertarget{relative-polar-coordinate-representation}{%
+	\subsection{3.5 Relative Polar Coordinate Representation}\label{relative-polar-coordinate-representation}}
 
-Proactive composition requires predicting future service positions to
-make composition decisions that remain valid over the planning horizon.
-We implement trajectory prediction using historical movement patterns:
+Instead of velocity-based trajectory prediction, we transform raw GPS
+coordinates into a relative polar coordinate representation that is
+directly fed to the DRL agent. This transformation provides several
+advantages: it encodes spatial relationships explicitly, is robust to
+coordinate system variations, and provides a compact state
+representation.
 
-\begin{Shaded}
-	\begin{Highlighting}[]
-		\KeywordTok{def}\NormalTok{ predict\_trajectory(service, history, horizon):}
-		\CommentTok{"""Predict service positions over planning horizon"""}
-		\NormalTok{    positions }\OperatorTok{=}\NormalTok{ []}
-		\NormalTok{    velocity }\OperatorTok{=}\NormalTok{ service.velocity}
+The polar coordinate transformation converts the absolute positions
+into relative features:
+\[
+	r_i = \sqrt{(x_i - x_c)^2 + (y_i - y_c)^2}, \quad
+	\theta_i = \arctan2(y_i - y_c, x_i - x_c)
+\]
 
-		\ControlFlowTok{for}\NormalTok{ t }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(horizon):}
-		\NormalTok{        pos }\OperatorTok{=}\NormalTok{ service.position }\OperatorTok{+}\NormalTok{ velocity }\OperatorTok{*}\NormalTok{ t }\OperatorTok{+}\NormalTok{ np.random.normal(}\DecValTok{0}\NormalTok{, }\FloatTok{0.1}\NormalTok{)}
-		\NormalTok{        positions.append(pos)}
-
-		\CommentTok{\# Calculate future distances for capacity prediction}
-		\NormalTok{    future\_distances }\OperatorTok{=}\NormalTok{ compute\_distance\_matrix(positions, device\_positions)}
-		\NormalTok{    future\_capacity }\OperatorTok{=}\NormalTok{ calculate\_capacity(future\_distances)}
-
-		\ControlFlowTok{return}\NormalTok{ positions, future\_capacity}
-	\end{Highlighting}
-\end{Shaded}
-
-The predicted trajectories and corresponding capacity values go into the
-state representation, enabling the A2C agent to make composition
-decisions based on anticipated service positions and expected
-capacities.
+The state vector for each service consists of three features:
+\([r_i, \cos\theta_i, \sin\theta_i]\). This representation ensures that:
+1. Distance \(r_i\) captures the proximity to the consumer
+2. The angular components \(\cos\theta, \sin\theta\) capture directional
+information while avoiding the discontinuity at \(\theta = \pi\)
+3. The representation is translation-invariant with respect to the
+consumer's position
 
 \hypertarget{spatio-temporal-constraint-handling-with-str-based-capacity}{%
 	\subsubsection{3.6 Spatio-Temporal Constraint Handling with STR-Based

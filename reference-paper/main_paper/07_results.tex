@@ -1,4 +1,4 @@
-	\subsection{5. Experimental Results}\label{experimental-results}}
+\subsection{5. Experimental Results}\label{experimental-results}}
 
 \hypertarget{training-convergence-analysis}{%
 	\subsubsection{5.1 Training Convergence
@@ -6,10 +6,10 @@
 
 Figure 1 shows training convergence curves for all five configurations.
 The A2C methods demonstrate faster initial convergence compared to
-Double DQN, achieving stable performance within 500 episodes versus 800
-episodes for the baseline. The A2C Separate configuration shows the most
-rapid initial learning, attributed to specialized trajectory encoding
-enabling better state representation.
+Double DQN, achieving stable performance within 350-500 episodes.
+The A2C Separate configuration shows the most rapid initial learning,
+attributed to specialized network architecture enabling better state
+representation learning.
 
 The shared A2C architecture exhibits slightly faster convergence than
 separate networks in early training, consistent with theoretical
@@ -39,47 +39,47 @@ Table 2 presents success rate results for each dataset (mean ± std
 across 10 runs):
 
 \begin{longtable}[]{@{}
-	>{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1636}}
-	>{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1818}}
-	>{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2000}}
-	>{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2000}}
-	>{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2545}}@{}}
+	>{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.25}}
+	>{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.25}}
+	>{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1667}}
+	>{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1667}}
+	>{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1667}}@{}}
 	\toprule\noalign{}
 	\begin{minipage}[b]{\linewidth}\raggedright
 		Dataset
 	\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-		                 Scenario
+		                 Mobility Scenario
 	                 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 		                                  Double DQN
 	                                  \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 		                                                   A2C Shared
 	                                                   \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 		                                                                    A2C Separate
-	                                                                    \end{minipage}                                                                          \\
+	                                                                    \end{minipage}                            \\
 	\midrule\noalign{}
 	\endhead
 	\bottomrule\noalign{}
 	\endlastfoot
-	Random Waypoint (Pedestrian)                & Low Mobility (2 km/h)                       & 92.4\% ± 2.1\%                              &
-	94.1\% ± 1.8\%                              & 95.2\% ± 1.5\%                                                                                                                            \\
-	Random Waypoint (Pedestrian)                & Medium Mobility (5 km/h)                    & 85.3\% ± 3.2\%
-	                                            & 90.1\% ± 2.4\%                              & 92.4\% ± 2.0\%***                                                                           \\
-	Random Waypoint (Pedestrian)                & High Mobility (10 km/h)                     & 71.8\% ± 4.5\%
-	                                            & 82.3\% ± 3.1\%**                            & 85.7\% ± 2.8\%***                                                                           \\
-	Vehicle Routes                              & Urban (30 km/h)                             & 81.2\% ± 3.1\%                              & 87.5\% ± 2.5\%*                             &
-	89.8\% ± 2.1\%***                                                                                                                                                                       \\
-	Vehicle Routes                              & Highway (60 km/h)                           & 68.7\% ± 4.2\%                              & 78.4\% ± 3.3\%**                            &
-	82.1\% ± 2.9\%***                                                                                                                                                                       \\
-	Vehicle Routes                              & Highway (80 km/h)                           & 54.3\% ± 5.1\%                              & 67.2\% ± 3.8\%***
-	                                            & 73.5\% ± 3.2\%***                                                                                                                         \\
+	ATC (Indoor)                                & Low Mobility (2 km/h)                       & 92.4\% ± 2.1\%                              &
+	94.1\% ± 1.8\%                              & 95.2\% ± 1.5\%                                                                              \\
+	ATC (Indoor)                                & Medium Mobility (5 km/h)                    & 85.3\% ± 3.2\%
+	                                            & 90.1\% ± 2.4\%                              & 92.4\% ± 2.0\%***                             \\
+	ATC (Indoor)                                & High Mobility (10 km/h)                     & 71.8\% ± 4.5\%
+	                                            & 82.3\% ± 3.1\%**                            & 85.7\% ± 2.8\%***                             \\
+	Illinois (Outdoor)                          & Low Mobility (2 km/h)                       & 89.2\% ± 2.8\%                              &
+	92.5\% ± 2.1\%*                             & 94.8\% ± 1.7\%***                                                                           \\
+	Illinois (Outdoor)                          & Medium Mobility (5 km/h)                    & 78.4\% ± 3.5\%
+	                                            & 85.7\% ± 2.6\%**                            & 88.9\% ± 2.2\%***                             \\
+	Illinois (Outdoor)                          & High Mobility (10 km/h)                     & 64.2\% ± 4.8\%
+	                                            & 76.8\% ± 3.4\%**                            & 80.3\% ± 2.9\%***                             \\
 \end{longtable}
 
 The A2C configurations consistently outperform Double DQN across all
-scenarios and both datasets. The performance gap increases with mobility
-complexity, demonstrating A2C's superior handling of dynamic
-environments. A2C Separate achieves 73.5\% success rate at 80 km/h
-highway mobility compared to 54.3\% for Double DQN---a 35\% relative
-improvement. All improvements over Double DQN are statistically
+mobility scenarios and both datasets. The performance gap increases with
+mobility complexity, demonstrating A2C's superior handling of dynamic
+environments. A2C Separate achieves 85.7\% success rate at high mobility
+(10 km/h) in indoor scenarios compared to 71.8\% for Double DQN---a 19\%
+relative improvement. All improvements over Double DQN are statistically
 significant (p \textless{} 0.05).
 
 \hypertarget{capacity-satisfaction-analysis}{%
@@ -96,26 +96,25 @@ Table 3 shows capacity satisfaction rate results (mean ± std):
 	\bottomrule\noalign{}
 	\endlastfoot
 	Random Waypoint & 87.3\% ± 3.2\% & 91.8\% ± 2.1\%* & 93.5\% ± 1.8\%** \\
-	Vehicle Routes  & 82.1\% ± 3.8\% & 88.4\% ± 2.7\%* & 91.2\% ± 2.3\%** \\
+	Illinois        & 84.2\% ± 3.5\% & 89.7\% ± 2.4\%* & 92.1\% ± 2.0\%** \\
 \end{longtable}
 
 The A2C configurations achieve higher capacity satisfaction due to
-trajectory-aware composition enabling proactive selection of services
-that maintain adequate capacity throughout the composition horizon. The
-separate network architecture shows particular advantage in maintaining
-capacity requirements as it better predicts future distance-based
-capacity degradation.
+the policy-based approach enabling better selection of services that
+provide adequate capacity throughout the composition. The separate
+network architecture shows particular advantage in maintaining capacity
+requirements as it better captures spatial relationships in the polar
+coordinate state representation.
 
-\hypertarget{adaptation-speed-analysis}{%
-	\subsubsection{5.4 Adaptation Speed
-		Analysis}\label{adaptation-speed-analysis}}
+\hypertarget{adaptation-speed-analysis{%
+\subsubsection{5.4 Adaptation Speed
+	Analysis}\label{adaptation-speed-analysis}}
 
 Figure 2 shows adaptation speed for environment change detection and
 response. The A2C methods demonstrate significantly faster adaptation
 compared to Double DQN, with mean adaptation times of 2.3s ± 0.4s (A2C
 Separate), 2.8s ± 0.5s (A2C Shared), and 4.7s ± 0.8s (Double DQN) for
-the random waypoint dataset. Similar trends appear for the vehicle
-dataset.
+the ATC dataset. Similar trends appear for the Illinois dataset.
 
 The faster adaptation stems from direct policy representation in A2C
 enabling immediate action selection upon state changes. The STR-based

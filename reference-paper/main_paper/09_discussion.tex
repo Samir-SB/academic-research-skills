@@ -1,25 +1,24 @@
-	\subsection{7. Discussion}\label{discussion}}
+\subsection{7. Discussion}\label{discussion}}
 
 \hypertarget{interpretation-of-results}{%
 	\subsubsection{7.1 Interpretation of
 		Results}\label{interpretation-of-results}}
 
 A2C outperforms Double DQN on moving IoT service composition while
-preserving STR-based selection. Three factors drive improvements.
+A2C outperforms Double DQN on moving IoT service composition while building upon the STR-based selection from prior work [1]. Three factors drive improvements.
 
 First, actor-critic gives stable learning by combining value estimation
 with direct policy optimization. The advantage function reduces variance
 while keeping updates unbiased, so the agent learns effectively from
 fewer samples.
 
-Second, proactive composition via trajectory prediction anticipates
-service positions instead of just reacting. The A2C agent picks services
-that maintain capacity across the composition horizon, not just
-currently available ones.
+Second, the relative polar coordinate representation captures spatial
+relationships efficiently, enabling the agent to learn effective service
+selection without explicit velocity or trajectory prediction.
 
-Third, separate networks with LSTM trajectory encoding specialize
-processing for spatio-temporal states. More parameters and training
-time, but better performance when movement patterns matter.
+Third, separate networks specialize processing for spatio-temporal
+states. More parameters and training time, but better performance when
+movement patterns matter.
 
 The STR-based selection continues driving decisions---the agent learns
 to maximize expected capacity while maintaining stability.
@@ -30,34 +29,33 @@ to maximize expected capacity while maintaining stability.
 
 A2C improves over Double DQN on both datasets.
 
-Random Waypoint: A2C Separate achieves 95.2\% versus 92.4\% at low
-mobility (3\% improvement). At high mobility (10 km/h), the gap grows to
-13.9\% (85.7\% vs 71.8\%).
+ATC (Indoor): A2C Separate achieves 95.2\% versus 92.4\% at low
+mobility (2.8\% improvement). At high mobility (10 km/h), the gap grows
+to 13.9\% (85.7\% vs 71.8\%).
 
-Vehicle Routes: At 80 km/h, A2C Separate reaches 73.5\% versus 54.3\%
-for Double DQN---a 19.2\% absolute improvement. Structured movement
-patterns help trajectory prediction.
+Illinois (Outdoor): At high mobility (10 km/h), A2C Separate reaches
+80.3\% versus 64.2\% for Double DQN---a 16.1\% absolute improvement.
+Outdoor trajectories with more varied movement patterns benefit from
+the learned policy.
 
-Capacity satisfaction improves because A2C anticipates degradation and
-picks services with better margin.
+Capacity satisfaction improves because A2C better captures spatial
+relationships and selects services with better capacity margins.
 
 \hypertarget{practical-implications}{%
-	\subsubsection{7.3 Practical
-		Implications}\label{practical-implications}}
+	#### 7.3 Practical Implications}\label{practical-implications}}
 
 \textbf{Edge Deployment}: A2C with shared networks balances performance
 and computation for edge deployment. Inference cost allows real-time
 decisions on edge devices.
 
-\textbf{Stability}: A2C re-composes 69.2/hr versus 124.3/hr for Double
-DQN on waypoint data. Less disruption, lower overhead for production
-systems.
+\textbf{Stability}: A2C re-composes less frequently than Double DQN,
+reducing service disruption and overhead for production systems.
 
 \textbf{STR Quality}: STR-derived capacity provides a grounded service
 quality metric tied to spatial proximity.
 
-\hypertarget{limitations}{%
-	\subsubsection{7.4 Limitations}\label{limitations}}
+\hypertarget{limitations}%
+#### 7.4 Limitations}\label{limitations}
 
 Three limitations point to future work:
 
@@ -68,9 +66,9 @@ investigation.
 \textbf{Centralized}: Assumes centralized composition. Distributed
 multi-agent approaches could scale better for large IoT systems.
 
-\textbf{Validation}: We tested on real GPS from Illinois, but AP
-locations are simulated. Future work should use real IoT service
-availability data.
+\textbf{Validation}: We tested on real GPS from ATC and Illinois
+datasets, but service availability is simulated. Future work should
+use real IoT service availability data.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
