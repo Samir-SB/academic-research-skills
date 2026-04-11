@@ -1,7 +1,7 @@
 # Reference Papers Summary Table
 
 ## Overview
-This table summarizes all 18 reference papers analyzed for the PhD thesis on "A2C-Based Proactive Composition for Moving IoT Services".
+This table summarizes all 25 reference papers analyzed for the PhD thesis on "A2C-Based Proactive Composition for Moving IoT Services".
 
 ---
 
@@ -85,6 +85,35 @@ This table summarizes all 18 reference papers analyzed for the PhD thesis on "A2
 
 ---
 
+## Papers 20-25: Additional DRL Approaches
+
+| # | Title | Authors | Year | Focus | Algorithm | Scope |
+|---|-------|---------|------|-------|-----------|-------|
+| 20 | PPDRL: Pretraining-and-Policy Based DRL | Yi et al. | 2022 | QoS-aware composition | DQN + Pretraining + Policy Scoring | Static services |
+| 21 | Deep Learning for Local Service Selection | Awanyo & Guermouche | 2024 | Local service selection | CNN + LSTM | Static services |
+| 22 | PD3QND: Deep RL with Noise & Double Dueling | Chen et al. | 2023 | Dynamic QoS | DQN + Noise + PER + Double Dueling | Dynamic services |
+| 23 | ADQRCN: Adaptive DQN + RNN | Wang et al. | 2019 | Large-scale, partially observable | DQN + RNN | Large-scale |
+| 24 | ML Survey: 147 Papers (2018-2023) | Lu et al. | 2024 | Systematic survey | Survey (Q-learning, DQN, A3C, A2C) | All domains |
+| 25 | Large-Scale DRL | Moustafa & Ito | 2018 | Large-scale composition | DQN | Large-scale |
+
+### Key Findings from Paper 24 (Survey of 147 papers)
+- **Q-learning**: 12 papers
+- **DQN**: 8 papers
+- **Actor-Critic**: 3 papers
+- **A3C**: 2 papers (only A3C, NO A2C found)
+- **PPO**: 1 paper
+- **Moving IoT services**: Only 3 papers
+- **A2C specifically**: 0 papers
+
+### Paper 22 (PD3QND) vs A2C
+- PD3QND uses DQN variants (Noise, PER, Double Dueling)
+- Still value-based, not actor-critic
+- No trajectory prediction
+- No proactive handover
+- No moving IoT services
+
+---
+
 ## Additional Papers (06-10)
 
 | # | Title | Authors | Year | Focus | Algorithm | Relevance |
@@ -112,14 +141,16 @@ This table summarizes all 18 reference papers analyzed for the PhD thesis on "A2
 
 | Algorithm | Papers | Limitations |
 |-----------|--------|-------------|
-| **Survey/Review** | 01, 05, 11 | No implementation |
+| **Survey/Review** | 01, 05, 11, 24 | No implementation |
 | **Genetic Algorithm** | 02, 03 | No learning, static optimization |
-| **Machine Learning** | 04 | Prediction only, no RL |
-| **DQN** | 06 | Scheduling, not IoT services |
+| **Machine Learning** | 04, 21 | Prediction only, no RL |
+| **DQN** | 06, 20, 22, 23, 25 | Value-based, no actor-critic |
+| **DQN + RNN** | 23 | POMDP but still value-based |
 | **Meta-heuristic Hybrid** | 07, 09 | No learning |
-| **Q-learning** | 08, 17 | Basic Q-learning (17), no A2C |
+| **Q-learning** | 08, 17 | Basic Q-learning, no A2C |
 | **Rule-based** | 18 | No learning |
 | **Crowdsourcing** | 12-16 | Confined areas, no mobility |
+| **A3C** | 24 (mentioned) | Only 2 papers, none for moving IoT |
 
 ---
 
@@ -135,12 +166,23 @@ This table summarizes all 18 reference papers analyzed for the PhD thesis on "A2
 
 ## Statistics
 
-- **Total papers**: 18
-- **Analyzed**: 01-18 (all 18 papers)
-- **Most relevant**: 17, 18 (moving IoT services)
-- **RL approaches**: 2 (Paper 08: Q-learning, Paper 17: basic deep Q-learning)
-- **Survey papers**: 3 (01, 05, 11)
+- **Total papers**: 25
+- **Analyzed**: 01-25 (all 25 papers)
+- **Most relevant**: 17, 18, 22, 24 (moving IoT services, handover, survey)
+- **RL approaches**: 8+ (Q-learning, DQN, DQN+RNN, A3C)
+- **A2C/A3C approaches**: 2 (A3C: papers 24 survey mentions 2, NO A2C found)
+- **Survey papers**: 4 (01, 05, 11, 24)
 - **Handover mechanisms**: 2 (Paper 17 implicit, Paper 18 explicit)
+
+---
+
+## Key Research Gaps (Validated by Papers 20-25)
+
+1. **No A2C**: Survey (Paper 24) confirms 0 papers use A2C for IoT service composition
+2. **No trajectory prediction**: All DRL papers use current state, not future trajectory
+3. **No proactive handover**: Reactive only in all papers
+4. **Value-based only**: All use DQN variants, no actor-critic for moving services
+5. **Moving services**: Only 3 papers (17, 18, 24 mentions) address mobile IoT services
 
 ---
 
