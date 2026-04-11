@@ -1,121 +1,229 @@
 # Peer Review Analysis: A Deep Reinforcement Learning Approach for Composing Moving IoT Services
 
-## 1. What is the main research problem addressed in this paper?
+## Overview
 
-The paper addresses the challenge of composing IoT services in dynamic environments where services are moving—meaning the IoT devices or sensors are mobile rather than static. This creates a fundamental challenge not addressed in prior work: the composition topology changes continuously as services move, making traditional static composition approaches ineffective. The problem involves maintaining service quality and composition stability despite continuous spatial changes in the service landscape.
+This paper addresses the challenge of composing IoT services in dynamic environments where services are mobile rather than static. The core problem is that traditional service composition approaches assume fixed service locations, but many real-world IoT scenarios involve moving devices that continuously change their spatial positions.
 
-## 2. How does this paper differ from previous work on mobile IoT services (e.g., papers 14-16)?
+The paper develops a framework for discovering crowdsourced services that move in close proximity to a user over time. The key insight is that services must be both spatially and temporally valid—they must be within communication range at the exact time of service provisioning.
 
-While papers 14-16 focus on energy aspects of mobile IoT (fluid composition, proactive composition, elastic composition), this paper directly addresses the mobility challenge in service composition itself. Paper 15 (proactive composition) predicted device trajectories but used the predictions for energy planning; this paper uses trajectory information to optimize the actual service composition. Paper 16 (elastic composition) addresses availability changes but not spatial movement. This paper is the first to specifically address composing services from moving IoT devices using DRL.
+## Research Questions Answered
 
-## 3. What is the core contribution of this paper?
+### 1. What is the specific problem this paper addresses?
 
-The main contribution is a Deep Reinforcement Learning (DRL) framework specifically designed for composing moving IoT services. The paper proposes: (1) a novel formulation of moving service composition as a sequential decision problem, (2) a Double DQN-based algorithm with prioritized experience replay for learning optimal composition policies, (3) a trajectory-aware composition mechanism that predicts future service positions to make proactive composition decisions, and (4) an adaptive Q-network that handles the varying state spaces caused by mobile services.
+The paper addresses three key research challenges:
 
-## 4. What deep reinforcement learning algorithm is used?
+1. **Connectivity**: A moving service must stay connected with a service provider (within connectivity proximity). This requires determining co-movement patterns between users and service trajectories.
 
-The paper uses Double DQN (Double Deep Q-Network) with prioritized experience replay. Double DQN addresses the overestimation problem in standard Q-learning by using two separate networks for action selection and evaluation. The prioritized replay mechanism samples important transitions more frequently during training, accelerating learning in dynamic environments. The network architecture likely uses a deep neural network to approximate the Q-function, handling the complex state space of moving IoT services.
+2. **Service Continuity**: A service provider and user may not share their entire route—they may only overlap for part of the journey. The composition must select an optimal sequence of available moving services ensuring continuity.
 
-## 5. How is the state space defined for the moving services composition problem?
+3. **Indexing and Scalability**: Existing co-movement discovery methods rely on centralized index structures like R-trees, which degrade dramatically as datasets scale up.
 
-The state space includes: (1) current positions of all available moving services, (2) their movement trajectories and velocities, (3) QoS attributes of each service, (4) distance matrix between services and the user/requesting application, (5) historical composition success rates, and (6) time-to-service availability considering mobility. The high-dimensional state space is precisely why deep learning is needed—traditional RL cannot handle the complexity.
+### 2. What is the motivation scenario?
 
-## 6. What actions can the agent take in this formulation?
+The paper uses WiFi hotspot sharing as the primary scenario. Users can share their smartphone WiFi as moving hotspots while strolling in a city. This creates the need to select and compose moving services that overlap with a user's trajectory to maintain continuous connectivity.
 
-The agent can: (1) select specific services from the available pool to include in the composition, (2) decide when to trigger re-composition as services move, (3) choose replacement services when existing ones move out of range, (4) adjust composition depth (number of services), and (5) decide whether to wait for better service configurations or proceed with current options. The action space is discrete but large, suitable for DQN-based approaches.
+### 3. How does the paper model moving IoT services?
 
-## 7. How is the reward function designed?
+The paper defines:
 
-The reward function balances multiple objectives: (1) positive reward for successful composition completion, (2) negative reward for composition failure or QoS violations, (3) reward for minimizing re-composition frequency (encouraging stable compositions), (4) reward for maintaining low latency as services move, and (5) reward for efficient resource utilization. The multi-objective reward likely uses weighted sum or multi-objective optimization to balance composition success, quality, and efficiency.
+- **Moving Crowdsourced Service (MS)**: A service provided by an IoT device moving in time, space, or both, modeled as a moving region described by a tuple of `<Ts, Rti(pi)>` where Ts is a service trajectory (sequence of timestamped samples) and Rti(pi) is the coverage region (circular area centered at pi with radius r at time ti).
 
-## 8. What datasets are used for evaluation?
+- **User Trajectory (Tu)**: The path traveled by a user, represented as a set of k timestamped samples `<uti, uxi, uyi>`.
 
-The evaluation uses synthetic IoT service datasets with realistic mobility patterns. The datasets include: (1) random waypoint mobility models simulating human-carried devices, (2) vehicles moving along predefined routes, (3) drones with configurable flight paths, (4) varying service densities (sparse to dense deployments), and (5) different velocity profiles (slow pedestrian, medium vehicle, fast drone scenarios). The simulation probably tests scales from 20-100+ moving services.
+- **Valid Candidate Moving Service**: A moving service paired with the user trajectory over w consecutive timesteps (w > 0).
 
-## 9. What are the main performance metrics used?
+### 4. How is the state space defined?
 
-The paper evaluates: (1) Composition success rate—the percentage of requests successfully composed despite service mobility, (2) Average response time—from request to composition completion, (3) QoS satisfaction rate—percentage of compositions meeting QoS requirements, (4) Re-composition frequency—how often compositions need adjustment due to mobility, (5) Learning convergence speed—how quickly the DRL agent learns effective policies, and (6) Adaptation cost—computational overhead of handling mobility.
+The state space includes:
+- Current user trajectory sample `<t, x, y>` 
+- The agent observes the current user position as the state
 
-## 10. How does the paper handle the challenge of continuous state changes?
+### 5. What actions can the agent take?
 
-The paper addresses continuous state changes through: (1) trajectory prediction that estimates future service positions, (2) event-triggered re-composition rather than continuous monitoring (reducing overhead), (3) look-ahead mechanisms that consider future states in current decisions, and (4) experience replay that captures diverse state transitions for robust learning. The Double DQN architecture helps maintain stable Q-values despite state fluctuations.
+The action space is discrete:
+- Select a valid candidate moving service ID from available services
+- Select a **dummy service** (when no valid candidates exist)
 
-## 11. What is trajectory-aware composition?
+### 5.1 What is the purpose of the dummy service?
 
-Trajectory-aware composition uses predicted service trajectories to make proactive composition decisions. Instead of reacting to service movements after they occur, the system anticipates future positions and includes services that will remain available throughout the composition's expected lifetime. This is a key innovation distinguishing this from reactive approaches—it transforms the problem from spatial optimization to spatiotemporal optimization.
+The dummy service handles the case when there are **no valid candidate services** available for a given user trajectory sample. This addresses two problematic scenarios:
 
-## 12. How does DRL compare with traditional optimization approaches?
+1. **No valid candidates exist**: The user is in a location with no overlapping moving services
+2. **Agent selects invalid service**: The agent picks a service that doesn't actually overlap with the user trajectory
 
-The paper compares DRL with: (1) Genetic Algorithm-based composition—slower but good global search, (2) PSO-based composition—faster convergence but prone to local optima, (3) Q-learning—suffers from curse of dimensionality, and (4) static composition—baseline that doesn't handle mobility. DRL shows superior performance in dynamic scenarios with faster adaptation and better success rates. However, DRL requires training time while traditional approaches are typically anytime algorithms.
+The dummy service serves as a valid action the agent can take when no real services are available, preventing the agent from making impossible selections while still learning appropriate behavior:
 
-## 13. What is the computational complexity of the proposed approach?
+- **Dummy service selected**: Reward = -1 (less severe, acknowledges "no service available")
+- **Invalid service selected**: Penalty = -10 (more severe, teaches agent to avoid invalid selections)
 
-The training complexity is dominated by neural network training, but the inference (composition decision) is fast—suitable for real-time applications. The algorithm maintains O(n) complexity for service selection where n is the number of available services. The overhead comes from maintaining trajectory predictions and updating the composition state, which can be managed through efficient data structures.
+This mechanism teaches the agent to prefer the dummy service (higher reward -1) over selecting an invalid service (punishment -10) when no real services are available.
 
-## 14. How does the paper address the exploration-exploitation tradeoff?
+### 6. What is the reward function?
 
-The paper uses epsilon-greedy exploration during training with annealing to reduce exploration over time. The prioritized replay also contributes to exploration by revisiting important transitions that might otherwise be neglected. Once trained, the agent exploits learned policies while still maintaining some randomness to adapt to novel situations. The balance is crucial—too much exploration wastes resources, too little prevents adaptation to changing conditions.
+The reward is based on QoS (capacity) provided by the selected service:
+- Positive reward [0, 1] for valid service selection based on capacity
+- Reward of -1 for selecting dummy service
+- Penalty of -10 for selecting invalid service
 
-## 15. What happens when no suitable services are available?
+The capacity is computed using the Shannon-Hartley theorem, directly proportional to signal strength. Signal strength uses an exponential attenuation model based on distance between user and service.
 
-The paper likely handles this through: (1) graceful degradation to lower QoS levels, (2) waiting for services to move into range (with timeout), (3) expanding the search radius beyond immediate vicinity, (4) leveraging trajectory predictions to anticipate future availability, and (5) providing feedback about impossible compositions. The DRL agent learns to recognize impossible situations and make appropriate decisions.
+### 7. What algorithm is used?
 
-## 16. How does this paper compare with paper 8 (RL for interactive QoS-aware composition)?
+The paper uses **Q-learning with Neural Networks** (basic deep Q-learning), NOT DQN or Double DQN. This is confirmed by multiple references in the paper:
 
-Paper 8 uses basic Q-learning for static IoT services. This paper extends that paradigm to moving services using Deep RL instead of tabular Q-learning. The key differences: (1) state representation handles mobility features, (2) Double DQN handles function approximation stability, (3) trajectory prediction is explicitly incorporated, and (4) the problem is inherently multi-step rather than single decision. This paper represents a significant advancement over paper 8's approach.
+- "The Q-learning's discount factor γ is set to 0.9" (experimental section)
+- "We rely on the Q-Learning algorithm to learn the optimal execution policy"
+- Figure labels refer to "Q-Learning Training Time" and "Q-Learning Testing Time"
 
-## 17. What is the role of the Q-network architecture?
+**Algorithm Details (from Algorithm 1):**
+- **Neural Network**: Dense fully connected, 3 hidden layers with 512 units each
+- **Activation**: ReLU in hidden layers, dropout with probability 0.5
+- **Learning rate**: 0.001
+- **Discount factor (γ)**: 0.9
+- **Exploration**: ε-greedy (ε starts at 1.0, decayed by 0.995)
+- **Memory**: Basic buffer that stores transitions, trains when full
+- **Training/Test split**: 70% / 30%
 
-The Q-network uses a deep neural network to approximate Q(s,a) for all actions from a given state. The architecture likely includes: (1) input layers for state features (service positions, velocities, QoS), (2) hidden layers (likely convolutional for spatial patterns or fully connected for general features), (3) output layer with one value per possible action. The network is trained via gradient descent to minimize TD error between predicted and target Q-values.
+**What's NOT used:**
+- No target network
+- No explicit experience replay (just basic memory buffer)
+- No Double DQN mechanism
+- No prioritized experience replay
 
-## 18. How does the paper ensure generalization across different mobility patterns?
+The term "deep reinforcement learning" in the paper refers to using a neural network for Q-function approximation (making it "deep" Q-learning), but it's still basic Q-learning implementation.
 
-Generalization is achieved through: (1) diverse training scenarios covering various mobility patterns, (2) transfer learning that adapts pre-trained policies to new patterns, (3) normalization of state features to handle different scales, and (4) the adaptive capacity of deep networks to handle variations. The paper probably evaluates on mobility patterns not seen during training to demonstrate generalization.
+### 7.1 What are the hyper-parameters?
 
-## 19. What are the practical applications considered?
+From the experimental section (6.1 Experiment Setup):
 
-The paper applies the approach to: (1) vehicle-to-vehicle service composition for autonomous driving, (2) drone swarm coordination for surveillance, (3) moving sensor networks for environmental monitoring, (4) mobile edge computing where computation moves with users, and (5) wearable IoT device networks that move with users. These scenarios highlight the importance of handling mobility in real-world IoT deployments.
+| Hyper-parameter | Value |
+|-----------------|-------|
+| **Neural Network Architecture** | Dense fully connected |
+| **Hidden Layers** | 3 layers |
+| **Neurons per Layer** | 512 |
+| **Activation Function** | ReLU |
+| **Dropout** | 0.5 (probability) |
+| **Learning Rate** | 0.001 |
+| **Discount Factor (γ)** | 0.9 |
+| **Exploration (ε) Start** | 1.0 |
+| **ε Decay** | 0.995 (multiplicative) |
+| **Training/Test Split** | 70% / 30% |
+| **Memory** | Basic buffer (trains when full) |
 
-## 20. What are the limitations acknowledged by the authors?
+### 7.2 What is the state space?
 
-Likely limitations include: (1) training data requirements—the DRL agent needs extensive training to learn effective policies, (2) computational resources for training—infeasible for extremely resource-constrained devices, (3) assumption of predictable mobility patterns—highly chaotic movements may defeat trajectory prediction, (4) communication overhead for continuous state updates, and (5) cold start problem when few historical data points exist.
+From the paper (Section 4):
 
-## 21. How does the paper handle privacy concerns with location data?
+- **State Definition**: Each state s is a user trajectory sample `<t, x, y>` where:
+  - t = timestamp
+  - x = longitude coordinate
+  - y = latitude coordinate
 
-The excerpt doesn't detail privacy mechanisms, but approaches could include: (1) local processing of location data without sharing raw coordinates, (2) differential privacy adding noise to location reports, (3) federated learning where training happens on-device, and (4) aggregation-based approaches that combine data without individual tracking. This is an important consideration for real-world deployment.
+- **State Space (S)**: Finite set of user trajectory samples representing the user's position at each timestep
 
-## 22. What is the energy efficiency contribution?
+- **Initial State (s₀)**: First user trajectory sample
+- **Terminal State (sᵣ)**: Last user trajectory sample
 
-The paper contributes to energy efficiency through: (1) reduced re-composition frequency through proactive decision-making, (2) efficient service selection that minimizes communication overhead, (3) trajectory-aware composition that reduces failed attempts and wasted energy, and (4) optimized decision-making that reduces computational waste. The DRL approach learns energy-efficient composition policies as part of its optimization.
+The agent observes the current user position (t, x, y) as the state input to the neural network.
 
-## 23. How does the paper validate the approach (theoretical, simulation, real-world)?
+### 7.3 What is the action space?
 
-The paper uses simulation-based validation with synthetic but realistic mobility patterns. The simulation environment models: (1) realistic mobility models, (2) variable service densities, (3) communication ranges and propagation models, (4) QoS fluctuations, and (5) realistic timing constraints. Simulation enables testing scenarios that would be impractical in real-world deployments, including worst-case conditions.
+From the paper (Section 4, Definition 5):
 
-## 24. What is the scalability behavior?
+- **Action Definition**: Each action represents selecting a **valid candidate moving service**
 
-The paper likely demonstrates scalability through: (1) efficient state representation that scales linearly with service count, (2) parallel training of the DQN, (3) incremental updates rather than full retraining, and (4) hierarchical composition for large-scale scenarios. The evaluation probably shows near-linear scalability up to 100+ moving services, with graceful degradation beyond that.
+- **Action Space (A)**: Set of valid candidate moving service IDs available at the current state
+  - Actions are replaced with "valid candidate moving services" (see Definition 4)
+  - At each state, there is a set of moving services that could be selected
 
-## 25. How does the paper compare with meta-heuristic approaches (papers 06-07)?
+- **Special Actions**:
+  - **Dummy Service**: Used when no valid candidates exist for a given user trajectory sample
+  - **Invalid Service Selection**: Penalized with -10 reward
 
-Paper 6 uses DQN combined with meta-heuristics (GA, PSO, SA, ABC) for scheduling; paper 7 uses discrete dragonfly algorithm + PSO. Those papers apply meta-heuristics to static optimization problems. This paper uses pure DRL specifically designed for the sequential decision problem of moving service composition. Meta-heuristics would require continuous re-optimization as services move, while DRL learns a policy that handles changes efficiently without full re-optimization.
+The neural network outputs are the possible actions (service IDs) that the agent can select at each state.
 
-## 26. What future research directions are mentioned?
+### 8. What assumptions are made?
 
-Likely future directions include: (1) multi-agent DRL for distributed composition decisions, (2) transfer learning across different environments, (3) integration with edge computing for low-latency decisions, (4) handling adversarial mobility patterns, (5) real-world deployment and validation, and (6) combining DRL with blockchain for secure service markets.
+From the paper (Section 3.1 Problem Formulation):
 
-## 27. How does the paper handle QoS in a mobility context?
+1. **One moving service can only serve one user at any point in time** - No sharing of services between multiple users simultaneously
 
-QoS in mobility contexts is addressed through: (1) dynamic QoS monitoring as services move, (2) trajectory-based prediction of future QoS values, (3) adaptive composition that maintains QoS despite changes, (4) graceful degradation strategies when QoS cannot be maintained, and (5) multi-objective reward that prioritizes QoS satisfaction. The DRL agent learns to balance composition success with QoS maintenance.
+2. **Constant speed between timestamps** - A moving service moves between any two consecutive timestamps ti and ti+1 with a constant speed. This allows determining the position of the moving service at any given time in the interval [ti, ti+1]. Other speed functions could be considered if the function for finding the moving service's location is constant time.
 
-## 28. What distinguishes this from other DRL applications in IoT?
+3. **Fixed coverage region radius** - Radii of all coverage regions of services are fixed to a single value. The region around each service is considered as a circular area with fixed radius.
 
-This is specifically focused on the unique challenges of moving services: (1) spatiotemporal state representation, (2) trajectory prediction integration, (3) event-triggered re-composition, and (4) mobility-aware reward design. General DRL applications in IoT (like resource management or task offloading) don't need to handle the continuous topology changes this paper addresses.
+4. **Deterministic trajectories** - Trajectories of services are deterministic (known in advance). There is a platform that incentivizes WiFi hotspot providers to follow certain assigned trajectories.
 
-## 29. What is the overall quality and rigor of this paper?
+5. **Focus on pedestrian trajectories** - The paper focuses on the trajectories of pedestrians.
 
-The paper demonstrates good quality with: (1) well-motivated problem addressing a real research gap, (2) appropriate use of DRL for the problem complexity, (3) systematic evaluation with multiple metrics and comparisons, (4) clear presentation of the DRL architecture and training process, and (5) thoughtful discussion of limitations and applications. The paper appears to be a solid DRL application to IoT service composition.
+6. **WiFi hotspot services overlay digital maps** - The services are modeled to overlay digital maps.
 
-## 30. How does this paper contribute to the overall research field?
+7. **Equal bandwidth allocation** - Total available bandwidth is assumed to be equally allocated between different IoT service users.
 
-This paper makes significant contributions: (1) first DRL approach specifically for moving IoT service composition, (2) trajectory-aware composition mechanism, (3) Double DQN with prioritized replay for IoT composition, (4) demonstration that DRL outperforms traditional optimization in dynamic scenarios, and (5) foundation for future research on mobile IoT service management.
+8. **Fixed error rate** - The error rate is fixed. Increasing the capacity increases the signal strength, which leads to more successful transmissions.
+
+9. **No prior knowledge of QoS** - The Q-learning algorithm does not have prior knowledge about QoS attributes of moving services since they are computed based on the distance between a user and a moving service.
+
+10. **Consumers don't change trajectories** - The proposed framework neither assumes nor requires consumers to change their trajectories for better services.
+
+### 8. How is service continuity/handover addressed?
+
+The paper addresses continuity through:
+- **Sequential composition**: The composition plan is a sequence of moving services (CP = {S1, S2, ..., Sn})
+- **Overlap detection**: Finding services that intersect with the user's trajectory at each timestep
+- **Dummy service**: Handles cases where no valid candidates exist
+- **Penalty mechanism**: Penalizes selecting invalid services to encourage valid selections
+
+The key mechanism is not "trajectory prediction" but rather finding trajectory overlaps between user and service paths, and selecting a sequence of services that together cover the user's entire trajectory.
+
+### 9. What datasets are used?
+
+Two real-world pedestrian trajectory datasets:
+
+1. **Indoor (ATC Shopping Center, Osaka)**:
+   - 1,777,297,164 samples
+   - 185,554 trajectories
+   - Sampling rate: 0.03-0.06 seconds (normalized to 0.04s)
+   - Represents high-density pedestrian mobility
+
+2. **Illinois Daily Commute**:
+   - 357,706 samples
+   - 207 trajectories
+   - Sampling: strictly every 1 second
+   - Represents daily commuter mobility patterns
+
+### 10. What are the key results?
+
+- **Accuracy**: ~95% on indoor dataset (after 500 trajectories), ~93% on Illinois dataset (after 35 trajectories)
+- **Scalability**: Q-learning testing time < 0.1s vs ground-truth ~10,000s for 1000 services
+- **Convergence**: Polynomial increase with number of moving services
+
+### 11. What is the ground-truth approach?
+
+The paper uses a **Parallel Flock-Based Service Discovery** algorithm as ground-truth:
+- Apache Spark with spatio-temporal MapReduce
+- Temporal Map Step: Prunes sub-trajectories based on user trajectory timesteps (left outer join)
+- Spatial Map Step: Filters candidate services within circular region of user trajectory
+- Reduce Phase: Groups by user timestep
+
+### 12. What are the limitations mentioned?
+
+The paper does not explicitly discuss limitations in detail, but potential limitations include:
+- Assumption of deterministic trajectories
+- Need for extensive training data
+- Computational resources required for training
+- Assumption of constant speed between timestamps
+
+## Comparison with Your Approach
+
+| Aspect | Paper 17 | Your Approach |
+|--------|----------|----------------|
+| Algorithm | Q-learning with Neural Network | A2C (Actor-Critic) |
+| State | User trajectory sample (t, x, y) | Polar coordinates (r, cosθ, sinθ) |
+| Handover | Trajectory overlap detection | A2C learns optimal switching |
+| Datasets | ATC Indoor + Illinois | Same datasets |
+
+---
+
+*Based on: A_Deep_Reinforcement_Learning_Approach_for_Composing_Moving_IoT_ServicesM.pdf*
+*Reference: Paper 17 in research collection*
