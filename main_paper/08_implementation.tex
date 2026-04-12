@@ -103,7 +103,7 @@ phases with different num\_services settings
 	\hline
 	Learning Rate          & 5e-5           \\
 	\hline
-	Discount Factor (γ)    & 0.9            \\
+	Discount Factor ($\gamma$)    & 0.9            \\
 	\hline
 	N-step (A2C)           & 30             \\
 	\hline
@@ -144,14 +144,14 @@ python train.py --config configs/exp1.yaml
 
 \begin{verbatim}
 runs/<run_id>/
-├── model/
-│   ├── a2c_model.zip          # SB3 A2C model checkpoint
-│   └── resolved_config.yaml   # Resolved configuration
-├── plot/
-│   ├── episode_rewards.png    # Training metrics plot
-│   └── action_distribution.png # Action distribution
-└── logs/
-    └── <run_id>.log           # Execution logs
+  +-- model/
+  |   +-- a2c_model.zip          # SB3 A2C model checkpoint
+  |   +-- resolved_config.yaml   # Resolved configuration
+  +-- plot/
+  |   +-- episode_rewards.png    # Training metrics plot
+  |   +-- action_distribution.png # Action distribution
+  +-- logs/
+      +-- <run_id>.log           # Execution logs
 
 experiments_results.csv        # Aggregated results
 \end{verbatim}

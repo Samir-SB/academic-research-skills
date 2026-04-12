@@ -198,7 +198,7 @@ service composition approach.
 \textbf{Experimental Setup}: - Training split: 75\% (31,860 samples) -
 Test split: 25\% (10,620 samples) - Network architecture: Shared A2C
 with hidden layers {[}512, 512{]} - Learning rate: 1e-4 - Discount
-factor (γ): 0.9 - N-step bootstrapping: 60 steps - Entropy coefficient:
+factor ($\gamma$): 0.9 - N-step bootstrapping: 60 steps - Entropy coefficient:
 0.05 - Number of training episodes: 5
 
 \textbf{Training Results on Real GPS Data}:
@@ -225,7 +225,7 @@ Data directory: \texttt{data/selected} - Dataset:
 \texttt{df\_shuffled\_500.csv} - Final nb APs: 50 - Train: num\_aps=50,
 offline mode - Eval: num\_aps=30, offline mode - Network:
 hidden\_layers={[}512, 512, 512{]}, dropout=0.5 - Training: lr=0.00005,
-γ=0.9, n\_steps=30, episodes=100 - Target accuracy: 98\%
+$\gamma$=0.9, n\_steps=30, episodes=100 - Target accuracy: 98\%
 
 \textbf{Analysis}:
 
