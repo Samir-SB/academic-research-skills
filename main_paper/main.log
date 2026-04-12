@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.4.12)  12 APR 2026 14:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.4.12)  12 APR 2026 14:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -900,19 +900,19 @@ olar-coordinate-representation}) has been already used, duplicate ignored
                    \relax 
 l.388 ...elative-polar-coordinate-representation}}
                                                   
-Overfull \hbox (26.63974pt too wide) detected at line 402
+Overfull \hbox (26.53972pt too wide) detected at line 403
 \OML/lmm/m/it/10 r[] \OT1/lmr/m/n/10 = []\OML/lmm/m/it/10 ;  ^^R[] \OT1/lmr/m/n
-/10 = [] 2(\OML/lmm/m/it/10 y[] \OMS/lmsy/m/n/10 ^^@ \OML/lmm/m/it/10 y[]; x[] 
-\OMS/lmsy/m/n/10 ^^@ \OML/lmm/m/it/10 x[]\OT1/lmr/m/n/10 )
+/10 = [](\OML/lmm/m/it/10 y[] \OMS/lmsy/m/n/10 ^^@ \OML/lmm/m/it/10 y[]; x[] \O
+MS/lmsy/m/n/10 ^^@ \OML/lmm/m/it/10 x[]\OT1/lmr/m/n/10 )
  []
 
 
-Underfull \hbox (badness 1097) in paragraph at lines 414--414
+Underfull \hbox (badness 1097) in paragraph at lines 415--415
 []\T1/lmr/bx/n/10 3.6 Spatio-Temporal Con-straint Han-
  []
 
 
-Overfull \hbox (10.93625pt too wide) detected at line 435
+Overfull \hbox (10.93625pt too wide) detected at line 436
 \OML/lmm/m/it/10 C[]\OT1/lmr/m/n/10 (\OML/lmm/m/it/10 t\OT1/lmr/m/n/10 ) = \OML
 /lmm/m/it/10 B \OMS/lmsy/m/n/10 ^^A [][]\OT1/lmr/m/n/10 (1 + \OML/lmm/m/it/10 S
 TR\OT1/lmr/m/n/10 (\OML/lmm/m/it/10 d[]\OT1/lmr/m/n/10 (\OML/lmm/m/it/10 t\OT1/
@@ -1519,7 +1519,7 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 Here is how much of TeX's memory you used:
  11499 strings out of 480247
  177795 string characters out of 5896151
- 492945 words of memory out of 5000000
+ 493007 words of memory out of 5000000
  29076 multiletter control sequences out of 15000+600000
  534506 words of font info for 77 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
@@ -1539,7 +1539,7 @@ f/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy
 7.pfb></usr/share/texmf/fonts/type1/public/lm/lmtk10.pfb></usr/share/texmf/font
 s/type1/public/lm/lmtt10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt9.pfb>
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (17 pages, 407458 bytes).
+Output written on main.pdf (17 pages, 407448 bytes).
 PDF statistics:
  494 PDF objects out of 1000 (max. 8388607)
  433 compressed objects within 5 object streams
