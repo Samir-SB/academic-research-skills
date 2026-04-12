@@ -160,10 +160,11 @@ sample of the next user trajectory.
 
 The STR-based capacity model uses parameters matching prior work:
 
-\begin{table}[htbp]
-	\centering
+\begin{table*}[t]
+	centering
 	\caption{STR-Based Capacity Calculation Parameters}
 	\label{str-params-table}
+	\resizebox{\textwidth}{!}{
 	\begin{tabular}{|l|c|l|}
 		\toprule
 		\textbf{Parameter} & \textbf{Value} & \textbf{Description}                \\
@@ -175,8 +176,8 @@ The STR-based capacity model uses parameters matching prior work:
 		$SNR_{max}$        & 1000 (30 dB)   & Maximum SNR at zero distance        \\
 		$C_{min}$          & 1 Mbps         & Minimum required capacity           \\
 		\bottomrule
-	\end{tabular}
-\end{table}
+	\end{tabular}}
+\end{table*}
 
 \hypertarget{experimental-configurations}{%
 	\subsubsection{4.5 Experimental

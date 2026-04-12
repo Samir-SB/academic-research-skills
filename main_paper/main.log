@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.4.12)  12 APR 2026 14:12
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.4.12)  12 APR 2026 14:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1069,11 +1069,6 @@ Underfull \hbox (badness 2772) in paragraph at lines 161--162
 \T1/lmr/m/n/10 The STR-based ca-pac-ity model uses pa-ram-e-ters
  []
 
-
-Overfull \hbox (64.0088pt too wide) in paragraph at lines 167--179
- [][] 
- []
-
 [9])
 Runaway argument?
 {
@@ -1094,12 +1089,11 @@ l.1 ...ental Results}\label{experimental-results}}
 You've closed more groups than you opened.
 Such booboos are generally harmless, so keep going.
 
-
+[10]
 Underfull \hbox (badness 10000) in paragraph at lines 36--36
 []\T1/lmr/bx/n/10 5.2 Suc-cess Rate Per-for-mance by
  []
 
-[10]
 Runaway argument?
 {adaptation-speed-analysis{\subsubsection {5.4 Adaptation Speed Analy\ETC.
 ! Paragraph ended before \hypertarget was complete.
@@ -1167,7 +1161,7 @@ Underfull \hbox (badness 1303) in paragraph at lines 267--272
 \T1/lmr/m/n/10 sin(angle)) pro-vides rotation-invariant fea-tures
  []
 
-)
+[12])
 Runaway argument?
 {
 ! File ended while scanning use of \hypertarget.
@@ -1195,7 +1189,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 7--7
 []\T1/lmr/bx/n/12 6.1 Data Pre-pro-cess-ing
  []
 
-[12]
+
 Underfull \hbox (badness 10000) in paragraph at lines 12--21
 \T1/lmr/m/n/10 Con-vert to ego-centric po-lar co-or-di-nates -
  []
@@ -1285,13 +1279,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 72--73
 []\T1/lmr/bx/n/10 DQN Im-ple-men-ta-tion\T1/lmr/m/n/10 : We use
  []
 
-
+[13]
 Underfull \hbox (badness 1642) in paragraph at lines 93--97
 \T1/lmr/m/n/10 - \T1/lmtt/m/n/10 MasterConfig\T1/lmr/m/n/10 : Py-dan-tic model 
 for all hy-per-
  []
 
-[13]
+
 Underfull \hbox (badness 5832) in paragraph at lines 127--132
 \T1/lmr/m/n/10 De-fine ex-per-i-ment pa-ram-e-ters 2. \T1/lmr/bx/n/10 Ex-e-cu-t
 ion
@@ -1435,7 +1429,7 @@ Underfull \hbox (badness 1019) in paragraph at lines 64--66
 tion.
  []
 
-)
+[14])
 Runaway argument?
 {
 ! File ended while scanning use of \hypertarget.
@@ -1448,13 +1442,12 @@ to read past where you wanted me to stop.
 I'll try to recover; but if the error is serious,
 you'd better type `E' or `X' now and fix your file.
 
-) (./09_discussion.tex [14pdfTeX warning (ext4): destination with the same iden
-tifier (name{interpretation-of-results}) has been already used, duplicate ignor
-ed
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.16 
-     ]
+) (./09_discussion.texpdfTeX warning (ext4): destination with the same identifi
+er (name{interpretation-of-results}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.4 ... Results}\label{interpretation-of-results}}
+                                                  
 Underfull \hbox (badness 10000) in paragraph at lines 21--23
 []\T1/lmr/m/n/10 The STR-based se-lec-tion con-tin-ues driv-ing
  []
@@ -1615,7 +1608,9 @@ Underfull \hbox (badness 1571) in paragraph at lines 53--54
 \T1/lmr/m/n/10 based content-centric ser-vices in mo-bile sens-ing,''
  []
 
-) [16] (./main.aux)
+[16]) [17
+
+] (./main.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
@@ -1623,13 +1618,13 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 0B264359F6059A89907895B05C95A6AF;11499.
  ) 
 Here is how much of TeX's memory you used:
- 11490 strings out of 480247
- 177672 string characters out of 5896151
+ 11491 strings out of 480247
+ 177679 string characters out of 5896151
  495880 words of memory out of 5000000
  29072 multiletter control sequences out of 15000+600000
  531190 words of font info for 75 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 60i,13n,63p,546b,472s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,13n,63p,546b,473s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dv
 ips/lm/lm-ts1.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/shar
 e/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/share/texmf/fonts/enc/dvips/lm/l
@@ -1645,10 +1640,10 @@ f/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy
 7.pfb></usr/share/texmf/fonts/type1/public/lm/lmtk10.pfb></usr/share/texmf/font
 s/type1/public/lm/lmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
 amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (16 pages, 382928 bytes).
+Output written on main.pdf (17 pages, 383225 bytes).
 PDF statistics:
- 483 PDF objects out of 1000 (max. 8388607)
- 425 compressed objects within 5 object streams
- 139 named destinations out of 1000 (max. 500000)
+ 487 PDF objects out of 1000 (max. 8388607)
+ 428 compressed objects within 5 object streams
+ 140 named destinations out of 1000 (max. 500000)
  417 words of extra memory for PDF output out of 10000 (max. 10000000)
 
