@@ -15,7 +15,8 @@
 \usepackage[svgnames]{xcolor}
 \usepackage[paper=a4paper,margin=0.8in]{geometry}
 \usepackage{hyperref}
-\usepackage{natbib}
+\usepackage{etoolbox}
+%\usepackage{natbib}
 \usepackage{longtable,booktabs,array}
 \usepackage{graphicx}
 
@@ -26,7 +27,7 @@
   urlcolor=NavyBlue,
   pdfcreator={LaTeX}}
 
-\input{11_references}
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}}
 
 \author{}
 \date{}

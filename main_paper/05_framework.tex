@@ -1,11 +1,11 @@
 \subsection{3. Proposed A2C-Based
-	Framework}\label{proposed-a2c-based-framework}}
+	Framework}\label{proposed-a2c-based-framework}
 
 \hypertarget{problem-formalization}{%
 	\subsubsection{3.1 Problem Formalization}\label{problem-formalization}}
 
 We formalize the problem following the definitions from prior work
-{[}1{]}:
+:
 
 \textbf{Definition 1: Moving Crowdsourced Service MS} \cite{neiat2021}. A moving
 crowdsourced service MS is a tuple of \(\langle id, F, Q \rangle\)
@@ -63,7 +63,7 @@ coverage regions are fixed to a single value - Maximum spatial proximity
 equals the radius of fixed WiFi hotspot coverage (e.g., 20-100m) - We
 focus on deterministic moving crowdsourced services
 
-\textbf{MDP Formulation}: We formulate this as an MDP, following the exact structure from prior work [1].
+\textbf{MDP Formulation}: We formulate this as an MDP, following the exact structure from prior work \cite{neiat2021}.
 
 \textbf{State Space ($S$)}: At time step $t$, the state consists of the current user trajectory sample and all available service trajectories. Each sample is a tuple: $<t, x, y>$ for user trajectories, and $<t, x, y, service\_id, QoS>$ for service trajectories. At any given time, the environment has a current state $s \in S$ representing the current user trajectory sample reported to the agent.
 
@@ -157,11 +157,11 @@ the agent always favors the dummy service over invalid selections since
 \hline
 \textbf{Step} & \textbf{Operation} \\
 \hline
-1 & Initialize policy parameters $\theta_\\pi$ and value parameters $\theta_V$ \\
+1 & Initialize policy parameters $\theta_{\pi}$ and value parameters $\theta_V$ \\
 \hline
-2 & Initialize replay memory $\\mathcal{D}$ with capacity $N$ \\
+2 & Initialize replay memory $\mathcal{D}$ with capacity $N$ \\
 \hline
-3 & Set exploration rate $\\epsilon \gets 1.0$ \\
+3 & Set exploration rate $\epsilon \gets 1.0$ \\
 \hline
 4 & \textbf{for} episode $= 1$ \textbf{to} $M$ \\
 \hline
@@ -171,13 +171,13 @@ the agent always favors the dummy service over invalid selections since
 \hline
 7 & \quad\quad Observe state $s_t$ from environment \\
 \hline
-8 & \quad\quad \textbf{if} rand() $< \epsilon$ \textbf{then} select random $a_t$ \textbf{else} $a_t \gets \\arg\\max_a \\pi(a|s_t;\\theta_\\pi)$ \\
+8 & \quad\quad \textbf{if} rand() $< \epsilon$ \textbf{then} select random $a_t$ \textbf{else} $a_t \gets \arg\max_a \pi(a|s_t;\theta_{\pi})$ \\
 \hline
 9 & \quad\quad Execute $a_t$, observe reward $r_t$ and next state $s_{t+1}$ \\
 \hline
-10 & \quad\quad Store transition $(s_t, a_t, r_t, s_{t+1})$ in $\\mathcal{D}$ \\
+10 & \quad\quad Store transition $(s_t, a_t, r_t, s_{t+1})$ in $\mathcal{D}$ \\
 \hline
-11 & \quad\quad Sample mini-batch $\\mathcal{B}$ from $\\mathcal{D}$ \\
+11 & \quad\quad Sample mini-batch $\mathcal{B}$ from $\mathcal{D}$ \\
 \hline
 12 & \quad\quad Update critic: minimize TD-error on $\mathcal{B}$ \\
 \hline
@@ -311,7 +311,7 @@ experiments, convergence to \(\epsilon = 0.01\) requires approximately
 \hypertarget{network-architectures}{%
 	\subsubsection{3.4 Network Architectures}\label{network-architectures}}
 
-We use a dense fully connected neural network to train our model, following the exact architecture from prior work [1]:
+We use a dense fully connected neural network to train our model, following the exact architecture from prior work \cite{neiat2021}:
 
 \textbf{Neural Network Architecture}: The inputs to the network are the parameters defining a state whereas the outputs are the actions which the agent can take. Three hidden layers are used with 512 neurons each. The rectified linear unit (ReLU) activation function is used in all hidden layers. We use dropout with probability 0.5 on all hidden layers to reduce overfitting. The Q-learning's discount factor $\gamma$ is set to 0.9, whereas the Neural Network's learning rate is 0.001.
 
@@ -441,4 +441,4 @@ primary QoS metric following distance → STR → capacity hierarchy.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\hypertarget{experimental-setup}{%
+% End of framework section

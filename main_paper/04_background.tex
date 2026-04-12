@@ -8,7 +8,7 @@ Moving IoT services represent a paradigm shift from traditional static
 composition: service providers change their spatial positions over time,
 creating unique challenges for composition algorithms. The temporal
 dimension of service availability requires anticipating future service
-positions when making composition decisions {[}1{]}.
+positions when making composition decisions.
 
 A moving crowdsourced service can be modeled as a moving region where
 the service provider moves in close proximity to users over time. The
@@ -17,7 +17,7 @@ spatio-temporal constraints including energy requirements, QoS
 parameters, and connectivity ranges. Prior work formalized moving IoT
 service composition as a Markov Decision Process where the state
 includes service positions, device positions, velocities, and predicted
-trajectories {[}1{]}. The action space encompasses service selection,
+trajectories \cite{neiat2021}. The action space encompasses service selection,
 replacement, addition, and removal operations. The STR-based selection
 function provides the fundamental service quality metric.
 
@@ -184,7 +184,7 @@ space and time. Fixed services (like WiFi at a coffee shop) remain at
 known locations, while moving services (like a smartphone hotspot while
 walking) change position continuously. Prior work formalized this as
 trajectory-based composition where both provider and consumer have GPS
-trajectories {[}1{]}. The challenge is that co-movement patterns must be
+trajectories \cite{neiat2021}. The challenge is that co-movement patterns must be
 discovered---finding services that overlap with the user's path at each
 timestep.
 
@@ -193,7 +193,7 @@ emerged as a powerful approach for service composition in dynamic
 environments. Unlike traditional optimization, DRL learns a policy
 through interaction with the environment, adapting to changing
 conditions. DQN-based approaches have been applied to mobile service
-composition {[}1{]}, but suffer from overestimation bias and reactive
+composition \cite{neiat2021}, but suffer from overestimation bias and reactive
 decision-making. Policy gradient methods like A2C address these
 limitations by learning the policy directly.
 
@@ -224,7 +224,7 @@ assumes static services at known locations {[}11{]}. Moving IoT services
 fundamentally change this assumption---services change position
 continuously, requiring composition decisions at each timestep. Prior
 work formalized moving IoT service composition as a trajectory-based
-problem where both provider and consumer have GPS trajectories {[}1{]}.
+problem where both provider and consumer have GPS trajectories \cite{neiat2021}.
 Key challenges include: (1) discovering services that overlap with the
 user in both space and time, (2) ensuring service continuity when
 trajectories only partially overlap, and (3) scaling to large trajectory
@@ -232,12 +232,12 @@ datasets without expensive indexing.
 
 The Signal Transmission Reward (STR) model provides a hierarchical
 approach: distance determines STR, STR determines capacity, and capacity
-determines service quality {[}1{]}. This model captures the physical
+determines service quality \cite{neiat2021}. This model captures the physical
 reality that wireless signal strength degrades with distance.
 
 \textbf{Deep Reinforcement Learning for Service Composition}: DRL has
 emerged as the dominant approach for dynamic service composition.
-DQN-based methods {[}1{]} learn Q-values for service selection but
+DQN-based methods \cite{neiat2021} learn Q-values for service selection but
 suffer from overestimation bias---the Q-values systematically
 overestimate true action values, leading to suboptimal selection when
 valid services are scarce {[}7{]}. Double DQN addresses this by
@@ -271,10 +271,10 @@ Traditional methods use flock, convoy, swarm, and group patterns
 degrade as datasets scale {[}20{]}.
 
 Parallel flock-based approaches using MapReduce address scalability
-{[}1{]}. The spatio-temporal MapReduce first prunes trajectories
+\cite{neiat2021}. The spatio-temporal MapReduce first prunes trajectories
 temporally, then filters spatially to find candidate services. Our work
 builds on this by using DRL to learn composition without indexing.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\hypertarget{proposed-a2c-based-framework}{%
+\hypertarget{proposed-a2c-based-framework}{}

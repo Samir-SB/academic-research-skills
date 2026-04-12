@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.4.12)  12 APR 2026 15:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.4.12)  12 APR 2026 15:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -320,19 +320,16 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip52
 )
-(/usr/share/texlive/texmf-dist/tex/latex/natbib/natbib.sty
-Package: natbib 2010/09/13 8.31b (PWD, AO)
-\bibhang=\skip53
-\bibsep=\skip54
-LaTeX Info: Redefining \cite on input line 694.
-\c@NAT@ctr=\count284
+(/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count284
 )
 (/usr/share/texlive/texmf-dist/tex/latex/tools/longtable.sty
 Package: longtable 2021-09-01 v4.17 Multi-page Table package (DPC)
-\LTleft=\skip55
-\LTright=\skip56
-\LTpre=\skip57
-\LTpost=\skip58
+\LTleft=\skip53
+\LTright=\skip54
+\LTpre=\skip55
+\LTpost=\skip56
 \LTchunksize=\count285
 \LTcapwidth=\dimen160
 \LT@head=\box52
@@ -372,8 +369,8 @@ Package: array 2021/10/04 v2.5f Tabular extension package (FMi)
 \ar@mcellbox=\box57
 \extrarowheight=\dimen175
 \NC@list=\toks26
-\extratabsurround=\skip59
-\backup@length=\skip60
+\extratabsurround=\skip57
+\backup@length=\skip58
 \ar@cellbox=\box58
 )
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
@@ -393,142 +390,39 @@ Package graphics Info: Driver file: pdftex.def on input line 107.
 \Gin@req@height=\dimen176
 \Gin@req@width=\dimen177
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 27.
-
-(./11_references.tex
-
-! LaTeX Error: Missing \begin{document}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1 \subsection
-               {References}\label{references}
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-LaTeX Font Info:    Trying to load font information for T1+lmr on input line 1.
+Package hyperref Info: Option `colorlinks' set `true' on input line 28.
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 35
+.
 
 (/usr/share/texmf/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-
-! LaTeX Error: Missing \begin{document}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1 \subsection{References}
-                           \label{references}
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-! Undefined control sequence.
-<argument> \@bibsetup 
-                      {99}\global \c@NAT@ctr \z@ 
-l.3 \begin{thebibliography}{99}
-                               
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
-Package natbib Warning: Empty `thebibliography' environment on input line 65.
-
-
-Overfull \vbox (438.69075pt too high) has occurred while \output is active []
-
-
-! Undefined control sequence.
-\set@color ...\@pdfcolorstack push{\current@color 
-                                                  }\aftergroup \reset@color 
-l.65 \end{thebibliography}
-                          
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-\set@color ...\@pdfcolorstack push{\current@color 
-                                                  }\aftergroup \reset@color 
-l.65 \end{thebibliography}
-                          
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-\set@color ...\@pdfcolorstack push{\current@color 
-                                                  }\aftergroup \reset@color 
-l.65 \end{thebibliography}
-                          
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-[1
-
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
-\@writefile{toc}{\contentsline {subsection}{\numberline {0.1}References}{1}{sub
-section.0.1}\protected@file@percent }
-\newlabel{references}{{0.1}{1}}
-]
-Underfull \hbox (badness 1917) in paragraph at lines 71--72
-[]\T1/cmr/m/n/10 textitPaper pre-pared for sub-mis-sion to IEEE
- []
-
-) (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2022-01-12 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count294
 \l__pdf_internal_box=\box59
 )
-(./main.aux
-
-LaTeX Warning: Label `discussion' multiply defined.
-
-
-LaTeX Warning: Label `interpretation-of-results' multiply defined.
-
-
-LaTeX Warning: Label `comparison-with-prior-work' multiply defined.
-
-
-LaTeX Warning: Label `practical-implications' multiply defined.
-
-
-LaTeX Warning: Label `limitations' multiply defined.
-
-)
+(./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
  (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count295
@@ -585,7 +479,7 @@ e
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring ON on input line 34.
+Package hyperref Info: Link coloring ON on input line 35.
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
 
@@ -597,129 +491,117 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count301
 )
-LaTeX Info: Redefining \ref on input line 34.
-LaTeX Info: Redefining \pageref on input line 34.
-LaTeX Info: Redefining \nameref on input line 34.
+LaTeX Info: Redefining \ref on input line 35.
+LaTeX Info: Redefining \pageref on input line 35.
+LaTeX Info: Redefining \nameref on input line 35.
 
 (./main.out) (./main.out)
 \@outlinefile=\write3
 \openout3 = `main.out'.
 
- [2
-
-]
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 3
-9.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 4
+0.
  (/usr/share/texmf/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 3
-9.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 4
+0.
 
 (/usr/share/texmf/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-39.
+40.
 
 (/usr/share/texmf/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-39.
+40.
 
 (/usr/share/texmf/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 39.
+(Font)              <12> on input line 40.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 39.
+(Font)              <8> on input line 40.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 39.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 39.
+(Font)              <6> on input line 40.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 40.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 39.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 40.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) (./01_abstract.tex)
-(./02_introduction.tex
+) (./01_abstract.tex
+
+LaTeX Warning: Citation `neiat2021' on page 1 undefined on input line 11.
+
+) (./02_introduction.tex
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
 (hyperref)                than one, level fixed on input line 15.
 
 
-Package natbib Warning: Citation `neiat2021' on page 3 undefined on input line 
-18.
+LaTeX Warning: Citation `neiat2021' on page 1 undefined on input line 18.
 
 
-Package natbib Warning: Citation `neiat2015' on page 3 undefined on input line 
-18.
+LaTeX Warning: Citation `neiat2021' on page 1 undefined on input line 23.
 
 
-Package natbib Warning: Citation `neiat2015' on page 3 undefined on input line 
-23.
+LaTeX Warning: Citation `gudmundsson2006' on page 1 undefined on input line 47.
 
 
-Package natbib Warning: Citation `gudmundsson2006' on page 3 undefined on input
- line 47.
+
+LaTeX Warning: Citation `jeung2008' on page 1 undefined on input line 49.
 
 
-Package natbib Warning: Citation `jeung2008' on page 3 undefined on input line 
-49.
+LaTeX Warning: Citation `neiat2015' on page 1 undefined on input line 55.
 
 
-Package natbib Warning: Citation `neiat2015' on page 3 undefined on input line 
-55.
+LaTeX Warning: Citation `deng2016' on page 1 undefined on input line 56.
 
 
-Package natbib Warning: Citation `deng2016' on page 3 undefined on input line 5
-6.
+LaTeX Warning: Citation `zhang2015' on page 1 undefined on input line 62.
 
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
-Package natbib Warning: Citation `zhang2015' on page 3 undefined on input line 
-62.
-
-[3
 
 ]
 
-Package natbib Warning: Citation `deng2017' on page 4 undefined on input line 6
-6.
+LaTeX Warning: Citation `deng2017' on page 2 undefined on input line 66.
 
 
-Package natbib Warning: Citation `zhang2015' on page 4 undefined on input line 
-68.
+LaTeX Warning: Citation `zhang2015' on page 2 undefined on input line 68.
 
 
-Package natbib Warning: Citation `gai2018' on page 4 undefined on input line 71
-.
+LaTeX Warning: Citation `gai2018' on page 2 undefined on input line 71.
 
 
-Package natbib Warning: Citation `neiat2021' on page 4 undefined on input line 
-81.
+LaTeX Warning: Citation `neiat2021' on page 2 undefined on input line 81.
 
 
-Package natbib Warning: Citation `neiat2021' on page 4 undefined on input line 
-84.
+LaTeX Warning: Citation `neiat2021' on page 2 undefined on input line 84.
 
 
-Package natbib Warning: Citation `gai2018' on page 4 undefined on input line 85
-.
+LaTeX Warning: Citation `gai2018' on page 2 undefined on input line 85.
 
 
-Package natbib Warning: Citation `neiat2021' on page 4 undefined on input line 
-100.
+Underfull \hbox (badness 1028) in paragraph at lines 81--91
+\T1/lmr/m/n/10 needed [[]]. How-ever, DQN's value-based na-ture
+ []
 
 
-Package natbib Warning: Citation `neiat2021' on page 4 undefined on input line 
-106.
+LaTeX Warning: Citation `neiat2021' on page 2 undefined on input line 100.
+
+
+LaTeX Warning: Citation `neiat2021' on page 2 undefined on input line 106.
 
 ) (./03_motivation.tex) (./04_background.tex
 Underfull \hbox (badness 2486) in paragraph at lines 7--12
@@ -731,7 +613,11 @@ Underfull \hbox (badness 1024) in paragraph at lines 7--12
 \T1/lmr/m/n/10 change their spa-tial po-si-tions over time, cre-at-ing
  []
 
-[4]
+[2]
+
+LaTeX Warning: Citation `neiat2021' on page 3 undefined on input line 20.
+
+
 Underfull \hbox (badness 1533) in paragraph at lines 26--26
 []\T1/lmr/bx/n/10 2.2 Actor-Critic Deep Re-in-force-ment
  []
@@ -748,8 +634,7 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <5> on input line 37.
 
-Package natbib Warning: Citation `shannon1948' on page 5 undefined on input lin
-e 86.
+LaTeX Warning: Citation `shannon1948' on page 3 undefined on input line 86.
 
 
 Underfull \hbox (badness 1038) in paragraph at lines 85--87
@@ -767,7 +652,7 @@ Underfull \hbox (badness 1521) in paragraph at lines 103--106
 []\T1/lmr/m/n/10 This hi-er-ar-chi-cal model en-sures that prox-im-ity
  []
 
-[5]
+[3]
 Underfull \hbox (badness 1062) in paragraph at lines 151--153
 []\T1/lmr/m/n/10 MLMC-NAC achieves $[]\OT1/lmr/m/n/10 (1\OML/lmm/m/it/10 =[]\OT
 1/lmr/m/n/10 )$ \T1/lmr/m/n/10 con-ver-gence for
@@ -779,9 +664,18 @@ Underfull \hbox (badness 2790) in paragraph at lines 163--171
  []
 
 
+LaTeX Warning: Citation `neiat2021' on page 4 undefined on input line 187.
+
+
+LaTeX Warning: Citation `neiat2021' on page 4 undefined on input line 196.
+
+
 Underfull \hbox (badness 1147) in paragraph at lines 191--199
 []\T1/lmr/bx/n/10 Deep Re-in-force-ment Learn-ing for Ser-vice
  []
+
+
+LaTeX Warning: Citation `neiat2021' on page 4 undefined on input line 227.
 
 
 Underfull \hbox (badness 1019) in paragraph at lines 222--232
@@ -789,50 +683,36 @@ Underfull \hbox (badness 1019) in paragraph at lines 222--232
  []
 
 
+LaTeX Warning: Citation `neiat2021' on page 4 undefined on input line 235.
+
+
+LaTeX Warning: Citation `neiat2021' on page 4 undefined on input line 240.
+
+
 Underfull \hbox (badness 1147) in paragraph at lines 238--246
 []\T1/lmr/bx/n/10 Deep Re-in-force-ment Learn-ing for Ser-vice
  []
 
-[6]
+[4]
 Underfull \hbox (badness 3803) in paragraph at lines 267--272
 []\T1/lmr/bx/n/10 Trajectory-Based Ser-vice Dis-cov-ery\T1/lmr/m/n/10 : Co-
  []
 
-)
-Runaway argument?
-{
-! File ended while scanning use of \hypertarget.
-<inserted text> 
-                \par 
-l.43 \input{04_background}
-                          
-I suspect you have forgotten a `}', causing me
-to read past where you wanted me to stop.
-I'll try to recover; but if the error is serious,
-you'd better type `E' or `X' now and fix your file.
 
-(./05_framework.tex
-! Too many }'s.
-l.2 ...ework}\label{proposed-a2c-based-framework}}
-                                                  
-You've closed more groups than you opened.
-Such booboos are generally harmless, so keep going.
+LaTeX Warning: Citation `neiat2021' on page 5 undefined on input line 274.
+
+) (./05_framework.tex
+
+LaTeX Warning: Citation `neiat2021' on page 5 undefined on input line 10.
 
 
-Package natbib Warning: Citation `neiat2021' on page 7 undefined on input line 
-10.
+LaTeX Warning: Citation `neiat2021' on page 5 undefined on input line 23.
 
 
-Package natbib Warning: Citation `neiat2021' on page 7 undefined on input line 
-23.
+LaTeX Warning: Citation `neiat2021' on page 5 undefined on input line 27.
 
 
-Package natbib Warning: Citation `neiat2021' on page 7 undefined on input line 
-27.
-
-
-Package natbib Warning: Citation `neiat2021' on page 7 undefined on input line 
-37.
+LaTeX Warning: Citation `neiat2021' on page 5 undefined on input line 37.
 
 
 Overfull \hbox (14.16216pt too wide) detected at line 41
@@ -843,229 +723,36 @@ OMS/lmsy/m/n/10 j\OML/lmm/m/it/10 a \OMS/lmsy/m/n/10 ^^@ \OML/lmm/m/it/10 b\OMS
  []
 
 
-Package natbib Warning: Citation `neiat2021' on page 7 undefined on input line 
-43.
+LaTeX Warning: Citation `neiat2021' on page 5 undefined on input line 43.
 
 
-Package natbib Warning: Citation `neiat2021' on page 7 undefined on input line 
-58.
+LaTeX Warning: Citation `neiat2021' on page 5 undefined on input line 58.
 
-[7]
 
-Package natbib Warning: Citation `neiat2021' on page 8 undefined on input line 
-137.
+LaTeX Warning: Citation `neiat2021' on page 5 undefined on input line 66.
 
-! Missing { inserted.
-<to be read again> 
-                   \let 
-l.192 \end{tabular}}
-                    
-A left brace was mandatory here, so I've put one in.
-You might want to delete and/or insert some corrections
-so that I will find a matching right brace soon.
-(If you're confused by all this, try typing `I}' now.)
+[5]
 
-! Missing } inserted.
-<inserted text> 
-                }
-l.192 \end{tabular}}
-                    
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
+LaTeX Warning: Citation `neiat2021' on page 6 undefined on input line 137.
 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.192 \end{tabular}}
-                    
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.192 \end{tabular}}
-                    
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.192 \end{tabular}}
-                    
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.192 \end{tabular}}
-                    
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.192 \end{tabular}}
-                    
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.192 \end{tabular}}
-                    
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.192 \end{tabular}}
-                    
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.192 \end{tabular}}
-                    
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.192 \end{tabular}}
-                    
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.192 \end{tabular}}
-                    
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.192 \end{tabular}}
-                    
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.192 \end{tabular}}
-                    
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing { inserted.
-<to be read again> 
-                   \let 
-l.192 \end{tabular}}
-                    
-A left brace was mandatory here, so I've put one in.
-You might want to delete and/or insert some corrections
-so that I will find a matching right brace soon.
-(If you're confused by all this, try typing `I}' now.)
-
-! Missing } inserted.
-<inserted text> 
-                }
-l.192 \end{tabular}}
-                    
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.192 \end{tabular}}
-                    
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.192 \end{tabular}}
-                    
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.192 \end{tabular}}
-                    
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.192 \end{tabular}}
-                    
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.192 \end{tabular}}
-                    
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.192 \end{tabular}}
-                    
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
+Underfull \hbox (badness 3049) in paragraph at lines 192--192
+[]|  \T1/lmr/bx/n/10 if \T1/lmr/m/n/10 rand() $\OML/lmm/m/it/10 < ^^O$ \T1/lmr/
+bx/n/10 then \T1/lmr/m/n/10 se-lect ran-dom $\OML/lmm/m/it/10 a[]$ \T1/lmr/bx/n
+/10 else $\OML/lmm/m/it/10 a[] \OMS/lmsy/m/n/10  
+ []
 
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 2
 06.
 (/usr/share/texmf/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [8]
+) [6]
 Underfull \hbox (badness 10000) in paragraph at lines 248--248
 []\T1/lmr/bx/n/10 3.3.1 Con-ver-gence and Com-plex-ity
  []
+
+
+LaTeX Warning: Citation `neiat2021' on page 7 undefined on input line 314.
 
 
 Underfull \hbox (badness 1331) in paragraph at lines 316--317
@@ -1082,7 +769,7 @@ Underfull \hbox (badness 1221) in paragraph at lines 357--358
 dent net-
  []
 
-[9]pdfTeX warning (ext4): destination with the same identifier (name{relative-p
+[7]pdfTeX warning (ext4): destination with the same identifier (name{relative-p
 olar-coordinate-representation}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
@@ -1109,55 +796,7 @@ lmr/m/n/10 )) \OMS/lmsy/m/n/10 ^^A \OML/lmm/m/it/10 SNR[]\OT1/lmr/m/n/10 ) \OMS
 r/m/n/10 )
  []
 
-)
-Runaway argument?
-{
-! File ended while scanning use of \hypertarget.
-<inserted text> 
-                \par 
-l.44 \input{05_framework}
-                         
-I suspect you have forgotten a `}', causing me
-to read past where you wanted me to stop.
-I'll try to recover; but if the error is serious,
-you'd better type `E' or `X' now and fix your file.
-
-(./06_experimental_setup.tex
-! Too many }'s.
-l.1 ...erimental Setup}\label{experimental-setup}}
-                                                  
-You've closed more groups than you opened.
-Such booboos are generally harmless, so keep going.
-
-! Undefined control sequence.
-l.15 	\tightlist
-                
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-[10]
-! Undefined control sequence.
-l.37 	\tightlist
-                
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.73 		      \tightlist
-                       
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-[11]
+) (./06_experimental_setup.tex [8] [9]
 Underfull \hbox (badness 2772) in paragraph at lines 161--162
 \T1/lmr/m/n/10 The STR-based ca-pac-ity model uses pa-ram-e-ters
  []
@@ -1168,532 +807,23 @@ Runaway argument?
 ! File ended while scanning use of \hypertarget.
 <inserted text> 
                 \par 
-l.45 \input{06_experimental_setup}
+l.46 \input{06_experimental_setup}
                                   
-I suspect you have forgotten a `}', causing me
-to read past where you wanted me to stop.
-I'll try to recover; but if the error is serious,
-you'd better type `E' or `X' now and fix your file.
-
-(./07_results.tex
-! Too many }'s.
-l.1 ...ental Results}\label{experimental-results}}
-                                                  
-You've closed more groups than you opened.
-Such booboos are generally harmless, so keep going.
-
-[12]
-Underfull \hbox (badness 10000) in paragraph at lines 36--36
-[]\T1/lmr/bx/n/10 5.2 Suc-cess Rate Per-for-mance by
- []
-
-[13]
-Runaway argument?
-{adaptation-speed-analysis{\subsubsection {5.4 Adaptation Speed Analy\ETC.
-! Paragraph ended before \hypertarget was complete.
-<to be read again> 
-                   \par 
-l.97 
-     
-I suspect you've forgotten a `}', causing me to apply this
-control sequence to too much text. How can we recover?
-My plan is to forget the whole thing and hope for the best.
-
-
-Underfull \hbox (badness 1132) in paragraph at lines 202--207
-[]\T1/lmr/bx/n/10 Experimental Setup\T1/lmr/m/n/10 : - Train-ing split: 75%
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 227--233
-[]\T1/lmr/bx/n/10 Experiment Con-fig-u-ra-tion \T1/lmr/m/n/10 (from
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 227--233
-\T1/lmtt/m/n/10 configs/exp1.yaml\T1/lmr/m/n/10 ): - Data di-rec-tory:
- []
-
-
-Underfull \hbox (badness 1629) in paragraph at lines 227--233
-\T1/lmtt/m/n/10 data/selected \T1/lmr/m/n/10 - Dataset: \T1/lmtt/m/n/10 df_shuf
-fled_500.csv
- []
-
-[14]
-Underfull \hbox (badness 10000) in paragraph at lines 249--255
-[]\T1/lmr/bx/n/10 Experiment Doc-u-men-ta-tion\T1/lmr/m/n/10 : The
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 249--255
-\T1/lmr/m/n/10 com-plete tech-ni-cal doc-u-men-ta-tion of
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 249--255
-\T1/lmr/m/n/10 the ex-per-i-ment code is avail-able in
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 249--255
-\T1/lmtt/m/n/10 experiments-codesource/experiment-details.md\T1/lmr/m/n/10 ,
- []
-
-
-Underfull \hbox (badness 4132) in paragraph at lines 268--273
-\T1/lmr/m/n/10 or-di-nate rep-re-sen-ta-tion (dis-tance, cos(angle),
- []
-
-
-Underfull \hbox (badness 1303) in paragraph at lines 268--273
-\T1/lmr/m/n/10 sin(angle)) pro-vides rotation-invariant fea-tures
- []
-
-)
-Runaway argument?
-{
-! File ended while scanning use of \hypertarget.
+? 
+! Emergency stop.
 <inserted text> 
                 \par 
-l.46 \input{07_results}
-                       
-I suspect you have forgotten a `}', causing me
-to read past where you wanted me to stop.
-I'll try to recover; but if the error is serious,
-you'd better type `E' or `X' now and fix your file.
-
-(./08_implementation.tex
-Underfull \hbox (badness 10000) in paragraph at lines 3--5
-\T1/lmr/m/n/10 This sec-tion presents the im-ple-men-ta-tion us-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 3--5
-\T1/lmr/m/n/10 ing the Sta-ble Base-lines3 frame-work in the
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 7--7
-[]\T1/lmr/bx/n/12 6.1 Data Pre-pro-cess-ing
- []
-
-[15]
-Underfull \hbox (badness 10000) in paragraph at lines 12--21
-\T1/lmr/m/n/10 Con-vert to ego-centric po-lar co-or-di-nates -
- []
-
-
-Underfull \hbox (badness 7238) in paragraph at lines 12--21
-\T1/lmtt/m/n/10 compute_capacity()\T1/lmr/m/n/10 : Shannon-Hartley ca-pac-ity
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 24--24
-[]\T1/lmr/bx/n/10 6.2 Sim-u-la-tion En-vi-ron-ment (illi-
- []
-
-
-Underfull \hbox (badness 6001) in paragraph at lines 26--31
-\T1/lmr/bx/n/10 MovingIoTEnvironment \T1/lmr/m/n/10 (\T1/lmtt/m/n/10 illinois_o
-nline.py\T1/lmr/m/n/10 ):
- []
-
-
-Underfull \hbox (badness 2932) in paragraph at lines 26--31
-\T1/lmr/m/n/10 Gymnasium-compliant sim-u-la-tion en-vi-ron-ment for
- []
-
-! You can't use `macro parameter character #' in vertical mode.
-<argument> ##
-             ###### 6.3 Stable Baselines3 Framework for A2C and DQN Training 
-l.34 }
-      \label{stable-baselines3-framework-for-a2c-and-dqn-training}
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-! You can't use `macro parameter character #' in vertical mode.
-<argument> ####
-               #### 6.3 Stable Baselines3 Framework for A2C and DQN Training 
-l.34 }
-      \label{stable-baselines3-framework-for-a2c-and-dqn-training}
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-! You can't use `macro parameter character #' in vertical mode.
-<argument> ######
-                 ## 6.3 Stable Baselines3 Framework for A2C and DQN Training 
-l.34 }
-      \label{stable-baselines3-framework-for-a2c-and-dqn-training}
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-! You can't use `macro parameter character #' in vertical mode.
-<argument> ########
-                    6.3 Stable Baselines3 Framework for A2C and DQN Training 
-l.34 }
-      \label{stable-baselines3-framework-for-a2c-and-dqn-training}
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 36--40
-\T1/lmr/m/n/10 ([][]$\T1/lmtt/m/n/10 https : / / stable-[]baselines3 . readthed
-ocs . io/$[][]\T1/lmr/m/n/10 )
- []
-
-LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 47.
-
-Underfull \hbox (badness 2726) in paragraph at lines 47--49
-[]\T1/lmr/bx/n/10 A2C Im-ple-men-ta-tion (\T1/lmtt/b/n/10 train.py\T1/lmr/bx/n/
-10 )\T1/lmr/m/n/10 : We use
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 78--79
-[]\T1/lmr/bx/n/10 DQN Im-ple-men-ta-tion\T1/lmr/m/n/10 : We use
- []
-
-
-Underfull \hbox (badness 1642) in paragraph at lines 99--103
-\T1/lmr/m/n/10 - \T1/lmtt/m/n/10 MasterConfig\T1/lmr/m/n/10 : Py-dan-tic model 
-for all hy-per-
- []
-
-
-Underfull \hbox (badness 5832) in paragraph at lines 133--138
-\T1/lmr/m/n/10 De-fine ex-per-i-ment pa-ram-e-ters 2. \T1/lmr/bx/n/10 Ex-e-cu-t
-ion
- []
-
-
-Overfull \hbox (58.06142pt too wide) in paragraph at lines 147--147
-[]\T1/lmtt/m/n/10 ./run_experiments.sh configs/exp1.yaml configs/exp2.yaml[] 
- []
-
-(./09_discussion.tex
-Underfull \hbox (badness 10000) in paragraph at lines 21--23
-[]\T1/lmr/m/n/10 The STR-based se-lec-tion con-tin-ues driv-ing
- []
-
-
-Underfull \hbox (badness 1194) in paragraph at lines 21--23
-\T1/lmr/m/n/10 decisions---the agent learns to max-i-mize ex-pected
- []
-
-[16]
-! You can't use `macro parameter character #' in vertical mode.
-<argument> ##
-             ###### 7.3 Practical Implications
-l.43 	#### 7.3 Practical Implications}
-                                      \label{practical-implications}}
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-! You can't use `macro parameter character #' in vertical mode.
-<argument> ####
-               #### 7.3 Practical Implications
-l.43 	#### 7.3 Practical Implications}
-                                      \label{practical-implications}}
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-! You can't use `macro parameter character #' in vertical mode.
-<argument> ######
-                 ## 7.3 Practical Implications
-l.43 	#### 7.3 Practical Implications}
-                                      \label{practical-implications}}
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-! You can't use `macro parameter character #' in vertical mode.
-<argument> ########
-                    7.3 Practical Implications
-l.43 	#### 7.3 Practical Implications}
-                                      \label{practical-implications}}
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-! Too many }'s.
-l.43 ...plications}\label{practical-implications}}
-                                                  
-You've closed more groups than you opened.
-Such booboos are generally harmless, so keep going.
-
-! You can't use `macro parameter character #' in vertical mode.
-<argument> ##
-             
-l.56 #
-      ### 7.4 Limitations}\label{limitations}
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-! You can't use `macro parameter character #' in vertical mode.
-l.56 ##
-       ## 7.4 Limitations}\label{limitations}
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-! You can't use `macro parameter character #' in vertical mode.
-l.56 ###
-        # 7.4 Limitations}\label{limitations}
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-! You can't use `macro parameter character #' in vertical mode.
-l.56 ####
-          7.4 Limitations}\label{limitations}
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-! Too many }'s.
-l.56 #### 7.4 Limitations}
-                          \label{limitations}
-You've closed more groups than you opened.
-Such booboos are generally harmless, so keep going.
-
-
-Underfull \hbox (badness 1019) in paragraph at lines 64--66
-[]\T1/lmr/bx/n/10 Centralized\T1/lmr/m/n/10 : As-sumes cen-tral-ized com-po-si-
-tion.
- []
-
-)
-Runaway argument?
-{
-! File ended while scanning use of \hypertarget.
-<inserted text> 
-                \par 
-l.171 \input{09_discussion}
-                           
-I suspect you have forgotten a `}', causing me
-to read past where you wanted me to stop.
-I'll try to recover; but if the error is serious,
-you'd better type `E' or `X' now and fix your file.
-
-) (./09_discussion.texpdfTeX warning (ext4): destination with the same identifi
-er (name{interpretation-of-results}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.4 ... Results}\label{interpretation-of-results}}
-                                                  
-Underfull \hbox (badness 10000) in paragraph at lines 21--23
-[]\T1/lmr/m/n/10 The STR-based se-lec-tion con-tin-ues driv-ing
- []
-
-
-Underfull \hbox (badness 1194) in paragraph at lines 21--23
-\T1/lmr/m/n/10 decisions---the agent learns to max-i-mize ex-pected
- []
-
-pdfTeX warning (ext4): destination with the same identifier (name{comparison-wi
-th-prior-work}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.26 		Work}\label{comparison-with-prior-work}}
-                                                [17]pdfTeX warning (ext4): dest
-ination with the same identifier (name{practical-implications}) has been alread
-y used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.43 	#### 7.3 Practical Implications}
-                                      \label{practical-implications}}
-! You can't use `macro parameter character #' in vertical mode.
-<argument> ##
-             ###### 7.3 Practical Implications
-l.43 	#### 7.3 Practical Implications}
-                                      \label{practical-implications}}
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-! You can't use `macro parameter character #' in vertical mode.
-<argument> ####
-               #### 7.3 Practical Implications
-l.43 	#### 7.3 Practical Implications}
-                                      \label{practical-implications}}
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-! You can't use `macro parameter character #' in vertical mode.
-<argument> ######
-                 ## 7.3 Practical Implications
-l.43 	#### 7.3 Practical Implications}
-                                      \label{practical-implications}}
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-! You can't use `macro parameter character #' in vertical mode.
-<argument> ########
-                    7.3 Practical Implications
-l.43 	#### 7.3 Practical Implications}
-                                      \label{practical-implications}}
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-! Too many }'s.
-l.43 ...plications}\label{practical-implications}}
-                                                  
-You've closed more groups than you opened.
-Such booboos are generally harmless, so keep going.
-
-pdfTeX warning (ext4): destination with the same identifier (name{limitations})
- has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.56 #
-      ### 7.4 Limitations}\label{limitations}
-! You can't use `macro parameter character #' in vertical mode.
-<argument> ##
-             
-l.56 #
-      ### 7.4 Limitations}\label{limitations}
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-! You can't use `macro parameter character #' in vertical mode.
-l.56 ##
-       ## 7.4 Limitations}\label{limitations}
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-! You can't use `macro parameter character #' in vertical mode.
-l.56 ###
-        # 7.4 Limitations}\label{limitations}
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-! You can't use `macro parameter character #' in vertical mode.
-l.56 ####
-          7.4 Limitations}\label{limitations}
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-! Too many }'s.
-l.56 #### 7.4 Limitations}
-                          \label{limitations}
-You've closed more groups than you opened.
-Such booboos are generally harmless, so keep going.
-
-
-Underfull \hbox (badness 1019) in paragraph at lines 64--66
-[]\T1/lmr/bx/n/10 Centralized\T1/lmr/m/n/10 : As-sumes cen-tral-ized com-po-si-
-tion.
- []
-
-)
-Runaway argument?
-{
-! File ended while scanning use of \hypertarget.
-<inserted text> 
-                \par 
-l.48 \input{09_discussion}
-                          
-I suspect you have forgotten a `}', causing me
-to read past where you wanted me to stop.
-I'll try to recover; but if the error is serious,
-you'd better type `E' or `X' now and fix your file.
-
-(./10_conclusion.tex)
-Runaway argument?
-{
-! File ended while scanning use of \hypertarget.
-<inserted text> 
-                \par 
-l.49 \input{10_conclusion}
-                          
-I suspect you have forgotten a `}', causing me
-to read past where you wanted me to stop.
-I'll try to recover; but if the error is serious,
-you'd better type `E' or `X' now and fix your file.
-
-(./11_references.tex
-
-Package natbib Warning: Empty `thebibliography' environment on input line 65.
-
-[18]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-)
-
-Package natbib Warning: There were undefined citations.
-
-[19] (./main.aux)
-
-LaTeX Warning: There were multiply-defined labels.
-
-Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 8D5378D3031D0F7F99CC867A828BC02D;11500.
- ) 
+l.46 \input{06_experimental_setup}
+                                  
+End of file on the terminal!
+
+ 
 Here is how much of TeX's memory you used:
- 11849 strings out of 480247
- 182221 string characters out of 5896151
- 499353 words of memory out of 5000000
- 29412 multiletter control sequences out of 15000+600000
- 534827 words of font info for 78 fonts, out of 8000000 for 9000
+ 11659 strings out of 480247
+ 178678 string characters out of 5896151
+ 497748 words of memory out of 5000000
+ 29319 multiletter control sequences out of 15000+600000
+ 529917 words of font info for 75 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 60i,13n,63p,546b,440s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dv
-ips/lm/lm-ts1.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/shar
-e/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/share/texmf/fonts/enc/dvips/lm/l
-m-mathex.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc} </home/samir/.texl
-ive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk></usr/share/texmf/
-fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx12
-.pfb></usr/share/texmf/fonts/type1/public/lm/lmbxi10.pfb></usr/share/texmf/font
-s/type1/public/lm/lmex10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi10.pfb
-></usr/share/texmf/fonts/type1/public/lm/lmmi5.pfb></usr/share/texmf/fonts/type
-1/public/lm/lmmi7.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/s
-hare/texmf/fonts/type1/public/lm/lmr17.pfb></usr/share/texmf/fonts/type1/public
-/lm/lmr7.pfb></usr/share/texmf/fonts/type1/public/lm/lmri10.pfb></usr/share/tex
-mf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lms
-y7.pfb></usr/share/texmf/fonts/type1/public/lm/lmtk10.pfb></usr/share/texmf/fon
-ts/type1/public/lm/lmtt10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt8.pfb
-></usr/share/texmf/fonts/type1/public/lm/lmtt9.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (19 pages, 460855 bytes).
-PDF statistics:
- 587 PDF objects out of 1000 (max. 8388607)
- 454 compressed objects within 5 object streams
- 149 named destinations out of 1000 (max. 500000)
- 417 words of extra memory for PDF output out of 10000 (max. 10000000)
-
+ 60i,13n,63p,546b,398s stack positions out of 5000i,500n,10000p,200000b,80000s
+!  ==> Fatal error occurred, no output PDF file produced!
