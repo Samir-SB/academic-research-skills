@@ -208,10 +208,11 @@ architecture incorporating LSTM-based trajectory encoding.
 
 The hyperparameters for all configurations are summarized in Table 1:
 
-\begin{table}[htbp]
+\begin{table*}[t]
 	\centering
 	\caption{Hyperparameter Settings for All Configurations}
 	\label{hyperparameters-table}
+	\resizebox{\textwidth}{!}{
 	\begin{tabular}{|l|c|c|c|c|c|}
 		\toprule
 		\textbf{Parameter}         & \textbf{Random} & \textbf{Greedy} & \textbf{Double DQN} & \textbf{A2C Shared} & \textbf{A2C Separate}      \\
@@ -227,8 +228,8 @@ The hyperparameters for all configurations are summarized in Table 1:
 		Hidden Layers              & N/A             & N/A             & 256-128             & 256-128             & 256-128 (shared) or 128-64 \\
 		LSTM Hidden Size           & N/A             & N/A             & N/A                 & N/A                 & 128                        \\
 		\bottomrule
-	\end{tabular}
-\end{table}
+	\end{tabular}}
+\end{table*}
 
 \hypertarget{experimental-setup-details}{%
 	\subsubsection{4.7 Experimental Setup

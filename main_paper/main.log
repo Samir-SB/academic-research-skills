@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.4.12)  12 APR 2026 14:07
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.4.12)  12 APR 2026 14:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1074,12 +1074,7 @@ Overfull \hbox (64.0088pt too wide) in paragraph at lines 167--179
  [][] 
  []
 
-[9]
-Overfull \hbox (274.38826pt too wide) in paragraph at lines 215--231
- [][] 
- []
-
-)
+[9])
 Runaway argument?
 {
 ! File ended while scanning use of \hypertarget.
@@ -1099,12 +1094,12 @@ l.1 ...ental Results}\label{experimental-results}}
 You've closed more groups than you opened.
 Such booboos are generally harmless, so keep going.
 
-[10]
+
 Underfull \hbox (badness 10000) in paragraph at lines 36--36
 []\T1/lmr/bx/n/10 5.2 Suc-cess Rate Per-for-mance by
  []
 
-
+[10]
 Overfull \hbox (94.48422pt too wide) in paragraph at lines 76--84
  [][] 
  []
@@ -1125,7 +1120,7 @@ Overfull \hbox (85.7621pt too wide) in paragraph at lines 149--160
  [][] 
  []
 
-
+[11]
 Underfull \hbox (badness 1132) in paragraph at lines 200--205
 []\T1/lmr/bx/n/10 Experimental Setup\T1/lmr/m/n/10 : - Train-ing split: 75%
  []
@@ -1146,7 +1141,7 @@ Underfull \hbox (badness 1629) in paragraph at lines 225--231
 fled_500.csv
  []
 
-[11]
+
 Underfull \hbox (badness 10000) in paragraph at lines 247--253
 []\T1/lmr/bx/n/10 Experiment Doc-u-men-ta-tion\T1/lmr/m/n/10 : The
  []
@@ -1214,7 +1209,7 @@ Underfull \hbox (badness 7238) in paragraph at lines 12--21
 \T1/lmtt/m/n/10 compute_capacity()\T1/lmr/m/n/10 : Shannon-Hartley ca-pac-ity
  []
 
-
+[12]
 Underfull \hbox (badness 10000) in paragraph at lines 24--24
 []\T1/lmr/bx/n/10 6.2 Sim-u-la-tion En-vi-ron-ment (illi-
  []
@@ -1276,7 +1271,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 36--40
 ocs . io/$[][]\T1/lmr/m/n/10 )
  []
 
-[12]
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
 (Font)              Font shape `T1/lmtt/b/n' tried instead on input line 47.
 
@@ -1302,12 +1296,15 @@ for all hy-per-
  []
 
 
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [13]
 Underfull \hbox (badness 5832) in paragraph at lines 127--132
 \T1/lmr/m/n/10 De-fine ex-per-i-ment pa-ram-e-ters 2. \T1/lmr/bx/n/10 Ex-e-cu-t
 ion
  []
 
-[13]
+
 Overfull \hbox (58.06142pt too wide) in paragraph at lines 141--141
 []\T1/lmtt/m/n/10 ./run_experiments.sh configs/exp1.yaml configs/exp2.yaml[] 
  []
@@ -1458,7 +1455,13 @@ to read past where you wanted me to stop.
 I'll try to recover; but if the error is serious,
 you'd better type `E' or `X' now and fix your file.
 
-) (./09_discussion.tex
+) (./09_discussion.tex [14pdfTeX warning (ext4): destination with the same iden
+tifier (name{interpretation-of-results}) has been already used, duplicate ignor
+ed
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.20 
+     ]
 Underfull \hbox (badness 10000) in paragraph at lines 21--23
 []\T1/lmr/m/n/10 The STR-based se-lec-tion con-tin-ues driv-ing
  []
@@ -1468,18 +1471,14 @@ Underfull \hbox (badness 1194) in paragraph at lines 21--23
 \T1/lmr/m/n/10 decisions---the agent learns to max-i-mize ex-pected
  []
 
-[14pdfTeX warning (ext4): destination with the same identifier (name{interpreta
-tion-of-results}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.41 
-     pdfTeX warning (ext4): destination with the same identifier (name{comparis
-on-with-prior-work}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.41 
-     ]pdfTeX warning (ext4): destination with the same identifier (name{practic
-al-implications}) has been already used, duplicate ignored
+pdfTeX warning (ext4): destination with the same identifier (name{comparison-wi
+th-prior-work}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.26 		Work}\label{comparison-with-prior-work}}
+                                               pdfTeX warning (ext4): destinati
+on with the same identifier (name{practical-implications}) has been already use
+d, duplicate ignored
 <to be read again> 
                    \relax 
 l.43 	#### 7.3 Practical Implications}
@@ -1608,7 +1607,7 @@ to read past where you wanted me to stop.
 I'll try to recover; but if the error is serious,
 you'd better type `E' or `X' now and fix your file.
 
-(./11_references.tex
+(./11_references.tex [15]
 Underfull \hbox (badness 2189) in paragraph at lines 25--26
 []\T1/lmr/m/n/10 [12] Y. Sun, J. Liu, and X. Chen, ``Graph-
  []
@@ -1618,7 +1617,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 25--26
 \T1/lmr/m/n/10 Reinforcement-Learning-Based Dependency-Aware
  []
 
-[15]
+
 Underfull \hbox (badness 1571) in paragraph at lines 53--54
 \T1/lmr/m/n/10 based content-centric ser-vices in mo-bile sens-ing,''
  []
@@ -1637,7 +1636,7 @@ Here is how much of TeX's memory you used:
  29072 multiletter control sequences out of 15000+600000
  531190 words of font info for 75 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 60i,13n,63p,546b,473s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,13n,63p,546b,472s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dv
 ips/lm/lm-ts1.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/shar
 e/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/share/texmf/fonts/enc/dvips/lm/l
@@ -1653,7 +1652,7 @@ f/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy
 7.pfb></usr/share/texmf/fonts/type1/public/lm/lmtk10.pfb></usr/share/texmf/font
 s/type1/public/lm/lmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
 amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (16 pages, 382217 bytes).
+Output written on main.pdf (16 pages, 382787 bytes).
 PDF statistics:
  483 PDF objects out of 1000 (max. 8388607)
  425 compressed objects within 5 object streams
