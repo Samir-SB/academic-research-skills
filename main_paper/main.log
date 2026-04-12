@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.4.12)  12 APR 2026 12:38
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.4.12)  12 APR 2026 13:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1457,33 +1457,18 @@ I'll try to recover; but if the error is serious,
 you'd better type `E' or `X' now and fix your file.
 
 (./11_references.tex
-Underfull \hbox (badness 1546) in paragraph at lines 7--8
-\T1/lmr/m/n/10 te-grated Actor-Critic for Deep Re-in-force-ment
+Underfull \hbox (badness 4229) in paragraph at lines 25--26
+[]\T1/lmr/m/n/10 [12] Y. Sun, J. Liu, and X. Chen, ``Graph-
  []
 
 
-Underfull \hbox (badness 5696) in paragraph at lines 27--28
-[]\T1/lmr/m/n/10 Y. Sun, J. Liu, and X. Chen, ``Graph-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 27--28
-\T1/lmr/m/n/10 Reinforcement-Learning-Based Dependency-
- []
-
-
-Underfull \hbox (badness 1337) in paragraph at lines 31--32
-\T1/lmr/m/n/10 Ser-vice Func-tion Chain De-ploy-ment in IoT,''
+Underfull \hbox (badness 10000) in paragraph at lines 25--26
+\T1/lmr/m/n/10 Reinforcement-Learning-Based Dependency-Aware
  []
 
 [16]
-Underfull \hbox (badness 1237) in paragraph at lines 49--50
-\T1/lmr/m/n/10 ``Spatio-temporal com-po-si-tion of crowd-sourced
- []
-
-
-Underfull \hbox (badness 1694) in paragraph at lines 57--58
-[]\T1/lmr/m/n/10 Y. Zheng, ``Tra-jec-tory com-put-ing in spatial-
+Underfull \hbox (badness 1163) in paragraph at lines 55--56
+[]\T1/lmr/m/n/10 [27] Y. Zheng, ``Tra-jec-tory com-put-ing in spatial-
  []
 
 ) [17
@@ -1499,13 +1484,13 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 0B264359F6059A89907895B05C95A6AF;11499.
  ) 
 Here is how much of TeX's memory you used:
- 11932 strings out of 480247
- 184003 string characters out of 5896151
+ 11901 strings out of 480247
+ 183786 string characters out of 5896151
  504692 words of memory out of 5000000
  29471 multiletter control sequences out of 15000+600000
  531190 words of font info for 75 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 60i,10n,63p,546b,405s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,10n,63p,546b,399s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dv
 ips/lm/lm-ts1.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/shar
 e/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/share/texmf/fonts/enc/dvips/lm/l
@@ -1521,10 +1506,10 @@ f/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy
 7.pfb></usr/share/texmf/fonts/type1/public/lm/lmtk10.pfb></usr/share/texmf/font
 s/type1/public/lm/lmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
 amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (17 pages, 385032 bytes).
+Output written on main.pdf (17 pages, 381152 bytes).
 PDF statistics:
- 524 PDF objects out of 1000 (max. 8388607)
- 465 compressed objects within 5 object streams
- 171 named destinations out of 1000 (max. 500000)
+ 487 PDF objects out of 1000 (max. 8388607)
+ 428 compressed objects within 5 object streams
+ 140 named destinations out of 1000 (max. 500000)
  417 words of extra memory for PDF output out of 10000 (max. 10000000)
 
