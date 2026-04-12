@@ -7,7 +7,7 @@
 We formalize the problem following the definitions from prior work
 {[}1{]}:
 
-\textbf{Definition 1: Moving Crowdsourced Service MS} {[}1{]}. A moving
+\textbf{Definition 1: Moving Crowdsourced Service MS} \cite{neiat2021}. A moving
 crowdsourced service MS is a tuple of \(\langle id, F, Q \rangle\)
 where: - \(id\) is a unique service identifier - \(F\) is a function
 offered by MS (e.g., providing a moving WiFi hotspot). The function
@@ -20,11 +20,11 @@ coverage region offered by MS at time \(t_i\), represented as a circular
 area centered at \(p_i\) with radius \(r\) - \(Q\) is a set of QoS
 attributes (e.g., capacity)
 
-\textbf{Definition 2: User Trajectory \(T_u\)} {[}1{]}. A user trajectory is the
+\textbf{Definition 2: User Trajectory \(T_u\)} \cite{neiat2021}. A user trajectory is the
 path traveled by a user, defined as a set of \(k\) timestamped samples:
 \[T_u = \{\langle u_{t_i}, u_{x_i}, u_{y_i} \rangle\}\]
 
-\textbf{Definition 3: Spatial Candidate Pair} {[}1{]}. Given a set of moving
+\textbf{Definition 3: Spatial Candidate Pair} \cite{neiat2021}. Given a set of moving
 services \(\mathcal{M} = \{MS_1, MS_2, ..., MS_n\}\), a user trajectory
 \(T_u = \{up_1, up_2, ..., up_n\}\) where \(up_i = (u_{x_i}, u_{y_i})\),
 and a search radius \(r_s\), a moving service forms a spatial candidate
@@ -34,13 +34,13 @@ radius = \(r_s\)):
 \[\text{Valid}_{spatial}(i, t_i) = \mathbb{1}(d(T_u.up_{t_i}, MS_k.p_{t_i}) \leq r_s)\]
 where \(d(\cdot)\) is the Euclidean or Haversine distance.
 
-\textbf{Definition 4: Valid Candidate Moving Service} {[}1{]}. A moving service
+\textbf{Definition 4: Valid Candidate Moving Service} \cite{neiat2021}. A moving service
 \(MS_i\) is a valid candidate service for a given user trajectory if it
 is paired with the user trajectory over \(w\) consecutive timesteps
 where \(w > 0\):
 \[CMS_i = \{cp_{t_a}, cp_{t_b}, ..., cp_{t_w}\}, t_a < t_b < ... < t_w, |a - b| = 1\]
 
-\textbf{Problem Definition} {[}1{]}: Given a set of moving crowdsourced services
+\textbf{Problem Definition} \cite{neiat2021}: Given a set of moving crowdsourced services
 \(\mathcal{M} = \{MS_1, MS_2, ..., MS_n\}\), a user trajectory \(T_u\),
 and a search radius \(r_s\) as input, the problem is to find the
 ``optimal'' composition plan that gives the best trade-offs among
@@ -55,7 +55,7 @@ CP = \{S_1, S_2, \ldots, S_n\} \quad \text{where} \quad S_i \in \mathcal{V}_u
 \noindent where \(\mathcal{V}_u\) denotes the set of valid candidate
 services for user trajectory \(T_u\).
 
-\textbf{Assumptions} {[}1{]}: - One moving service can only serve one user at
+\textbf{Assumptions} \cite{neiat2021}: - One moving service can only serve one user at
 any point in time - A moving service moves between any two consecutive
 timestamps \(t_i\) and \(t_{i+1}\) with constant speed, enabling
 position interpolation in interval \([t_i, t_{i+1}]\) - Radii of all
@@ -134,7 +134,7 @@ sent to agent (step e) 8. Agent continues until all samples in user
 trajectory are visited 9. Upon traversing all samples, environment
 resets to first sample, process repeats
 
-\textbf{Handling Edge Cases} {[}1{]}:
+\textbf{Handling Edge Cases} \cite{neiat2021}:
 
 \emph{Case 1 - No valid candidate services}: When no moving services
 overlap with the current user trajectory sample in space and time, we
