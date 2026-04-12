@@ -142,31 +142,49 @@ sample (either in time or space), we apply a penalty (-10). This ensures
 the agent always favors the dummy service over invalid selections since
 -1 \textgreater{} -10.
 
-\textbf{Training Algorithm}: The algorithm initializes parameters,
-creates a neural network with random weights, and sets up an empty
-replay memory. The agent begins with exploration-only (epsilon = 1.0) and
-gradually shifts to exploitation as epsilon decays.
-
-\begin{itemize}
-	\tightlist
-	\item
-	      Line 7: Loop through each user trajectory in training set
-	\item
-	      Lines 8-10: Allow environment to exploit each user trajectory
-	      repetition times (enabling the agent to experiment with different
-	      actions given the same state)
-	\item
-	      Lines 11-15: Agent invokes action based on epsilon value (random for
-	      exploration, model-based for exploitation)
-	\item
-	      Line 16: Environment returns reward based on QoS of selected service
-	\item
-	      Line 17: Store (state, action, reward, next\_state) tuple in memory
-	\item
-	      Line 20: Use memory to train the model (batch training)
-	\item
-	      Line 21: Decay epsilon after each training process
-\end{itemize}
+\begin{table}[htbp]
+\centering
+\caption{A2C Training Algorithm for Moving IoT Service Composition}
+\label{a2c-training-algo}
+\resizebox{0.9\linewidth}{!}{
+\begin{tabular}{|l|p{10cm}|}
+\hline
+\textbf{Step} & \textbf{Operation} \\
+\hline
+1 & Initialize policy parameters $\theta_\\pi$ and value parameters $\theta_V$ \\
+\hline
+2 & Initialize replay memory $\\mathcal{D}$ with capacity $N$ \\
+\hline
+3 & Set exploration rate $\\epsilon \gets 1.0$ \\
+\hline
+4 & \textbf{for} episode $= 1$ \textbf{to} $M$ \\
+\hline
+5 & \quad Sample user trajectory $T$ from training set \\
+\hline
+6 & \quad \textbf{for} each timestep $t$ \textbf{in} $T$ \\
+\hline
+7 & \quad\quad Observe state $s_t$ from environment \\
+\hline
+8 & \quad\quad \textbf{if} rand() $< \epsilon$ \textbf{then} select random $a_t$ \textbf{else} $a_t \gets \\arg\\max_a \\pi(a|s_t;\\theta_\\pi)$ \\
+\hline
+9 & \quad\quad Execute $a_t$, observe reward $r_t$ and next state $s_{t+1}$ \\
+\hline
+10 & \quad\quad Store transition $(s_t, a_t, r_t, s_{t+1})$ in $\\mathcal{D}$ \\
+\hline
+11 & \quad\quad Sample mini-batch $\\mathcal{B}$ from $\\mathcal{D}$ \\
+\hline
+12 & \quad\quad Update critic: minimize TD-error on $\mathcal{B}$ \\
+\hline
+13 & \quad\quad Update actor: maximize advantage on $\mathcal{B}$ \\
+\hline
+14 & \quad \textbf{end for} \\
+\hline
+15 & \quad $\epsilon \gets \epsilon \times \gamma_\epsilon$ (decay exploration) \\
+\hline
+16 & \textbf{end for} \\
+\hline
+\end{tabular}}
+\end{table}
 
 \textbf{Edge Server Assumptions}: Model training and storage are carried
 out using edge servers. Edge servers are assumed to be conveniently

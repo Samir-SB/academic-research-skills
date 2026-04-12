@@ -46,18 +46,19 @@ Table 2 presents accuracy results for each dataset (mean $\pm$ std across 10 run
 	\centering
 	\caption{Accuracy Performance by Dataset}
 	\label{accuracy-table}
+	\resizebox{0.95\linewidth}{!}{
 	\begin{tabular}{|l|c|c|c|c|}
 		\toprule
-		\textbf{Dataset}   & \textbf{Mobility Scenario} & \textbf{Double DQN} & \textbf{A2C Shared} & \textbf{A2C Separate} \\
+		\textbf{Dataset} & \textbf{Mobility} & \textbf{Double DQN} & \textbf{A2C Shared} & \textbf{A2C Separate} \\
 		\midrule
-		ATC (Indoor)       & Low Mobility (2 km/h)      & 92.4\% $\pm$ 2.1\%  & 94.1\% $\pm$ 1.8\%  & 95.2\% $\pm$ 1.5\%    \\
-		ATC (Indoor)       & Medium Mobility (5 km/h)   & 85.3\% $\pm$ 3.2\%  & 90.1\% $\pm$ 2.4\%  & 92.4\% $\pm$ 2.0\%    \\
-		ATC (Indoor)       & High Mobility (10 km/h)    & 71.8\% $\pm$ 4.5\%  & 82.3\% $\pm$ 3.1\%  & 85.7\% $\pm$ 2.8\%    \\
-		Illinois (Outdoor) & Low Mobility (2 km/h)      & 89.2\% $\pm$ 2.8\%  & 92.5\% $\pm$ 2.1\%  & 94.8\% $\pm$ 1.7\%    \\
-		Illinois (Outdoor) & Medium Mobility (5 km/h)   & 78.4\% $\pm$ 3.5\%  & 85.7\% $\pm$ 2.6\%  & 88.9\% $\pm$ 2.2\%    \\
-		Illinois (Outdoor) & High Mobility (10 km/h)    & 64.2\% $\pm$ 4.8\%  & 76.8\% $\pm$ 3.4\%  & 80.3\% $\pm$ 2.9\%    \\
+		ATC (Indoor) & Low (2 km/h)      & 92.4$\pm$2.1 & 94.1$\pm$1.8 & 95.2$\pm$1.5 \\
+		ATC (Indoor) & Med (5 km/h)   & 85.3$\pm$3.2 & 90.1$\pm$2.4 & 92.4$\pm$2.0 \\
+		ATC (Indoor) & High (10 km/h)    & 71.8$\pm$4.5 & 82.3$\pm$3.1 & 85.7$\pm$2.8 \\
+		Illinois & Low (2 km/h)      & 89.2$\pm$2.8 & 92.5$\pm$2.1 & 94.8$\pm$1.7 \\
+		Illinois & Med (5 km/h)   & 78.4$\pm$3.5 & 85.7$\pm$2.6 & 88.9$\pm$2.2 \\
+		Illinois & High (10 km/h)    & 64.2$\pm$4.8 & 76.8$\pm$3.4 & 80.3$\pm$2.9 \\
 		\bottomrule
-	\end{tabular}
+	\end{tabular}}
 \end{table}
 
 The A2C configurations consistently outperform Double DQN across all mobility scenarios and both datasets. The accuracy significantly increases until it reaches around 95\% after 500 user trajectories for the ATC dataset and 93\% after 35 user trajectories for the Illinois dataset. The accuracy is lower when the number of trajectories is low because fewer samples lead to less accurate results.
