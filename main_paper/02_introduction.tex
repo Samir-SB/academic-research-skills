@@ -44,31 +44,31 @@ composition.
 The first challenge is connectivity---the core requirement for service
 discovery. A moving service must stay connected with a consumer, meaning
 it must remain within connectivity proximity. This requires determining
-co-movement patterns between the user and service trajectories [22]. We
+co-movement patterns between the user and service trajectories [21]. We
 propose spatio-temporal filtering to find services that overlap with the
-user trajectory in both space and time [23].
+user trajectory in both space and time [22].
 
 The second challenge is service continuity. A consumer and service
 provider may not share their entire route---they may only overlap for
 part of the journey. Therefore, an effective composition approach is
 required to select an optimal sequence of available moving services that
-ensure continuity [24]. This is fundamentally different from static
-composition where services remain available throughout [27].
+ensure continuity [23]. This is fundamentally different from static
+composition where services remain available throughout [26].
 
 The third challenge is indexing and scalability. Existing co-movement
 discovery methods rely on centralized index structures like R-trees. As
 datasets scale up, performance degrades dramatically. We need an
 approach that discovers and composes services without relying on
-expensive indexing [29].
+expensive indexing [28].
 
 Moving IoT services exhibit spatio-temporal variability. Service
 positions, availability, and quality attributes change continuously over
-time [25]. A service might be within communication range at one instant and
+time [24]. A service might be within communication range at one instant and
 outside it the next. Quality metrics like channel capacity depend on
-distance, which changes as services move [29]. This dynamic nature
+distance, which changes as services move [28]. This dynamic nature
 fundamentally alters the composition problem from a one-time
 optimization to a sequential decision process requiring real-time
-adaptation [26].
+adaptation [25].
 
 The core challenge is spatio-temporal validity. A service is valid only
 when it falls within the consumer's discovery zone (communication range)
