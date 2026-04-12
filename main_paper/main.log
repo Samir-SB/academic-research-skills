@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.4.12)  12 APR 2026 14:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.4.12)  12 APR 2026 14:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1100,74 +1100,70 @@ Underfull \hbox (badness 10000) in paragraph at lines 36--36
  []
 
 [10]
-Overfull \hbox (94.48422pt too wide) in paragraph at lines 76--84
- [][] 
- []
-
 Runaway argument?
 {adaptation-speed-analysis{\subsubsection {5.4 Adaptation Speed Analy\ETC.
 ! Paragraph ended before \hypertarget was complete.
 <to be read again> 
                    \par 
-l.96 
+l.97 
      
 I suspect you've forgotten a `}', causing me to apply this
 control sequence to too much text. How can we recover?
 My plan is to forget the whole thing and hope for the best.
 
 
-Overfull \hbox (85.7621pt too wide) in paragraph at lines 149--160
+Overfull \hbox (85.7621pt too wide) in paragraph at lines 150--161
  [][] 
  []
 
 [11]
-Underfull \hbox (badness 1132) in paragraph at lines 200--205
+Underfull \hbox (badness 1132) in paragraph at lines 201--206
 []\T1/lmr/bx/n/10 Experimental Setup\T1/lmr/m/n/10 : - Train-ing split: 75%
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 225--231
+Underfull \hbox (badness 10000) in paragraph at lines 226--232
 []\T1/lmr/bx/n/10 Experiment Con-fig-u-ra-tion \T1/lmr/m/n/10 (from
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 225--231
+Underfull \hbox (badness 10000) in paragraph at lines 226--232
 \T1/lmtt/m/n/10 configs/exp1.yaml\T1/lmr/m/n/10 ): - Data di-rec-tory:
  []
 
 
-Underfull \hbox (badness 1629) in paragraph at lines 225--231
+Underfull \hbox (badness 1629) in paragraph at lines 226--232
 \T1/lmtt/m/n/10 data/selected \T1/lmr/m/n/10 - Dataset: \T1/lmtt/m/n/10 df_shuf
 fled_500.csv
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 247--253
+Underfull \hbox (badness 10000) in paragraph at lines 248--254
 []\T1/lmr/bx/n/10 Experiment Doc-u-men-ta-tion\T1/lmr/m/n/10 : The
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 247--253
+Underfull \hbox (badness 10000) in paragraph at lines 248--254
 \T1/lmr/m/n/10 com-plete tech-ni-cal doc-u-men-ta-tion of
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 247--253
+Underfull \hbox (badness 10000) in paragraph at lines 248--254
 \T1/lmr/m/n/10 the ex-per-i-ment code is avail-able in
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 247--253
+Underfull \hbox (badness 10000) in paragraph at lines 248--254
 \T1/lmtt/m/n/10 experiments-codesource/experiment-details.md\T1/lmr/m/n/10 ,
  []
 
 
-Underfull \hbox (badness 4132) in paragraph at lines 266--271
+Underfull \hbox (badness 4132) in paragraph at lines 267--272
 \T1/lmr/m/n/10 or-di-nate rep-re-sen-ta-tion (dis-tance, cos(angle),
  []
 
 
-Underfull \hbox (badness 1303) in paragraph at lines 266--271
+Underfull \hbox (badness 1303) in paragraph at lines 267--272
 \T1/lmr/m/n/10 sin(angle)) pro-vides rotation-invariant fea-tures
  []
 
@@ -1199,7 +1195,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 7--7
 []\T1/lmr/bx/n/12 6.1 Data Pre-pro-cess-ing
  []
 
-
+[12]
 Underfull \hbox (badness 10000) in paragraph at lines 12--21
 \T1/lmr/m/n/10 Con-vert to ego-centric po-lar co-or-di-nates -
  []
@@ -1209,7 +1205,7 @@ Underfull \hbox (badness 7238) in paragraph at lines 12--21
 \T1/lmtt/m/n/10 compute_capacity()\T1/lmr/m/n/10 : Shannon-Hartley ca-pac-ity
  []
 
-[12]
+
 Underfull \hbox (badness 10000) in paragraph at lines 24--24
 []\T1/lmr/bx/n/10 6.2 Sim-u-la-tion En-vi-ron-ment (illi-
  []
@@ -1295,10 +1291,7 @@ Underfull \hbox (badness 1642) in paragraph at lines 93--97
 for all hy-per-
  []
 
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [13]
+[13]
 Underfull \hbox (badness 5832) in paragraph at lines 127--132
 \T1/lmr/m/n/10 De-fine ex-per-i-ment pa-ram-e-ters 2. \T1/lmr/bx/n/10 Ex-e-cu-t
 ion
@@ -1460,7 +1453,7 @@ tifier (name{interpretation-of-results}) has been already used, duplicate ignor
 ed
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.20 
+l.16 
      ]
 Underfull \hbox (badness 10000) in paragraph at lines 21--23
 []\T1/lmr/m/n/10 The STR-based se-lec-tion con-tin-ues driv-ing
@@ -1652,7 +1645,7 @@ f/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy
 7.pfb></usr/share/texmf/fonts/type1/public/lm/lmtk10.pfb></usr/share/texmf/font
 s/type1/public/lm/lmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
 amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (16 pages, 382787 bytes).
+Output written on main.pdf (16 pages, 382928 bytes).
 PDF statistics:
  483 PDF objects out of 1000 (max. 8388607)
  425 compressed objects within 5 object streams

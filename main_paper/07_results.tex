@@ -69,10 +69,11 @@ The A2C configurations consistently outperform Double DQN across all mobility sc
 
 Table 3 shows capacity satisfaction rate results (mean $\pm$ std):
 
-\begin{table}[htbp]
+\begin{table*}[t]
 	\centering
 	\caption{Capacity Satisfaction Rate Results}
 	\label{capacity-satisfaction-table}
+	\resizebox{0.9\textwidth}{!}{
 	\begin{tabular}{|l|c|c|c|}
 		\toprule
 		\textbf{Dataset} & \textbf{Double DQN} & \textbf{A2C Shared} & \textbf{A2C Separate} \\
@@ -80,8 +81,8 @@ Table 3 shows capacity satisfaction rate results (mean $\pm$ std):
 		Random Waypoint  & 87.3\% $\pm$ 3.2\%  & 91.8\% $\pm$ 2.1\%  & 93.5\% $\pm$ 1.8\%    \\
 		Illinois         & 84.2\% $\pm$ 3.5\%  & 89.7\% $\pm$ 2.4\%  & 92.1\% $\pm$ 2.0\%    \\
 		\bottomrule
-	\end{tabular}
-\end{table}
+	\end{tabular}}
+\end{table*}
 
 The A2C configurations achieve higher capacity satisfaction due to
 the policy-based approach enabling better selection of services that
