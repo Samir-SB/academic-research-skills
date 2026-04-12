@@ -15,12 +15,12 @@ communication range.
 		Scenario}\label{wifi-hotspot-sharing-scenario}}
 
 A representative example of moving crowdsourced services is WiFi hotspot
-sharing through smartphones \cite{neiat2021}. This type of crowdsourced IoT service is
+sharing through smartphones [1]. This type of crowdsourced IoT service is
 characterized by spatio-temporal aspects---the location/space and
 time/period in which services are provisioned and consumed.
 
 We identify two key types of crowdsourced services with regard to
-spatial location: fixed and moving \cite{neiat2021}. A fixed crowdsourced service refers
+spatial location: fixed and moving [1]. A fixed crowdsourced service refers
 to services that are permanent in space during the service provisioning
 period---for example, a WiFi hotspot shared while sitting at a coffee
 shop. In contrast, a moving crowdsourced service is not tied to any
@@ -44,31 +44,31 @@ composition.
 The first challenge is connectivity---the core requirement for service
 discovery. A moving service must stay connected with a consumer, meaning
 it must remain within connectivity proximity. This requires determining
-co-movement patterns between the user and service trajectories \cite{gudmundsson2006}. We
+co-movement patterns between the user and service trajectories [2]. We
 propose spatio-temporal filtering to find services that overlap with the
-user trajectory in both space and time \cite{jeung2008}.
+user trajectory in both space and time [3].
 
 The second challenge is service continuity. A consumer and service
 provider may not share their entire route---they may only overlap for
 part of the journey. Therefore, an effective composition approach is
 required to select an optimal sequence of available moving services that
-ensure continuity \cite{neiat2015}. This is fundamentally different from static
-composition where services remain available throughout \cite{deng2016}.
+ensure continuity [4]. This is fundamentally different from static
+composition where services remain available throughout [5].
 
 The third challenge is indexing and scalability. Existing co-movement
 discovery methods rely on centralized index structures like R-trees. As
 datasets scale up, performance degrades dramatically. We need an
 approach that discovers and composes services without relying on
-expensive indexing \cite{zhang2015}.
+expensive indexing [6].
 
 Moving IoT services exhibit spatio-temporal variability. Service
 positions, availability, and quality attributes change continuously over
-time \cite{deng2017}. A service might be within communication range at one instant and
+time [7]. A service might be within communication range at one instant and
 outside it the next. Quality metrics like channel capacity depend on
-distance, which changes as services move \cite{zhang2015}. This dynamic nature
+distance, which changes as services move [6]. This dynamic nature
 fundamentally alters the composition problem from a one-time
 optimization to a sequential decision process requiring real-time
-adaptation \cite{gai2018}.
+adaptation [8].
 
 The core challenge is spatio-temporal validity. A service is valid only
 when it falls within the consumer's discovery zone (communication range)
@@ -78,11 +78,11 @@ from distance through exponential signal attenuation. The agent must
 learn to select services that are both valid and high-quality, without
 knowing a priori which services will be valid at each timestep.
 
-Prior work addressed this with Double DQN \cite{neiat2021}, using the STR model
+Prior work addressed this with Double DQN [1], using the STR model
 for distance-derived capacity and composition. The approach achieved
 92.4\% success at low pedestrian mobility (2 km/h) and 71.8\% at higher
-mobility (10 km/h), with frequent re-compositions needed \cite{neiat2021}. However,
-DQN's value-based nature has three key limitations \cite{gai2018}. First,
+mobility (10 km/h), with frequent re-compositions needed [1]. However,
+DQN's value-based nature has three key limitations [8]. First,
 overestimation bias leads to suboptimal action selection, particularly
 harmful when valid services are few. Second, DQN handles discrete action
 spaces poorly for service composition. Third, DQN is reactive---it
@@ -97,13 +97,13 @@ enabling faster convergence and better sample efficiency. A2C naturally
 handles discrete action spaces and can be extended with LSTM for
 trajectory encoding to anticipate future states.
 
-\textbf{Our Contributions}: This work makes four key contributions: (1) We adapt A2C for moving IoT service composition, building upon the STR-based selection from prior work \cite{neiat2021} while replacing Double DQN with A2C; (2) We implement and compare two network architectures; (3) We evaluate on real GPS datasets; (4) We analyze scalability with convergence within 350-500 episodes and 44% reduction in re-composition frequency.
+\textbf{Our Contributions}: This work makes four key contributions: (1) We adapt A2C for moving IoT service composition, building upon the STR-based selection from prior work [1] while replacing Double DQN with A2C; (2) We implement and compare two network architectures; (3) We evaluate on real GPS datasets; (4) We analyze scalability with convergence within 350-500 episodes and 44% reduction in re-composition frequency.
 
 We pose four research questions:
 
 \begin{enumerate}
 	\item How can A2C be adapted for moving IoT service composition while
-	      building upon the STR-based selection from prior work \cite{neiat2021}?
+	      building upon the STR-based selection from prior work [1]?
 	\item How do shared versus separate network architectures perform in this
 	      domain?
 	\item How does A2C compare to reactive baselines (greedy nearest-neighbor,
