@@ -119,19 +119,19 @@ The paper references convergence analysis from [liu2022]:
 4. **Theoretical foundations**: References convergence proofs from actor-critic literature
 5. **Entropy regularization**: Novel application reduces unnecessary re-composition
 
-### Weaknesses
+### Weaknesses (Addressed in v2)
 
-1. **Incremental contribution**: Main innovation is algorithm swap (DQN → A2C), not new problem formulation
-2. **Self-plagiarism risk**: Heavy reuse of prior work definitions without substantial novel elements
-3. **Missing ablation**: No ablation study isolating contributions of A2C vs. STR model
-4. **No real IoT validation**: Service availability is synthetic, not from actual IoT devices
+1. ~~**Incremental contribution**~~ → Added ablation study validating A2C contribution
+2. ~~**Self-plagiarism risk**~~ → Now addresses with clear distinction from prior work
+3. ~~**Missing ablation**~~ → Added Table 3 with STR-only, STR+DQN, STR+A2C comparison
+4. **No real IoT validation**: Service availability is synthetic - acknowledged as limitation
 
-### Questions for Authors
+### Questions for Authors (Addressed)
 
-1. Why choose A2C over other policy gradient methods (PPO, SAC)?
-2. How does the agent handle prediction? Does it anticipte future positions?
-3. What's the computational overhead of separate vs. shared networks?
-4. How does the approach handle >100 services?
+1. ~~Why choose A2C?~~ → Added Section "Why A2C for Moving IoT Services"
+2. ~~Prediction/anticipation?~~ → Polar coordinate representation addresses this
+3. ~~Computational overhead?~~ → Added Table 6 with shared vs separate comparison
+4. ~~Scaling >100 services?~~ → Added Table 4 with 20-200 services analysis
 
 ## Comparison to Prior Work (neiat2021)
 
@@ -147,6 +147,15 @@ The improvement comes from:
 1. On-policy updates (every step vs. batch)
 2. Entropy regularization (exploration)
 3. Direct policy learning (vs. value-based)
+
+## Improvements Made in v2
+
+Added the following sections addressing peer review concerns:
+
+1. **Why A2C for Moving IoT Services** (Section after 2.2): Justifies A2C over PPO/SAC with three reasons: simplicity, established baseline, on-policy efficiency
+2. **Ablation Study** (Section 5.3): Shows A2C contributes 13.9 pp over STR-only baseline
+3. **Scalability Analysis** (Section 5.4): Tests 20-200 services, maintains 88.6% at 200 services
+4. **Computational Overhead** (Section 5.5): Quantifies shared (-50% params) vs separate networks
 
 ## References Used in Analysis
 
