@@ -2,33 +2,33 @@
 
 \usepackage{amsmath,amssymb}
 \usepackage{iftex}
+
 \ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp}
+  \usepackage{lmodern}
 \else
   \usepackage{unicode-math}
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures={TeX,Scale=1}}
 \fi
-\usepackage{lmodern}
+
 \usepackage[svgnames]{xcolor}
 \usepackage[paper=a4paper,margin=0.8in]{geometry}
-\usepackage{hyperref}
-\usepackage{xcolor}
 \usepackage{etoolbox}
-%\usepackage{natbib}
 \usepackage{longtable,booktabs,array}
 \usepackage{graphicx}
 
+\usepackage{hyperref}
 \hypersetup{
   colorlinks=true,
-  linkcolor=DarkRed,
+  linkcolor=blue,
   citecolor=blue,
   urlcolor=blue,
   pdfcreator={LaTeX}}
 
-\providecommand{\tightlist}{\setlength{\itemsep}{0pt}}
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
 \author{}
 \date{}
