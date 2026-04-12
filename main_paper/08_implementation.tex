@@ -47,7 +47,12 @@ pip install stable-baselines3
 \textbf{A2C Implementation (\texttt{train.py})}: We use
 \texttt{stable\_baselines3.A2C} with the custom Gymnasium environment:
 
-\begin{verbatim}
+\begin{figure*}[t]
+	\centering
+	\caption{A2C Implementation Code}
+	\label{a2c-implementation-code}
+	\scriptsize
+	\begin{verbatim}
 from stable_baselines3 import A2C
 from illinois_online import APSelectionEnv
 
@@ -67,7 +72,8 @@ model = A2C(
 
 model.learn(total_timesteps=100000)
 model.save("a2c_moving_iot")
-\end{verbatim}
+	\end{verbatim}
+\end{figure*}
 
 \textbf{DQN Implementation}: We use \texttt{stable\_baselines3.DQN}:
 

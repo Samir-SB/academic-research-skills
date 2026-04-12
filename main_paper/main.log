@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.4.12)  12 APR 2026 14:23
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.4.12)  12 APR 2026 14:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1171,64 +1171,59 @@ Underfull \hbox (badness 2726) in paragraph at lines 47--49
  []
 
 
-Overfull \hbox (37.06148pt too wide) in paragraph at lines 70--70
-[]\T1/lmtt/m/n/10 env = APSelectionEnv(num_services=20, max_steps=100)[] 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 72--73
+Underfull \hbox (badness 10000) in paragraph at lines 78--79
 []\T1/lmr/bx/n/10 DQN Im-ple-men-ta-tion\T1/lmr/m/n/10 : We use
  []
 
 
-Underfull \hbox (badness 1642) in paragraph at lines 93--97
+Underfull \hbox (badness 1642) in paragraph at lines 99--103
 \T1/lmr/m/n/10 - \T1/lmtt/m/n/10 MasterConfig\T1/lmr/m/n/10 : Py-dan-tic model 
 for all hy-per-
  []
 
 
-Underfull \hbox (badness 5832) in paragraph at lines 127--132
+Underfull \hbox (badness 5832) in paragraph at lines 133--138
 \T1/lmr/m/n/10 De-fine ex-per-i-ment pa-ram-e-ters 2. \T1/lmr/bx/n/10 Ex-e-cu-t
 ion
  []
 
 
-Overfull \hbox (58.06142pt too wide) in paragraph at lines 141--141
+Overfull \hbox (58.06142pt too wide) in paragraph at lines 147--147
 []\T1/lmtt/m/n/10 ./run_experiments.sh configs/exp1.yaml configs/exp2.yaml[] 
  []
 
 
-Overfull \hbox (73.81137pt too wide) in paragraph at lines 157--157
+Overfull \hbox (73.81137pt too wide) in paragraph at lines 163--163
 []  \T1/lmtt/m/n/10 |   +-- a2c_model.zip          # SB3 A2C model checkpoint[]
  
  []
 
 
-Overfull \hbox (63.3114pt too wide) in paragraph at lines 157--157
+Overfull \hbox (63.3114pt too wide) in paragraph at lines 163--163
 []  \T1/lmtt/m/n/10 |   +-- resolved_config.yaml   # Resolved configuration[] 
  []
 
 
-Overfull \hbox (58.06142pt too wide) in paragraph at lines 157--157
+Overfull \hbox (58.06142pt too wide) in paragraph at lines 163--163
 []  \T1/lmtt/m/n/10 |   +-- episode_rewards.png    # Training metrics plot[] 
  []
 
 
-Overfull \hbox (52.81143pt too wide) in paragraph at lines 157--157
+Overfull \hbox (52.81143pt too wide) in paragraph at lines 163--163
 []  \T1/lmtt/m/n/10 |   +-- action_distribution.png # Action distribution[] 
  []
 
 
-Overfull \hbox (21.31152pt too wide) in paragraph at lines 157--157
+Overfull \hbox (21.31152pt too wide) in paragraph at lines 163--163
 []      \T1/lmtt/m/n/10 +-- <run_id>.log           # Execution logs[] 
  []
 
 
-Overfull \hbox (31.8115pt too wide) in paragraph at lines 157--157
+Overfull \hbox (31.8115pt too wide) in paragraph at lines 163--163
 []\T1/lmtt/m/n/10 experiments_results.csv        # Aggregated results[] 
  []
 
-[14] (./09_discussion.tex
+(./09_discussion.tex [14]
 Underfull \hbox (badness 10000) in paragraph at lines 21--23
 []\T1/lmr/m/n/10 The STR-based se-lec-tion con-tin-ues driv-ing
  []
@@ -1336,14 +1331,19 @@ Runaway argument?
 ! File ended while scanning use of \hypertarget.
 <inserted text> 
                 \par 
-l.159 \input{09_discussion}
+l.165 \input{09_discussion}
                            
 I suspect you have forgotten a `}', causing me
 to read past where you wanted me to stop.
 I'll try to recover; but if the error is serious,
 you'd better type `E' or `X' now and fix your file.
 
-) (./09_discussion.tex
+) (./09_discussion.texpdfTeX warning (ext4): destination with the same identifi
+er (name{interpretation-of-results}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.4 ... Results}\label{interpretation-of-results}}
+                                                  
 Underfull \hbox (badness 10000) in paragraph at lines 21--23
 []\T1/lmr/m/n/10 The STR-based se-lec-tion con-tin-ues driv-ing
  []
@@ -1353,6 +1353,17 @@ Underfull \hbox (badness 1194) in paragraph at lines 21--23
 \T1/lmr/m/n/10 decisions---the agent learns to max-i-mize ex-pected
  []
 
+[15pdfTeX warning (ext4): destination with the same identifier (name{comparison
+-with-prior-work}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.41 
+     ]pdfTeX warning (ext4): destination with the same identifier (name{practic
+al-implications}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.43 	#### 7.3 Practical Implications}
+                                      \label{practical-implications}}
 ! You can't use `macro parameter character #' in vertical mode.
 <argument> ##
              ###### 7.3 Practical Implications
@@ -1399,6 +1410,12 @@ l.43 ...plications}\label{practical-implications}}
 You've closed more groups than you opened.
 Such booboos are generally harmless, so keep going.
 
+pdfTeX warning (ext4): destination with the same identifier (name{limitations})
+ has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.56 #
+      ### 7.4 Limitations}\label{limitations}
 ! You can't use `macro parameter character #' in vertical mode.
 <argument> ##
              
@@ -1439,30 +1456,7 @@ l.56 #### 7.4 Limitations}
 You've closed more groups than you opened.
 Such booboos are generally harmless, so keep going.
 
-[15pdfTeX warning (ext4): destination with the same identifier (name{interpreta
-tion-of-results}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.60 \textbf{STR Model}
-                       : Uses simplified distance-based models. More complexpdf
-TeX warning (ext4): destination with the same identifier (name{comparison-with-
-prior-work}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.60 \textbf{STR Model}
-                       : Uses simplified distance-based models. More complexpdf
-TeX warning (ext4): destination with the same identifier (name{practical-implic
-ations}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.60 \textbf{STR Model}
-                       : Uses simplified distance-based models. More complexpdf
-TeX warning (ext4): destination with the same identifier (name{limitations}) ha
-s been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.60 \textbf{STR Model}
-                       : Uses simplified distance-based models. More complex]
+
 Underfull \hbox (badness 1019) in paragraph at lines 64--66
 []\T1/lmr/bx/n/10 Centralized\T1/lmr/m/n/10 : As-sumes cen-tral-ized com-po-si-
 tion.
@@ -1517,13 +1511,13 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 0B264359F6059A89907895B05C95A6AF;11499.
  ) 
 Here is how much of TeX's memory you used:
- 11499 strings out of 480247
- 177795 string characters out of 5896151
+ 11503 strings out of 480247
+ 177849 string characters out of 5896151
  493007 words of memory out of 5000000
- 29076 multiletter control sequences out of 15000+600000
- 534506 words of font info for 77 fonts, out of 8000000 for 9000
+ 29078 multiletter control sequences out of 15000+600000
+ 534827 words of font info for 78 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 60i,13n,63p,546b,469s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,13n,63p,546b,394s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dv
 ips/lm/lm-ts1.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/shar
 e/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/share/texmf/fonts/enc/dvips/lm/l
@@ -1537,12 +1531,13 @@ are/texmf/fonts/type1/public/lm/lmr17.pfb></usr/share/texmf/fonts/type1/public/
 lm/lmr7.pfb></usr/share/texmf/fonts/type1/public/lm/lmri10.pfb></usr/share/texm
 f/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy
 7.pfb></usr/share/texmf/fonts/type1/public/lm/lmtk10.pfb></usr/share/texmf/font
-s/type1/public/lm/lmtt10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt9.pfb>
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (17 pages, 407448 bytes).
+s/type1/public/lm/lmtt10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt8.pfb>
+</usr/share/texmf/fonts/type1/public/lm/lmtt9.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (17 pages, 435033 bytes).
 PDF statistics:
- 494 PDF objects out of 1000 (max. 8388607)
- 433 compressed objects within 5 object streams
- 142 named destinations out of 1000 (max. 500000)
+ 500 PDF objects out of 1000 (max. 8388607)
+ 437 compressed objects within 5 object streams
+ 143 named destinations out of 1000 (max. 500000)
  417 words of extra memory for PDF output out of 10000 (max. 10000000)
 
