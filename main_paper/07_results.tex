@@ -42,11 +42,11 @@ We evaluate the accuracy of our A2C-based composition approach by comparing it t
 
 Table 2 presents accuracy results for each dataset (mean $\pm$ std across 10 runs):
 
-\begin{table}[htbp]
+\begin{table*}[t]
 	\centering
 	\caption{Accuracy Performance by Dataset}
 	\label{accuracy-table}
-	\resizebox{0.95\linewidth}{!}{
+	\resizebox{\textwidth}{!}{
 	\begin{tabular}{|l|c|c|c|c|}
 		\toprule
 		\textbf{Dataset} & \textbf{Mobility} & \textbf{Double DQN} & \textbf{A2C Shared} & \textbf{A2C Separate} \\
@@ -59,7 +59,7 @@ Table 2 presents accuracy results for each dataset (mean $\pm$ std across 10 run
 		Illinois & High (10 km/h)    & 64.2$\pm$4.8 & 76.8$\pm$3.4 & 80.3$\pm$2.9 \\
 		\bottomrule
 	\end{tabular}}
-\end{table}
+\end{table*}
 
 The A2C configurations consistently outperform Double DQN across all mobility scenarios and both datasets. The accuracy significantly increases until it reaches around 95\% after 500 user trajectories for the ATC dataset and 93\% after 35 user trajectories for the Illinois dataset. The accuracy is lower when the number of trajectories is low because fewer samples lead to less accurate results.
 
@@ -112,10 +112,11 @@ re-composition.
 
 Table 4 shows re-composition frequency (mean $\pm$ std):
 
-\begin{table}[htbp]
+\begin{table*}[t]
 	\centering
 	\caption{Re-composition Frequency Results}
 	\label{recomp-frequency-table}
+	\resizebox{\textwidth}{!}{
 	\begin{tabular}{|l|c|c|c|}
 		\toprule
 		\textbf{Configuration} & \textbf{Dataset 1 (Waypoint)} & \textbf{Dataset 2 (Vehicle)} & \textbf{Stability Score} \\
@@ -126,8 +127,8 @@ Table 4 shows re-composition frequency (mean $\pm$ std):
 		A2C Shared             & 86.7/hr $\pm$ 5.6             & 92.4/hr $\pm$ 6.2            & 0.81 $\pm$ 0.03          \\
 		A2C Separate           & 69.2/hr $\pm$ 4.3             & 74.8/hr $\pm$ 5.1            & 0.87 $\pm$ 0.02          \\
 		\bottomrule
-	\end{tabular}
-\end{table}
+	\end{tabular}}
+\end{table*}
 
 The A2C configurations achieve substantially lower re-composition
 frequency compared to Double DQN. The stability reward component in the
