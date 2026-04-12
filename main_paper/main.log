@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.4.12)  12 APR 2026 14:17
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.4.12)  12 APR 2026 14:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -666,17 +666,11 @@ OMS/lmsy/m/n/10 j\OML/lmm/m/it/10 a \OMS/lmsy/m/n/10 ^^@ \OML/lmm/m/it/10 b\OMS
 /lmsy/m/n/10 j \OT1/lmr/m/n/10 = 1
  []
 
-
-Overfull \hbox (67.689pt too wide) detected at line 50
-\OML/lmm/m/it/10 CP \OT1/lmr/m/n/10 = \OMS/lmsy/m/n/10 f\OML/lmm/m/it/10 S[]; S
-[]; :::; S[]\OMS/lmsy/m/n/10 g[]\OML/lmm/m/it/10 S[][]T[]
- []
-
 [5]
 ! Missing { inserted.
 <to be read again> 
                    \let 
-l.186 \end{tabular}}
+l.192 \end{tabular}}
                     
 A left brace was mandatory here, so I've put one in.
 You might want to delete and/or insert some corrections
@@ -686,7 +680,7 @@ so that I will find a matching right brace soon.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.186 \end{tabular}}
+l.192 \end{tabular}}
                     
 I've put in what seems to be necessary to fix
 the current column of the current alignment.
@@ -695,7 +689,7 @@ Try to go on, since this might almost work.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.186 \end{tabular}}
+l.192 \end{tabular}}
                     
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -703,7 +697,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.186 \end{tabular}}
+l.192 \end{tabular}}
                     
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -711,7 +705,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.186 \end{tabular}}
+l.192 \end{tabular}}
                     
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -719,7 +713,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.186 \end{tabular}}
+l.192 \end{tabular}}
                     
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -730,7 +724,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.186 \end{tabular}}
+l.192 \end{tabular}}
                     
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -738,7 +732,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.186 \end{tabular}}
+l.192 \end{tabular}}
                     
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -746,7 +740,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.186 \end{tabular}}
+l.192 \end{tabular}}
                     
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -754,7 +748,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.186 \end{tabular}}
+l.192 \end{tabular}}
                     
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -762,7 +756,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.186 \end{tabular}}
+l.192 \end{tabular}}
                     
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -773,7 +767,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.186 \end{tabular}}
+l.192 \end{tabular}}
                     
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -781,7 +775,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.186 \end{tabular}}
+l.192 \end{tabular}}
                     
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -792,7 +786,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.186 \end{tabular}}
+l.192 \end{tabular}}
                     
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -800,7 +794,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing { inserted.
 <to be read again> 
                    \let 
-l.186 \end{tabular}}
+l.192 \end{tabular}}
                     
 A left brace was mandatory here, so I've put one in.
 You might want to delete and/or insert some corrections
@@ -810,7 +804,7 @@ so that I will find a matching right brace soon.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.186 \end{tabular}}
+l.192 \end{tabular}}
                     
 I've put in what seems to be necessary to fix
 the current column of the current alignment.
@@ -819,7 +813,7 @@ Try to go on, since this might almost work.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.186 \end{tabular}}
+l.192 \end{tabular}}
                     
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -830,7 +824,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.186 \end{tabular}}
+l.192 \end{tabular}}
                     
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -841,7 +835,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.186 \end{tabular}}
+l.192 \end{tabular}}
                     
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -849,7 +843,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.186 \end{tabular}}
+l.192 \end{tabular}}
                     
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -860,7 +854,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.186 \end{tabular}}
+l.192 \end{tabular}}
                     
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -868,7 +862,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.186 \end{tabular}}
+l.192 \end{tabular}}
                     
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -877,30 +871,30 @@ really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 2
-00.
+06.
 (/usr/share/texmf/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ) [6]
-Underfull \hbox (badness 10000) in paragraph at lines 242--242
+Underfull \hbox (badness 10000) in paragraph at lines 248--248
 []\T1/lmr/bx/n/10 3.3.1 Con-ver-gence and Com-plex-ity
  []
 
 
-Underfull \hbox (badness 1331) in paragraph at lines 310--311
+Underfull \hbox (badness 1331) in paragraph at lines 316--317
 \T1/lmr/m/n/10 the net-work are the pa-ram-e-ters defin-ing a state
  []
 
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 3
-18.
+24.
 (/usr/share/texmf/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ) [7]
-Overfull \hbox (42.31146pt too wide) in paragraph at lines 336--336
+Overfull \hbox (42.31146pt too wide) in paragraph at lines 342--342
 []    \T1/lmtt/m/n/10 +-----------------------+-----------------------+[] 
  []
 
 
-Underfull \hbox (badness 1221) in paragraph at lines 345--346
+Underfull \hbox (badness 1221) in paragraph at lines 351--352
  []\T1/lmr/bx/n/10 3.4.2 Sep-a-rate Ar-chi-tec-ture[] \T1/lmr/m/n/10 In-de-pen-
 dent net-
  []
@@ -909,21 +903,21 @@ pdfTeX warning (ext4): destination with the same identifier (name{relative-pola
 r-coordinate-representation}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.376 ...elative-polar-coordinate-representation}}
+l.382 ...elative-polar-coordinate-representation}}
                                                   
-Overfull \hbox (26.63974pt too wide) detected at line 390
+Overfull \hbox (26.63974pt too wide) detected at line 396
 \OML/lmm/m/it/10 r[] \OT1/lmr/m/n/10 = []\OML/lmm/m/it/10 ;  ^^R[] \OT1/lmr/m/n
 /10 = [] 2(\OML/lmm/m/it/10 y[] \OMS/lmsy/m/n/10 ^^@ \OML/lmm/m/it/10 y[]; x[] 
 \OMS/lmsy/m/n/10 ^^@ \OML/lmm/m/it/10 x[]\OT1/lmr/m/n/10 )
  []
 
 
-Underfull \hbox (badness 1097) in paragraph at lines 402--402
+Underfull \hbox (badness 1097) in paragraph at lines 408--408
 []\T1/lmr/bx/n/10 3.6 Spatio-Temporal Con-straint Han-
  []
 
 
-Overfull \hbox (10.93625pt too wide) detected at line 423
+Overfull \hbox (10.93625pt too wide) detected at line 429
 \OML/lmm/m/it/10 C[]\OT1/lmr/m/n/10 (\OML/lmm/m/it/10 t\OT1/lmr/m/n/10 ) = \OML
 /lmm/m/it/10 B \OMS/lmsy/m/n/10 ^^A [][]\OT1/lmr/m/n/10 (1 + \OML/lmm/m/it/10 S
 TR\OT1/lmr/m/n/10 (\OML/lmm/m/it/10 d[]\OT1/lmr/m/n/10 (\OML/lmm/m/it/10 t\OT1/
@@ -1532,7 +1526,7 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 Here is how much of TeX's memory you used:
  11497 strings out of 480247
  177758 string characters out of 5896151
- 492880 words of memory out of 5000000
+ 493945 words of memory out of 5000000
  29075 multiletter control sequences out of 15000+600000
  534506 words of font info for 77 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
@@ -1552,7 +1546,7 @@ f/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy
 7.pfb></usr/share/texmf/fonts/type1/public/lm/lmtk10.pfb></usr/share/texmf/font
 s/type1/public/lm/lmtt10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt9.pfb>
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (17 pages, 408490 bytes).
+Output written on main.pdf (17 pages, 408696 bytes).
 PDF statistics:
  493 PDF objects out of 1000 (max. 8388607)
  432 compressed objects within 5 object streams

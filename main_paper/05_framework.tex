@@ -47,7 +47,13 @@ and a search radius \(r_s\) as input, the problem is to find the
 multiple QoS criteria---high QoS while maintaining a low number of
 disconnections. The output is a composition plan \(CP\) which is a
 sequence of moving crowdsourced services:
-\[CP = \{S_1, S_2, ..., S_n\} \text{ iff } S_i \text{ is a valid candidate moving service for } T_u\]
+
+\begin{equation*}
+CP = \{S_1, S_2, \ldots, S_n\} \quad \text{where} \quad S_i \in \mathcal{V}_u
+\end{equation*}
+
+\noindent where \(\mathcal{V}_u\) denotes the set of valid candidate
+services for user trajectory \(T_u\).
 
 \textbf{Assumptions}: - One moving service can only serve one user at
 any point in time - A moving service moves between any two consecutive
