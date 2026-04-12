@@ -35,12 +35,17 @@ with significance levels at p \textless{} 0.05 (\emph{), p \textless{}
 	\subsubsection{5.2 Success Rate Performance by
 		Dataset}\label{success-rate-performance-by-dataset}}
 
-Table 2 presents success rate results for each dataset (mean $\pm$ std across 10 runs):
+The accuracy is defined as the ratio between the number of times an optimal service was selected $c_s$ to the total number of available valid samples $n_s$:
+\[Accuracy = \frac{|c_s|}{|n_s|}\]
+
+We evaluate the accuracy of our A2C-based composition approach by comparing it to the ground-truth approach. The ground-truth (parallel flock-based service discovery) generates the best possible composition plan, achieving 100% accuracy by definition. Our accuracy is computed as the percentage of timesteps where the A2C agent selects the same optimal service as the ground-truth.
+
+Table 2 presents accuracy results for each dataset (mean $\pm$ std across 10 runs):
 
 \begin{table}[htbp]
 	\centering
-	\caption{Success Rate Performance by Dataset}
-	\label{success-rate-table}
+	\caption{Accuracy Performance by Dataset}
+	\label{accuracy-table}
 	\begin{tabular}{|l|c|c|c|c|}
 		\toprule
 		\textbf{Dataset}   & \textbf{Mobility Scenario} & \textbf{Double DQN} & \textbf{A2C Shared} & \textbf{A2C Separate} \\
@@ -55,13 +60,7 @@ Table 2 presents success rate results for each dataset (mean $\pm$ std across 10
 	\end{tabular}
 \end{table}
 
-The A2C configurations consistently outperform Double DQN across all
-mobility scenarios and both datasets. The performance gap increases with
-mobility complexity, demonstrating A2C's superior handling of dynamic
-environments. A2C Separate achieves 85.7\% success rate at high mobility
-(10 km/h) in indoor scenarios compared to 71.8\% for Double DQN---a 19\%
-relative improvement. All improvements over Double DQN are statistically
-significant (p \textless{} 0.05).
+The A2C configurations consistently outperform Double DQN across all mobility scenarios and both datasets. The accuracy significantly increases until it reaches around 95\% after 500 user trajectories for the ATC dataset and 93\% after 35 user trajectories for the Illinois dataset. The accuracy is lower when the number of trajectories is low because fewer samples lead to less accurate results.
 
 \hypertarget{capacity-satisfaction-analysis}{%
 	\subsubsection{5.3 Capacity Satisfaction
@@ -158,11 +157,9 @@ Table 5 shows capacity satisfaction results (mean $\pm$ std):
 	\end{tabular}
 \end{table}
 
-The A2C methods achieve higher capacity satisfaction by better utilizing
-the STR model. Trajectory prediction enables selection of services that
-maintain higher capacity throughout the composition horizon.
+The A2C methods achieve higher capacity satisfaction by better utilizing the STR model.
 
-\hypertarget{ablation-studies}{%
+\hypertarget{scalability-analysis}{%
 	\subsubsection{5.7 Ablation Studies}\label{ablation-studies}}
 
 We conduct ablation experiments to isolate the contribution of key

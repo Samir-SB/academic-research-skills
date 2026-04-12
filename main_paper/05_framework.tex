@@ -57,19 +57,9 @@ coverage regions are fixed to a single value - Maximum spatial proximity
 equals the radius of fixed WiFi hotspot coverage (e.g., 20-100m) - We
 focus on deterministic moving crowdsourced services
 
-\textbf{MDP Formulation}: We formulate this as an MDP:
+\textbf{MDP Formulation}: We formulate this as an MDP, following the exact structure from prior work [1].
 
-\textbf{State Space (\(S\))}: At time step \(t\), the state consists of
-the relative polar coordinates of all moving entities with respect to
-the consumer:
-\[s_t = \{r_1^t, \theta_1^t, r_2^t, \theta_2^t, ..., r_n^t, \theta_n^t, t\}\]
-
-where \(r_i^t = \sqrt{(x_i^t - x_c^t)^2 + (y_i^t - y_c^t)^2}\) is the
-distance from service \(i\) to consumer \(c\) at time \(t\), and
-\(\theta_i^t = \arctan2(y_i^t - y_c^t, x_i^t - x_c^t)\) is the bearing
-angle. The state is transformed into a feature vector containing
-\([r, \cos\theta, \sin\theta]\) for each service, enabling the agent to
-learn spatial relationships without explicit velocity computation.
+\textbf{State Space ($S$)}: At time step $t$, the state consists of the current user trajectory sample and all available service trajectories. Each sample is a tuple: $<t, x, y>$ for user trajectories, and $<t, x, y, service\_id, QoS>$ for service trajectories. At any given time, the environment has a current state $s \in S$ representing the current user trajectory sample reported to the agent.
 
 \textbf{Action Space (\(A\))}: Select service ID from available
 services: \[a_t \in \{1, 2, 3, ..., n\}\]
@@ -96,7 +86,7 @@ with each transition.
 \textbf{Reward Function (\(R\))}: The reward function is based on the
 capacity QoS parameter. Since QoS attributes (capacity) are computed
 from the distance between the consumer and moving service---which is
-unknown a priori---the A2C algorithm must learn the optimal execution
+unknown a priori---the algorithm must learn the optimal execution
 policy through interaction with the environment.
 
 The reward for selecting service \(i\) at time \(t\) is:
@@ -297,9 +287,11 @@ experiments, convergence to \(\epsilon = 0.01\) requires approximately
 \hypertarget{network-architectures}{%
 	\subsubsection{3.4 Network Architectures}\label{network-architectures}}
 
-We implement and compare two network architectures.
+We use a dense fully connected neural network to train our model, following the exact architecture from prior work [1]:
 
-\hypertarget{shared-architecture}{%
+\textbf{Neural Network Architecture}: The inputs to the network are the parameters defining a state whereas the outputs are the actions which the agent can take. Three hidden layers are used with 512 neurons each. The rectified linear unit (ReLU) activation function is used in all hidden layers. We use dropout with probability 0.5 on all hidden layers to reduce overfitting. The Q-learning's discount factor $\gamma$ is set to 0.9, whereas the Neural Network's learning rate is 0.001.
+
+\hypertarget{relative-polar-coordinate-representation}{%
 	\paragraph{3.4.1 Shared Architecture}\label{shared-architecture}}
 
 A common feature extraction backbone followed by separate actor and
