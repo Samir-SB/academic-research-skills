@@ -344,7 +344,12 @@ context, and the distance matrix for STR calculation.
 
 Independent networks enable specialized processing:
 
-\begin{verbatim}
+\begin{figure*}[t]
+	\centering
+	\caption{Architecture of A2C with Separate Networks}
+	\label{separate-architecture-diagram}
+	\small
+	\begin{verbatim}
 Input State -> Actor Network                      Input State -> Critic Network
      |                                                    |
      v                                                    v
@@ -352,8 +357,7 @@ Input State -> Actor Network                      Input State -> Critic Network
 | Trajectory Encoder   |                      | State Encoder        |
 | LSTM(128)            |                      | FC(256) -> ReLU       |
 +----------------------+                      +----------------------+
-     |                                                    |
-     v                                                    v
+     |                                                    v
 +----------------------+                      +----------------------+
 | Policy Head          |                      | Value Head           |
 | FC(64) -> ReLU       |                      | FC(64) -> ReLU       |
@@ -361,7 +365,8 @@ Input State -> Actor Network                      Input State -> Critic Network
 | -> Softmax           |                      +----------------------+
 +----------------------+
      Policy pi               Value V(s)
-\end{verbatim}
+	\end{verbatim}
+\end{figure*}
 
 The actor incorporates LSTM for trajectory-aware policy learning,
 capturing temporal dependencies in service movement patterns. The critic
