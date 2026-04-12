@@ -148,7 +148,12 @@ python train.py --config configs/exp1.yaml
 
 \textbf{Output Structure}:
 
-\begin{verbatim}
+\begin{figure*}[t]
+	\centering
+	\caption{Output Directory Structure}
+	\label{output-structure}
+	\small
+	\begin{verbatim}
 runs/<run_id>/
   +-- model/
   |   +-- a2c_model.zip          # SB3 A2C model checkpoint
@@ -160,6 +165,7 @@ runs/<run_id>/
       +-- <run_id>.log           # Execution logs
 
 experiments_results.csv        # Aggregated results
-\end{verbatim}
+	\end{verbatim}
+\end{figure*}
 
 \input{09_discussion}
