@@ -22,6 +22,13 @@ reference-paper/
 └── literature-review-synthesis.md
 
 experiments-codesource/     # Experiment code (DQN, A2C baselines)
+
+thesis_chapters/
+├── 02_literature_review/                    
+└───├── 02_literature_review.tex
+    ├── 02_literature_review.pdf
+    ├── references.bib
+    └── README.md  
 ```
 
 ## Key Commands
