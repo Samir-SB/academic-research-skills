@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.4.12)  12 APR 2026 14:19
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.4.12)  12 APR 2026 14:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -885,39 +885,34 @@ Underfull \hbox (badness 1331) in paragraph at lines 316--317
  []
 
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 3
-24.
+29.
 (/usr/share/texmf/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [7]
-Overfull \hbox (42.31146pt too wide) in paragraph at lines 342--342
-[]    \T1/lmtt/m/n/10 +-----------------------+-----------------------+[] 
- []
-
-
-Underfull \hbox (badness 1221) in paragraph at lines 351--352
+)
+Underfull \hbox (badness 1221) in paragraph at lines 357--358
  []\T1/lmr/bx/n/10 3.4.2 Sep-a-rate Ar-chi-tec-ture[] \T1/lmr/m/n/10 In-de-pen-
 dent net-
  []
 
-pdfTeX warning (ext4): destination with the same identifier (name{relative-pola
-r-coordinate-representation}) has been already used, duplicate ignored
+[7]pdfTeX warning (ext4): destination with the same identifier (name{relative-p
+olar-coordinate-representation}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.382 ...elative-polar-coordinate-representation}}
+l.388 ...elative-polar-coordinate-representation}}
                                                   
-Overfull \hbox (26.63974pt too wide) detected at line 396
+Overfull \hbox (26.63974pt too wide) detected at line 402
 \OML/lmm/m/it/10 r[] \OT1/lmr/m/n/10 = []\OML/lmm/m/it/10 ;  ^^R[] \OT1/lmr/m/n
 /10 = [] 2(\OML/lmm/m/it/10 y[] \OMS/lmsy/m/n/10 ^^@ \OML/lmm/m/it/10 y[]; x[] 
 \OMS/lmsy/m/n/10 ^^@ \OML/lmm/m/it/10 x[]\OT1/lmr/m/n/10 )
  []
 
 
-Underfull \hbox (badness 1097) in paragraph at lines 408--408
+Underfull \hbox (badness 1097) in paragraph at lines 414--414
 []\T1/lmr/bx/n/10 3.6 Spatio-Temporal Con-straint Han-
  []
 
 
-Overfull \hbox (10.93625pt too wide) detected at line 429
+Overfull \hbox (10.93625pt too wide) detected at line 435
 \OML/lmm/m/it/10 C[]\OT1/lmr/m/n/10 (\OML/lmm/m/it/10 t\OT1/lmr/m/n/10 ) = \OML
 /lmm/m/it/10 B \OMS/lmsy/m/n/10 ^^A [][]\OT1/lmr/m/n/10 (1 + \OML/lmm/m/it/10 S
 TR\OT1/lmr/m/n/10 (\OML/lmm/m/it/10 d[]\OT1/lmr/m/n/10 (\OML/lmm/m/it/10 t\OT1/
@@ -955,6 +950,7 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
+[8]
 ! Undefined control sequence.
 l.37 	\tightlist
                 
@@ -964,7 +960,6 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-[8]
 ! Undefined control sequence.
 l.73 		      \tightlist
                        
@@ -1004,6 +999,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 36--36
 []\T1/lmr/bx/n/10 5.2 Suc-cess Rate Per-for-mance by
  []
 
+[11]
 Runaway argument?
 {adaptation-speed-analysis{\subsubsection {5.4 Adaptation Speed Analy\ETC.
 ! Paragraph ended before \hypertarget was complete.
@@ -1015,7 +1011,7 @@ I suspect you've forgotten a `}', causing me to apply this
 control sequence to too much text. How can we recover?
 My plan is to forget the whole thing and hope for the best.
 
-[11]
+
 Underfull \hbox (badness 1132) in paragraph at lines 202--207
 []\T1/lmr/bx/n/10 Experimental Setup\T1/lmr/m/n/10 : - Train-ing split: 75%
  []
@@ -1036,7 +1032,7 @@ Underfull \hbox (badness 1629) in paragraph at lines 227--233
 fled_500.csv
  []
 
-
+[12]
 Underfull \hbox (badness 10000) in paragraph at lines 249--255
 []\T1/lmr/bx/n/10 Experiment Doc-u-men-ta-tion\T1/lmr/m/n/10 : The
  []
@@ -1056,7 +1052,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 249--255
 \T1/lmtt/m/n/10 experiments-codesource/experiment-details.md\T1/lmr/m/n/10 ,
  []
 
-[12]
+
 Underfull \hbox (badness 4132) in paragraph at lines 268--273
 \T1/lmr/m/n/10 or-di-nate rep-re-sen-ta-tion (dis-tance, cos(angle),
  []
@@ -1094,7 +1090,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 7--7
 []\T1/lmr/bx/n/12 6.1 Data Pre-pro-cess-ing
  []
 
-
+[13]
 Underfull \hbox (badness 10000) in paragraph at lines 12--21
 \T1/lmr/m/n/10 Con-vert to ego-centric po-lar co-or-di-nates -
  []
@@ -1160,7 +1156,7 @@ I'll just pretend that you didn't ask for it.
 If you're in the wrong mode, you might be able to
 return to the right one by typing `I}' or `I$' or `I\par'.
 
-[13]
+
 Underfull \hbox (badness 10000) in paragraph at lines 36--40
 \T1/lmr/m/n/10 ([][]$\T1/lmtt/m/n/10 https : / / stable-[]baselines3 . readthed
 ocs . io/$[][]\T1/lmr/m/n/10 )
@@ -1232,7 +1228,7 @@ Overfull \hbox (31.8115pt too wide) in paragraph at lines 157--157
 []\T1/lmtt/m/n/10 experiments_results.csv        # Aggregated results[] 
  []
 
-(./09_discussion.tex
+[14] (./09_discussion.tex
 Underfull \hbox (badness 10000) in paragraph at lines 21--23
 []\T1/lmr/m/n/10 The STR-based se-lec-tion con-tin-ues driv-ing
  []
@@ -1242,7 +1238,6 @@ Underfull \hbox (badness 1194) in paragraph at lines 21--23
 \T1/lmr/m/n/10 decisions---the agent learns to max-i-mize ex-pected
  []
 
-[14]
 ! You can't use `macro parameter character #' in vertical mode.
 <argument> ##
              ###### 7.3 Practical Implications
@@ -1348,12 +1343,7 @@ to read past where you wanted me to stop.
 I'll try to recover; but if the error is serious,
 you'd better type `E' or `X' now and fix your file.
 
-) (./09_discussion.texpdfTeX warning (ext4): destination with the same identifi
-er (name{interpretation-of-results}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.4 ... Results}\label{interpretation-of-results}}
-                                                  
+) (./09_discussion.tex
 Underfull \hbox (badness 10000) in paragraph at lines 21--23
 []\T1/lmr/m/n/10 The STR-based se-lec-tion con-tin-ues driv-ing
  []
@@ -1449,7 +1439,30 @@ l.56 #### 7.4 Limitations}
 You've closed more groups than you opened.
 Such booboos are generally harmless, so keep going.
 
-
+[15pdfTeX warning (ext4): destination with the same identifier (name{interpreta
+tion-of-results}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.60 \textbf{STR Model}
+                       : Uses simplified distance-based models. More complexpdf
+TeX warning (ext4): destination with the same identifier (name{comparison-with-
+prior-work}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.60 \textbf{STR Model}
+                       : Uses simplified distance-based models. More complexpdf
+TeX warning (ext4): destination with the same identifier (name{practical-implic
+ations}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.60 \textbf{STR Model}
+                       : Uses simplified distance-based models. More complexpdf
+TeX warning (ext4): destination with the same identifier (name{limitations}) ha
+s been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.60 \textbf{STR Model}
+                       : Uses simplified distance-based models. More complex]
 Underfull \hbox (badness 1019) in paragraph at lines 64--66
 []\T1/lmr/bx/n/10 Centralized\T1/lmr/m/n/10 : As-sumes cen-tral-ized com-po-si-
 tion.
@@ -1468,25 +1481,7 @@ to read past where you wanted me to stop.
 I'll try to recover; but if the error is serious,
 you'd better type `E' or `X' now and fix your file.
 
-(./10_conclusion.tex [15pdfTeX warning (ext4): destination with the same identi
-fier (name{comparison-with-prior-work}) has been already used, duplicate ignore
-d
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.18 	      \textbf
-                   {Architecture matters in high mobility}: Separate networkspd
-fTeX warning (ext4): destination with the same identifier (name{practical-impli
-cations}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.18 	      \textbf
-                   {Architecture matters in high mobility}: Separate networkspd
-fTeX warning (ext4): destination with the same identifier (name{limitations}) h
-as been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.18 	      \textbf
-                   {Architecture matters in high mobility}: Separate networks])
+(./10_conclusion.tex)
 Runaway argument?
 {
 ! File ended while scanning use of \hypertarget.
@@ -1514,9 +1509,7 @@ Underfull \hbox (badness 1571) in paragraph at lines 53--54
 \T1/lmr/m/n/10 based content-centric ser-vices in mo-bile sens-ing,''
  []
 
-) [17
-
-] (./main.aux)
+) [17] (./main.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
@@ -1524,13 +1517,13 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 0B264359F6059A89907895B05C95A6AF;11499.
  ) 
 Here is how much of TeX's memory you used:
- 11497 strings out of 480247
- 177758 string characters out of 5896151
- 493945 words of memory out of 5000000
- 29075 multiletter control sequences out of 15000+600000
+ 11499 strings out of 480247
+ 177795 string characters out of 5896151
+ 492945 words of memory out of 5000000
+ 29076 multiletter control sequences out of 15000+600000
  534506 words of font info for 77 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 60i,13n,63p,546b,472s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,13n,63p,546b,469s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dv
 ips/lm/lm-ts1.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/shar
 e/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/share/texmf/fonts/enc/dvips/lm/l
@@ -1546,10 +1539,10 @@ f/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy
 7.pfb></usr/share/texmf/fonts/type1/public/lm/lmtk10.pfb></usr/share/texmf/font
 s/type1/public/lm/lmtt10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt9.pfb>
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (17 pages, 408696 bytes).
+Output written on main.pdf (17 pages, 407458 bytes).
 PDF statistics:
- 493 PDF objects out of 1000 (max. 8388607)
- 432 compressed objects within 5 object streams
- 141 named destinations out of 1000 (max. 500000)
+ 494 PDF objects out of 1000 (max. 8388607)
+ 433 compressed objects within 5 object streams
+ 142 named destinations out of 1000 (max. 500000)
  417 words of extra memory for PDF output out of 10000 (max. 10000000)
 

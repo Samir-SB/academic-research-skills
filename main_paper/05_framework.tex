@@ -321,7 +321,12 @@ We use a dense fully connected neural network to train our model, following the 
 A common feature extraction backbone followed by separate actor and
 critic heads:
 
-\begin{verbatim}
+\begin{figure*}[t]
+	\centering
+	\caption{Architecture of A2C with Shared Network}
+	\label{shared-architecture-diagram}
+	\small
+	\begin{verbatim}
 Input Layer (State Vector + Distance Matrix)
     |
     v
@@ -339,7 +344,8 @@ Input Layer (State Vector + Distance Matrix)
 |   -> Softmax    |   |                 |
 +-----------------+   +-----------------+
      Policy pi          Value V(s)
-\end{verbatim}
+	\end{verbatim}
+\end{figure*}
 
 The shared encoder extracts spatio-temporal features from the state
 representation including service positions, device trajectory, temporal
